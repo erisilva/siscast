@@ -1,0 +1,140 @@
+foreach(PDO::getAvailableDrivers() as $driver) {
+  echo $driver;
+}
+
+
+<IfModule mod_rewrite.c>    
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+
+
+<?php
+//            // this is the key created inside a client machine
+//            // key client + key server = key to decript methods exec
+//            $session = new TSecureSessionHandler('erivelton-silva');
+//            ini_set('session.save_handler', 'files');
+//            session_set_save_handler($session, true);
+//            // Im hidding sessions in a stupid directory, need to improve
+//            session_save_path(__DIR__ . '\_session_');
+//            $session->start();
+//
+//            if (!$session->isValid()) {
+//                $session->destroy('erivelton-silva');
+//            }
+//
+//            $session->put('sessao_usuario_id', '1');
+//            $session->put('sessao_usuario_nome', 'maria');
+//            // using trepository tests
+//            // criar uma funcao que permite a entrada de um nullo
+//            // ou sei lah, dar um resultado como o de baixo
+//            $crit = new TCriteria();
+//            $crit->add(new TFilter('1', '=', '1'));
+//
+//            $temp = new TRepository('user');
+//
+//            $lista = $temp->load($crit);
+//            print_r($lista);
+//
+//            foreach ($lista as $index => $valor) {
+//                echo $lista[$index] . ' <br>';
+//            }
+//
+//
+//
+//$app = new TApp(($url));
+//
+//$app->executar();
+//
+//
+//$temp = new TSqlSelect();
+//$temp->setEntity('farmacia');
+//
+//$temp->addColumn('id');
+//$temp->addColumn('dinheiro');
+//$temp->addColumn('cruzeiro');
+//$temp->addColumn('vez');
+?>  
+
+
+<?php
+// comments 
+//$temp = new TSqlDelete();
+//
+//$crit = new TCriteria();
+//$crit->add(new TFilter('idFarmacia', '=', 1));
+//$temp->setCriteria($crit);
+//
+//$temp->setEntity('farmacia');
+//
+//echo $temp->getInstruction();
+//$temp = new TSqlInsert();
+//$temp->setEntity('farmacia');
+//$temp->setRowData('idFarmacia', 9);
+//$temp->setRowData('idxuxa', NULL);
+//$temp->setRowData('descricao', 'das drogas');
+//
+//echo $temp->getInstruction();
+//$temp1 = new TCriteria;
+//$temp1->add(new TFilter('idade', 'IN', array(1,2,3,4)));
+//$temp1->add(new TFilter('idade', 'NOT IN', array(10)));
+//
+//echo $temp1->dump();
+//
+//echo '<br>';
+//
+//$temp2 = new TCriteria;
+//$temp2->add(new TFilter('nome', 'like', '%pedro%'));
+//$temp2->add(new TFilter('sexo', '=', 'F'));
+//
+//echo $temp2->dump();
+//
+//echo '<br>';
+//
+//$temp = new TCriteria;
+//$temp->add($temp1, TExpression::OR_OPERATOR);
+//$temp->add($temp2, TExpression::OR_OPERATOR);
+//
+//echo $temp->dump();
+//$temp = new TCriteria;
+//$temp->add(new TFilter('bruno', '>', 24), TExpression::OR_OPERATOR);
+//$temp->add(new TFilter('eri', '<', 24), TExpression::OR_OPERATOR);
+//
+//echo $temp->dump();
+//
+//$temp = new TFilter('data', '>', array('a','b'));
+//
+//echo $temp->dump();
+//TDBConnection::getConnection();
+//
+//TDBConnection::beginTransaction();
+//TDBConnection::prepareQuery('select * from farmacia where descricao like :temp;');
+//TDBConnection::bindParamQuery(':temp', '%', null);
+//$debug = TDBConnection::debugDumpParams();
+//TDBConnection::execute();
+//TDBConnection::endTransaction();
+//
+//$tempResult = TDBConnection::resultset();
+//
+//print_r($debug);
+//
+//
+//TDBConnection::prepareQuery('select * from produto');
+//
+//$tempResultSingle = TDBConnection::single();
+//
+//print_r($tempResultSingle);
+//
+//echo '<br>';
+//
+//echo TDBConnection::rowCount();
+//
+//$tempLastId = TDBConnection::lastInsertId();
+//foreach (TDBConnection::resultset() as $idTemp => $valueTemp) {
+//    echo "<br>" . "id => " . $valueTemp[] . "nome => " . $valueTemp. "<br>";
+//}
+?>

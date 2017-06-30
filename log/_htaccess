@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>    
+# Acesso restrito!
+deny from all
+</IfModule>
+
