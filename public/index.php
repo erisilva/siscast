@@ -69,15 +69,15 @@ TDBConnection::getConnection();
 
                 <!--/ fazer um novo pedido-->
                 <div>
-                    <form name="cadastrar" id="cadastrar" method="post" action="cadastro.php">
+ 
                         <fieldset>
 
-                            <div class="alinha">
-                                <input type="submit" name="botao_cadastro" id="botao_cadastro" value="Fazer um Pedido de Agendamento">
-                            </div>
+                            <p class="alinha"><a href="cadastro.php">Fazer Pedido de Castração</a></p>
+                            
+                            <p class="alinha">Tempo médido de espera: xx mês(es).</p>
 
                         </fieldset>
-                    </form>  
+ 
                 </div>
                 <br>              
 

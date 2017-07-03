@@ -63,7 +63,8 @@ $filtroCPFFormatado = TCommon::FormataNomeFiltro($filtroCPF);
 
 
 $statement = " pedidos
-                                inner join situacoes on (pedidos.situacao_id = situacoes.id) ";
+                                inner join situacoes on (pedidos.situacao_id = situacoes.id) 
+                                inner join racas on (pedidos.raca_id = racas.id)";
 
 /* configurando os filtros */
 if ($filtroNome != "") {
@@ -103,16 +104,32 @@ if ($ordem == 1){
 
 $query = "SELECT 
                                 pedidos.id,
-                                concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigoInterno,
-                                date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
+                                concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigo_pedido,
+                                date_format(pedidos.quando, '%d/%m/%y %H:%i') as data_pedido,
                             pedidos.nome,
                             pedidos.cpf,
                             date_format(pedidos.nascimento, '%d/%m/%y') as nascimento,
                             pedidos.endereco,
+                            pedidos.numero,
+                            pedidos.bairro,
+                            pedidos.complemento,
+                            pedidos.cep,
+                            pedidos.cns,
+                            pedidos.beneficio,
+                            pedidos.beneficioQual,
+                            pedidos.tel,
+                            pedidos.cel,
+                            
                             pedidos.nomeAnimal,
                             pedidos.especie,
                             pedidos.genero,
                             pedidos.porte,
+                            pedidos.idade,
+                            pedidos.idadeEm,
+                            pedidos.cor,
+                            racas.descricao as raca,
+                            pedidos.procedencia,
+
                             situacoes.nome as situacao "
         . "from {$statement}";
 

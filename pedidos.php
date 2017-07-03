@@ -315,7 +315,7 @@ if ($nRows != 0) {
         echo "</td>\n";
 
         echo "<td>\n";
-        echo "<a href=\" javascript:abrir('pedidos/alterar.php?id=" . $temp->id . "') \">Alterar</a>\n";
+        echo "<a href=\" javascript:abrir('pedidos/formAlterar.php?id=" . $temp->id . "') \">Alterar</a>\n";
         echo "</td>\n";
 
         echo "</tr>\n";

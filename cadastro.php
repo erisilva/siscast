@@ -92,7 +92,7 @@ TDBConnection::getConnection();
                 // limpa as variáveis de entrada
                 $nome = $cpf = $endereco = $numero = $complemento = $bairro = $cep = $tel = '';
                 $cel = $cns = $beneficio = $beneficioQual = $nomeAnimal = $genero = $porte = $idade = '';
-                $idadeEm = $cor = $especie = $raca_id = $procedencia = '';
+                $idadeEm = $cor = $especie = $raca_id = $procedencia = $nascimento ='';
 
                 // executa o cadastro se possível
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -102,7 +102,8 @@ TDBConnection::getConnection();
                     /* dados do pedinte */
                     $nome = (isset($_POST['nome']) ? strip_tags(trim($_POST['nome'])) : '');
                     $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
-                    $nascimento = (isset($_POST['nascimento']) ? strip_tags(trim($_POST['nascimento'])) : '');
+                    $nascimento = (isset($_POST['nascimento']) ? $_POST['nascimento'] : '');
+                    //$nascimento = (isset($_POST['nascimento']) ? date("Y-m-d", strtotime($_POST['nascimento'])) : '');
 
                     /* dados de endereço */
                     $endereco = (isset($_POST['endereco']) ? strip_tags(trim($_POST['endereco'])) : '');
@@ -207,7 +208,7 @@ TDBConnection::getConnection();
                     /* pessoa */
                     TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':nome', $nome, PDO::PARAM_STR);
-                    TDBConnection::bindParamQuery(':nascimento', $nome, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':nascimento', $nascimento, PDO::PARAM_STR);
 
                     /* endereço */
                     TDBConnection::bindParamQuery(':endereco', $endereco, PDO::PARAM_STR);
