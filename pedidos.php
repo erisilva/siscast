@@ -311,7 +311,7 @@ if ($nRows != 0) {
         echo "</td>\n";
 
         echo "<td class=\"alinha_direita\">\n";
-        echo "<a href=\" javascript:abrir('pedidos/show.php?id=" . $temp->id . "') \">Imprimir</a>\n";
+        echo "<a href=\" javascript:abrir('pedidos/agendar.php?id=" . $temp->id . "') \">Agendar</a>\n";
         echo "</td>\n";
 
         echo "<td>\n";
