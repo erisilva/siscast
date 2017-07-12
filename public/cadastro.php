@@ -205,7 +205,7 @@ TDBConnection::getConnection();
                     /* pessoa */
                     TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':nome', $nome, PDO::PARAM_STR);
-                    TDBConnection::bindParamQuery(':nascimento', $nome, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':nascimento', $nascimento, PDO::PARAM_STR);
 
                     /* endereço */
                     TDBConnection::bindParamQuery(':endereco', $endereco, PDO::PARAM_STR);

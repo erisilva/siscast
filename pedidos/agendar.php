@@ -66,16 +66,16 @@ TDBConnection::getConnection();
                 /* dados do pedinte */
                 $idPedido = (isset($_POST['idPedido']) ? strip_tags(trim($_POST['idPedido'])) : '');
                 $situacao_id = (isset($_POST['situacao_id']) ? strip_tags(trim($_POST['situacao_id'])) : '');
-                $primeiraTentativa = (isset($_POST['primeiraTentativa']) ? strip_tags(trim($_POST['primeiraTentativa'])) : '');
-                $primeiraTentativaQuando = (isset($_POST['primeiraTentativaQuando']) ? strip_tags(trim($_POST['primeiraTentativaQuando'])) : '');
+                $primeiraTentativa = (isset($_POST['primeiraTentativa']) ? strip_tags(trim($_POST['primeiraTentativa'])) : 'N');
+                $primeiraTentativaQuando = (isset($_POST['primeiraTentativaQuando']) ? strip_tags(trim($_POST['primeiraTentativaQuando'])) : null);
                 $primeiraTentativaHora = (isset($_POST['primeiraTentativaHora']) ? strip_tags(trim($_POST['primeiraTentativaHora'])) : '');
-                $segundaTentativa = (isset($_POST['segundaTentativa']) ? strip_tags(trim($_POST['segundaTentativa'])) : '');
-                $segundaTentativaQuando = (isset($_POST['segundaTentativaQuando']) ? strip_tags(trim($_POST['segundaTentativaQuando'])) : '');
+                $segundaTentativa = (isset($_POST['segundaTentativa']) ? strip_tags(trim($_POST['segundaTentativa'])) : 'N');
+                $segundaTentativaQuando = (isset($_POST['segundaTentativaQuando']) ? strip_tags(trim($_POST['segundaTentativaQuando'])) : null);
                 $segundaTentativaHora = (isset($_POST['segundaTentativaHora']) ? strip_tags(trim($_POST['segundaTentativaHora'])) : '');
                 $nota = (isset($_POST['nota']) ? strip_tags(trim($_POST['nota'])) : '');
-                $agendaQuando = (isset($_POST['agendaQuando']) ? strip_tags(trim($_POST['agendaQuando'])) : '');
+                $agendaQuando = (isset($_POST['agendaQuando']) ? strip_tags(trim($_POST['agendaQuando'])) : null);
                 $motivoNaoAgendado = (isset($_POST['motivoNaoAgendado']) ? strip_tags(trim($_POST['motivoNaoAgendado'])) : '');
-                $agendaTurno = (isset($_POST['agendaTurno']) ? strip_tags(trim($_POST['agendaTurno'])) : '');
+                $agendaTurno = (isset($_POST['agendaTurno']) ? strip_tags(trim($_POST['agendaTurno'])) : null);
 
 
                 /* validação dos dados */
@@ -184,7 +184,7 @@ TDBConnection::getConnection();
 
                         <input type="checkbox" name="primeiraTentativa" value="S" <?php echo (($pedido->primeiraTentativa == 'S') ? 'checked' : '' ) ?>>
 
-                        <input type="date" name="primeiraTentativaQuando" id="primeiraTentativaQuando" value="<?php echo date('Y-m-d', strtotime($pedido->primeiraTentativaQuando)) ?>" >
+                        <input type="date" name="primeiraTentativaQuando" id="primeiraTentativaQuando" value="<?php echo ( strtotime($pedido->primeiraTentativaQuando ) != 0 ? date('Y-m-d', strtotime($pedido->primeiraTentativaQuando)) : '') ?>">
 
                         Horário:<input type="text" name="primeiraTentativaHora" id="primeiraTentativaHora" maxlength="12" size="10" value="<?php echo $pedido->primeiraTentativaHora ?>">
                     </fieldset>
@@ -194,7 +194,7 @@ TDBConnection::getConnection();
 
                         <input type="checkbox" name="segundaTentativa" value="S" <?php echo (($pedido->segundaTentativa == 'S') ? 'checked' : '' ) ?>>
 
-                        <input type="date" name="segundaTentativaQuando" id="segundaTentativaQuando" value="<?php echo date('Y-m-d', strtotime($pedido->segundaTentativaQuando)) ?>">
+                        <input type="date" name="segundaTentativaQuando" id="segundaTentativaQuando" value="<?php echo ( strtotime($pedido->segundaTentativaQuando ) != 0 ? date('Y-m-d', strtotime($pedido->segundaTentativaQuando)) : '') ?>">
 
                         Horário:<input type="text" name="segundaTentativaHora" id="segundaTentativaHora" maxlength="12" size="10" value="<?php echo $pedido->segundaTentativaHora ?>">
                     </fieldset>
@@ -203,7 +203,7 @@ TDBConnection::getConnection();
                     <fieldset>
                         <legend>Agendar:</legend>
 
-                        <input type="date" name="agendaQuando" id="agendaQuando" value="<?php echo date('Y-m-d', strtotime($pedido->agendaQuando)) ?>">
+                        <input type="date" name="agendaQuando" id="agendaQuando" value="<?php echo ( strtotime($pedido->agendaQuando ) != 0 ? date('Y-m-d', strtotime($pedido->agendaQuando)) : '') ?>">
                         <input type="radio" name="agendaTurno" value="manha" <?php echo (($pedido->agendaTurno == 'manha') ? 'checked' : '' ) ?>>Manhã
                         <input type="radio" name="agendaTurno" value="tarde" <?php echo (($pedido->agendaTurno == 'tarde') ? 'checked' : '' ) ?>>Tarde
                     </fieldset>    
