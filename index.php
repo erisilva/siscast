@@ -1,6 +1,6 @@
 <?php
 /*
- *  session stuff and auload class
+ *  session
  */
 session_start();
 /*
@@ -27,18 +27,14 @@ ini_set('log_errors', 1);
 ini_set('error_log', dirname(__FILE__) . '/log/log.txt');
 ini_set('error_reporting', E_ALL ^ E_NOTICE);
 
-/*
- * constants
- */
-require_once './config/TConfig.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
     <meta charset="UTF-8">
     <meta name="author" content="Erivelton da Silva">
-    <meta name="description" content="Sistema para controle dos protocolos para o Recursos Humanos da FAMUC">
-    <meta name="keywords" content="mvc2, Sistema de informação,protocolos,recursos humanos, prefeitura muncipal de contagem, mg, secretaria de saúde, gestão de protocolos, FAMUC">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" href="img/favicon.ico">
 

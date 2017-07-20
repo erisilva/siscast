@@ -166,7 +166,7 @@ CREATE TABLE `pedidos` (
 
     `cpf` varchar(11)  DEFAULT NULL,
     `nome` varchar(140)  DEFAULT NULL,
-    `nascimento` TIMESTAMP default '0000-00-00 00:00:00',
+    `nascimento` DATE,
 
     `endereco` varchar(255)  DEFAULT NULL,
     `numero` varchar(20)  DEFAULT NULL,
@@ -199,16 +199,16 @@ CREATE TABLE `pedidos` (
     `situacao_id` int(10) unsigned NOT NULL,
 
     `primeiraTentativa` ENUM ('S', 'N'),
-    `primeiraTentativaQuando` TIMESTAMP default '0000-00-00 00:00:00',
+    `primeiraTentativaQuando` DATE,
     `primeiraTentativaHora` varchar(12)  DEFAULT NULL,
 
     `segundaTentativa` ENUM ('S', 'N'),
-    `segundaTentativaQuando` TIMESTAMP default '0000-00-00 00:00:00',
+    `segundaTentativaQuando` DATE,
     `segundaTentativaHora` varchar(12)  DEFAULT NULL,
 
     `nota` varchar(200)  DEFAULT NULL,
 
-    `agendaQuando` TIMESTAMP default '0000-00-00 00:00:00',
+    `agendaQuando` DATE,
     `agendaTurno` ENUM ('manha', 'tarde'),
     `motivoNaoAgendado` varchar(120)  DEFAULT NULL,
 

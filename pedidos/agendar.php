@@ -49,8 +49,8 @@ TDBConnection::getConnection();
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" href="../img/favicon.ico">
     <title>SisCast - Impressão de Pedido</title>
-    <link rel="stylesheet" type="text/css" href="../estilo/estilo.css">    
-    <link rel="stylesheet" type="text/css" href="../estilo/navegacao.css">    
+    <link rel="stylesheet" type="text/css" href="../estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="../estilo/navegacao.css">
     <body>
         <div class="estrutura_popup">
 
@@ -77,6 +77,18 @@ TDBConnection::getConnection();
                 $motivoNaoAgendado = (isset($_POST['motivoNaoAgendado']) ? strip_tags(trim($_POST['motivoNaoAgendado'])) : '');
                 $agendaTurno = (isset($_POST['agendaTurno']) ? strip_tags(trim($_POST['agendaTurno'])) : null);
 
+
+                if ($primeiraTentativaQuando == '') {
+                    $primeiraTentativaQuando = '0000-00-00 00:00:00';
+                }
+
+                if ($segundaTentativaQuando == '') {
+                    $segundaTentativaQuando = '0000-00-00 00:00:00';
+                }
+
+                if ($agendaQuando == '') {
+                    $agendaQuando = '0000-00-00 00:00:00';
+                }
 
                 /* validação dos dados */
 
@@ -119,7 +131,7 @@ TDBConnection::getConnection();
             }
 
             TDBConnection::prepareQuery("
-                        SELECT pedidos.*, 
+                        SELECT pedidos.*,
                         date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
                         date_format(pedidos.nascimento, '%d/%m/%y') as nasci,
                         concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigoInterno,
@@ -140,7 +152,7 @@ TDBConnection::getConnection();
 
                 <div class="codprotocolo">
                     Código: <?php echo $pedido->codigoInterno ?>
-                </div>                
+                </div>
 
 
                 <fieldset>
@@ -184,7 +196,7 @@ TDBConnection::getConnection();
 
                         <input type="checkbox" name="primeiraTentativa" value="S" <?php echo (($pedido->primeiraTentativa == 'S') ? 'checked' : '' ) ?>>
 
-                        <input type="date" name="primeiraTentativaQuando" id="primeiraTentativaQuando" value="<?php echo ( strtotime($pedido->primeiraTentativaQuando ) != 0 ? date('Y-m-d', strtotime($pedido->primeiraTentativaQuando)) : '') ?>">
+                        <input type="date" name="primeiraTentativaQuando" id="primeiraTentativaQuando" value="<?php echo ( strtotime($pedido->primeiraTentativaQuando) != 0 ? date('Y-m-d', strtotime($pedido->primeiraTentativaQuando)) : '') ?>">
 
                         Horário:<input type="text" name="primeiraTentativaHora" id="primeiraTentativaHora" maxlength="12" size="10" value="<?php echo $pedido->primeiraTentativaHora ?>">
                     </fieldset>
@@ -194,7 +206,7 @@ TDBConnection::getConnection();
 
                         <input type="checkbox" name="segundaTentativa" value="S" <?php echo (($pedido->segundaTentativa == 'S') ? 'checked' : '' ) ?>>
 
-                        <input type="date" name="segundaTentativaQuando" id="segundaTentativaQuando" value="<?php echo ( strtotime($pedido->segundaTentativaQuando ) != 0 ? date('Y-m-d', strtotime($pedido->segundaTentativaQuando)) : '') ?>">
+                        <input type="date" name="segundaTentativaQuando" id="segundaTentativaQuando" value="<?php echo ( strtotime($pedido->segundaTentativaQuando) != 0 ? date('Y-m-d', strtotime($pedido->segundaTentativaQuando)) : '') ?>">
 
                         Horário:<input type="text" name="segundaTentativaHora" id="segundaTentativaHora" maxlength="12" size="10" value="<?php echo $pedido->segundaTentativaHora ?>">
                     </fieldset>
@@ -203,10 +215,10 @@ TDBConnection::getConnection();
                     <fieldset>
                         <legend>Agendar:</legend>
 
-                        <input type="date" name="agendaQuando" id="agendaQuando" value="<?php echo ( strtotime($pedido->agendaQuando ) != 0 ? date('Y-m-d', strtotime($pedido->agendaQuando)) : '') ?>">
+                        <input type="date" name="agendaQuando" id="agendaQuando" value="<?php echo ( strtotime($pedido->agendaQuando) != 0 ? date('Y-m-d', strtotime($pedido->agendaQuando)) : '') ?>">
                         <input type="radio" name="agendaTurno" value="manha" <?php echo (($pedido->agendaTurno == 'manha') ? 'checked' : '' ) ?>>Manhã
                         <input type="radio" name="agendaTurno" value="tarde" <?php echo (($pedido->agendaTurno == 'tarde') ? 'checked' : '' ) ?>>Tarde
-                    </fieldset>    
+                    </fieldset>
 
                     <fieldset>
                         <legend>Observações:</legend>
@@ -217,7 +229,7 @@ TDBConnection::getConnection();
                         <label for="motivoNaoAgendado">Motivo:</label>
                         <input type="text" name="motivoNaoAgendado" id="motivoNaoAgendado" maxlength="120" size="36" value="<?php echo $pedido->motivoNaoAgendado ?>">
 
-                    </fieldset>    
+                    </fieldset>
 
                     <div class="alinha">
                         <input type="submit" name="Allterar" id="Allterar"
@@ -225,14 +237,14 @@ TDBConnection::getConnection();
                     </div>
 
 
-                </form>       
+                </form>
 
             </div>
             <!--/rodapé-->
 
             <div>
                 <a href="javascript:window.print();">Imprimir</a> <a href="javascript:window.close();"> fechar</a>
-            </div>            
+            </div>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

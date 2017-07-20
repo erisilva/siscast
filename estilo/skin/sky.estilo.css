@@ -41,14 +41,14 @@
 .titulosuperior {
     float: left;
     width: 100%;
-    border-top: solid 2px #8B8B83;
+    border-top: solid 2px #0000CD;
     padding: 0.2em;
 
 }
 
 .titulosuperior h1 {
     font-size: 14px;
-    color: #B03060;
+    color: #000080;
 }
 
 .titulofuncionario {
@@ -204,7 +204,7 @@
 
 .menu {
     height: 33px;
-    background: none repeat scroll 0 0 #B03060;
+    background: none repeat scroll 0 0 	#0000CD;
     margin-left: 0;
     margin-top: 10px;
     padding: 0;
@@ -238,7 +238,7 @@
     display: block;
     font-size: 1em;
     padding: 0 20px;
-    color: #FFB6C1;
+    color: #87CEEB;
     text-decoration: none;
 }
 
@@ -349,7 +349,7 @@
     text-align: center;
     color: yellow;
     font-size: 22px;
-    background-color: #B03060;
+    background-color: #0000CD;
     margin: 2px;
     
     -webkit-box-shadow: 1px 0 0 rgba(255, 255, 255, 0.2) inset;
@@ -371,7 +371,7 @@
     clear: both; /*Cancela a influência de float de qualquer lado*/
     padding: 0.5em;
     font-size: 14px;
-    border-top: solid 1px #8B8B83;
+    border-top: solid 1px #0000CD;
     text-align: center;
 }
 
@@ -433,7 +433,8 @@ table {
 }
 
 th {
-    background-color: #FF69B4;
+    background-color: #000080;
+    color: #87CEEB;
     text-align: left;
 }
 
@@ -441,11 +442,10 @@ table, td, th {
     border: 1px solid black;
     font-size: 14px;
     padding: 3px;
-
 }
 
 tr:nth-child(even) {
-    background-color: #FFB6C1;
+    background-color: #87CEFA;
 }
 
 ul {
@@ -527,13 +527,13 @@ input[type=email] {
 }
 
 input[type=button], input[type=submit], input[type=reset] {
-    background-color: #B03060;
+    background-color: #0000CD;
     font-weight: bold;
     border: none;
     color: #FFB6C1;
     margin: 4px 2px;
     cursor: pointer;
-    border:1px solid rgb(245, 130, 32);
+    border:1px solid #000080;
     border-radius: 5px;
   }
 

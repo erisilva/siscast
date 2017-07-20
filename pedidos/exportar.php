@@ -28,14 +28,6 @@ if (!isset($_SESSION['sessao_usuario_id'])) {
 }
 
 /*
- * header page
- */
-header('Content-Type: text/html; charset=utf-8');
-ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', dirname(__FILE__) . '/log/log.txt');
-ini_set('error_reporting', E_ALL ^ E_NOTICE);
-/*
  * se conecta
  */
 TDBConnection::getConnection();
@@ -150,11 +142,17 @@ if ($nRows > 0) {
 // monta o header
     $header = "";
     for ($index = 0; $index < count($colunas); $index++) {
-        $header .= $colunas[$index] . "\t";
+        $header .= $colunas[$index] . ";";
     }
 
     // debug
     // echo $header;
+    
+    /*
+     * NOTAS: 
+     * trocar ; por /t dependendo da versão do servidor php
+     *       
+     */
 
     $data = "";
     foreach ($result as $linha) {
@@ -162,11 +160,12 @@ if ($nRows > 0) {
         for ($index = 0; $index < count($colunas); $index++) {
             $value = utf8_decode($linha->$colunas[$index]);
             if ((!isset($value) ) || ( $value == "" )) {
-                $value = "\t";
+                $value = ";";
             } else {
                 $value = str_replace('"', '""', $value);
                 $value = str_replace('.', ',', $value);
-                $value = '"' . $value . '"' . "\t";
+                $value = str_replace(';', ',', $value);
+                $value = '"' . $value . '"' . ";";
             }
             $line .= $value;
         }

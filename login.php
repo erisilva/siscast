@@ -6,7 +6,7 @@ session_start();
 require_once '/config/TConfig.php';
 
 /*
- *  session stuff and auload class
+ *  session
  */
 require_once 'libs/Autoloader.php';
 

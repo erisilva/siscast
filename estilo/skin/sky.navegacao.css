@@ -10,12 +10,12 @@ ul.pagination a {
     color:black;
     display:inline-block;
     padding:3px 6px;
-    border:1px solid #FF69B4;
+    border:1px solid #0000CD;
     text-decoration:none;
 }
 ul.pagination a:hover, 
 ul.pagination a.current {
-    background:#FF69B4;
+    background:#0000CD;
     color:#fff; 
 }
 
