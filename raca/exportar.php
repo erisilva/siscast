@@ -73,6 +73,12 @@ if ($nRows > 0) {
 
     // debug
     // echo $header;
+    
+    /*
+     * NOTAS: 
+     * trocar ; por /t dependendo da versão do servidor php
+     *       
+     */    
 
     $data = "";
     foreach ($result as $linha) {
@@ -80,17 +86,18 @@ if ($nRows > 0) {
         for ($index = 0; $index < count($colunas); $index++) {
             $value = utf8_decode($linha->$colunas[$index]);
             if ((!isset($value) ) || ( $value == "" )) {
-                $value = "\t";
+                $value = ";";
             } else {
                 $value = str_replace('"', '""', $value);
                 $value = str_replace('.', ',', $value);
-                $value = '"' . $value . '"' . "\t";
+                $value = str_replace(';', ',', $value);
+                $value = '"' . $value . '"' . ";";
             }
             $line .= $value;
         }
         $data .= trim($line) . "\n";
     }
-    $data = str_replace( "\r" , "" , $data );
+    $data = str_replace("\r", "", $data);
     
     //debug
     //echo $data;

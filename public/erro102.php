@@ -71,8 +71,8 @@ TDBConnection::getConnection();
                 <div class="rodape">
                     <p>
                         <strong>Central de Controle de Zoonoses</strong><br>
-                        Telefone: 1111-1111<br>
-                        E-mail: email@email.com.br
+                        Telefones: 3351-3751 / 3361-7703<br>
+                        E-mail: cczcontagem@gmail.com
                     </p>
                 </div>
             </div>

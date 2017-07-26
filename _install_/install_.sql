@@ -226,3 +226,46 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+/*
+usado para guardar calculos estatísticos evitando obrecarregamento do servidor
+select round(avg(datediff(coalesce(agendaQuando, now()), quando))) as media from pedidos;
+*/
+
+CREATE TABLE `estatistica` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `quando` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `mediaEspera` int  DEFAULT NULL,
+  `totalAgendados` int  DEFAULT NULL,
+  `totalEspera` int  DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `estatistica` (`id`, `mediaEspera`, `totalAgendados`, `totalEspera`) VALUES (null, 0, 0, 0);
+
+
+SET GLOBAL event_scheduler = ON;
+DROP EVENT IF EXISTS calcular_media_espera;
+DELIMITER //
+CREATE EVENT calcular_media_espera
+  ON schedule
+    every 10 minute        
+    DO
+    BEGIN
+      DECLARE mediaEspera INT DEFAULT 0;
+            DECLARE totalEspera INT DEFAULT 0;
+            DECLARE totalAgendado INT DEFAULT 0;
+ 
+      select round(avg(datediff(coalesce(agendaQuando, now()), quando))) into mediaEspera from pedidos;
+            
+      select count(*) into totalEspera from pedidos where situacao_id = 1;
+
+      select count(*) into totalAgendado from pedidos where situacao_id = 3;  
+            
+            
+            INSERT INTO `estatistica` (`id`, `mediaEspera`, `totalAgendados`, `totalEspera`) VALUES (null, mediaEspera, totalEspera, totalAgendado);
+      
+        
+        END//
+DELIMITER ;
+
+

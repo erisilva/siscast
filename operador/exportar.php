@@ -35,22 +35,84 @@ ini_set('display_errors', 1);
 ini_set('log_errors', 1);
 ini_set('error_log', dirname(__FILE__) . '/log/log.txt');
 ini_set('error_reporting', E_ALL ^ E_NOTICE);
-
 /*
  * se conecta
  */
 TDBConnection::getConnection();
-TDBConnection::prepareQuery("SELECT user.*, userprofile.description as profile FROM user inner join userprofile on (user.userProfile_id = userprofile.id)");
+
+/*
+ * recebe os parametros de filtragem 
+ */
+//$filtroDataInicio = (isset($_POST['filtroDataInicio']) ? $_POST['filtroDataInicio'] : '');
+//$filtroDataFim = (isset($_POST['filtroDataFim']) ? $_POST['filtroDataFim'] : '');
+
+/*
+ * efetua a consulta 
+ */
+$query = "select
+            user.name,
+            user.email,
+            userProfile.description as perfil,
+            user.isOut as bloqueado
+
+            from user
+                    inner join userProfile on (user.userProfile_id = userProfile.id); ";
+
+TDBConnection::getConnection();
+TDBConnection::prepareQuery($query);
 $result = TDBConnection::resultset();
 $nRows = TDBConnection::rowCount();
 
+// é importante que a query tenha pelo menos um registro
+if ($nRows > 0) {
 
-$header  .= "Nome" . "\t";
-$header  .= "Login" . "\t";
-$header  .= "E-mail" . "\t";
-$header  .= "Bloqueado?" . "\t";
+// pega os campos em forma de uma array da primeira linha da consulta
+    $fields = get_object_vars($result[0]);
 
+// cria um array contendo apenas o nome dos atributos do objeto
+    $colunas = array_keys($fields);
 
+// monta o header
+    $header = "";
+    for ($index = 0; $index < count($colunas); $index++) {
+        $header .= $colunas[$index] . "\t";
+    }
+
+    // debug
+    // echo $header;
+    
+     /*
+     * NOTAS: 
+     * trocar ; por /t dependendo da versão do servidor php
+     *       
+     */
+
+    $data = "";
+    foreach ($result as $linha) {
+        $line = "";
+        for ($index = 0; $index < count($colunas); $index++) {
+            $value = utf8_decode($linha->$colunas[$index]);
+            if ((!isset($value) ) || ( $value == "" )) {
+                $value = ";";
+            } else {
+                $value = str_replace('"', '""', $value);
+                $value = str_replace('.', ',', $value);
+                $value = str_replace(';', ',', $value);
+                $value = '"' . $value . '"' . ";";
+            }
+            $line .= $value;
+        }
+        $data .= trim($line) . "\n";
+    }
+    $data = str_replace("\r", "", $data);
+    
+    //debug
+    //echo $data;
+    
+} else {
+    $header = "";
+    $data = "Não foi encontrado nenhum registro";
+}
 
 $filename = "Operadores " . date('dmY-his') . ".xls";
 

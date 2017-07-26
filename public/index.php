@@ -54,7 +54,7 @@ TDBConnection::getConnection();
             </div>
 
             <div class="titulosuperior">
-                <h1 class="alinha">Pedido de Castrações</h1>
+                <h1 class="alinha">Cadastro para Esterilização de Animais</h1>
             </div>
 
             <!--/conteúdo-->
@@ -72,41 +72,122 @@ TDBConnection::getConnection();
  
                         <fieldset>
 
-                            <p class="alinha"><a href="cadastro.php">Fazer Pedido de Castração</a></p>
+                            <p class="alinha"><a href="cadastro.php">Fazer Cadastro para Esterilização de Animais</a></p>
+
+                            <?php 
+                            TDBConnection::prepareQuery("SELECT mediaEspera, totalAgendados FROM estatistica ORDER BY id DESC LIMIT 1;");                            
+                            $estatistica = TDBConnection::single();
+                            ?>
                             
-                            <p class="alinha">Tempo médido de espera: xx mês(es).</p>
+                            <p class="alinha">Tempo médio de espera: <?php echo  $estatistica->mediaEspera; ?> dia(s).</p>
 
                         </fieldset>
  
                 </div>
-                <br>              
+                
+                <br> 
+
+                <div>
+                    <form name="formConsulta" id="formConsulta" method="post"
+                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <fieldset>
+                        <legend>Consultar Cadastro:</legend>
+                        CPF:<input type="text" name="cpf" id="cpf" maxlength="11" size="8" required>
+                        <input type="submit" name="Agendar" id="Agendar" value="consultar">
+                     </fieldset>
+                   </form>   
+                </div>
+
+
+
+                <?php
+
+
+                if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+                    $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
+
+                    $query = "SELECT 
+                                        date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
+                                        pedidos.nomeAnimal,
+                                        pedidos.especie,
+                                        situacoes.nome as situacao,
+                                        coalesce(date_format(pedidos.agendaquando, '%d/%m/%y'), '-') as agendaQuando,
+                                        coalesce(pedidos.agendaTurno, '-') as agendaTurno
+
+
+                                from pedidos
+                                        inner join situacoes on (pedidos.situacao_id = situacoes.id)
+
+                                    where pedidos.cpf = :cpf
+
+                                    order by pedidos.quando desc;";
+
+
+                    TDBConnection::getConnection();
+                    TDBConnection::prepareQuery($query);
+                    TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
+                    $result = TDBConnection::resultset();
+                    $nRows = TDBConnection::rowCount();
+
+
+                    echo "<br>\n";
+                    echo "<div class=\"alinha\">\n";
+                    echo "<p class=\"destaque\">Pedidos Realizados</p>\n";
+                    echo "</div>\n";
+
+                    if ($nRows != 0) {
+                        echo "\n";
+                        echo "\n";
+                        echo "<table>\n";
+                        echo "<thead>\n";
+                        echo "<tr>\n";
+                        //cabeçalho da tabela
+                        echo "<th>Data/Hora</th>\n";
+                        echo "<th>Nome</th>\n";
+                        echo "<th>Situação</th>\n";
+                        echo "<th>Agendado para</th>\n";
+                        echo "<th>Turno</th>\n";
+                        echo "</tr>\n";
+                        echo "</thead>\n";
+                        echo "<tbody>\n";
+
+                        foreach ($result as $temp) {
+                            echo "<tr>\n";
+
+                            echo "<td>\n";
+                            echo $temp->quandoFormatado . "\n";
+                            echo "</td>\n";
+
+                            echo "<td>\n";
+                            echo $temp->nomeAnimal . "\n";
+                            echo "</td>\n";
+
+                            echo "<td>\n";
+                            echo $temp->situacao . "\n";
+                            echo "</td>\n";
+
+                            echo "<td>\n";
+                            echo $temp->agendaQuando . "\n";
+                            echo "</td>\n";
+
+                            echo "<td>\n";
+                            echo $temp->agendaTurno . "\n";
+                            echo "</td>\n";
+
+                            echo "</tr>\n";
+                        }
+                        echo "</tbody>\n";
+                        echo "</table>\n";
+                    } else {
+                        echo "Nenhum pedido foi encontrado para esse cpf.";
+                    }
+                }    
+                ?>                  
 
                 <!--/ quantitativo de agendas-->
                 <br>
                 <div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Ano</th>
-                                <th>Mês</th>
-                                <th class="alinha_direita">Agendados</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2017</td>
-                                <td>Junho</td>
-                                <td class="alinha_direita">0</td>
-                            </tr>
-
-                            <tr>
-                                <td>2017</td>
-                                <td>Julho</td>
-                                <td class="alinha_direita">0</td>
-                            </tr>                            
-                        </tbody>
-                    </table>
-                    <p class="alinha">Total de agendas realizadas: 0000</p>
+                    <p class="alinha">Total de agendas realizadas: <?php echo  $estatistica->totalAgendados; ?></p>
                 </div>
 
                 <!--/rodapé-->
@@ -114,8 +195,8 @@ TDBConnection::getConnection();
                 <div class="rodape">
                     <p>
                         <strong>Central de Controle de Zoonoses</strong><br>
-                        Telefone: 1111-1111<br>
-                        E-mail: email@email.com.br
+                        Telefones: 3351-3751 / 3361-7703<br>
+                        E-mail: cczcontagem@gmail.com
                     </p>
                 </div>
             </div>
