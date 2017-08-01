@@ -200,10 +200,6 @@ TDBConnection::getConnection();
                     </p>
                 </div>
             </div>
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-            <!-- se o CDN não for ativo faz o carregamento da jquery diretamente -->
-            <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>');</script>
             <!-- scripts da página -->
     </body>
 </html>
