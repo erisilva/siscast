@@ -300,7 +300,8 @@ TDBConnection::getConnection();
                         <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario" required <?php echo (($pedidos->procedencia == 'vive na rua / comunitario') ? 'checked' : '' ) ?>>vive na rua / comunitário
                         <input type="radio" name="procedencia" id="procedencia" value="resgatado" <?php echo (($pedidos->procedencia == 'resgatado') ? 'checked' : '' ) ?>>Resgatado
                         <input type="radio" name="procedencia" id="procedencia" value="adotado" <?php echo (($pedidos->procedencia == 'adotado') ? 'checked' : '' ) ?>>Adotado
-                        <input type="radio" name="procedencia" id="procedencia" value="comprado" <?php echo (($pedidos->procedencia == 'comprado') ? 'checked' : '' ) ?>>Comprado<br><br>                        
+                        <input type="radio" name="procedencia" id="procedencia" value="comprado" <?php echo (($pedidos->procedencia == 'comprado') ? 'checked' : '' ) ?>>Comprado
+                        <input type="radio" name="procedencia" id="procedencia" value="ONG" <?php echo (($pedidos->procedencia == 'ONG') ? 'checked' : '' ) ?>>ONG<br><br>                        
 
                         <br>
 

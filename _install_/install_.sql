@@ -192,7 +192,7 @@ CREATE TABLE `pedidos` (
     `especie` ENUM ('felino', 'canino'),
     `raca_id` int(10) unsigned NOT NULL,
 
-    `procedencia` ENUM ('vive na rua / comunitario', 'resgatado', 'adotado', 'comprado' ),
+    `procedencia` ENUM ('vive na rua / comunitario', 'resgatado', 'adotado', 'comprado', 'ONG' ),
     `quando` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
 
@@ -248,7 +248,7 @@ DROP EVENT IF EXISTS calcular_media_espera;
 DELIMITER //
 CREATE EVENT calcular_media_espera
   ON schedule
-    every 10 minute        
+    every 24 hour       
     DO
     BEGIN
       DECLARE mediaEspera INT DEFAULT 0;

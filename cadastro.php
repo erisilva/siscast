@@ -345,7 +345,9 @@ TDBConnection::getConnection();
                         <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario" required>vive na rua / comunitário
                         <input type="radio" name="procedencia" id="procedencia" value="resgatado">Resgatado
                         <input type="radio" name="procedencia" id="procedencia" value="adotado">Adotado
-                        <input type="radio" name="procedencia" id="procedencia" value="comprado">Comprado<br><br>                        
+                        <input type="radio" name="procedencia" id="procedencia" value="comprado">Comprado
+                        <input type="radio" name="procedencia" id="procedencia" value="ONG">ONG
+                        <br><br>                        
 
                         <br>
 

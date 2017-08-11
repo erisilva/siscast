@@ -89,7 +89,7 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
 
                 <p class="sistema">Planilhas</p>
                 <ul class="listaRelatoriosimp">
-                    <li><a href="#">Link 1.</a></li>
+                    <li><a href="relatorios/relatorio001/relatorio.php">Relatório de Pedidos.</a></li>
                     <li><a href="#">Link 2.</a></li>
 
                 </ul>                 
@@ -109,12 +109,6 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
             </div>
         </div>
 
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <!-- se o CDN não for ativo faz o carregamento da jquery diretamente -->
-        <script>window.jQuery || document.write('<script src="/mvc2/js/jquery.min.js"><\/script>');</script>        
-        <!-- scripts da página -->
-        <script src="js/protocolo.js"></script>
     </body>
 </html>                
 

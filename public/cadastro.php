@@ -334,10 +334,11 @@ TDBConnection::getConnection();
                         </select><br><br>  
 
                         <label for="procedencia">Origem:</label>
-                        <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario" required>vive na rua / comunitário
+                        <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario" required>vive na rua/comunitário
                         <input type="radio" name="procedencia" id="procedencia" value="resgatado">Resgatado
                         <input type="radio" name="procedencia" id="procedencia" value="adotado">Adotado
-                        <input type="radio" name="procedencia" id="procedencia" value="comprado">Comprado<br><br>                        
+                        <input type="radio" name="procedencia" id="procedencia" value="comprado">Comprado
+                        <input type="radio" name="procedencia" id="procedencia" value="ONG">ONG<br><br> 
 
                         <br>
 
@@ -346,15 +347,12 @@ TDBConnection::getConnection();
                     <br>
 
                     <fieldset>
-                        <legend>Critérios e pré-requisitos para cadastro e esterilização de animais no Centro de Controle de Zoonoses  de Contagem:</legend>
+                        <legend>Critérios e pré-requisitos para cadastro de esterilização de animais no Centro de Controle de Zoonoses  de Contagem:</legend>
                         
                         <div>
-                            <p>O cadastro para esterilização de cães e gatos deverá ser feito mediante preenchimento e envio do formulário eletrônico disponível no site oficial da Prefeitura Municipal de Contagem. Após o preenchimento e envio do formulário, as solicitações serão avaliadas pela equipe responsável e, se aceitas, o solicitante deverá aguardar o contato da equipe do CCZ para agendamento. O prazo para agendamento poderá variar de acordo com a demanda. Cabe ao solicitante acompanhar o andamento de sua solicitação no site.</p>
-                            <p>O solicitante deverá atender a todos critérios e  pré-requisitos a seguir.</p>
+                            <p>O cadastro para esterilização de cães e gatos deverá ser feito mediante preenchimento e envio deste formulário eletrônico. As solicitações serão avaliadas pela equipe responsável e, se aceitas, o solicitante deverá aguardar o contato da equipe do CCZ para agendamento. O prazo de espera poderá variar de acordo com a demanda. Cabe ao solicitante acompanhar o andamento de sua solicitação no site.</p>
                         </div>
-                        
-                        
-
+                                               
                         <div>
                             <h1>Critérios quanto ao solicitante</h1>
                             <ul>
@@ -363,12 +361,17 @@ TDBConnection::getConnection();
                                 <li>É de inteira responsabilidade do solicitante informar corretamente 1 (um) ou 2 (dois) contatos telefônicos.</li>
                                 <li>A cada solicitação é gerado um número de cadastro para controle interno, não correspondendo à ordem de atendimento ou agendamento.</li>
                                 <li>As solicitações passam por uma triagem, podendo ser aprovadas ou não. É de responsabilidade do solicitante acompanhar o andamento da sua solicitação pelo site.</li>
-                                <li>Após a aprovação do cadastro, o solicitante deverá aguardar o contato telefônico do CCZ, de segunda a sexta-feira, em horário comercial, para fins de agendamento. Após 3 (três) tentativas de contato sem sucesso, o cadastro será cancelado, podendo o solicitante realizar novo cadastro quando desejar.</li>
+                                <li>Após a aprovação do cadastro, o solicitante deverá aguardar o contato telefônico do CCZ, de segunda a sexta-feira, em horário comercial, para fins de agendamento. Após 2 (duas) tentativas de contato sem sucesso, o cadastro será cancelado, podendo o solicitante realizar novo cadastro quando desejar.</li>
                                 <li>No dia agendado para a cirurgia de esterilização, é obrigatória a apresentação de documento de identidade com foto e comprovante de residência (IPTU, CEMIG, COPASA) em seu nome. Em caso de impossibilidade de comparecimento no dia agendado, o solicitante poderá designar um representante através de declaração escrita e assinada a ser apresentada ao CCZ juntamente com os documentos supracitados, bem como um documento de identificação do representante;</li>
                                 <li>Caso o solicitante possua Carteira Nacional de Saúde (CNS), que pode ser emitida em qualquer unidade de saúde, ou benefício do governo, é obrigatória a apresentação de documentação comprobatória no dia agendado para a cirurgia.</li>
                                 <li>No dia agendado para a cirurgia de esterilização o solicitante deve chegar com 30 minutos de antecedência, sob pena de ter o atendimento cancelado.</li>
-                                <li>No dia agendado para a cirurgia, o solicitante deve: I) levar cobertor para o animal (felinos e caninos); II) levar atadura crepom (faixa) nova e colar elisabetano ou macacão cirúrgico (fêmeas); III) levar colar elisabetano (cães machos); IV) conduzir o animal em guia própria (caninos) ou em caixa de transporte própria (felinos). Importante: gatos não devem ser conduzidos no colo ou em guias, devido ao risco de fugas.</li>
-                                <li>Na impossibilidade de comparecimento com o animal no dia agendado, o solicitante deverá entrar em contato por telefone com até 24 horas de antecedência, para desmarcar.</li>
+                                <li>No dia agendado para a cirurgia, o solicitante deve levar:</li>
+                                <ol type="I">
+                                    <li>No caso de cadela ou gata: cobertor, atadura crepom (faixa) nova e colar elisabetano ou macacão cirúrgico;</li>
+                                    <li>No caso de cão: cobertor e colar elisabetano;</li>
+                                    <li>No caso de gato: cobertor.</li>
+                                </ol>
+                                <p><b>Importante:</b> Cães e cadelas devem ser conduzidos em guias próprias. Nunca soltos. Felinos devem ser transportados em caixas de transporte próprias, nunca no colo ou em guias, devido ao risco de fugas.</p>
                                 <li>Em caso de ausência no dia agendado, sem aviso prévio, a solicitação será cancelada e o interessado só terá direito a realizar novo processo de cadastramento para cirurgia de esterilização do animal decorridos 6 (seis) meses contados a partir da data agendada.</li>
                                 <li>Excepcionalmente, o CCZ poderá cancelar cirurgias agendadas, ocasião em que o solicitante será comunicado por telefone com até 24 horas de antecedência e o procedimento será remarcado.</li>
                                 <li>A cirurgia de esterilização só será realizada mediante leitura, preenchimento e assinatura pelo solicitante do Termo de Autorização para Realização de Cirurgia.</li>
@@ -377,15 +380,16 @@ TDBConnection::getConnection();
                             <ul>
                                 <li>Para serem submetidos à esterilização, os animais devem ter no mínimo 6 (seis) meses e no máximo 8 (oito) anos. O CCZ não realiza esterilização em animais idosos.</li>
                                 <li>O CCZ não realiza esterilização em animais com lesões cutâneas, epilépticos, obesos, no cio (cadelas) ou em gestação avançada (gatas ou cadelas). Se a cadela estiver no cio, deve-se aguardar pelo menos 20 dias após o término do mesmo para realizar a esterilização. Em caso de gestação  (gatas ou cadelas) recente, deve-se aguardar pelo menos 60 dias após o parto para realizar a esterilização.</li>
-                                <li>Cadelas só podem ser submetidas à cirurgia de esterilização decorridos pelo menos 20 dias do final do cio.</li>
-                                <li>Gatas e cadelas só podem ser submetidas à cirurgia de esterilização decorridos pelo menos 60 dias após o parto.</li>
-                                <li>Antes da cirurgia de esterilização, os animais são submetidos a exame clínico pelo médico veterinário do CCZ,  podendo ser considerados inaptos para a cirurgia, caso sejam constatadas quaisquer alterações consideradas significativas e que impossibilitem a realização da cirurgia.</li>
-                                <li>No caso de caninos, o solicitante pode apresentar exame recente (menos de 6 meses) de leishmaniose ou submeter o animal, no CCZ, ao teste rápido para Leishmaniose Visceral no dia agendado. Em caso de resultado negativo a cirurgia poderá ser realizada imediatamente. Em caso de resultado positivo, a cirurgia não poderá ser realizada imediatamente e o solicitante deverá aguardar o resultado de um segundo exame sorológico confirmatório para Leishmaniose Visceral.</li>
+                                </li>
+                                <li>Antes da cirurgia de esterilização, os animais poderão ser submetidos a exame clínico pelo médico veterinário do CCZ, podendo ser considerados inaptos para a cirurgia, caso sejam constatadas quaisquer alterações consideradas significativas e que impossibilitem a realização da cirurgia.</li>
+                                <li>No caso de caninos, o solicitante pode apresentar exame recente (menos de 6 meses) de leishmaniose ou submeter o animal, no CCZ, ao teste rápido para Leishmaniose Visceral no dia agendado. Em caso de resultado negativo a cirurgia poderá ser realizada imediatamente. Em caso de resultado positivo, a cirurgia não poderá ser realizada imediatamente e o solicitante deverá aguardar o resultado do exame sorológico ELISA confirmatório para Leishmaniose Visceral.</li>
                                 <li>Só serão esterilizados animais com exame positivo para Leishmaniose visceral ou que estejam em tratamento veterinário de qualquer tipo, mediante laudo de médico veterinário responsável pelo tratamento, autorizando a cirurgia de esterilização.</li>
                                 <li>O CCZ não realiza exames de risco cirúrgico, sendo altamente recomendado que o solicitante o faça por conta própria.</li>
                                 <li>Cães e gatos comunitários ou abandonados recolhidos pelo CCZ são atendidos prioritariamente, assim como cães e gatos pertencentes a imóveis ou regiões do município onde seja constatada a necessidade de atendimento imediato, em face da superpopulação de animais, alto risco epidemiológico, calamidades e/ou outros casos específicos mediante avaliação do corpo técnico do CCZ.</li>
                                 <li>Cães e gatos comunitários ou abandonados recolhidos por organizações da sociedade civil poderão ser atendidos segundo critérios específicos, objetivando a cooperação mútua, controle populacional ético, guarda responsável e/ou adoção dos animais, mediante celebração de convênios.</li>                                
                             </ul>
+                            
+                            <p>No dia do procedimento o solicitante deverá assinar um termo de autorização que pode ser acessado nesse <a href="../doc/termo_autorizacao_cirurgia.pdf" target="new_window">link</a>.</p>
                         </div>
 
                         <input type="checkbox" name="concordar" id="concordar" value="sim" required>
@@ -407,9 +411,9 @@ TDBConnection::getConnection();
                 <br/><br/>
                 <div class="rodape">
                     <p>
-                        <strong>Central de Controle de Zoonoses</strong><br>
+                        <strong>Centro de Controle de Zoonoses</strong><br>
                         Telefones: 3351-3751 / 3361-7703<br>
-                        E-mail: cczcontagem@gmail.com
+                        E-mail: cczcontagem@yahoo.com.br
                     </p>
                 </div>
             </div>
