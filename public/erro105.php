@@ -60,7 +60,7 @@ TDBConnection::getConnection();
 
             <div class="conteudo">
 
-                <p class="atencao alinha"><strong>Erro:</strong>CPF inválido.</p>
+                <p class="atencao alinha"><strong>Erro de segurança:</strong> Valores inválidos, por favor atualize seu navegador de internet.</p>
                 
                 <p>Recomenda-se a utilização desse formulário nos seguintes navegadores: Microsoft Edge, Google Chrome, Mozzila Firefox ou Opera</p>
                 
@@ -68,7 +68,7 @@ TDBConnection::getConnection();
                 
                 <br>
 
-                <p class="alinha"><a href="javascript:history.go(-1)">[Voltar]</a></p>
+                <p class="alinha"><a href="index.php">[Voltar]</a></p>
 
                 <!--/rodapé-->
                 <br/><br/>
@@ -82,6 +82,7 @@ TDBConnection::getConnection();
             </div>
 
             <!-- scripts da página -->
+
         </div>    
     </body>
 </html>

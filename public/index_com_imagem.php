@@ -61,12 +61,12 @@ TDBConnection::getConnection();
 
             <div class="conteudo">
 
-                <!--/ banner 
+                <!--/ banner-->
                 <div>
                     <img src="../img/banner.jpg" alt="logoContagem">
                 </div>
                 <br>
-                -->
+
                 <!--/ fazer um novo pedido-->
                 <div>
  

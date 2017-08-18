@@ -49,7 +49,7 @@ TDBConnection::getConnection();
             <!-- Cabeçalho-->
 
             <div class="logotipo">
-                <img src="../img/logo.jpg" alt="logoContagem" class="imagem_logo">
+                <img src="../img/logo.png" alt="logoContagem" class="imagem_logo">
             </div>
 
             <div class="titulosuperior">

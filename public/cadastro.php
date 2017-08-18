@@ -31,6 +31,34 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
  * se conecta
  */
 TDBConnection::getConnection();
+
+/*
+ * segurança
+ */
+if (!isset($_SESSION['token'])){
+    date_default_timezone_set('America/Sao_Paulo');
+    $token = md5(uniqid(rand(), TRUE));
+    $quando = date("Y-m-d H:i:s");
+    $_SESSION['token'] = $token;
+    $_SESSION['token_time'] = time();
+    
+    $ip = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+    TDBConnection::beginTransaction();
+    TDBConnection::prepareQuery("INSERT INTO logacesso VALUES (null, :token, :ip, :description);");
+    TDBConnection::bindParamQuery(':token', $token, PDO::PARAM_STR);
+    TDBConnection::bindParamQuery(':ip', $ip, PDO::PARAM_STR);
+    TDBConnection::bindParamQuery(':description', $quando, PDO::PARAM_STR);
+    TDBConnection::execute();
+    TDBConnection::endTransaction();
+}
+
+//$token_age = time() - $_SESSION['token_time'];
+//
+//echo  $_SESSION['token_time'] . '       '  .  time() . '         ' .$token_age;
+//
+//exit;
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +78,7 @@ TDBConnection::getConnection();
             <!-- Cabeçalho-->
 
             <div class="logotipo">
-                <img src="../img/logo.jpg" alt="logoContagem" class="imagem_logo">
+                <img src="../img/logo.png" alt="logoContagem" class="imagem_logo">
             </div>
 
             <div class="titulosuperior">
@@ -62,13 +90,47 @@ TDBConnection::getConnection();
 
             <div class="conteudo">
                 <?php
-                // limpa as variáveis de entrada
+                // limpa as variáveis de que receberão os valores do formulário
                 $nome = $cpf = $endereco = $numero = $complemento = $bairro = $cep = $tel = '';
                 $cel = $cns = $beneficio = $beneficioQual = $nomeAnimal = $genero = $porte = $idade = '';
                 $idadeEm = $cor = $especie = $raca_id = $procedencia = '';
 
                 // executa o cadastro se possível
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                    // checagem de data, para casos de o usuário usar o IE    
+                    function checarData($date) {
+                        $tempDate = explode('-', $date);
+                        // checkdate(month, day, year)
+                        return checkdate($tempDate[1], $tempDate[2], $tempDate[0]);
+                    }
+
+                    
+                    // verifica se o token enviado é válido
+                    // de acordo com a sessão                    
+                    if ($_POST['token'] != $_SESSION['token'])
+                    {  
+                        // reseta os tokens
+                        $_SESSION['token_time'] = nul;
+                        $_SESSION['token'] = null; 
+                        header("Location: erro104.php");
+                        exit;     
+                    }
+                    
+                    // de acordo com o log de acesso
+                    
+                    
+                    // verifca se o token enviado não expirou
+                    $token_age = time() - $_SESSION['token_time'];                    
+                    // cada token tem uma vida de duas horas após ser criado
+                    if ($token_age > 7200){
+                        // reseta os tokens
+                        $_SESSION['token_time'] = null;
+                        $_SESSION['token'] = null; 
+                        header("Location: erro103.php");
+                        exit; 
+                    }
+                    
 
                     // recebi e formata as variáveis
 
@@ -107,6 +169,12 @@ TDBConnection::getConnection();
                     /* validar cpf */
                     if (TCommon::valida_cpf($cpf) == false) {
                         header("Location: erro100.php");
+                        exit;
+                    }
+                    
+                    /* validar a data de nascimento que dá problema no IE */ 
+                    if(!checarData($nascimento)){
+                        header("Location: erro105.php");
                         exit;
                     }
                     
@@ -235,6 +303,10 @@ TDBConnection::getConnection();
                     $result = TDBConnection::execute();
 
                     TDBConnection::endTransaction();
+                    
+                    // reseta os tokens
+                    $_SESSION['token_time'] = null;
+                    $_SESSION['token'] = null;        
 
                     header("Location: concluido.php?cpf=" . $cpf);
                     exit;
@@ -245,18 +317,20 @@ TDBConnection::getConnection();
                       action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onSubmit="return validaForm();">
                     <fieldset>
                         <legend>Informações sobre o tutor:</legend>
+                        
+                        <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
 
                         <label for="nome">Nome:</label>
                         <input type="text" name="nome" id="nome" maxlength="140" size="36" required autofocus><br><br>
 
                         <label for="nascimento">Data Nascimento:</label>
-                        <input type="date" name="nascimento" id="nascimento" required><br/><br/>
+                        <input type="date" name="nascimento" id="nascimento" required><br><br>
 
                         <label for="cpf">CPF:</label>
                         <input type="text" name="cpf" id="cpf" maxlength="11" size="12" required><br><br>
 
                         <label for="endereco">Endereço:</label>
-                        <input type="text" name="endereco" id="endereco" maxlength="255" size="36" required><br/><br/>                        
+                        <input type="text" name="endereco" id="endereco" maxlength="255" size="36" required><br><br>                        
 
                         <label for="numero">Número:</label>
                         <input type="text" name="numero" id="numero" maxlength="20" size="9"> 

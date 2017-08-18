@@ -49,11 +49,11 @@ TDBConnection::getConnection();
             <!-- Cabeçalho-->
 
             <div class="logotipo">
-                <img src="../img/logo.jpg" alt="logoContagem" class="imagem_logo">
+                <img src="../img/logo.png" alt="logoContagem" class="imagem_logo">
             </div>
 
             <div class="titulosuperior">
-                <h1>Agenda de Castrações</h1>
+                <h1>Cadastro para Esterilização de Animais</h1>
             </div>
 
             <!--/conteúdo-->
@@ -61,6 +61,10 @@ TDBConnection::getConnection();
             <div class="conteudo">
 
                 <p class="atencao alinha"><strong>Erro:</strong>Existem campos não preenchidos.</p>
+                
+                <p>Recomenda-se a utilização desse formulário nos seguintes navegadores: Microsoft Edge, Google Chrome, Mozzila Firefox ou Opera</p>
+                
+                <p class="atencao">Incompátivel com Internet Explorer</p>
                 
                 <br>
 

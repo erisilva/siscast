@@ -269,3 +269,13 @@ CREATE EVENT calcular_media_espera
 DELIMITER ;
 
 
+-- segurança das conexões, análise das requisições
+CREATE TABLE `logAcesso` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `token` varchar(180)  DEFAULT NULL,
+  `ip` varchar(60)  DEFAULT NULL,
+  `description` DATETIME,  
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+

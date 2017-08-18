@@ -47,7 +47,7 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
         <div class="estrutura_popup">
 
             <div class="logotipo">
-                <img src="img/logo.jpg" alt="logoContagem" class="imagem_logo"> 
+                <img src="img/logo.png" alt="logoContagem" class="imagem_logo"> 
             </div>
 
             <div class="titulosuperior"> 
