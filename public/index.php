@@ -7,14 +7,14 @@ session_start();
 /*
  * constants
  */
-require_once '../config/TConfig.php';
+require_once 'config/TConfig.php';
 
 /*
  *  autoload
  */
-require_once '../libs/Autoloader.php';
+require_once 'libs/Autoloader.php';
 $loader = new Autoloader();
-$loader->directories = array('../libs', '../model');
+$loader->directories = array('libs', 'model');
 $loader->register();
 
 
@@ -40,9 +40,9 @@ TDBConnection::getConnection();
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="../img/favicon.ico">
+    <link rel="icon" href="img/favicon.ico">
     <title>SisCast - Pedidos de Agendamento Público</title>
-    <link rel="stylesheet" type="text/css" href="../estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
     <script type="text/javascript" src="cpf.js"></script>
     <body>
         <div class="estrutura_popup">
@@ -50,7 +50,7 @@ TDBConnection::getConnection();
             <!-- Cabeçalho-->
 
             <div class="logotipo">
-                <img src="../img/logo.png" alt="logoContagem" class="imagem_logo">
+                <img src="img/logo.png" alt="logoContagem" class="imagem_logo">
             </div>
 
             <div class="titulosuperior">
@@ -63,7 +63,7 @@ TDBConnection::getConnection();
 
                 <!--/ banner 
                 <div>
-                    <img src="../img/banner.jpg" alt="logoContagem">
+                    <img src="img/banner.jpg" alt="logoContagem">
                 </div>
                 <br>
                 -->

@@ -7,14 +7,14 @@ session_start();
 /*
  * constants
  */
-require_once '../config/TConfig.php';
+require_once 'config/TConfig.php';
 
 /*
  *  autoload
  */
-require_once '../libs/Autoloader.php';
+require_once 'libs/Autoloader.php';
 $loader = new Autoloader();
-$loader->directories = array('../libs', '../model');
+$loader->directories = array('libs', 'model');
 $loader->register();
 
 
@@ -52,13 +52,6 @@ if (!isset($_SESSION['token'])){
     TDBConnection::execute();
     TDBConnection::endTransaction();
 }
-
-//$token_age = time() - $_SESSION['token_time'];
-//
-//echo  $_SESSION['token_time'] . '       '  .  time() . '         ' .$token_age;
-//
-//exit;
-
 ?>
 
 <!DOCTYPE html>
@@ -68,9 +61,9 @@ if (!isset($_SESSION['token'])){
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="../img/favicon.ico">
+    <link rel="icon" href="img/favicon.ico">
     <title>SisCast - Pedidos de Agendamento Público</title>
-    <link rel="stylesheet" type="text/css" href="../estilo/estilo.css">
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
     
     <body>
         <div class="estrutura">
@@ -78,7 +71,7 @@ if (!isset($_SESSION['token'])){
             <!-- Cabeçalho-->
 
             <div class="logotipo">
-                <img src="../img/logo.png" alt="logoContagem" class="imagem_logo">
+                <img src="img/logo.png" alt="logoContagem" class="imagem_logo">
             </div>
 
             <div class="titulosuperior">
@@ -98,16 +91,26 @@ if (!isset($_SESSION['token'])){
                 // executa o cadastro se possível
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    // checagem de data, para casos de o usuário usar o IE    
+                    // função de checagem de data, para eliminar o pepino que dá no IE
                     function checarData($date) {
                         $tempDate = explode('-', $date);
                         // checkdate(month, day, year)
                         return checkdate($tempDate[1], $tempDate[2], $tempDate[0]);
                     }
-
                     
                     // verifica se o token enviado é válido
-                    // de acordo com a sessão                    
+                    // de acordo com a sessão 
+
+                    if (!isset($_SESSION['token'])){
+                        header("Location: erro104.php");
+                        exit;
+                    }
+
+                    if (!isset($_POST['token'])){
+                        header("Location: erro104.php");
+                        exit;
+                    }
+
                     if ($_POST['token'] != $_SESSION['token'])
                     {  
                         // reseta os tokens
@@ -116,76 +119,267 @@ if (!isset($_SESSION['token'])){
                         header("Location: erro104.php");
                         exit;     
                     }
-                    
-                    // de acordo com o log de acesso
-                    
-                    
-                    // verifca se o token enviado não expirou
-                    $token_age = time() - $_SESSION['token_time'];                    
+
+                    // verifica se a vida da sessão já acabou
+                    $token_age = time() - $_SESSION['token_time'];
                     // cada token tem uma vida de duas horas após ser criado
                     if ($token_age > 7200){
                         // reseta os tokens
                         $_SESSION['token_time'] = null;
-                        $_SESSION['token'] = null; 
+                        $_SESSION['token'] = null;
                         header("Location: erro103.php");
-                        exit; 
+                        exit;
                     }
                     
+                    // de acordo com o log de acesso no banco de dados
+                    // parece mágica mas não é, essa simples consulta verifica se as seções existem
+                    // teoricamente esse conjunto de códigos já faz toda validação
+                    // se os tokens de post e sessao sao iguais
+                    // se foram criados
+                    // se não expiraram
+                    // se existem
+                    // por mim isso está funcionando como uma segunda camada
+                    // de iteração com o banco de dados
+                    // só que tem de ir ao banco consultas, os anteriores são processados mais rapidos
+                    // essa dupla verificação permite uma segurança maior com as requisições
+                    TDBConnection::prepareQuery("SELECT TIMESTAMPDIFF(SECOND,logacesso.description,now()) as vida FROM logacesso
+                                                        where token = :token_post and token = :token_sessao;");
+                    TDBConnection::bindParamQuery(':token_post', $_POST['token'], PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':token_sessao', $_SESSION['token'], PDO::PARAM_STR);
+                    $logacesso = TDBConnection::single();
 
-                    // recebi e formata as variáveis
+                    if (TDBConnection::rowCount() == 0 ) {
+                        header("Location: erro104.php");
+                        exit;
+                    }
+                    // duas horas de vida, segunda validação
+                    if ($logacesso->vida > 7200){
+                        // reseta os tokens
+                        $_SESSION['token_time'] = null;
+                        $_SESSION['token'] = null;
+                        header("Location: erro103.php");
+                        exit;
+                    }
 
-                    /* dados do pedinte */
-                    $nome = (isset($_POST['nome']) ? strip_tags(trim($_POST['nome'])) : '');
-                    $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
-                    $nascimento = (isset($_POST['nascimento']) ? strip_tags(trim($_POST['nascimento'])) : '');
+                    // validação e tratamento dos dados recebidos do formulário
 
-                    /* dados de endereço */
-                    $endereco = (isset($_POST['endereco']) ? strip_tags(trim($_POST['endereco'])) : '');
-                    $numero = (isset($_POST['numero']) ? strip_tags(trim($_POST['numero'])) : '');
-                    $complemento = (isset($_POST['complemento']) ? strip_tags(trim($_POST['complemento'])) : '');
-                    $bairro = (isset($_POST['bairro']) ? strip_tags(trim($_POST['bairro'])) : '');
-                    $cep = (isset($_POST['cep']) ? strip_tags(trim($_POST['cep'])) : '');
-                    $tel = (isset($_POST['tel']) ? strip_tags(trim($_POST['tel'])) : '');
-                    $cel = (isset($_POST['cel']) ? strip_tags(trim($_POST['cel'])) : '');
+                    // validação # nome
+                    $_POST['nome'] = trim( $_POST['nome'] );
+                    if(isset($_POST['nome']) && !empty($_POST['nome'])) {
+                        $nome = strip_tags($_POST['nome']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
 
-                    /* informações adicionais */
-                    $cns = (isset($_POST['cns']) ? strip_tags(trim($_POST['cns'])) : '');
-                    $beneficio = (isset($_POST['beneficio']) ? strip_tags(trim($_POST['beneficio'])) : '');
-                    $beneficioQual = (isset($_POST['beneficioQual']) ? strip_tags(trim($_POST['beneficioQual'])) : '');
-
-                    /* informações do animal */
-                    $nomeAnimal = (isset($_POST['nomeAnimal']) ? strip_tags(trim($_POST['nomeAnimal'])) : '');
-                    $genero = (isset($_POST['genero']) ? strip_tags(trim($_POST['genero'])) : '');
-                    $porte = (isset($_POST['porte']) ? strip_tags(trim($_POST['porte'])) : '');
-                    $idade = (isset($_POST['idade']) ? strip_tags(trim($_POST['idade'])) : 0);
-                    $idadeEm = (isset($_POST['idadeEm']) ? strip_tags(trim($_POST['idadeEm'])) : '');
-                    $cor = (isset($_POST['cor']) ? strip_tags(trim($_POST['cor'])) : '');
-                    $especie = (isset($_POST['especie']) ? strip_tags(trim($_POST['especie'])) : '');
-                    $raca_id = (isset($_POST['raca_id']) ? strip_tags(trim($_POST['raca_id'])) : 0);
-                    $procedencia = (isset($_POST['procedencia']) ? strip_tags(trim($_POST['procedencia'])) : '');
-
-                    /* validação dos dados */
-                    
+                    // validação # cpf
+                    $_POST['cpf'] = trim( $_POST['cpf'] );
+                    if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
+                        $cpf = strip_tags($_POST['cpf']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
                     /* validar cpf */
                     if (TCommon::valida_cpf($cpf) == false) {
                         header("Location: erro100.php");
                         exit;
                     }
-                    
-                    /* validar a data de nascimento que dá problema no IE */ 
+
+                    // validação # nascimento
+                    $_POST['nascimento'] = trim( $_POST['nascimento'] );
+                    if(isset($_POST['nascimento']) && !empty($_POST['nascimento'])) {
+                        $nascimento = strip_tags($_POST['nascimento']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+                    /* validar a data de nascimento que dá problema no IE */
                     if(!checarData($nascimento)){
                         header("Location: erro105.php");
                         exit;
                     }
-                    
-                    /* validar entradas vazias - não testado*/
-                    if (($nome == '') || ($nascimento == '') || ($endereco == '')
-                            || ($numero == '') || ($bairro == '') || ($cep == '')
-                            || ($genero == '') || ($cel == '') || ($nomeAnimal == '')
-                            || ($porte == '') || ($idade == 0) || ($idadeEm == '')
-                            || ($cor == '')|| ($raca_id == 0)|| ($procedencia == '')){
+
+                    // validação # endereco
+                    $_POST['endereco'] = trim( $_POST['endereco'] );
+                    if(isset($_POST['endereco']) && !empty($_POST['endereco'])) {
+                        $endereco = strip_tags($_POST['endereco']);
+                    }
+                    else {
                         header("Location: erro101.php");
-                        exit;                        
+                        exit;
+                    }
+
+                    // validação # numero
+                    $_POST['numero'] = trim( $_POST['numero'] );
+                    if(isset($_POST['numero']) && !empty($_POST['numero'])) {
+                        $numero = strip_tags($_POST['numero']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # complemento
+                    // campo opcional
+                    $complemento = (isset($_POST['complemento']) ? strip_tags(trim($_POST['complemento'])) : '');
+
+                    // validação # bairro
+                    $_POST['bairro'] = trim( $_POST['bairro'] );
+                    if(isset($_POST['bairro']) && !empty($_POST['bairro'])) {
+                        $bairro = strip_tags($_POST['bairro']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # cep
+                    $_POST['cep'] = trim( $_POST['cep'] );
+                    if(isset($_POST['cep']) && !empty($_POST['cep'])) {
+                        $cep = strip_tags($_POST['cep']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # tel
+                    $_POST['tel'] = trim( $_POST['tel'] );
+                    if(isset($_POST['tel']) && !empty($_POST['tel'])) {
+                        $tel = strip_tags($_POST['tel']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # cel
+                    $_POST['cel'] = trim( $_POST['cel'] );
+                    if(isset($_POST['cel']) && !empty($_POST['cel'])) {
+                        $cel = strip_tags($_POST['cel']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+
+                    // validação # cns
+                    $_POST['cns'] = trim( $_POST['cns'] );
+                    if(isset($_POST['cns']) && !empty($_POST['cns'])) {
+                        $cns = strip_tags($_POST['cns']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # beneficio
+                    $_POST['beneficio'] = trim( $_POST['beneficio'] );
+                    if(isset($_POST['beneficio']) && !empty($_POST['beneficio'])) {
+                        $beneficio = strip_tags($_POST['beneficio']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # beneficioQual
+                    // campo opcional, não validar
+                    $beneficio = (isset($_POST['beneficio']) ? strip_tags(trim($_POST['beneficio'])) : '');
+
+                    // validação # nomeAnimal
+                    $_POST['nomeAnimal'] = trim( $_POST['nomeAnimal'] );
+                    if(isset($_POST['nomeAnimal']) && !empty($_POST['nomeAnimal'])) {
+                        $nomeAnimal = strip_tags($_POST['nomeAnimal']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # genero
+                    $_POST['genero'] = trim( $_POST['genero'] );
+                    if(isset($_POST['genero']) && !empty($_POST['genero'])) {
+                        $genero = strip_tags($_POST['genero']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # porte
+                    $_POST['porte'] = trim( $_POST['porte'] );
+                    if(isset($_POST['porte']) && !empty($_POST['porte'])) {
+                        $porte = strip_tags($_POST['porte']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # idade
+                    $_POST['idade'] = trim( $_POST['idade'] );
+                    if(isset($_POST['idade']) && !empty($_POST['idade'])) {
+                        $idade = strip_tags($_POST['idade']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # idadeEm
+                    $_POST['idadeEm'] = trim( $_POST['idadeEm'] );
+                    if(isset($_POST['idadeEm']) && !empty($_POST['idadeEm'])) {
+                        $idadeEm = strip_tags($_POST['idadeEm']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # cor
+                    $_POST['cor'] = trim( $_POST['cor'] );
+                    if(isset($_POST['cor']) && !empty($_POST['cor'])) {
+                        $cor = strip_tags($_POST['cor']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # especie
+                    $_POST['especie'] = trim( $_POST['especie'] );
+                    if(isset($_POST['especie']) && !empty($_POST['especie'])) {
+                        $especie = strip_tags($_POST['cor']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # raca_id
+                    $_POST['raca_id'] = trim( $_POST['raca_id'] );
+                    if(isset($_POST['raca_id']) && !empty($_POST['raca_id']) && ($_POST['raca_id'] > 0) ){
+                        $raca_id = strip_tags($_POST['raca_id']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
+                    }
+
+                    // validação # procedencia
+                    $_POST['procedencia'] = trim( $_POST['procedencia'] );
+                    if(isset($_POST['procedencia']) && !empty($_POST['procedencia'])) {
+                        $procedencia = strip_tags($_POST['procedencia']);
+                    }
+                    else {
+                        header("Location: erro101.php");
+                        exit;
                     }
                                         
                     /* validar número máximo de pedidos por cpf (5) */
@@ -199,7 +393,6 @@ if (!isset($_SESSION['token'])){
                     }
 
                     /* calculo do codigo e ano */
-
                     TDBConnection::beginTransaction();
                     TDBConnection::prepareQuery("select (coalesce(max(codigo), 0) + 1) as codigo, year(now()) as ano from pedidos where ano = year(now());");
                     $codigo_ano = TDBConnection::single();
@@ -305,8 +498,8 @@ if (!isset($_SESSION['token'])){
                     TDBConnection::endTransaction();
                     
                     // reseta os tokens
-                    $_SESSION['token_time'] = null;
-                    $_SESSION['token'] = null;        
+                    unset($_SESSION['token_time']);
+                    unset($_SESSION['token']);
 
                     header("Location: concluido.php?cpf=" . $cpf);
                     exit;
@@ -463,7 +656,7 @@ if (!isset($_SESSION['token'])){
                                 <li>Cães e gatos comunitários ou abandonados recolhidos por organizações da sociedade civil poderão ser atendidos segundo critérios específicos, objetivando a cooperação mútua, controle populacional ético, guarda responsável e/ou adoção dos animais, mediante celebração de convênios.</li>                                
                             </ul>
                             
-                            <p>No dia do procedimento o solicitante deverá assinar um termo de autorização que pode ser acessado nesse <a href="../doc/termo_autorizacao_cirurgia.pdf" target="new_window">link</a>.</p>
+                            <p>No dia do procedimento o solicitante deverá assinar um termo de autorização que pode ser acessado nesse <a href="doc/termo_autorizacao_cirurgia.pdf" target="new_window">link</a>.</p>
                         </div>
 
                         <input type="checkbox" name="concordar" id="concordar" value="sim" required>

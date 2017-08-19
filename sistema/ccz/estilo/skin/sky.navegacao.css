@@ -1,0 +1,21 @@
+ul.pagination {
+    text-align:center;
+    color:black;
+}
+ul.pagination li {
+    display:inline;
+    padding:0 1px;
+}
+ul.pagination a {
+    color:black;
+    display:inline-block;
+    padding:3px 6px;
+    border:1px solid #0000CD;
+    text-decoration:none;
+}
+ul.pagination a:hover, 
+ul.pagination a.current {
+    background:#0000CD;
+    color:#fff; 
+}
+
