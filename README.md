@@ -25,3 +25,8 @@ usuário padrão: adm senha: masterkey
 
 ATENÇãO : apagar esse usuario no banco ao publicar o sistema na internet
 obviamente depois de ter criado os usuários ou operadores do sistema
+
+_________________________________________________________________________
+por questões de segurança (teoricamente), separei o formulario
+de pedido web (pasta public), da pasta do sistema.
+

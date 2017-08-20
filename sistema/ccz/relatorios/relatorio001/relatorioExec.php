@@ -54,7 +54,7 @@ class PDF extends FPDF {
 
         // w h text border ln (0 = ln(0)) fill= false para transparente
 
-        $this->Cell( 40, 50, $this->Image('../../img/logo.png', $this->GetX(), $this->GetY(), 33.78), 0, 0, 'L', false );
+        // $this->Cell( 40, 50, $this->Image('../../img/logo.png', $this->GetX(), $this->GetY(), 33.78), 0, 0, 'L', false );
 
         $this->SetFillColor(255, 255, 255);
         $this->SetTextColor(0, 0, 0);

@@ -78,12 +78,11 @@ if (!isset($_SESSION['token'])){
                 <h1>Cadastro para Esterilização de Animais</h1>
             </div>
 
-
             <!--/conteúdo-->
 
             <div class="conteudo">
                 <?php
-                // limpa as variáveis de que receberão os valores do formulário
+                // limpa as variáveis que receberão os valores do formulário
                 $nome = $cpf = $endereco = $numero = $complemento = $bairro = $cep = $tel = '';
                 $cel = $cns = $beneficio = $beneficioQual = $nomeAnimal = $genero = $porte = $idade = '';
                 $idadeEm = $cor = $especie = $raca_id = $procedencia = '';

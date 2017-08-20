@@ -2,238 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f649750c-6f80-46f4-9da1-1cdb4b691b7b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_install_/install_.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_install_/showAll.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_session_/legal" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/cadastro.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/config/TConfig.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/configuracao.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/doc/termo_autorizacao_cirurgia.pdf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/estilo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/navegacao.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/skin/candy.estilo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/skin/candy.navegacao.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/skin/ocean.estilo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/skin/ocean.navegacao.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/skin/sky.estilo.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/estilo/skin/sky.navegacao.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/grade/grade.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/backward_nav.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/banner.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/bola.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/bola3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/close_view.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/defaults_ps.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/delete2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/doctor.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/faviconold.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/id_card2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/impressora.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/logo2015.jpg.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/logo2016.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/menu.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/newfile_wiz.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/notebook.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/planilha.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/refresh_nav.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/save_edit.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/users3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jquery/formulario.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jquery/padrao.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jquery/padrao.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jquery/teste001.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jquery/teste001.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/appExec.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/cadastro.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/lib.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/operadores.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/protocolo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/Autoloader.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TApp.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TCommon.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TCriteria.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TDBConnection.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TExpression.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TFilter.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TLogger.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TLoggerHTML.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TLoggerTXT.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TLoggerXML.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TRecord.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TRepository.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TSqlDelete.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TSqlInsert.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TSqlInstruction.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TSqlSelect.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/libs/TSqlUpdate.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/log/_htaccess" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/log/log.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/login.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/logout.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/alterarSenha.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/alterarSenha.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/alterarSenhaExec.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/busca.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/exportar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/formAlterar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/formCadastro.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/novaSenha.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/novaSenha.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/operador/novaSenhaExec.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos/agendar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos/alterar.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos/alterarExec.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos/cadastro.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos/exportar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos/formAlterar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pedidos/show.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/raca/busca.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/raca/exportar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/raca/formAlterar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/raca/formCadastro.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/FAQ.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/changelog.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/acceptpagebreak.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/addfont.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/addlink.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/addpage.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/aliasnbpages.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/cell.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/close.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/error.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/footer.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/fpdf.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/getstringwidth.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/getx.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/gety.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/header.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/image.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/index.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/line.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/link.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/ln.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/multicell.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/output.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/pageno.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/rect.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setauthor.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setautopagebreak.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setcompression.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setcreator.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setdisplaymode.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setdrawcolor.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setfillcolor.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setfont.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setfontsize.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setkeywords.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setleftmargin.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setlinewidth.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setlink.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setmargins.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setrightmargin.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setsubject.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/settextcolor.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/settitle.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/settopmargin.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setx.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/setxy.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/sety.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/text.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/doc/write.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/courier.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/courierb.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/courierbi.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/courieri.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/helvetica.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/helveticab.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/helveticabi.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/helveticai.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/symbol.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/times.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/timesb.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/timesbi.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/timesi.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/font/zapfdingbats.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/fpdf.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/fpdf.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/install.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/license.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1250.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1251.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1252.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1253.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1254.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1255.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1257.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp1258.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/cp874.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-1.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-11.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-15.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-16.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-2.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-4.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-5.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-7.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/iso-8859-9.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/koi8-r.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/koi8-u.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/makefont.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/makefont/ttfparser.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/20k_c1.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/20k_c2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/calligra.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/calligra.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/calligra.z" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/countries.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/index.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/makefont.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto1.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto1.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto2.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto2.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto3.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto3.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto4.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto4.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto5.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto5.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto6.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto6.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto7.htm" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/FPDF/tutorial/tuto7.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/pdfProtocolosCompletoPorPeriodo.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/pdfProtocolosCompletoPorPeriodoFiltro.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/planilhaBase.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/protocoloExporta.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/relatorio001/relatorio.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/relatorios/relatorio001/relatorioExec.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/restrito.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/situacao/busca.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/situacao/exportar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/situacao/formAlterar.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/situacao/formCadastro.php" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sistema/ccz/monitora/busca.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/cadastro.php" afterPath="$PROJECT_DIR$/public/cadastro.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/concluido.php" afterPath="$PROJECT_DIR$/public/concluido.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/erro100.php" afterPath="$PROJECT_DIR$/public/erro100.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/erro101.php" afterPath="$PROJECT_DIR$/public/erro101.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/erro102.php" afterPath="$PROJECT_DIR$/public/erro102.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/erro103.php" afterPath="$PROJECT_DIR$/public/erro103.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/erro104.php" afterPath="$PROJECT_DIR$/public/erro104.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/erro105.php" afterPath="$PROJECT_DIR$/public/erro105.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index_com_imagem.php" afterPath="$PROJECT_DIR$/public/index_com_imagem.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorioExec.php" afterPath="$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorioExec.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -247,43 +20,41 @@
       <file leaf-file-name="cadastro.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/cadastro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1666">
-              <caret line="98" column="21" lean-forward="false" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
+            <state relative-caret-position="-2074">
+              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding>
-                <marker date="1503116564785" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
-                <marker date="1503116564785" expanded="true" signature="5094:5281" ph="SELECT TIMES... logacesso" />
-                <marker date="1503116564785" expanded="true" signature="15360:15469" ph="select count... pedidos" />
-                <marker date="1503116564785" expanded="true" signature="15981:16085" ph="select (coal... " />
-                <marker date="1503116564785" expanded="true" signature="16234:19693" ph="INSERT INTO pedidos... " />
-                <marker date="1503116564785" expanded="true" signature="27596:27634" ph="select * fro... racas" />
+                <marker date="1503269077183" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
+                <marker date="1503269077183" expanded="true" signature="5090:5277" ph="SELECT TIMES... logacesso" />
+                <marker date="1503269077183" expanded="true" signature="15356:15465" ph="select count... pedidos" />
+                <marker date="1503269077183" expanded="true" signature="15977:16081" ph="select (coal... " />
+                <marker date="1503269077183" expanded="true" signature="16230:19689" ph="INSERT INTO pedidos... " />
+                <marker date="1503269077183" expanded="true" signature="27592:27630" ph="select * fro... racas" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="agendar.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sistema/ccz/pedidos/agendar.php">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+              <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding>
-                <marker date="1503088310822" expanded="true" signature="3613:4735" ph="UPDATE pedid... " />
-                <marker date="1503088310822" expanded="true" signature="6135:6751" ph="SELECT pedid... pedidos" />
-                <marker date="1503088310822" expanded="true" signature="8864:8901" ph="select * fro... situacoes" />
+                <marker date="1503116450557" expanded="true" signature="1956:2032" ph="SELECT media... estatistica" />
+                <marker date="1503116450557" expanded="true" signature="3184:3966" ph="SELECT date_... pedidos" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="442">
-                <caret line="26" column="68" lean-forward="false" selection-start-line="26" selection-start-column="68" selection-end-line="26" selection-end-column="68" />
-                <folding />
-              </first_editor>
-              <second_editor />
+      <file leaf-file-name="busca.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sistema/ccz/monitora/busca.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1887">
+              <caret line="111" column="30" lean-forward="false" selection-start-line="111" selection-start-column="30" selection-end-line="111" selection-end-column="30" />
+              <folding>
+                <marker date="1503270027514" expanded="true" signature="2963:3149" ph="SELECT * FRO... $" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -315,8 +86,10 @@
         <option value="$PROJECT_DIR$/public/erro102.php" />
         <option value="$PROJECT_DIR$/public/erro103.php" />
         <option value="$PROJECT_DIR$/public/erro105.php" />
-        <option value="$PROJECT_DIR$/public/cadastro.php" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorioExec.php" />
+        <option value="$PROJECT_DIR$/public/cadastro.php" />
+        <option value="$PROJECT_DIR$/sistema/ccz/monitora/busca.php" />
       </list>
     </option>
   </component>
@@ -327,7 +100,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -348,8 +121,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -378,18 +149,32 @@
               <item name="siscast" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="ccz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="pedidos" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="monitora" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="siscast" type="b2602c69:ProjectViewProjectNode" />
+              <item name="siscast" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ccz" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="raca" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="C:/cmder/vendor/git-for-windows/bin/git.exe" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\siscast\sistema\ccz\monitora" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -415,6 +200,8 @@
       <updated>1503092124504</updated>
       <workItem from="1503092128040" duration="11748000" />
       <workItem from="1503115327135" duration="2505000" />
+      <workItem from="1503232264114" duration="2661000" />
+      <workItem from="1503268449409" duration="2229000" />
     </task>
     <task id="LOCAL-00001" summary="commit 1.8 melhorias em segurança e reorganização das pastas">
       <created>1503117734424</created>
@@ -427,17 +214,17 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14253000" />
+    <option name="totallyTimeSpent" value="19143000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14787701" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18594436" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12678288" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -472,24 +259,74 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1503116564785" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
-            <marker date="1503116564785" expanded="true" signature="5094:5281" ph="SELECT TIMES... logacesso" />
-            <marker date="1503116564785" expanded="true" signature="15360:15469" ph="select count... pedidos" />
-            <marker date="1503116564785" expanded="true" signature="15981:16085" ph="select (coal... " />
-            <marker date="1503116564785" expanded="true" signature="16234:19693" ph="INSERT INTO pedidos... " />
-            <marker date="1503116564785" expanded="true" signature="27596:27634" ph="select * fro... racas" />
+            <marker date="1503269077183" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
+            <marker date="1503269077183" expanded="true" signature="5090:5277" ph="SELECT TIMES... logacesso" />
+            <marker date="1503269077183" expanded="true" signature="15356:15465" ph="select count... pedidos" />
+            <marker date="1503269077183" expanded="true" signature="15977:16081" ph="select (coal... " />
+            <marker date="1503269077183" expanded="true" signature="16230:19689" ph="INSERT INTO pedidos... " />
+            <marker date="1503269077183" expanded="true" signature="27592:27630" ph="select * fro... racas" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/formAlterar.php">
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/monitora/busca.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3825">
-          <caret line="225" column="93" lean-forward="false" selection-start-line="225" selection-start-column="93" selection-end-line="225" selection-end-column="131" />
-          <folding />
+        <state relative-caret-position="748">
+          <caret line="44" column="17" lean-forward="true" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+          <folding>
+            <marker date="1503270027514" expanded="true" signature="2963:3149" ph="SELECT * FRO... $" />
+          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/cadastro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1666">
+          <caret line="98" column="21" lean-forward="false" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
+          <folding>
+            <marker date="1503269077183" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
+            <marker date="1503269077183" expanded="true" signature="5090:5277" ph="SELECT TIMES... logacesso" />
+            <marker date="1503269077183" expanded="true" signature="15356:15465" ph="select count... pedidos" />
+            <marker date="1503269077183" expanded="true" signature="15977:16081" ph="select (coal... " />
+            <marker date="1503269077183" expanded="true" signature="16230:19689" ph="INSERT INTO pedidos... " />
+            <marker date="1503269077183" expanded="true" signature="27592:27630" ph="select * fro... racas" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/pedidos/agendar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="442">
+            <caret line="26" column="68" lean-forward="false" selection-start-line="26" selection-start-column="68" selection-end-line="26" selection-end-column="68" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/cadastro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1503269077183" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
+            <marker date="1503269077183" expanded="true" signature="5090:5277" ph="SELECT TIMES... logacesso" />
+            <marker date="1503269077183" expanded="true" signature="15356:15465" ph="select count... pedidos" />
+            <marker date="1503269077183" expanded="true" signature="15977:16081" ph="select (coal... " />
+            <marker date="1503269077183" expanded="true" signature="16230:19689" ph="INSERT INTO pedidos... " />
+            <marker date="1503269077183" expanded="true" signature="27592:27630" ph="select * fro... racas" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pedidos/formAlterar.php" />
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_4.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -498,31 +335,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-969">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1503116450557" expanded="true" signature="1956:2032" ph="SELECT media... estatistica" />
-            <marker date="1503116450557" expanded="true" signature="3184:3966" ph="SELECT date_... pedidos" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_install_/install_.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="264" column="148" lean-forward="false" selection-start-line="264" selection-start-column="148" selection-end-line="264" selection-end-column="148" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/TDBConnection.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2042">
-          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/_install_/install_.sql" />
+    <entry file="file://$PROJECT_DIR$/libs/TDBConnection.php" />
     <entry file="file://$PROJECT_DIR$/public/erro104.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-962">
@@ -571,49 +385,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/formAlterar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3825">
-          <caret line="225" column="93" lean-forward="false" selection-start-line="225" selection-start-column="93" selection-end-line="225" selection-end-column="131" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/cadastro.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="98" column="21" lean-forward="false" selection-start-line="98" selection-start-column="21" selection-end-line="98" selection-end-column="21" />
-          <folding>
-            <marker date="1503116564785" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
-            <marker date="1503116564785" expanded="true" signature="5094:5281" ph="SELECT TIMES... logacesso" />
-            <marker date="1503116564785" expanded="true" signature="15360:15469" ph="select count... pedidos" />
-            <marker date="1503116564785" expanded="true" signature="15981:16085" ph="select (coal... " />
-            <marker date="1503116564785" expanded="true" signature="16234:19693" ph="INSERT INTO pedidos... " />
-            <marker date="1503116564785" expanded="true" signature="27596:27634" ph="select * fro... racas" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/pedidos/formAlterar.php" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="471">
+            <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sistema/ccz/pedidos/agendar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        <state relative-caret-position="17">
+          <caret line="22" column="24" lean-forward="false" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorioExec.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="56" column="11" lean-forward="false" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/cadastro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2074">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding>
-            <marker date="1503088310822" expanded="true" signature="3613:4735" ph="UPDATE pedid... " />
-            <marker date="1503088310822" expanded="true" signature="6135:6751" ph="SELECT pedid... pedidos" />
-            <marker date="1503088310822" expanded="true" signature="8864:8901" ph="select * fro... situacoes" />
+            <marker date="1503269077183" expanded="true" signature="926:988" ph="INSERT INTO logacesso... " />
+            <marker date="1503269077183" expanded="true" signature="5090:5277" ph="SELECT TIMES... logacesso" />
+            <marker date="1503269077183" expanded="true" signature="15356:15465" ph="select count... pedidos" />
+            <marker date="1503269077183" expanded="true" signature="15977:16081" ph="select (coal... " />
+            <marker date="1503269077183" expanded="true" signature="16230:19689" ph="INSERT INTO pedidos... " />
+            <marker date="1503269077183" expanded="true" signature="27592:27630" ph="select * fro... racas" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="442">
-            <caret line="26" column="68" lean-forward="false" selection-start-line="26" selection-start-column="68" selection-end-line="26" selection-end-column="68" />
-            <folding />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="115" column="0" lean-forward="true" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding>
+            <marker date="1503116450557" expanded="true" signature="1956:2032" ph="SELECT media... estatistica" />
+            <marker date="1503116450557" expanded="true" signature="3184:3966" ph="SELECT date_... pedidos" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/situacao/formAlterar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="104" column="38" lean-forward="false" selection-start-line="104" selection-start-column="38" selection-end-line="104" selection-end-column="38" />
+          <folding>
+            <marker date="1503088314640" expanded="true" signature="2887:2963" ph="UPDATE `situ... " />
+            <marker date="1503088314640" expanded="true" signature="3505:3562" ph="SELECT * FRO... situacoes" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/situacao/formCadastro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="109" column="38" lean-forward="false" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="38" />
+          <folding>
+            <marker date="1503088314824" expanded="true" signature="2931:2986" ph="insert into situacoes... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/monitora/busca.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1887">
+          <caret line="111" column="30" lean-forward="false" selection-start-line="111" selection-start-column="30" selection-end-line="111" selection-end-column="30" />
+          <folding>
+            <marker date="1503270027514" expanded="true" signature="2963:3149" ph="SELECT * FRO... $" />
+          </folding>
         </state>
       </provider>
     </entry>
