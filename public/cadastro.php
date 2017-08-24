@@ -34,6 +34,9 @@ TDBConnection::getConnection();
 
 /*
  * segurança
+ * para toda requisição é feita a criação de um token aleatorio
+ * se não existir nenhum token de sessao ao se solicitar
+ * a pagina é criado um token
  */
 if (!isset($_SESSION['token'])){
     date_default_timezone_set('America/Sao_Paulo');
@@ -41,9 +44,12 @@ if (!isset($_SESSION['token'])){
     $quando = date("Y-m-d H:i:s");
     $_SESSION['token'] = $token;
     $_SESSION['token_time'] = time();
-    
+
+    /* captura o e-mail da origem da requisição dessa página */     
     $ip = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 
+    /* Grava o logacesso com o ip origem da requisição, juntamente com token com a data/hora */
+    /* ERRO MEU: eu chamei o campo de data/hora de description em vez de quando como uso. Vou arrumar algum dia.*/
     TDBConnection::beginTransaction();
     TDBConnection::prepareQuery("INSERT INTO logacesso VALUES (null, :token, :ip, :description);");
     TDBConnection::bindParamQuery(':token', $token, PDO::PARAM_STR);
@@ -382,6 +388,8 @@ if (!isset($_SESSION['token'])){
                     }
                                         
                     /* validar número máximo de pedidos por cpf (5) */
+                    /* importante */
+                    /* Use a lista para definir quantos pedidos por situação podem ser cadastrados para esse cpf */
                     TDBConnection::prepareQuery("select count(*) as total from pedidos where situacao_id in (1,2,3,4,5,6) and ano = year(now()) and cpf = :cpf");
                     TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
                     $totalPedidos = TDBConnection::single();
@@ -496,7 +504,7 @@ if (!isset($_SESSION['token'])){
 
                     TDBConnection::endTransaction();
                     
-                    // reseta os tokens
+                    // reseta os tokens de segurança
                     unset($_SESSION['token_time']);
                     unset($_SESSION['token']);
 

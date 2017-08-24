@@ -43,8 +43,11 @@ TDBConnection::getConnection();
 /*
  * variáveis externas
  */
-$idUnidade = (isset($_POST['idUnidade']) ? strip_tags( trim( $_POST['idUnidade']) ) : 0); 
-$idDistrito = (isset($_POST['idDistrito']) ? strip_tags( trim( $_POST['idDistrito']) ) : 0); 
+$idSituacao = (isset($_POST['idSituacao']) ? strip_tags( trim( $_POST['idSituacao']) ) : 0);
+
+$dta_inicio = (isset($_POST['dta_inicio']) ? strip_tags( trim( $_POST['dta_inicio']) ) : '');
+$dta_fim = (isset($_POST['dta_fim']) ? strip_tags( trim( $_POST['dta_fim']) ) : '');
+
 
 require('../FPDF/fpdf.php');
 
@@ -110,32 +113,39 @@ $query = "SELECT
     date_format(pedidos.segundaTentativaQuando, '%d/%m/%y') as segundaTentativaQuando,
     pedidos.segundaTentativaHora,
     
+    date_format(pedidos.agendaQuando, '%d/%m/%y') as agenda,
+	pedidos.agendaTurno,
+    
     situacoes.nome as situacao
 from pedidos
 	inner join situacoes on (pedidos.situacao_id = situacoes.id)
     inner join racas on (racas.id = pedidos.raca_id)
     
 where 1=1
+    and ((pedidos.situacao_id = :idSituacao) or (:idSituacao = 0))
+    
+    and (pedidos.quando >= :dta_inicio) 
+    
+    and (pedidos.quando <= :dta_fim)
 
 order by pedidos.id;";
 
 TDBConnection::prepareQuery($query);
 
-// DBConnection::bindParamQuery(':idUnidade', $idUnidade, PDO::PARAM_INT);
-// TDBConnection::bindParamQuery(':idDistrito', $idDistrito, PDO::PARAM_INT);
+TDBConnection::bindParamQuery(':idSituacao', $idSituacao, PDO::PARAM_INT);
+TDBConnection::bindParamQuery(':dta_inicio', $dta_inicio, PDO::PARAM_STR);
+TDBConnection::bindParamQuery(':dta_fim', $dta_fim, PDO::PARAM_STR);
 $pedidos = TDBConnection::resultset();
 
     $pdf->SetFont('Arial', '', 11);
     $pdf->AddPage();
 
 foreach ($pedidos as $pedido) {
-    
 
-    
     $pdf->Cell(30, 6, utf8_decode('Código'), 1, 0, 'L');
     $pdf->Cell(30, 6, utf8_decode('Data/hora'), 1, 0, 'L');
     $pdf->Cell(126, 6, utf8_decode('Nome'), 1, 0, 'L');
-    $pdf->Ln();    
+    $pdf->Ln();
     $pdf->Cell(30, 6, utf8_decode($pedido->codigoInterno), 1, 0, 'L');
     $pdf->Cell(30, 6, utf8_decode($pedido->quandoFormatado), 1, 0, 'L');
     $pdf->Cell(126, 6, utf8_decode($pedido->nome), 1, 0, 'L');
@@ -177,8 +187,15 @@ foreach ($pedidos as $pedido) {
     
     $pdf->Cell(186, 6, utf8_decode('Situação: ' . $pedido->situacao), 1, 0, 'L');
     $pdf->Ln();
+
+    $pdf->Cell(186, 6, utf8_decode('Agendado para: ' . $pedido->agenda . ' turno: ' . $pedido->agendaTurno ), 1, 0, 'L');
     $pdf->Ln();
-    $pdf->Ln(); 
+
+    $pdf->Cell(186, 6, utf8_decode('Notas: '), 1, 0, 'L');
+    $pdf->Ln();
+
+    $pdf->Ln();
+    $pdf->Ln(2);
 
 }
 

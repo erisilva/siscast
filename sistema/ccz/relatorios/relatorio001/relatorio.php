@@ -91,7 +91,7 @@ TDBConnection::getConnection();
                       action="relatorioExec.php">
                     <fieldset>
                         
-                        Entre:<input type="date" name="dta_inicio">à<input type="date" name="dta_fim">
+                        Entre:<input type="date" name="dta_inicio" required>à<input type="date" name="dta_fim" required>
 
                         <select name="idSituacao" id="idUnidade">
                         <option value="0" selected>Mostrar Todas Situações do Pedido</option>
