@@ -360,7 +360,7 @@ if (!isset($_SESSION['token'])){
                     // validação # especie
                     $_POST['especie'] = trim( $_POST['especie'] );
                     if(isset($_POST['especie']) && !empty($_POST['especie'])) {
-                        $especie = strip_tags($_POST['cor']);
+                        $especie = strip_tags($_POST['especie']);
                     }
                     else {
                         header("Location: erro101.php");

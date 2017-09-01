@@ -12,7 +12,7 @@ define('DBHOST', 'localhost');
 define('DBPORT', '3306');
 define('DBNAME', 'siscast');
 define('DBUSRNAME', 'root');
-define('DBUSRPASSWORD', '123456');
+define('DBUSRPASSWORD', '');
 
 /*
  * configuracoes consulta

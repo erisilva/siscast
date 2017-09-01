@@ -95,9 +95,10 @@ TDBConnection::getConnection();
 
                     // Faz a alteração
                     TDBConnection::beginTransaction();
-                    TDBConnection::prepareQuery("update user set password = :password where id = :id;");
+                    TDBConnection::prepareQuery("update user set password = MD5( CONCAT('erivelton', :password, MD5(:login) ) ) where id = :id;");
                     TDBConnection::bindParamQuery(':id', $_SESSION['sessao_usuario_id'], PDO::PARAM_INT);
                     TDBConnection::bindParamQuery(':password', $novaSenha, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':login', $_SESSION['sessao_usuario_login'], PDO::PARAM_STR);
                     $result = TDBConnection::execute();
                     TDBConnection::endTransaction();
 
@@ -164,10 +165,6 @@ TDBConnection::getConnection();
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <!-- se o CDN não for ativo faz o carregamento da jquery diretamente -->
-        <script>window.jQuery || document.write('<script src="./js/jquery.min.js"><\/script>');</script>
-        <!-- scripts da página -->
     </body>
 </html>
 

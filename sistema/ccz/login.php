@@ -36,14 +36,11 @@ TDBConnection::getConnection();
 
 // verifica credenciais do login do usuario
 TDBConnection::beginTransaction();
-TDBConnection::prepareQuery("
-                select * from user
+TDBConnection::prepareQuery("select * from user
                     where 1 = 1 and
                         user.isOut = 'N' and 
                        user.password = MD5( CONCAT('erivelton', :senha_param, MD5(:login_param) ) ) and
-                       (user.login = :login_param)
-                    ;
-                ");
+                       (user.login = :login_param);");
 TDBConnection::bindParamQuery(':senha_param', $senhausuario, PDO::PARAM_STR);
 TDBConnection::bindParamQuery(':login_param', $loginusuario, PDO::PARAM_STR);
 $result = TDBConnection::single();
@@ -61,7 +58,7 @@ if ($nRows == 1) { // aceitou o login
     $_SESSION['sessao_usuario_id'] = (isset($result->id) ? $result->id : NULL);
     $_SESSION['sessao_usuario_name'] = (isset($result->name) ? $result->name : NULL);
     $_SESSION['sessao_usuario_login'] = (isset($result->login) ? $result->login : NULL);
-    $_SESSION['sessao_usuario_profile_id'] = (isset($result->login) ? $result->login : NULL);
+    $_SESSION['sessao_usuario_profile_id'] = (isset($result->profile_id) ? $result->profile_id : NULL);
 
 
     echo 1;
