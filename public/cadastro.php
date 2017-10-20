@@ -555,12 +555,12 @@ if (!isset($_SESSION['token'])){
                         <input type="radio" name="cns" id="cns" value="N">Não (Cartão Nacional de Saúde)<br>
                         <br>
 
-                        <label for="beneficio">Possui Benefício:</label>
+                        <label for="beneficio">Possui Benefício de algum programa social do governo?</label>
                         <input type="radio" name="beneficio" id="beneficio" value="S" required>Sim
                         <input type="radio" name="beneficio" id="beneficio" value="N">Não (Bolsa familia)<br>
                         <br>  
 
-                        <label for="beneficioQual">Qual:</label>
+                        <label for="beneficioQual">Se sim, qual?</label>
                         <input type="text" name="beneficioQual" id="beneficioQual" maxlength="120" size="35"><br/><br/>                        
 
                     </fieldset>

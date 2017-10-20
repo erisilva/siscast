@@ -35,84 +35,63 @@ TDBConnection::getConnection();
 
 <!DOCTYPE html>
 <html lang="pt-br">
-    <meta charset="UTF-8">
-    <meta name="author" content="Erivelton da Silva">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="img/favicon.ico">
-    <title>SisCast - Pedidos de Agendamento Público</title>
-    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
-    <script type="text/javascript" src="cpf.js"></script>
-    <body>
-        <div class="estrutura_popup">
+<meta charset="UTF-8">
+<meta name="author" content="Erivelton da Silva">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="img/favicon.ico">
+<title>SisCast - Pedidos de Agendamento Público</title>
+<link rel="stylesheet" type="text/css" href="estilo/estilo.css">
+<script type="text/javascript" src="cpf.js"></script>
+<body>
+<div class="estrutura_popup">
+    <div class="conteudo">
+        <div>
+            <img src="img/banner.png" alt="Banner">
+        </div>
+        <br>
+        <!--/ fazer um novo pedido-->
+        <div>
 
-            <!-- Cabeçalho-->
+            <fieldset>
 
-            <div class="logotipo">
-                <img src="img/logo.png" alt="logoContagem" class="imagem_logo">
-            </div>
-
-            <div class="titulosuperior">
-                <h1 class="alinha">Cadastro para Esterilização de Animais</h1>
-            </div>
-
-            <!--/conteúdo-->
-
-            <div class="conteudo">
-
-                <!--/ banner 
-                <div>
-                    <img src="img/banner.jpg" alt="logoContagem">
-                </div>
-                <br>
-                -->
-                <!--/ fazer um novo pedido-->
-                <div>
- 
-                        <fieldset>
-
-                            <p class="alinha"><a href="cadastro.php">Fazer Cadastro para Esterilização de Animais</a></p>
-
-                            <?php 
-                            TDBConnection::prepareQuery("SELECT mediaEspera, totalAgendados FROM estatistica ORDER BY id DESC LIMIT 1;");                            
-                            $estatistica = TDBConnection::single();
-                            ?>
-                            
-                            <p class="alinha">Tempo médio de espera: <?php echo  $estatistica->mediaEspera; ?> dia(s).</p>
-
-                        </fieldset>
- 
-                </div>
-                
-                <br> 
-
-                <div>
-                    <form name="formConsulta" id="formConsulta" method="post"
-                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <fieldset>
-                        <legend>Consultar Cadastro:</legend>
-                        CPF:<input type="text" name="cpf" id="cpf" maxlength="11" size="8" required>
-                        <input type="submit" name="Agendar" id="Agendar" value="consultar">
-                     </fieldset>
-                   </form>   
-                </div>
-
-
+                <p class="alinha"><a href="cadastro.php" style="font-size: 24px;">Clique Aqui para Fazer seu Cadastro</a></p>
 
                 <?php
+                TDBConnection::prepareQuery("SELECT mediaEspera, totalAgendados FROM estatistica ORDER BY id DESC LIMIT 1;");
+                $estatistica = TDBConnection::single();
+                ?>
 
+<!--                <p class="alinha">Tempo médio de espera: --><?php //echo  $estatistica->mediaEspera; ?><!-- dia(s).</p>-->
 
-                if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-                    $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
+            </fieldset>
 
-                    $query = "SELECT 
+        </div>
+        <br>
+        <div>
+            <form name="formConsulta" id="formConsulta" method="post"
+                  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <fieldset>
+                    <legend>Consultar Cadastro:</legend>
+                    CPF:<input type="text" name="cpf" id="cpf" maxlength="11" size="8" required>
+                    <input type="submit" name="Agendar" id="Agendar" value="consultar">
+                </fieldset>
+            </form>
+        </div>
+        <?php
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
+
+            $query = "SELECT 
                                         date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
                                         pedidos.nomeAnimal,
                                         pedidos.especie,
                                         situacoes.nome as situacao,
-                                        coalesce(date_format(pedidos.agendaquando, '%d/%m/%y'), '-') as agendaQuando,
-                                        coalesce(pedidos.agendaTurno, '-') as agendaTurno
+                                        coalesce(date_format(pedidos.agendaquando, '%d/%m/%y'), '(não marcado)') as agendaQuando,
+                                        coalesce(pedidos.agendaTurno, '(não marcado)') as agendaTurno,
+                                        pedidos.motivoNaoAgendado
 
 
                                 from pedidos
@@ -122,85 +101,48 @@ TDBConnection::getConnection();
 
                                     order by pedidos.quando desc;";
 
+            TDBConnection::getConnection();
+            TDBConnection::prepareQuery($query);
+            TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
+            $result = TDBConnection::resultset();
+            $nRows = TDBConnection::rowCount();
 
-                    TDBConnection::getConnection();
-                    TDBConnection::prepareQuery($query);
-                    TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
-                    $result = TDBConnection::resultset();
-                    $nRows = TDBConnection::rowCount();
+            echo "<br>\n";
+            echo "<div class=\"alinha\">\n";
+            echo "<h1 class=\"destaque\">Cadastros Realizados para o CPF $cpf</h1>\n";
+            echo "</div>\n";
 
-
-                    echo "<br>\n";
-                    echo "<div class=\"alinha\">\n";
-                    echo "<p class=\"destaque\">Pedidos Realizados</p>\n";
+            if ($nRows != 0) {
+                foreach ($result as $temp) {
+                    echo "<div class=\"pedidos\">\n";
+                    echo "<h1>Nome do Animal: " . $temp->nomeAnimal . "</h1>\n";
+                    echo "<p>Data/Hora do Cadastro: " . $temp->quandoFormatado . "</p>\n";
+                    echo "<p class=\"atencao destaque\">Situação:" . $temp->situacao . "</p>\n";
+                    echo "<p>Agendado para: " . $temp->agendaQuando . "   Turno: " . $temp->agendaTurno . "</p>\n";
+                    echo "<p>Observações: " . $temp->motivoNaoAgendado . "</p>\n";
                     echo "</div>\n";
+                    echo "<br>\n";
+                }
+            } else {
+                echo "Nenhum cadastro foi realizado para esse cpf.";
+            }
+        }
+        ?>
 
-                    if ($nRows != 0) {
-                        echo "\n";
-                        echo "\n";
-                        echo "<table>\n";
-                        echo "<thead>\n";
-                        echo "<tr>\n";
-                        //cabeçalho da tabela
-                        echo "<th>Data/Hora</th>\n";
-                        echo "<th>Nome</th>\n";
-                        echo "<th>Situação</th>\n";
-                        echo "<th>Agendado para</th>\n";
-                        echo "<th>Turno</th>\n";
-                        echo "</tr>\n";
-                        echo "</thead>\n";
-                        echo "<tbody>\n";
+        <!--/ quantitativo de agendas-->
+        <br>
 
-                        foreach ($result as $temp) {
-                            echo "<tr>\n";
-
-                            echo "<td>\n";
-                            echo $temp->quandoFormatado . "\n";
-                            echo "</td>\n";
-
-                            echo "<td>\n";
-                            echo $temp->nomeAnimal . "\n";
-                            echo "</td>\n";
-
-                            echo "<td>\n";
-                            echo $temp->situacao . "\n";
-                            echo "</td>\n";
-
-                            echo "<td>\n";
-                            echo $temp->agendaQuando . "\n";
-                            echo "</td>\n";
-
-                            echo "<td>\n";
-                            echo $temp->agendaTurno . "\n";
-                            echo "</td>\n";
-
-                            echo "</tr>\n";
-                        }
-                        echo "</tbody>\n";
-                        echo "</table>\n";
-                    } else {
-                        echo "Nenhum pedido foi encontrado para esse cpf.";
-                    }
-                }    
-                ?>                  
-
-                <!--/ quantitativo de agendas-->
-                <br>
-                <div>
-                    <p class="alinha">Total de agendas realizadas: <?php echo  $estatistica->totalAgendados; ?></p>
-                </div>
-
-                <!--/rodapé-->
-                <br/>
-                <div class="rodape">
-                    <p>
-                        <strong>Centro de Controle de Zoonoses</strong><br>
-                        Telefones: 3351-3751 / 3361-7703<br>
-                        E-mail: cczcontagem@yahoo.com.br
-                    </p>
-                </div>
-            </div>
-            <!-- scripts da página -->
-    </body>
+        <!--/rodapé-->
+        <br/>
+        <div class="rodape">
+            <p>
+                <strong>Centro de Controle de Zoonoses</strong><br>
+                Telefones: 3351-3751 / 3361-7703<br>
+                E-mail: cczcontagem@yahoo.com.br
+            </p>
+        </div>
+    </div>
+    <!-- scripts da página -->
+</body>
 </html>
 

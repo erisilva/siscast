@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f649750c-6f80-46f4-9da1-1cdb4b691b7b" name="Default" comment="commit 1.8 melhorias em segurança e reorganização das pastas">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sistema/ccz/_install_/showAll.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sistema/ccz/operador/alterarSenhaExec.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/estilo/estilo.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/estilo/navegacao.css" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/cadastro.php" afterPath="$PROJECT_DIR$/public/cadastro.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/config/TConfig.php" afterPath="$PROJECT_DIR$/public/config/TConfig.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/config/TConfig.php" afterPath="$PROJECT_DIR$/sistema/ccz/config/TConfig.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/login.php" afterPath="$PROJECT_DIR$/sistema/ccz/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/operador/alterarSenha.php" afterPath="$PROJECT_DIR$/sistema/ccz/operador/alterarSenha.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/estilo/estilo.css" afterPath="$PROJECT_DIR$/sistema/ccz/estilo/estilo.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/relatorios.php" afterPath="$PROJECT_DIR$/sistema/ccz/relatorios.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,54 +22,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="relatorio.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorio.php">
+      <file leaf-file-name="busca.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sistema/ccz/monitora/busca.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1581">
-              <caret line="93" column="119" lean-forward="false" selection-start-line="93" selection-start-column="119" selection-end-line="93" selection-end-column="119" />
+            <state relative-caret-position="1885">
+              <caret line="153" column="28" lean-forward="false" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
+              <folding>
+                <marker date="1503317138102" expanded="true" signature="2963:3149" ph="SELECT logac... $" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="relatorios.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="101" column="18" lean-forward="true" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="relatorioExec.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorioExec.php">
+      <file leaf-file-name="estilo.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sistema/ccz/estilo/estilo.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding>
-                <marker date="1503663012082" expanded="true" signature="2271:3640" ph="SELECT pedid... pedidos" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="alterarSenha.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sistema/ccz/operador/alterarSenha.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-652">
-              <caret line="85" column="39" lean-forward="true" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
-              <folding>
-                <marker date="1504009975572" expanded="true" signature="2818:2911" ph="update user " />
-                <marker date="1504009975572" expanded="true" signature="3620:3820" ph="SELECT user.... user" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cadastro.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/cadastro.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="240" column="24" lean-forward="false" selection-start-line="240" selection-start-column="24" selection-end-line="240" selection-end-column="56" />
-              <folding>
-                <marker date="1504268018122" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
-                <marker date="1504268018122" expanded="true" signature="5517:5704" ph="SELECT TIMES... logacesso" />
-                <marker date="1504268018122" expanded="true" signature="15940:16049" ph="select count... pedidos" />
-                <marker date="1504268018122" expanded="true" signature="16561:16665" ph="select (coal... " />
-                <marker date="1504268018122" expanded="true" signature="16814:20273" ph="INSERT INTO pedidos... " />
-                <marker date="1504268018122" expanded="true" signature="28189:28227" ph="select * fro... racas" />
-              </folding>
+            <state relative-caret-position="409">
+              <caret line="304" column="12" lean-forward="false" selection-start-line="304" selection-start-column="1" selection-end-line="304" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -78,34 +57,9 @@
       <file leaf-file-name="install_.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sistema/ccz/_install_/install_.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1309">
-              <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="81" selection-end-column="16" />
+            <state relative-caret-position="208">
+              <caret line="245" column="0" lean-forward="false" selection-start-line="245" selection-start-column="0" selection-end-line="268" selection-end-column="11" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sistema/ccz/login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="42" column="51" lean-forward="false" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
-              <folding>
-                <marker date="1503922702578" expanded="true" signature="834:1089" ph="select * fro... user" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="formCadastro.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sistema/ccz/operador/formCadastro.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3060">
-              <caret line="180" column="93" lean-forward="false" selection-start-line="180" selection-start-column="93" selection-end-line="180" selection-end-column="93" />
-              <folding>
-                <marker date="1503317138171" expanded="true" signature="3307:3441" ph="insert into user... " />
-                <marker date="1503317138171" expanded="true" signature="5940:5965" ph="select * fro... userprofile" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -145,7 +99,11 @@
         <option value="$PROJECT_DIR$/sistema/ccz/login.php" />
         <option value="$PROJECT_DIR$/sistema/ccz/operador/formCadastro.php" />
         <option value="$PROJECT_DIR$/sistema/ccz/operador/alterarSenha.php" />
+        <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/public/cadastro.php" />
+        <option value="$PROJECT_DIR$/public/estilo/estilo.css" />
+        <option value="$PROJECT_DIR$/sistema/ccz/estilo/estilo.css" />
+        <option value="$PROJECT_DIR$/sistema/ccz/relatorios.php" />
       </list>
     </option>
   </component>
@@ -154,6 +112,9 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpServers">
+    <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true">
     <include_path>
@@ -196,11 +157,6 @@
             <path>
               <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
               <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -221,7 +177,14 @@
               <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="ccz" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="operador" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="img" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ccz" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="monitora" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
@@ -235,11 +198,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/cmder/cmder/vendor/git-for-windows/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sisquest" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\SisCast\public\estilo" />
+      <recent name="C:\xampp\htdocs\SisCast\public\estilo\skin" />
+      <recent name="C:\xampp\htdocs\SisCast\public\img" />
       <recent name="C:\xampp\htdocs\siscast\sistema\ccz\monitora" />
     </key>
   </component>
@@ -258,6 +224,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f649750c-6f80-46f4-9da1-1cdb4b691b7b" name="Default" comment="" />
@@ -275,7 +244,15 @@
       <workItem from="1503668736802" duration="1486000" />
       <workItem from="1503922133660" duration="4973000" />
       <workItem from="1504008781591" duration="1317000" />
-      <workItem from="1504266065702" duration="2462000" />
+      <workItem from="1504266065702" duration="3057000" />
+      <workItem from="1504529533758" duration="2639000" />
+      <workItem from="1504699146052" duration="1817000" />
+      <workItem from="1505131775166" duration="874000" />
+      <workItem from="1505151350438" duration="95000" />
+      <workItem from="1506019759659" duration="1582000" />
+      <workItem from="1508259742721" duration="613000" />
+      <workItem from="1508260747925" duration="1910000" />
+      <workItem from="1508331002650" duration="12533000" />
     </task>
     <task id="LOCAL-00001" summary="commit 1.8 melhorias em segurança e reorganização das pastas">
       <created>1503117734424</created>
@@ -288,20 +265,19 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37945000" />
+    <option name="totallyTimeSpent" value="60603000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19739583" sideWeight="0.4923077" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21641791" sideWeight="0.4923077" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23329799" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2619565" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25869894" sideWeight="0.50769234" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -340,65 +316,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/operador/formCadastro.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3060">
-          <caret line="180" column="93" lean-forward="false" selection-start-line="180" selection-start-column="93" selection-end-line="180" selection-end-column="93" />
-          <folding>
-            <marker date="1503317138171" expanded="true" signature="3307:3441" ph="insert into user... " />
-            <marker date="1503317138171" expanded="true" signature="5940:5965" ph="select * fro... userprofile" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/operador/alterarSenha.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2822">
-          <caret line="166" column="0" lean-forward="true" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
-          <folding>
-            <marker date="1504009975572" expanded="true" signature="2818:2911" ph="update user " />
-            <marker date="1504009975572" expanded="true" signature="3620:3820" ph="SELECT user.... user" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorio.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="93" column="119" lean-forward="false" selection-start-line="93" selection-start-column="119" selection-end-line="93" selection-end-column="119" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/operador/alterarSenha.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="101" column="55" lean-forward="true" selection-start-line="101" selection-start-column="55" selection-end-line="101" selection-end-column="55" />
-          <folding>
-            <marker date="1504009975572" expanded="true" signature="2818:2911" ph="update user " />
-            <marker date="1504009975572" expanded="true" signature="3620:3820" ph="SELECT user.... user" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorioExec.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <marker date="1503663012082" expanded="true" signature="2271:3640" ph="SELECT pedid... pedidos" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/_install_/install_.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="81" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sistema/ccz/login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -634,13 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sistema/ccz/situacao/formAlterar.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
@@ -655,16 +565,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/monitora/busca.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2601">
-          <caret line="153" column="28" lean-forward="false" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios/relatorio001/relatorio.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
+        <state relative-caret-position="0">
           <caret line="93" column="119" lean-forward="false" selection-start-line="93" selection-start-column="119" selection-end-line="93" selection-end-column="119" />
           <folding />
         </state>
@@ -677,14 +580,6 @@
           <folding>
             <marker date="1503663012082" expanded="true" signature="2271:3640" ph="SELECT pedid... pedidos" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sistema/ccz/_install_/install_.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="81" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -711,8 +606,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sistema/ccz/operador/alterarSenha.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-652">
-          <caret line="85" column="39" lean-forward="true" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
+        <state relative-caret-position="1445">
+          <caret line="85" column="39" lean-forward="false" selection-start-line="85" selection-start-column="39" selection-end-line="85" selection-end-column="39" />
           <folding>
             <marker date="1504009975572" expanded="true" signature="2818:2911" ph="update user " />
             <marker date="1504009975572" expanded="true" signature="3620:3820" ph="SELECT user.... user" />
@@ -720,18 +615,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/banner.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1172">
+          <caret line="108" column="0" lean-forward="true" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <folding>
+            <marker date="1508349577628" expanded="true" signature="1424:1500" ph="SELECT media... estatistica" />
+            <marker date="1508349577628" expanded="true" signature="2432:3305" ph="SELECT date_... pedidos" />
+            <marker date="1508349577628" expanded="true" signature="4713:4900" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/cadastro.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="240" column="24" lean-forward="false" selection-start-line="240" selection-start-column="24" selection-end-line="240" selection-end-column="56" />
+        <state relative-caret-position="287">
+          <caret line="78" column="32" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="32" />
           <folding>
-            <marker date="1504268018122" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
-            <marker date="1504268018122" expanded="true" signature="5517:5704" ph="SELECT TIMES... logacesso" />
-            <marker date="1504268018122" expanded="true" signature="15940:16049" ph="select count... pedidos" />
-            <marker date="1504268018122" expanded="true" signature="16561:16665" ph="select (coal... " />
-            <marker date="1504268018122" expanded="true" signature="16814:20273" ph="INSERT INTO pedidos... " />
-            <marker date="1504268018122" expanded="true" signature="28189:28227" ph="select * fro... racas" />
+            <marker date="1508350245746" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
+            <marker date="1508350245746" expanded="true" signature="5517:5704" ph="SELECT TIMES... logacesso" />
+            <marker date="1508350245746" expanded="true" signature="15940:16049" ph="select count... pedidos" />
+            <marker date="1508350245746" expanded="true" signature="16561:16665" ph="select (coal... " />
+            <marker date="1508350245746" expanded="true" signature="16814:20273" ph="INSERT INTO pedidos... " />
+            <marker date="1508350245746" expanded="true" signature="28233:28271" ph="select * fro... racas" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/estilo/skin/sky.estilo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="33" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/estilo/estilo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="14" lean-forward="false" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/monitora/busca.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1885">
+          <caret line="153" column="28" lean-forward="false" selection-start-line="153" selection-start-column="28" selection-end-line="153" selection-end-column="28" />
+          <folding>
+            <marker date="1503317138102" expanded="true" signature="2963:3149" ph="SELECT logac... $" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/img/doctor.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/estilo/estilo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="304" column="12" lean-forward="false" selection-start-line="304" selection-start-column="1" selection-end-line="304" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/_install_/install_.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="245" column="0" lean-forward="false" selection-start-line="245" selection-start-column="0" selection-end-line="268" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/relatorios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="101" column="18" lean-forward="true" selection-start-line="101" selection-start-column="18" selection-end-line="101" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>

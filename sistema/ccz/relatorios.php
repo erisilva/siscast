@@ -87,16 +87,17 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
                 </ul> 
                 -->
 
-                <p class="sistema">Planilhas</p>
+                <p class="sistema">Relatórios</p>
                 <ul class="listaRelatoriosimp">
-                    <li><a href="relatorios/relatorio001/relatorio.php">Relatório de Pedidos.</a></li>
-                    <li><a href="#">Link 2.</a></li>
+                    <li><a href="relatorios/relatorio001/relatorio.php">Listagem Geral de Pedidos Por Período e Situação.</a></li>
+                </ul>
 
-                </ul>                 
+                <p class="sistema">Gestão</p>
+                <ul class="listaAcesso">
+                    <li><a href="monitora/busca.php">Monitoramento de Acessos ao Cadastro Público.</a></li>
+                </ul>
 
                 <br><br>
-                
-  
 
             </div>
 

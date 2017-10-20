@@ -302,22 +302,6 @@
     padding-bottom: 3px;
 }
 
-.listaprofissionais {
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-}
-
-.listaprofissionais li {
-    background-image: url('../img/doctor.png');
-    background-repeat: no-repeat;
-    background-position: 0px center;
-    padding-left: 15px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-
-
 .listaAcesso {
     list-style-type: none;
     padding: 0px;
