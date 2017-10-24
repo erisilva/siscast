@@ -68,7 +68,6 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
             </div>
 
             <!--menuTopo-->
-
             <div class="menuTopo">
                 <ul class="menu">                     
                     <li><a href="../cadastro.php">Cadastro</a></li>
@@ -85,7 +84,7 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
                 <div class="subtitulo">
                     Monitoramento de requisições feitas ao formulário web
                 </div>
-                
+
                 <div class="atencao alinha">
                     Somente consulta
                 </div>
@@ -152,7 +151,7 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
                 <div class="menuTopo">
                     <ul class="submenu">
                         <li><a  id="erivelton" href="../configuracao.php">Menu Configurar</a></li>
-                        <li><a href="#">Novo Cadastro</a></li>
+                        <li>Novo Cadastro</li>
                         <li><a href="#">Exportar</a></li>
                         <li><a href="javascript:location.reload();">Atualizar Página</a></li>
                     </ul>

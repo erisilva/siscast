@@ -428,6 +428,13 @@ table, td, th {
 
 }
 
+caption {
+    border: 0px;
+    background-color: #B03060;
+    font-size: 24px;
+    padding: 3px;
+}
+
 tr:nth-child(even) {
     background-color: #FFB6C1;
 }

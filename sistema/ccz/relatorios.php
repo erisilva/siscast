@@ -94,7 +94,8 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
 
                 <p class="sistema">Gestão</p>
                 <ul class="listaAcesso">
-                    <li><a href="monitora/busca.php">Monitoramento de Acessos ao Cadastro Público.</a></li>
+                    <li><a href="monitora/pedido.php">Monitoramento de Pedidos.</a></li>
+                    <li><a href="monitora/acesso.php">Monitoramento de Acessos ao Cadastro Público.</a></li>
                 </ul>
 
                 <br><br>

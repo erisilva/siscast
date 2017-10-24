@@ -149,4 +149,92 @@ abstract class TCommon {
         }
     }
 
+    static function mes_extensao($mes) {
+
+        if ($mes == 1){
+            return 'JAN';
+        }
+
+        if ($mes == 2){
+            return 'FEV';
+        }
+
+        if ($mes == 3){
+            return 'MAR';
+        }
+
+        if ($mes == 4){
+            return 'ABR';
+        }
+
+        if ($mes == 5){
+            return 'MAI';
+        }
+
+        if ($mes == 6){
+            return 'JUN';
+        }
+
+        if ($mes == 7){
+            return 'JUL';
+        }
+
+        if ($mes == 8){
+            return 'AGO';
+        }
+
+        if ($mes == 9){
+            return 'SET';
+        }
+
+        if ($mes == 10){
+            return 'OUT';
+        }
+
+        if ($mes == 11){
+            return 'NOV';
+        }
+
+        if ($mes == 12){
+            return 'DEZ';
+        }
+
+        return 'ERR';
+    }
+
+
+    static function dia_semana($mes) {
+
+        if ($mes == 1){
+            return 'DOM';
+        }
+
+        if ($mes == 2){
+            return 'SEG';
+        }
+
+        if ($mes == 3){
+            return 'TER';
+        }
+
+        if ($mes == 4){
+            return 'QUA';
+        }
+
+        if ($mes == 5){
+            return 'QUI';
+        }
+
+        if ($mes == 6){
+            return 'SEX';
+        }
+
+        if ($mes == 7){
+            return 'SAB';
+        }
+
+
+        return 'ERR';
+    }
+
 }
