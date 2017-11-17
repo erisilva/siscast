@@ -75,23 +75,53 @@ if (!isset($_SESSION['token'])){
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/app.js"></script>
-    <link rel="icon" href="img/favicon.ico">
+    <link rel="icon" href="img/favicon.png">
 
     <title>SisCast - Pedidos de Agendamento Público</title>
 
     <body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand" >
+                    <img src="img/logo.png" class="img-rounded" alt="Logotipo Contagem" height="60">
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>Início</a></li>
+                    <li><a href="cadastro.php"><span class="glyphicon glyphicon-plus-sign"></span>Fazer um Pedido</a></li>
+                    <li><a href="consulta.php"><span class="glyphicon glyphicon-search"></span>Consultar Pedidos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h1>Cadastro para Esterilização de Cães e Gatos</h1>
+    </div>
+
+    <br><br>
+
+    Cadastro para Esterilização de Cães e Gatos
+
+    <br><br>
+
+
+
+
         <div class="estrutura">
 
             <!-- Cabeçalho-->
-
-            <div class="logotipo">
-                <img src="img/logo.png" alt="logoContagem" class="imagem_logo">
-            </div>
-
-            <div class="titulosuperior">
-                <h1>Cadastro para Esterilização de Animais</h1>
-            </div>
 
             <!--/conteúdo-->
 

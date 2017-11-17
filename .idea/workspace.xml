@@ -5,40 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f649750c-6f80-46f4-9da1-1cdb4b691b7b" name="Default" comment="commit 1.8 melhorias em segurança e reorganização das pastas">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/nbproject/private/private.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/nbproject/private/private.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/nbproject/project.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/nbproject/project.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/backward_nav.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/bola.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/bola3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/close_view.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/defaults_ps.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/delete2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/doctor.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/faviconold.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/id_card2.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/impressora.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/logo.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/menu.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/newfile_wiz.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/notebook.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/planilha.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/refresh_nav.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/save_edit.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/img/users3.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/jquery.min.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/appExec.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/e5e90cb2-a40d-4444-87a5-3a0f6a5420b6.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/e5e90cb2-a40d-4444-87a5-3a0f6a5420b6.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/img/logo.png" afterPath="$PROJECT_DIR$/public/img/logo.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/cadastro.php" afterPath="$PROJECT_DIR$/public/cadastro.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/monitora/pedido.php" afterPath="$PROJECT_DIR$/sistema/ccz/monitora/pedido.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sistema/ccz/relatorios.php" afterPath="$PROJECT_DIR$/sistema/ccz/relatorios.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/estilo.css" afterPath="$PROJECT_DIR$/public/css/estilo.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -82,8 +52,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1066">
-              <caret line="64" column="26" lean-forward="false" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
+            <state relative-caret-position="238">
+              <caret line="110" column="12" lean-forward="true" selection-start-line="110" selection-start-column="12" selection-end-line="131" selection-end-column="47" />
               <folding>
                 <marker date="1510848467188" expanded="true" signature="1424:1500" ph="SELECT media... estatistica" />
                 <marker date="1510848467188" expanded="true" signature="3190:4063" ph="SELECT date_... pedidos" />
@@ -95,7 +65,7 @@
       <file leaf-file-name="erro100.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/erro100.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
+            <state relative-caret-position="838">
               <caret line="66" column="16" lean-forward="false" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
               <folding />
             </state>
@@ -105,26 +75,39 @@
       <file leaf-file-name="cadastro.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/cadastro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="74" column="84" lean-forward="false" selection-start-line="74" selection-start-column="84" selection-end-line="74" selection-end-column="84" />
+            <state relative-caret-position="379">
+              <caret line="123" column="29" lean-forward="false" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
               <folding>
-                <marker date="1510852185050" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
-                <marker date="1510852185050" expanded="true" signature="6090:6277" ph="SELECT TIMES... logacesso" />
-                <marker date="1510852185050" expanded="true" signature="16578:16687" ph="select count... pedidos" />
-                <marker date="1510852185050" expanded="true" signature="17199:17303" ph="select (coal... " />
-                <marker date="1510852185050" expanded="true" signature="17452:20911" ph="INSERT INTO pedidos... " />
-                <marker date="1510852185050" expanded="true" signature="28871:28909" ph="select * fro... racas" />
+                <marker date="1510924606623" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
+                <marker date="1510924606623" expanded="true" signature="7285:7472" ph="SELECT TIMES... logacesso" />
+                <marker date="1510924606623" expanded="true" signature="17773:17882" ph="select count... pedidos" />
+                <marker date="1510924606623" expanded="true" signature="18394:18498" ph="select (coal... " />
+                <marker date="1510924606623" expanded="true" signature="18647:22106" ph="INSERT INTO pedidos... " />
+                <marker date="1510924606623" expanded="true" signature="30066:30104" ph="select * fro... racas" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="estilo.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="estilo.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/css/estilo.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+            <state relative-caret-position="481">
+              <caret line="78" column="27" lean-forward="false" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="consulta.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/consulta.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="311">
+              <caret line="148" column="13" lean-forward="true" selection-start-line="148" selection-start-column="13" selection-end-line="148" selection-end-column="13" />
+              <folding>
+                <marker date="1510942786234" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
+                <marker date="1510942786234" expanded="true" signature="5828:6701" ph="SELECT date_... pedidos" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,26 +122,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>&lt;p class=&quot;atencao&quot;&gt;Incompátivel com Internet Explorer&lt;/p&gt;</find>
       <find>../</find>
+      <find>rgb(255, 240, 179)</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;p class=&quot;atencao&quot;&gt;Incompatível com Internet Explorer&lt;/p&gt;</replace>
       <replace />
+      <replace>rgb(101, 206, 255)</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\siscast\public</dir>
@@ -195,6 +170,7 @@
         <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/public/cadastro.php" />
         <option value="$PROJECT_DIR$/public/css/estilo.css" />
+        <option value="$PROJECT_DIR$/public/consulta.php" />
       </list>
     </option>
   </component>
@@ -258,6 +234,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -274,26 +252,7 @@
               <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
               <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="bootstrap.css" type="620a8d5e:NestingTreeNode" />
-            </path>
-            <path>
-              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="estilo" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="public" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="img" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="fonts" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
@@ -310,30 +269,46 @@
             </path>
             <path>
               <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ccz" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SisCast" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sistema" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ccz" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="img" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="SisCast" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sissas" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sismed" />
     <property name="settings.editor.selected.configurable" value="database.main" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
     <property name="ignore_missing_gitignore" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\SisCast\public" />
+      <recent name="C:\xampp\htdocs\SisCast\public\js" />
       <recent name="C:\xampp\htdocs\SisCast\public\img" />
       <recent name="C:\xampp\htdocs\SisCast\public\css" />
-      <recent name="C:\xampp\htdocs\SisCast\public\js" />
       <recent name="C:\xampp\htdocs\SisCast\public\estilo" />
-      <recent name="C:\xampp\htdocs\SisCast\public\estilo\skin" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -392,6 +367,7 @@
       <workItem from="1510574653985" duration="2434000" />
       <workItem from="1510676282194" duration="3157000" />
       <workItem from="1510846358526" duration="5594000" />
+      <workItem from="1510918842967" duration="10549000" />
     </task>
     <task id="LOCAL-00001" summary="commit 1.8 melhorias em segurança e reorganização das pastas">
       <created>1503117734424</created>
@@ -404,12 +380,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125043000" />
+    <option name="totallyTimeSpent" value="135592000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1359275" sideWeight="0.4923077" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1369936" sideWeight="0.4923077" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18123667" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -456,31 +433,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="442">
-            <caret line="26" column="68" lean-forward="false" selection-start-line="26" selection-start-column="68" selection-end-line="26" selection-end-column="68" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/cadastro.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pedidos/formAlterar.php" />
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_4.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="659" column="9" lean-forward="false" selection-start-line="659" selection-start-column="9" selection-end-line="659" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_install_/install_.sql" />
     <entry file="file://$PROJECT_DIR$/libs/TDBConnection.php" />
     <entry file="file://$PROJECT_DIR$/public/erro104.php">
@@ -768,14 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/erro100.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="66" column="16" lean-forward="false" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/jquery-3.2.1.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -796,18 +740,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.php">
+    <entry file="file://$PROJECT_DIR$/public/img/logo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sistema/ccz/img/logo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1066">
-          <caret line="64" column="26" lean-forward="false" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
-          <folding>
-            <marker date="1510848467188" expanded="true" signature="1424:1500" ph="SELECT media... estatistica" />
-            <marker date="1510848467188" expanded="true" signature="3190:4063" ph="SELECT date_... pedidos" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -819,7 +769,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app.js">
+    <entry file="file://$PROJECT_DIR$/public/js/bootstrap.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -827,26 +777,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/erro100.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="838">
+          <caret line="66" column="16" lean-forward="false" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/cadastro.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="74" column="84" lean-forward="false" selection-start-line="74" selection-start-column="84" selection-end-line="74" selection-end-column="84" />
+        <state relative-caret-position="379">
+          <caret line="123" column="29" lean-forward="false" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="29" />
           <folding>
-            <marker date="1510852185050" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
-            <marker date="1510852185050" expanded="true" signature="6090:6277" ph="SELECT TIMES... logacesso" />
-            <marker date="1510852185050" expanded="true" signature="16578:16687" ph="select count... pedidos" />
-            <marker date="1510852185050" expanded="true" signature="17199:17303" ph="select (coal... " />
-            <marker date="1510852185050" expanded="true" signature="17452:20911" ph="INSERT INTO pedidos... " />
-            <marker date="1510852185050" expanded="true" signature="28871:28909" ph="select * fro... racas" />
+            <marker date="1510924606623" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
+            <marker date="1510924606623" expanded="true" signature="7285:7472" ph="SELECT TIMES... logacesso" />
+            <marker date="1510924606623" expanded="true" signature="17773:17882" ph="select count... pedidos" />
+            <marker date="1510924606623" expanded="true" signature="18394:18498" ph="select (coal... " />
+            <marker date="1510924606623" expanded="true" signature="18647:22106" ph="INSERT INTO pedidos... " />
+            <marker date="1510924606623" expanded="true" signature="30066:30104" ph="select * fro... racas" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/css/estilo.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        <state relative-caret-position="481">
+          <caret line="78" column="27" lean-forward="false" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="110" column="12" lean-forward="true" selection-start-line="110" selection-start-column="12" selection-end-line="131" selection-end-column="47" />
+          <folding>
+            <marker date="1510848467188" expanded="true" signature="1424:1500" ph="SELECT media... estatistica" />
+            <marker date="1510848467188" expanded="true" signature="3190:4063" ph="SELECT date_... pedidos" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/consulta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="148" column="13" lean-forward="true" selection-start-line="148" selection-start-column="13" selection-end-line="148" selection-end-column="13" />
+          <folding>
+            <marker date="1510942786234" expanded="true" signature="1353:1415" ph="INSERT INTO logacesso... " />
+            <marker date="1510942786234" expanded="true" signature="5828:6701" ph="SELECT date_... pedidos" />
+          </folding>
         </state>
       </provider>
     </entry>
