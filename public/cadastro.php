@@ -63,14 +63,23 @@ if (!isset($_SESSION['token'])){
 <!DOCTYPE html>
 <html lang="pt-br">
     <meta charset="UTF-8">
-    <meta name="author" content="Erivelton da Silva">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta name="author" content="EriSilva, erisilva.net, www.erisilva.net, erivelton.contagem@gmail.com">
+    <meta name="description" content="Levantamento e Cadastro de Pedidos para Esterilização de Animais no Município de Contagem-MG, Brasil.">
+    <meta name="keywords" content="pedidos, esterilização, animais, pets, cadastro, levantamento, saúde, contagem">
     <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/app.js"></script>
     <link rel="icon" href="img/favicon.ico">
+
     <title>SisCast - Pedidos de Agendamento Público</title>
-    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
-    
+
     <body>
         <div class="estrutura">
 
@@ -252,6 +261,8 @@ if (!isset($_SESSION['token'])){
                         exit;
                     }
 
+                    // verifica se o cep pertence a contagem-mg
+
                     // validação # tel
                     $_POST['tel'] = trim( $_POST['tel'] );
                     if(isset($_POST['tel']) && !empty($_POST['tel'])) {
@@ -394,7 +405,7 @@ if (!isset($_SESSION['token'])){
                     TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
                     $totalPedidos = TDBConnection::single();
                     // definido como 5 por ano
-                    if ($totalPedidos->total > 4){
+                    if ($totalPedidos->total > 2){
                         header("Location: erro102.php");
                         exit;    
                     }
@@ -693,7 +704,7 @@ if (!isset($_SESSION['token'])){
             </div>
 
             <!-- scripts da página -->
-            <script src="cadastro.js"></script>
+<!--            <script src="cadastro.js"></script>-->
         </div>    
     </body>
 </html>

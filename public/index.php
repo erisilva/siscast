@@ -61,6 +61,30 @@ TDBConnection::getConnection();
                 <?php
                 TDBConnection::prepareQuery("SELECT mediaEspera, totalAgendados FROM estatistica ORDER BY id DESC LIMIT 1;");
                 $estatistica = TDBConnection::single();
+
+                // retorna um array
+
+                function busca_cep($cep){
+                    $resultado = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');
+
+                    if(!$resultado){
+                        $resultado = "&resultado=0&resultado_txt=erro+ao+buscar+cep";
+                    }
+                    parse_str($resultado, $retorno);
+                    return $retorno;
+                }
+
+
+                /*
+                 * Exemplo de utilização
+                 */
+
+                //Vamos buscar o CEP 90020022
+                $resultado_busca = busca_cep('32223-130');
+
+                echo "<pre> Array Retornada: ".print_r($resultado_busca, true)."</pre>";
+
+
                 ?>
 
 <!--                <p class="alinha">Tempo médio de espera: --><?php //echo  $estatistica->mediaEspera; ?><!-- dia(s).</p>-->
