@@ -35,7 +35,6 @@ $senhausuario = (isset($_POST['senhausuario']) ? $_POST['senhausuario'] : NULL);
 TDBConnection::getConnection();
 
 // verifica credenciais do login do usuario
-TDBConnection::beginTransaction();
 TDBConnection::prepareQuery("select * from user
                     where 1 = 1 and
                         user.isOut = 'N' and 
@@ -45,7 +44,6 @@ TDBConnection::bindParamQuery(':senha_param', $senhausuario, PDO::PARAM_STR);
 TDBConnection::bindParamQuery(':login_param', $loginusuario, PDO::PARAM_STR);
 $result = TDBConnection::single();
 $nRows = TDBConnection::rowCount();
-TDBConnection::endTransaction();
 
 //**************************************************************
 //************************************VALIDA O LOGIN OU EMAIL***

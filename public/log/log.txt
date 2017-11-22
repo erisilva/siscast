@@ -654,3 +654,4 @@ Stack trace:
 #2 C:\xampp\htdocs\SisCast\pedidos.php(221): TDBConnection::resultset()
 #3 {main}
   thrown in C:\xampp\htdocs\SisCast\libs\TDBConnection.php on line 132
+[20-Nov-2017 22:50:56 Europe/Berlin] PHP Warning:  PDO::__construct(): MySQL server has gone away in C:\xampp\htdocs\siscast\public\libs\TDBConnection.php on line 66

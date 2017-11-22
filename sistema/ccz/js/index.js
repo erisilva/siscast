@@ -16,7 +16,7 @@ $(document).ready(function(){
                 		if(result==1){ 
                 			location.href='cadastro.php'	//Redireciona
                 		}else{                                                                                
-                                        alert('Login ou senha incorretos!'); //Informa o erro
+                                        alert('Login ou senha incorretos kkkkk!'); //Informa o erro
                 		}
             		}
 		})

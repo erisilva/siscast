@@ -98,8 +98,8 @@ if (!isset($_SESSION['token'])){
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>Início</a></li>
-                        <li><a href="cadastro.php"><span class="glyphicon glyphicon-plus-sign"></span>Fazer um Pedido</a></li>
-                        <li><a href="consulta.php"><span class="glyphicon glyphicon-search"></span>Consultar Pedidos</a></li>
+                        <li><a href="cadastro.php"><span class="glyphicon glyphicon-plus-sign"></span>Fazer um Cadastro</a></li>
+                        <li><a href="consulta.php"><span class="glyphicon glyphicon-search"></span>Consultar Cadastro</a></li>
                     </ul>
                 </div>
             </div>
@@ -113,7 +113,7 @@ if (!isset($_SESSION['token'])){
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Consultar Pedidos
+                        <div class="panel-heading">Consultar Cadastro
                         </div>
                         <br>
                         <form class="form-horizontal" method="post"
@@ -121,7 +121,7 @@ if (!isset($_SESSION['token'])){
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="cpf">CPF:</label>
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" id="cpf" placeholder="Digite aqui seu cpf">
+                                    <input type="cpf" class="form-control" id="cpf" name="cpf" placeholder="Digite aqui seu cpf">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -130,25 +130,16 @@ if (!isset($_SESSION['token'])){
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <?php
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            $_POST['cpf'] = trim($_POST['cpf']);
+                            if (isset($_POST['cpf']) && !empty($_POST['cpf'])) {
+                                $cpf = strip_tags($_POST['cpf']);
+                            } else {
+                                $cpf = '';
+                            }
 
-        <?php
-
-
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $_POST['cpf'] = trim($_POST['cpf']);
-            if (isset($_POST['cpf']) && !empty($_POST['cpf'])) {
-                $cpf = strip_tags($_POST['cpf']);
-            } else {
-                header("Location: erro101.php");
-                exit;
-            }
-
-            $query = "SELECT 
+                            $query = "SELECT 
                                         date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
                                         pedidos.nomeAnimal,
                                         pedidos.especie,
@@ -165,19 +156,91 @@ if (!isset($_SESSION['token'])){
 
                                     order by pedidos.quando desc;";
 
-            TDBConnection::getConnection();
-            TDBConnection::prepareQuery($query);
-            TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
-            $pedidosResultado = TDBConnection::resultset();
-            $pedidosResultadoTotal = TDBConnection::rowCount();
+                            TDBConnection::getConnection();
+                            TDBConnection::prepareQuery($query);
+                            TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
+                            $pedidos = TDBConnection::resultset();
+                            $pedidosResultadoTotal = TDBConnection::rowCount();
+
+                            echo "<br>\n";
+
+                            if ($pedidosResultadoTotal != 0) {
+
+                                echo "<div class=\"container\">\n";
+                                echo "<h3>Pedidos Realizados para o cpf $cpf:</h3>\n";
+                                echo "</div>\n";
+                                echo "\n";
+                                echo "\n";
+                                echo "<div class=\"table-responsive\">\n";
+                                echo "<table class=\"table table-striped\">\n";
+                                echo "<thead>\n";
+                                echo "<tr>\n";
+                                //cabeçalho da tabela
+                                echo "<th>Data/Hora</th>\n";
+                                echo "<th>Nome</th>\n";
+                                echo "<th>Situação</th>\n";
+                                echo "<th>Agendado para</th>\n";
+                                echo "<th>Turno</th>\n";
+                                echo "</tr>\n";
+                                echo "</thead>\n";
+                                echo "<tbody>\n";
+
+                                foreach ($pedidos as $pedido) {
+                                    echo "<tr>\n";
+
+                                    echo "<td>\n";
+                                    echo $pedido->quandoFormatado . "\n";
+                                    echo "</td>\n";
+
+                                    echo "<td>\n";
+                                    echo $pedido->nomeAnimal . "\n";
+                                    echo "</td>\n";
+
+                                    echo "<td>\n";
+                                    echo $pedido->situacao . "\n";
+                                    echo "</td>\n";
+
+                                    echo "<td>\n";
+                                    echo $pedido->agendaQuando . "\n";
+                                    echo "</td>\n";
+
+                                    echo "<td>\n";
+                                    echo $pedido->agendaTurno . "\n";
+                                    echo "</td>\n";
+
+                                    echo "</tr>\n";
+                                }
+                                echo "</tbody>\n";
+                                echo "</table>\n";
+                                echo "</div>\n";
+                            } else {
+
+                                echo "<div class=\"alert alert-success alert-dismissable\">\n";
+                                echo "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n";
+                                echo "<strong>Atenção!</strong> Não existem pedidos relacionados ao cpf $cpf.\n";
+                                echo "</div>\n";
+
+                            }
 
 
-        }
+                        }
 
 
 
-        ?>
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+
+        <footer class="container-fluid text-center">
+            <p>
+                <strong>Centro de Controle de Zoonoses</strong><br>
+                Telefones: 3351-3751 / 3361-7703<br>
+                E-mail: cczcontagem@yahoo.com.br
+            </p>
+        </footer>
     </body>
 </html>
 
