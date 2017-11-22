@@ -103,3 +103,11 @@ body {
 footer {
     background-color: #fff;
 }
+
+
+.form-horizontal .form-group input,
+.form-horizontal .form-group select,
+.form-horizontal .form-group label
+{
+    margin-bottom: 3px;
+}
