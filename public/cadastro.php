@@ -69,7 +69,9 @@ if (!isset($_SESSION['token'])){
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="css/estilo.css">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -77,6 +79,11 @@ if (!isset($_SESSION['token'])){
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/app.js"></script>
+
+<script src="js/moment.js"></script>
+<script src="js/local/pt-br.js"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+
 <link rel="icon" href="img/favicon.png">
 
 <title>SisCast - Pedidos de Agendamento Público</title>
@@ -110,6 +117,99 @@ if (!isset($_SESSION['token'])){
     <h1 class="text-center">Cadastro para Esterilização de Cães e Gatos</h1>
 </div>
 
+<div class="container-fluid">
+
+<?php
+// executa o cadastro se possível
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // função de checagem de data, para eliminar o pepino que dá no IE
+    function checarData($date) {
+        $tempDate = explode('-', $date);
+        // checkdate(month, day, year)
+        return checkdate($tempDate[1], $tempDate[2], $tempDate[0]);
+    }
+
+    // verifica se o token enviado é válido
+    // de acordo com a sessão
+
+    if (!isset($_SESSION['token'])){
+        $erro["token"] = "Chave de acesso não encontrada. Atualize a página. Pressione <kbd>F5</kbd>.";
+    }
+
+    if (!isset($_POST['token'])){
+        $erro["token"] = "Chave de acesso não encontrada. Atualize a página. Pressione <kbd>F5</kbd>.";
+    }
+
+    if ($_POST['token'] != $_SESSION['token'])
+    {
+        // reseta os tokens
+        $_SESSION['token_time'] = nul;
+        $_SESSION['token'] = null;
+        $erro["token"] = "Chave de acesso inválida. Atualize a página. Pressione <kbd>F5</kbd>.";
+    }
+
+    // verifica se a vida da sessão já acabou
+    $token_age = time() - $_SESSION['token_time'];
+    // cada token tem uma vida de duas horas após ser criado
+    if ($token_age > 7200){
+        // reseta os tokens
+        $_SESSION['token_time'] = null;
+        $_SESSION['token'] = null;
+        $erro["token"] = "Chave de acesso expirado. Atualize a página. Pressione <kbd>F5</kbd>.";
+    }
+
+    // de acordo com o log de acesso no banco de dados
+    // parece mágica mas não é, essa simples consulta verifica se as seções existem
+    // teoricamente esse conjunto de códigos já faz toda validação
+    // se os tokens de post e sessao sao iguais
+    // se foram criados
+    // se não expiraram
+    // se existem
+    // por mim isso está funcionando como uma segunda camada
+    // de iteração com o banco de dados
+    // só que tem de ir ao banco consultas, os anteriores são processados mais rapidos
+    // essa dupla verificação permite uma segurança maior com as requisições
+    TDBConnection::prepareQuery("SELECT TIMESTAMPDIFF(SECOND,logacesso.description,now()) as vida FROM logacesso
+                                                        where token = :token_post and token = :token_sessao;");
+    TDBConnection::bindParamQuery(':token_post', $_POST['token'], PDO::PARAM_STR);
+    TDBConnection::bindParamQuery(':token_sessao', $_SESSION['token'], PDO::PARAM_STR);
+    $logacesso = TDBConnection::single();
+
+    if (TDBConnection::rowCount() == 0 ) {
+        $erro["token"] = "Chave de acesso inválida. Atualize a página. Pressione <kbd>F5</kbd>.";
+    }
+    // duas horas de vida, segunda validação
+    if ($logacesso->vida > 7200){
+        // reseta os tokens
+        $_SESSION['token_time'] = null;
+        $_SESSION['token'] = null;
+        $erro["token"] = "Chave de acesso não encontrada. Atualize a página. Pressione <kbd>F5</kbd>.";
+    }
+
+    // validação # nome
+    $_POST['nome'] = trim( $_POST['nome'] );
+    if(isset($_POST['nome']) && !empty($_POST['nome'])) {
+        $nome = strip_tags($_POST['nome']);
+    }
+    else {
+        $erro["nome"] = "Campo obrigatório.";
+    }
+
+
+    echo "<pre>\n";
+    print_r($_POST);
+    echo "</pre>\n";
+
+    echo "<pre>\n";
+    print_r($erro);
+    echo "</pre>\n";
+}
+
+?>
+
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -120,23 +220,44 @@ if (!isset($_SESSION['token'])){
                 <form class="form-horizontal" method="post"
                       action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
+                    <?php
+                    if (isset($erro['token'])){
+                        echo "<div class=\"alert alert-danger alert-dismissable\">\n";
+                        echo "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n";
+                        echo "  <strong>Erro Grave!</strong> " . $erro["token"] ."\n";
+                        echo "</div>\n";
+                    }
+
+
+                    ?>
+
                     <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
 
                     <div class="well well text-center"><h2>Informações Sobre o Tutor</h2></div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["nome"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="nome">Nome:</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" id="nome" name="nome"
-                                   placeholder="Digite seu nome completo" autofocus required maxlength="140">
+                                   placeholder="Digite seu nome completo" autofocus maxlength="140">
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["nome"]) ?   "<span class=\"label label-danger\">" . $erro["nome"] . "</span>" : ""; ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="nascimento">Data de Nascimento:</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="nascimento" name="nascimento">
+                        </div>
+                        <div class="col-md-7"></div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cpf">CPF:</label>
                         <div class="col-md-3">
-                            <input type="number" class="form-control" id="cpf" name="cpf" required>
+                            <input type="number" class="form-control" id="cpf" name="cpf">
                         </div>
                         <div class="col-md-6"></div>
                     </div>
@@ -145,7 +266,7 @@ if (!isset($_SESSION['token'])){
                         <label class="col-md-3 control-label" for="email">E-mail:</label>
                         <div class="col-md-6">
                             <input type="email" class="form-control" id="email" name="email"
-                                   placeholder="Digite seu e-mail" required maxlength="200">
+                                   placeholder="Digite seu e-mail" maxlength="200">
                         </div>
                         <div class="col-md-3"></div>
                     </div>
@@ -153,7 +274,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cep">CEP:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="cep" name="cep" required maxlength="8">
+                            <input type="text" class="form-control" id="cep" name="cep" maxlength="8">
                         </div>
                         <div class="col-md-7"></div>
                     </div>
@@ -171,7 +292,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="endereco">Endereço:</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="endereco" name="endereco" required disabled>
+                            <input type="text" class="form-control" id="endereco" name="endereco" disabled>
                         </div>
                         <div class="col-md-3"></div>
                     </div>
@@ -179,7 +300,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="bairro">Bairro:</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="bairro" name="bairro" required disabled>
+                            <input type="text" class="form-control" id="bairro" name="bairro" disabled>
                         </div>
                         <div class="col-md-3"></div>
                     </div>
@@ -187,7 +308,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cidade">Cidade:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="cidade" name="cidade" required disabled>
+                            <input type="text" class="form-control" id="cidade" name="cidade" disabled>
                         </div>
                         <div class="col-md-5"></div>
                     </div>
@@ -195,7 +316,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="estado">Estado:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="estado" name="estado" required disabled>
+                            <input type="text" class="form-control" id="estado" name="estado" disabled>
                         </div>
                         <div class="col-md-7"></div>
                     </div>
@@ -203,7 +324,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="numero">Número:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="numero" name="numero" required maxlength="20">
+                            <input type="text" class="form-control" id="numero" name="numero" maxlength="20">
                         </div>
                         <div class="col-md-7"></div>
                     </div>
@@ -219,7 +340,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="telefone">Telefone:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="telefone" name="telefone" required maxlength="20">
+                            <input type="text" class="form-control" id="telefone" name="telefone" maxlength="20">
                         </div>
                         <div class="col-md-5"></div>
                     </div>
@@ -227,7 +348,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="celular">Celular:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="celular" name="celular" required maxlength="20">
+                            <input type="text" class="form-control" id="celular" name="celular" maxlength="20">
                         </div>
                         <div class="col-md-5"></div>
                     </div>
@@ -235,7 +356,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cns">Cartão Nacional de Saúde:</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="cns" name="cns" required maxlength="20">
+                            <input type="text" class="form-control" id="cns" name="cns" maxlength="20">
                         </div>
                         <div class="col-md-6"></div>
                     </div>
@@ -257,7 +378,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="beneficio">Possui benefício de algum programa social do governo?</label>
                         <div class="col-md-6">
-                            <input type="radio" name="beneficio" id="beneficio" value="S" required>Sim
+                            <input type="radio" name="beneficio" id="beneficio" value="S">Sim
                             <input type="radio" name="beneficio" id="beneficio" value="N">Não
                         </div>
                         <div class="col-md-6"></div>
@@ -276,7 +397,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="nomeAnimal">Nome do animal:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal" required maxlength="120">
+                            <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal" maxlength="120">
                         </div>
                         <div class="col-md-7"></div>
                     </div>
@@ -284,7 +405,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="genero">Gênero:</label>
                         <div class="col-md-6">
-                            <input type="radio" name="genero" id="genero" value="M" required>Macho
+                            <input type="radio" name="genero" id="genero" value="M">Macho
                             <input type="radio" name="genero" id="genero" value="F">Fêmea<br><br>
                         </div>
                         <div class="col-md-6"></div>
@@ -293,7 +414,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="porte">Porte:</label>
                         <div class="col-md-6">
-                            <input type="radio" name="porte" id="porte" value="pequeno" required>Pequeno
+                            <input type="radio" name="porte" id="porte" value="pequeno">Pequeno
                             <input type="radio" name="porte" id="porte" value="medio">Médio
                             <input type="radio" name="porte" id="porte" value="grande">Grande<br><br>
                         </div>
@@ -303,8 +424,8 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="idade">Idade do animal:</label>
                         <div class="col-md-2">
-                            <input type="number" class="form-control" id="idade" name="idade" required>
-                            <span><input type="radio" name="idadeEm" id="idadeEm" value="mes" required>Mês(es)
+                            <input type="number" class="form-control" id="idade" name="idade">
+                            <span><input type="radio" name="idadeEm" id="idadeEm" value="mes">Mês(es)
                             <input type="radio" name="idadeEm" id="idadeEm" value="ano">Ano(s)</span>
                         </div>
                         <div class="col-md-7"></div>
@@ -325,7 +446,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cor">Cor(es) do animal:</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="cor" name="cor" required maxlength="80">
+                            <input type="text" class="form-control" id="cor" name="cor" maxlength="80">
                         </div>
                         <div class="col-md-6"></div>
                     </div>
@@ -333,7 +454,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="especie">Espécie:</label>
                         <div class="col-md-6">
-                            <input type="radio" name="especie" id="especie" value="felino" required>Felino
+                            <input type="radio" name="especie" id="especie" value="felino">Felino
                             <input type="radio" name="especie" id="especie" value="canino">Canino
                         </div>
                         <div class="col-md-3"></div>
@@ -342,7 +463,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="raca_id">Raça:</label>
                         <div class="col-md-6">
-                            <select class="form-control" name="raca_id" id="raca_id" required>
+                            <select class="form-control" name="raca_id" id="raca_id">
                                 <option value="" selected>Escolha...</option>
                                 <?php
                                 TDBConnection::prepareQuery("select * from racas order by descricao;");
@@ -359,7 +480,7 @@ if (!isset($_SESSION['token'])){
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="procedencia">Origem:</label>
                         <div class="col-md-6">
-                            <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario" required>vive na rua/comunitário
+                            <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario">vive na rua/comunitário
                             <input type="radio" name="procedencia" id="procedencia" value="resgatado">Resgatado
                             <input type="radio" name="procedencia" id="procedencia" value="adotado">Adotado
                             <input type="radio" name="procedencia" id="procedencia" value="comprado">Comprado
@@ -377,7 +498,7 @@ if (!isset($_SESSION['token'])){
                                 <p>O cadastro para esterilização de cães e gatos deverá ser feito mediante preenchimento e envio deste formulário eletrônico. As solicitações serão avaliadas pela equipe responsável e, se aceitas, o solicitante deverá aguardar o contato da equipe do CCZ para agendamento. O prazo de espera poderá variar de acordo com a demanda. Cabe ao solicitante acompanhar o andamento de sua solicitação no site.</p>
                             </div>
 
-                            <div>
+                            <div class="text-justify">
                                 <h1>Critérios quanto ao solicitante</h1>
                                 <ul>
                                     <li>O solicitante deve ser maior de 18 anos e residir no município de Contagem/MG.</li>
@@ -416,9 +537,10 @@ if (!isset($_SESSION['token'])){
                                 <p>No dia do procedimento o solicitante deverá assinar um termo de autorização que pode ser acessado nesse <a href="doc/termo_autorizacao_cirurgia.pdf" target="new_window">link</a>.</p>
                             </div>
 
-                            <input type="checkbox" name="concordar" id="concordar" value="sim" required>
-                            <span class="destaque">Declaro que li, aceito os termos e condições referentes ao cadastro para esterilização de animais e que as informações declaradas neste formulário são verdadeiras. </span><br><br>
-                        </div>
+                            <div class="alert alert-danger">
+                                <input type="checkbox" name="concordar" id="concordar" value="sim">
+                                <strong>Declaro que li, aceito os termos e condições referentes ao cadastro para esterilização de animais e que as informações declaradas neste formulário são verdadeiras.</strong>
+                            </div>
                         <div class="col-md-1"></div>
                     </div>
 
