@@ -123,13 +123,6 @@ if (!isset($_SESSION['token'])){
 // executa o cadastro se possível
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // função de checagem de data, para eliminar o pepino que dá no IE
-    function checarData($date) {
-        $tempDate = explode('/', $date);
-        // checkdate(month, day, year)
-        return checkdate($tempDate[0], $tempDate[1], $tempDate[2]);
-    }
-
     // verifica se o token enviado é válido
     // de acordo com a sessão
 
@@ -205,12 +198,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erro["nascimento"] = "Campo Obrigatório.";
     }
 
-    /*
-    if(!checarData($nascimento)){
-        $erro["nascimento"] = "Data Inválida. Use o formato 05/11/1978";
+    if (!TCommon::valida_data_br($nascimento)) {
+        $erro["nascimento"] = "Data inválida. Utilize o formato: DD/MM/AAAA.";
     }
-
-    */
 
     // validação # cpf
     $_POST['cpf'] = trim( $_POST['cpf'] );
@@ -225,8 +215,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erro["cpf"] = "Campo Obrigatório.";
     }
 
+    // validação # email
+    $_POST['email'] = trim( $_POST['email'] );
+    if(isset($_POST['email']) && !empty($_POST['email'])) {
+        $email = strip_tags($_POST['email']);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $erro["email"] = "Formato de e-mail inválido.";
+        }
+    }
+    else {
+        $erro["email"] = "Campo obrigatório.";
+    }
 
 
+    function busca_cep($cep){
+        //$resultado = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');
+        $resultado = @file_get_contents('http://viacep.com.br/ws/'.urlencode($cep).'/querty/');
+        if(!$resultado){
+            $resultado = "&resultado=0&resultado_txt=erro+ao+buscar+cep";
+        }
+        parse_str($resultado, $retorno);
+        return $retorno;
+    }
+    $resultado_busca = busca_cep("sdafeqwe");
+
+    echo "<pre>\n";
+    print_r($resultado_busca);
+    echo "</pre>\n";
 
     echo "<pre>\n";
     print_r($_POST);
@@ -290,7 +305,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group <?php echo isset($erro["cpf"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="cpf">CPF:</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" value="<?php echo isset($cpf) ? $cpf : ''; ?>>
+                            <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" value="<?php echo isset($cpf) ? $cpf : ''; ?>">
                         </div>
                         <div class="col-md-6"></div>
                         <div class="col-md-3">
@@ -298,13 +313,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" <?php echo isset($erro["email"]) ? "has-error" : ""; ?>>
                         <label class="col-md-3 control-label" for="email">E-mail:</label>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" id="email" name="email"
-                                   placeholder="Digite seu e-mail" maxlength="200">
+                            <input type="text" class="form-control" id="email" name="email"
+                                   placeholder="Digite seu e-mail" maxlength="200" value="<?php echo isset($email) ? $email : ''; ?>">
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["email"]) ?   "<span class=\"label label-danger\">" . $erro["email"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -328,7 +345,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="endereco">Endereço:</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="endereco" name="endereco" disabled>
+                            <input type="text" class="form-control" id="endereco" name="endereco">
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="numero">Número:</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="numero" name="numero" maxlength="20">
+                        </div>
+                        <div class="col-md-7"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="complemento">Complemento:</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="complemento" name="complemento" maxlength="60">
                         </div>
                         <div class="col-md-3"></div>
                     </div>
@@ -336,7 +369,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="bairro">Bairro:</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="bairro" name="bairro" disabled>
+                            <input type="text" class="form-control" id="bairro" name="bairro">
                         </div>
                         <div class="col-md-3"></div>
                     </div>
@@ -355,22 +388,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="text" class="form-control" id="estado" name="estado" disabled>
                         </div>
                         <div class="col-md-7"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="numero">Número:</label>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control" id="numero" name="numero" maxlength="20">
-                        </div>
-                        <div class="col-md-7"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="complemento">Complemento:</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" id="complemento" name="complemento" maxlength="60">
-                        </div>
-                        <div class="col-md-3"></div>
                     </div>
 
                     <div class="form-group">

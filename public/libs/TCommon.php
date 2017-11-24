@@ -149,4 +149,20 @@ abstract class TCommon {
         }
     }
 
+    // valida datas no formato dd/mm/aaaa
+    static function valida_data_br($date = "00/00/0000") {
+
+        $regex = "/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/";
+        if (preg_match($regex, $date)) {
+            $tempDate = explode('/', $date);
+            $day = isset($tempDate[0]) ? $tempDate[0] : "99";
+            $month = isset($tempDate[1]) ? $tempDate[1] : "99";
+            $year = isset($tempDate[2]) ? $tempDate[2] : "9999";
+            // checkdate(month, day, year)
+            return checkdate($month, $day, $year);
+        } else {
+            return false;
+        }
+    }
+
 }
