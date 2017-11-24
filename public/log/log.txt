@@ -655,3 +655,15 @@ Stack trace:
 #3 {main}
   thrown in C:\xampp\htdocs\SisCast\libs\TDBConnection.php on line 132
 [20-Nov-2017 22:50:56 Europe/Berlin] PHP Warning:  PDO::__construct(): MySQL server has gone away in C:\xampp\htdocs\siscast\public\libs\TDBConnection.php on line 66
+[24-Nov-2017 00:14:52 Europe/Berlin] PHP Warning:  checkdate() expects parameter 3 to be integer, string given in C:\xampp\htdocs\siscast\public\cadastro.php on line 130
+[24-Nov-2017 00:19:17 Europe/Berlin] PHP Warning:  checkdate() expects parameter 3 to be integer, string given in C:\xampp\htdocs\siscast\public\cadastro.php on line 130
+[24-Nov-2017 00:33:57 Europe/Berlin] PHP Warning:  checkdate() expects parameter 3 to be integer, string given in C:\xampp\htdocs\siscast\public\cadastro.php on line 130
+[24-Nov-2017 00:33:57 Europe/Berlin] PHP Fatal error:  Cannot redeclare calc_digitos_posicoes() (previously declared in C:\xampp\htdocs\siscast\public\libs\TCommon.php:83) in C:\xampp\htdocs\siscast\public\libs\TCommon.php on line 83
+[24-Nov-2017 00:34:16 Europe/Berlin] PHP Warning:  checkdate() expects parameter 3 to be integer, string given in C:\xampp\htdocs\siscast\public\cadastro.php on line 130
+[24-Nov-2017 00:34:16 Europe/Berlin] PHP Fatal error:  Cannot redeclare calc_digitos_posicoes() (previously declared in C:\xampp\htdocs\siscast\public\libs\TCommon.php:83) in C:\xampp\htdocs\siscast\public\libs\TCommon.php on line 83
+[24-Nov-2017 00:39:01 Europe/Berlin] PHP Fatal error:  Cannot redeclare calc_digitos_posicoes() (previously declared in C:\xampp\htdocs\siscast\public\libs\TCommon.php:83) in C:\xampp\htdocs\siscast\public\libs\TCommon.php on line 83
+[24-Nov-2017 00:39:21 Europe/Berlin] PHP Fatal error:  Cannot redeclare calc_digitos_posicoes() (previously declared in C:\xampp\htdocs\siscast\public\libs\TCommon.php:83) in C:\xampp\htdocs\siscast\public\libs\TCommon.php on line 83
+[23-Nov-2017 22:22:48 America/Sao_Paulo] PHP Warning:  A non-numeric value encountered in C:\xampp\htdocs\siscast\public\cadastro.php on line 153
+[23-Nov-2017 22:22:55 America/Sao_Paulo] PHP Warning:  A non-numeric value encountered in C:\xampp\htdocs\siscast\public\cadastro.php on line 153
+[23-Nov-2017 22:23:02 America/Sao_Paulo] PHP Warning:  A non-numeric value encountered in C:\xampp\htdocs\siscast\public\cadastro.php on line 153
+[23-Nov-2017 22:23:09 America/Sao_Paulo] PHP Warning:  A non-numeric value encountered in C:\xampp\htdocs\siscast\public\cadastro.php on line 153

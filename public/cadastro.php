@@ -80,7 +80,7 @@ if (!isset($_SESSION['token'])){
 <script src="js/bootstrap.min.js"></script>
 <script src="js/app.js"></script>
 
-<script src="js/moment.js"></script>
+<script src="js/moment.min.js"></script>
 <script src="js/local/pt-br.js"></script>
 <script src="js/bootstrap-datetimepicker.min.js"></script>
 
@@ -125,9 +125,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // função de checagem de data, para eliminar o pepino que dá no IE
     function checarData($date) {
-        $tempDate = explode('-', $date);
+        $tempDate = explode('/', $date);
         // checkdate(month, day, year)
-        return checkdate($tempDate[1], $tempDate[2], $tempDate[0]);
+        return checkdate($tempDate[0], $tempDate[1], $tempDate[2]);
     }
 
     // verifica se o token enviado é válido
@@ -196,6 +196,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erro["nome"] = "Campo obrigatório.";
     }
 
+    // validação # nascimento
+    $_POST['nascimento'] = trim( $_POST['nascimento'] );
+    if(isset($_POST['nascimento']) && !empty($_POST['nascimento'])) {
+        $nascimento = strip_tags($_POST['nascimento']);
+    }
+    else {
+        $erro["nascimento"] = "Campo Obrigatório.";
+    }
+
+    /*
+    if(!checarData($nascimento)){
+        $erro["nascimento"] = "Data Inválida. Use o formato 05/11/1978";
+    }
+
+    */
+
+    // validação # cpf
+    $_POST['cpf'] = trim( $_POST['cpf'] );
+    if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
+        $cpf = strip_tags($_POST['cpf']);
+        /* validar cpf */
+        if (TCommon::valida_cpf($cpf) == false) {
+            $erro["cpf"] = "CPF Inválido.";
+        }
+    }
+    else {
+        $erro["cpf"] = "Campo Obrigatório.";
+    }
+
+
+
 
     echo "<pre>\n";
     print_r($_POST);
@@ -239,27 +270,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label class="col-md-3 control-label" for="nome">Nome:</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" id="nome" name="nome"
-                                   placeholder="Digite seu nome completo" autofocus maxlength="140">
+                                   placeholder="Digite seu nome completo" autofocus maxlength="140" value="<?php echo isset($nome) ? $nome : ''; ?>">
                         </div>
                         <div class="col-md-3">
                             <?php echo isset($erro["nome"]) ?   "<span class=\"label label-danger\">" . $erro["nome"] . "</span>" : ""; ?>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["nascimento"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="nascimento">Data de Nascimento:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="nascimento" name="nascimento">
+                            <input type="text" class="form-control" id="nascimento" name="nascimento" maxlength="10" value="<?php echo isset($nascimento) ? $nascimento : ''; ?>">
                         </div>
-                        <div class="col-md-7"></div>
+                        <div class="col-md-7">
+                            <?php echo isset($erro["nascimento"]) ?   "<span class=\"label label-danger\">" . $erro["nascimento"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["cpf"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="cpf">CPF:</label>
                         <div class="col-md-3">
-                            <input type="number" class="form-control" id="cpf" name="cpf">
+                            <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" value="<?php echo isset($cpf) ? $cpf : ''; ?>>
                         </div>
                         <div class="col-md-6"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["cpf"]) ?   "<span class=\"label label-danger\">" . $erro["cpf"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="form-group">
