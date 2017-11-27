@@ -165,4 +165,14 @@ abstract class TCommon {
         }
     }
 
+
+    static function busca_cep_viacep_querty($cep){
+        $enderecoCompletoQuerty = @file_get_contents('http://viacep.com.br/ws/'.urlencode($cep).'/querty/');
+        if(!$enderecoCompletoQuerty){
+            $enderecoCompletoQuerty = "&resultado=0&resultado_txt=erro+ao+buscar+cep";
+        }
+        parse_str($enderecoCompletoQuerty, $enderecoCompleto);
+        return $enderecoCompleto;
+    }
+
 }

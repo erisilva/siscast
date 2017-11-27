@@ -127,11 +127,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // de acordo com a sessão
 
     if (!isset($_SESSION['token'])){
-        $erro["token"] = "Chave de acesso não encontrada. Atualize a página. Pressione <kbd>F5</kbd>.";
+        $erro["token"] = "Chave de acesso não encontrada. <a href='cadastro.php'>Clique aqui para limpar o formulário.</a>.";
     }
 
     if (!isset($_POST['token'])){
-        $erro["token"] = "Chave de acesso não encontrada. Atualize a página. Pressione <kbd>F5</kbd>.";
+        $erro["token"] = "Chave de acesso não encontrada. <a href='cadastro.php'>Clique aqui para limpar o formulário.</a>.";
     }
 
     if ($_POST['token'] != $_SESSION['token'])
@@ -139,7 +139,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // reseta os tokens
         $_SESSION['token_time'] = nul;
         $_SESSION['token'] = null;
-        $erro["token"] = "Chave de acesso inválida. Atualize a página. Pressione <kbd>F5</kbd>.";
+        $erro["token"] = "Chave de acesso inválida. <a href='cadastro.php'>Clique aqui para limpar o formulário.</a>.";
     }
 
     // verifica se a vida da sessão já acabou
@@ -149,7 +149,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // reseta os tokens
         $_SESSION['token_time'] = null;
         $_SESSION['token'] = null;
-        $erro["token"] = "Chave de acesso expirado. Atualize a página. Pressione <kbd>F5</kbd>.";
+        $erro["token"] = "Chave de acesso expirado. <a href='cadastro.php'>Clique aqui para limpar o formulário.</a>.";
     }
 
     // de acordo com o log de acesso no banco de dados
@@ -170,14 +170,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $logacesso = TDBConnection::single();
 
     if (TDBConnection::rowCount() == 0 ) {
-        $erro["token"] = "Chave de acesso inválida. Atualize a página. Pressione <kbd>F5</kbd>.";
+        $erro["token"] = "Chave de acesso inválida. <a href='cadastro.php'>Clique aqui para limpar o formulário.</a>.";
     }
     // duas horas de vida, segunda validação
     if ($logacesso->vida > 7200){
         // reseta os tokens
         $_SESSION['token_time'] = null;
         $_SESSION['token'] = null;
-        $erro["token"] = "Chave de acesso não encontrada. Atualize a página. Pressione <kbd>F5</kbd>.";
+        $erro["token"] = "Chave de acesso não encontrada. <a href='cadastro.php'>Clique aqui para limpar o formulário.</a>.";
     }
 
     // validação # nome
@@ -193,13 +193,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_POST['nascimento'] = trim( $_POST['nascimento'] );
     if(isset($_POST['nascimento']) && !empty($_POST['nascimento'])) {
         $nascimento = strip_tags($_POST['nascimento']);
+        if (!TCommon::valida_data_br($nascimento)) {
+            $erro["nascimento"] = "Data inválida. Utilize o formato: DD/MM/AAAA.";
+        }
     }
     else {
         $erro["nascimento"] = "Campo Obrigatório.";
-    }
-
-    if (!TCommon::valida_data_br($nascimento)) {
-        $erro["nascimento"] = "Data inválida. Utilize o formato: DD/MM/AAAA.";
     }
 
     // validação # cpf
@@ -227,21 +226,89 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erro["email"] = "Campo obrigatório.";
     }
 
-
-    function busca_cep($cep){
-        //$resultado = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');
-        $resultado = @file_get_contents('http://viacep.com.br/ws/'.urlencode($cep).'/querty/');
-        if(!$resultado){
-            $resultado = "&resultado=0&resultado_txt=erro+ao+buscar+cep";
+    // validação # cep
+    $_POST['cep'] = trim( $_POST['cep'] );
+    if(isset($_POST['cep']) && !empty($_POST['cep'])) {
+        $cep = strip_tags($_POST['cep']);
+        $logradouro = TCommon::busca_cep_viacep_querty($cep);
+        if (isset($logradouro['erro'])) {
+            $erro["cep"] = "CEP inválido ou não encontrado.";
+        } else {
+            if ($logradouro['localidade'] != "Contagem"){
+                $erro["cep"] = "Localização inválida: " . $logradouro['localidade']  . ", " . $logradouro['uf'] . ".";
+            }
+            // salva os valores que vierem da tabela do viacep
+            $cidade = $logradouro['localidade'];
+            $estado = $logradouro['uf'];
         }
-        parse_str($resultado, $retorno);
-        return $retorno;
     }
-    $resultado_busca = busca_cep("sdafeqwe");
+    else {
+        $erro["cep"] = "Campo Obrigatório.";
+    }
 
-    echo "<pre>\n";
-    print_r($resultado_busca);
-    echo "</pre>\n";
+    // validação # endereco
+    $_POST['endereco'] = trim( $_POST['endereco'] );
+    if(isset($_POST['endereco']) && !empty($_POST['endereco'])) {
+        $endereco = strip_tags($_POST['endereco']);
+    }
+    else {
+        $erro["endereco"] = "Campo obrigatório.";
+    }
+
+    // validação # numero
+    $_POST['numero'] = trim( $_POST['numero'] );
+    if(isset($_POST['numero']) && !empty($_POST['numero'])) {
+        $numero = strip_tags($_POST['numero']);
+    }
+    else {
+        $erro["numero"] = "Campo obrigatório.";
+    }
+
+    // opcional #complemento
+    $_POST['complemento'] = trim( $_POST['complemento'] );
+    $complemento = strip_tags($_POST['complemento']);
+
+    // validação # bairro
+    $_POST['bairro'] = trim( $_POST['bairro'] );
+    if(isset($_POST['bairro']) && !empty($_POST['bairro'])) {
+        $bairro = strip_tags($_POST['bairro']);
+    }
+    else {
+        $erro["bairro"] = "Campo obrigatório.";
+    }
+
+    // sem validação
+    // cidade -> $logadouro['localidade']
+    // sem validação
+    // estado -> $logadouro['uf']
+    // vide linha 241
+
+    // validação # tel
+    $_POST['tel'] = trim( $_POST['tel'] );
+    if(isset($_POST['tel']) && !empty($_POST['tel'])) {
+        $tel = strip_tags($_POST['tel']);
+    }
+    else {
+        $erro["tel"] = "Campo obrigatório.";
+    }
+
+    // validação # cel
+    $_POST['cel'] = trim( $_POST['cel'] );
+    if(isset($_POST['cel']) && !empty($_POST['cel'])) {
+        $cel = strip_tags($_POST['cel']);
+    }
+    else {
+        $erro["cel"] = "Campo obrigatório.";
+    }
+
+    // validação # cns
+    $_POST['cns'] = trim( $_POST['cns'] );
+    if(isset($_POST['cns']) && !empty($_POST['cns'])) {
+        $cns = strip_tags($_POST['cns']);
+    }
+    else {
+        $erro["cns"] = "Campo obrigatório. <a href=\"http://cartaosus.com.br/consulta-cartao-sus/\" target=\"_blank\">Clique aqui para consultar seu cns.</a>.";
+    }
 
     echo "<pre>\n";
     print_r($_POST);
@@ -313,7 +380,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
 
-                    <div class="form-group" <?php echo isset($erro["email"]) ? "has-error" : ""; ?>>
+                    <div class="form-group <?php echo isset($erro["email"]) ? "has-error" : ""; ?>" >
                         <label class="col-md-3 control-label" for="email">E-mail:</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" id="email" name="email"
@@ -324,12 +391,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["cep"]) ? "has-error" : ""; ?>" >
                         <label class="col-md-3 control-label" for="cep">CEP:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="cep" name="cep" maxlength="8">
+                            <input type="text" class="form-control" id="cep" name="cep" maxlength="8" value="<?php echo isset($cep) ? $cep : ''; ?>">
                         </div>
-                        <div class="col-md-7"></div>
+                        <div class="col-md-7">
+                            <?php echo isset($erro["cep"]) ?   "<span class=\"label label-danger\">" . $erro["cep"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -342,42 +411,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-3"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["endereco"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="endereco">Endereço:</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="endereco" name="endereco">
+                            <input type="text" class="form-control" id="endereco" name="endereco"
+                                   value="<?php echo isset($endereco) ? $endereco : ''; ?>">
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["endereco"]) ?   "<span class=\"label label-danger\">" . $erro["endereco"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["numero"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="numero">Número:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="numero" name="numero" maxlength="20">
+                            <input type="text" class="form-control" id="numero" name="numero" maxlength="20"
+                                   value="<?php echo isset($numero) ? $numero : ''; ?>">
                         </div>
-                        <div class="col-md-7"></div>
+                        <div class="col-md-7">
+                            <?php echo isset($erro["numero"]) ?   "<span class=\"label label-danger\">" . $erro["numero"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="complemento">Complemento:</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="complemento" name="complemento" maxlength="60">
+                            <input type="text" class="form-control" id="complemento" name="complemento" maxlength="60"
+                                   value="<?php echo isset($complemento) ? $complemento : ''; ?>">
                         </div>
                         <div class="col-md-3"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["bairro"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="bairro">Bairro:</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="bairro" name="bairro">
+                            <input type="text" class="form-control" id="bairro" name="bairro"
+                                   value="<?php echo isset($bairro) ? $bairro : ''; ?>">
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["bairro"]) ?   "<span class=\"label label-danger\">" . $erro["bairro"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cidade">Cidade:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="cidade" name="cidade" disabled>
+                            <input type="text" class="form-control" id="cidade" name="cidade" disabled
+                                   value="<?php echo isset($cidade) ? $cidade : ''; ?>">
                         </div>
                         <div class="col-md-5"></div>
                     </div>
@@ -385,33 +465,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="estado">Estado:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="estado" name="estado" disabled>
+                            <input type="text" class="form-control" id="estado" name="estado" disabled
+                                   value="<?php echo isset($estado) ? $estado : ''; ?>">
                         </div>
                         <div class="col-md-7"></div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="telefone">Telefone:</label>
+                    <div class="form-group <?php echo isset($erro["tel"]) ? "has-error" : ""; ?>">
+                        <label class="col-md-3 control-label" for="tel">Telefone:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="telefone" name="telefone" maxlength="20">
+                            <input type="text" class="form-control" id="tel" name="tel" maxlength="20" value="<?php echo isset($tel) ? $tel : ''; ?>">
                         </div>
-                        <div class="col-md-5"></div>
+                        <div class="col-md-5">
+                            <?php echo isset($erro["tel"]) ?   "<span class=\"label label-danger\">" . $erro["tel"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="celular">Celular:</label>
+                    <div class="form-group <?php echo isset($erro["cel"]) ? "has-error" : ""; ?>">
+                        <label class="col-md-3 control-label" for="cel">Celular:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="celular" name="celular" maxlength="20">
+                            <input type="text" class="form-control" id="cel" name="cel" maxlength="20" value="<?php echo isset($cel) ? $cel : ''; ?>">
                         </div>
-                        <div class="col-md-5"></div>
+                        <div class="col-md-5">
+                            <?php echo isset($erro["cel"]) ?   "<span class=\"label label-danger\">" . $erro["cel"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["cns"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="cns">Cartão Nacional de Saúde:</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="cns" name="cns" maxlength="20">
+                            <input type="text" class="form-control" id="cns" name="cns" maxlength="25" value="<?php echo isset($cns) ? $cns : ''; ?>">
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <?php echo isset($erro["cns"]) ?   "<span class=\"label label-danger\">" . $erro["cns"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="row">
