@@ -181,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # nome
-    $_POST['nome'] = trim( $_POST['nome'] );
+    $_POST['nome'] = trim($_POST['nome']);
     if(isset($_POST['nome']) && !empty($_POST['nome'])) {
         $nome = strip_tags($_POST['nome']);
     }
@@ -190,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # nascimento
-    $_POST['nascimento'] = trim( $_POST['nascimento'] );
+    $_POST['nascimento'] = trim($_POST['nascimento']);
     if(isset($_POST['nascimento']) && !empty($_POST['nascimento'])) {
         $nascimento = strip_tags($_POST['nascimento']);
         if (!TCommon::valida_data_br($nascimento)) {
@@ -202,7 +202,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # cpf
-    $_POST['cpf'] = trim( $_POST['cpf'] );
+    $_POST['cpf'] = trim($_POST['cpf']);
     if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
         $cpf = strip_tags($_POST['cpf']);
         /* validar cpf */
@@ -215,7 +215,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # email
-    $_POST['email'] = trim( $_POST['email'] );
+    $_POST['email'] = trim($_POST['email']);
     if(isset($_POST['email']) && !empty($_POST['email'])) {
         $email = strip_tags($_POST['email']);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -227,7 +227,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # cep
-    $_POST['cep'] = trim( $_POST['cep'] );
+    $_POST['cep'] = trim($_POST['cep']);
     if(isset($_POST['cep']) && !empty($_POST['cep'])) {
         $cep = strip_tags($_POST['cep']);
         $logradouro = TCommon::busca_cep_viacep_querty($cep);
@@ -247,7 +247,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # endereco
-    $_POST['endereco'] = trim( $_POST['endereco'] );
+    $_POST['endereco'] = trim($_POST['endereco']);
     if(isset($_POST['endereco']) && !empty($_POST['endereco'])) {
         $endereco = strip_tags($_POST['endereco']);
     }
@@ -256,7 +256,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # numero
-    $_POST['numero'] = trim( $_POST['numero'] );
+    $_POST['numero'] = trim($_POST['numero']);
     if(isset($_POST['numero']) && !empty($_POST['numero'])) {
         $numero = strip_tags($_POST['numero']);
     }
@@ -265,11 +265,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // opcional #complemento
-    $_POST['complemento'] = trim( $_POST['complemento'] );
+    $_POST['complemento'] = trim($_POST['complemento']);
     $complemento = strip_tags($_POST['complemento']);
 
     // validação # bairro
-    $_POST['bairro'] = trim( $_POST['bairro'] );
+    $_POST['bairro'] = trim($_POST['bairro']);
     if(isset($_POST['bairro']) && !empty($_POST['bairro'])) {
         $bairro = strip_tags($_POST['bairro']);
     }
@@ -284,7 +284,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // vide linha 241
 
     // validação # tel
-    $_POST['tel'] = trim( $_POST['tel'] );
+    $_POST['tel'] = trim($_POST['tel']);
     if(isset($_POST['tel']) && !empty($_POST['tel'])) {
         $tel = strip_tags($_POST['tel']);
     }
@@ -293,7 +293,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # cel
-    $_POST['cel'] = trim( $_POST['cel'] );
+    $_POST['cel'] = trim($_POST['cel']);
     if(isset($_POST['cel']) && !empty($_POST['cel'])) {
         $cel = strip_tags($_POST['cel']);
     }
@@ -302,13 +302,77 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // validação # cns
-    $_POST['cns'] = trim( $_POST['cns'] );
+    $_POST['cns'] = trim($_POST['cns']);
     if(isset($_POST['cns']) && !empty($_POST['cns'])) {
         $cns = strip_tags($_POST['cns']);
     }
     else {
-        $erro["cns"] = "Campo obrigatório. <a href=\"http://cartaosus.com.br/consulta-cartao-sus/\" target=\"_blank\">Clique aqui para consultar seu cns.</a>.";
+        $erro["cns"] = "Campo obrigatório. <a href=\"http://cartaosus.com.br/consulta-cartao-sus/\" target=\"_blank\">Clique aqui para consultar seu cns.</a>";
     }
+
+
+    // validação # beneficio
+    $_POST['beneficio'] = trim($_POST['beneficio']);
+    if(isset($_POST['beneficio']) && !empty($_POST['beneficio'])) {
+        $beneficio = strip_tags($_POST['beneficio']);
+    }
+    else {
+        $erro["beneficio"] = "Campo obrigatório.";
+    }
+
+    // opcional # beneficioQual
+    $_POST['beneficioQual'] = trim($_POST['beneficioQual']);
+    $beneficioQual = strip_tags($_POST['beneficioQual']);
+
+    // validação # nomeAnimal
+    $_POST['nomeAnimal'] = trim($_POST['nomeAnimal']);
+    if(isset($_POST['nomeAnimal']) && !empty($_POST['nomeAnimal'])) {
+        $nomeAnimal = strip_tags($_POST['nomeAnimal']);
+    }
+    else {
+        $erro["nomeAnimal"] = "Campo obrigatório.";
+    }
+
+    // validação # genero
+    $_POST['genero'] = trim($_POST['genero']);
+    if(isset($_POST['genero']) && !empty($_POST['genero'])) {
+        $genero = strip_tags($_POST['genero']);
+    }
+    else {
+        $erro["genero"] = "Campo obrigatório.";
+    }
+
+    // validação # porte
+    $_POST['porte'] = trim($_POST['porte']);
+    if(isset($_POST['porte']) && !empty($_POST['porte'])) {
+        $porte = strip_tags($_POST['porte']);
+    }
+    else {
+        $erro["porte"] = "Campo obrigatório.";
+    }
+
+    // validação # idade
+    $_POST['idade'] = trim($_POST['idade']);
+    if(isset($_POST['idade']) && !empty($_POST['idade'])) {
+        $idade = strip_tags($_POST['idade']);
+        if (!is_numeric($idade)){
+            $erro["idade"] = "A idade precisa ser um valor numérico.";
+        }
+    }
+    else {
+        $erro["idade"] = "Campo obrigatório.";
+    }
+
+    // validação # idadeEm
+    $_POST['idadeEm'] = trim($_POST['idadeEm']);
+    if(isset($_POST['idadeEm']) && !empty($_POST['idadeEm'])) {
+        $idade = strip_tags($_POST['idadeEm']);
+    }
+    else {
+        $erro["idadeEm"] = "Campo obrigatório.";
+    }
+
+    // validação # idade precisa estar dentro da faixa permitida
 
     echo "<pre>\n";
     print_r($_POST);
@@ -515,56 +579,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-3"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["beneficio"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="beneficio">Possui benefício de algum programa social do governo?</label>
-                        <div class="col-md-6">
-                            <input type="radio" name="beneficio" id="beneficio" value="S">Sim
-                            <input type="radio" name="beneficio" id="beneficio" value="N">Não
+                        <div class="col-md-2">
+                            <input type="radio" name="beneficio" id="beneficio" value="S" <?php echo ($beneficio == 'S') ? 'checked' : ''; ?>>Sim
+                            <input type="radio" name="beneficio" id="beneficio" value="N" <?php echo ($beneficio == 'N') ? 'checked' : ''; ?>>Não
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-7">
+                            <?php echo isset($erro["beneficio"]) ?   "<span class=\"label label-danger\">" . $erro["beneficio"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="beneficioQual">Se sim, qual(is)?</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="beneficioQual" name="beneficioQual" maxlength="120">
+                            <input type="text" class="form-control" id="beneficioQual" name="beneficioQual" maxlength="120"
+                                   value="<?php echo isset($beneficioQual) ? $beneficioQual : ''; ?>">
                         </div>
                         <div class="col-md-5"></div>
                     </div>
 
                     <div class="well well text-center"><h2>Informações Sobre o Animal</h2></div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["nomeAnimal"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="nomeAnimal">Nome do animal:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal" maxlength="120">
+                            <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal" maxlength="120"
+                                   value="<?php echo isset($nomeAnimal) ? $nomeAnimal : ''; ?>">
                         </div>
-                        <div class="col-md-7"></div>
+                        <div class="col-md-7">
+                            <?php echo isset($erro["nomeAnimal"]) ?   "<span class=\"label label-danger\">" . $erro["nomeAnimal"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["genero"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="genero">Gênero:</label>
-                        <div class="col-md-6">
-                            <input type="radio" name="genero" id="genero" value="M">Macho
-                            <input type="radio" name="genero" id="genero" value="F">Fêmea<br><br>
+                        <div class="col-md-2">
+                            <input type="radio" name="genero" id="genero" value="M" <?php echo ($genero == 'M') ? 'checked' : ''; ?>>Macho
+                            <input type="radio" name="genero" id="genero" value="F" <?php echo ($genero == 'F') ? 'checked' : ''; ?>>Fêmea<br><br>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-7">
+                            <?php echo isset($erro["genero"]) ?   "<span class=\"label label-danger\">" . $erro["genero"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["porte"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="porte">Porte:</label>
-                        <div class="col-md-6">
-                            <input type="radio" name="porte" id="porte" value="pequeno">Pequeno
-                            <input type="radio" name="porte" id="porte" value="medio">Médio
-                            <input type="radio" name="porte" id="porte" value="grande">Grande<br><br>
+                        <div class="col-md-3">
+                            <input type="radio" name="porte" id="porte" value="pequeno" <?php echo ($porte == 'pequeno') ? 'checked' : ''; ?>>Pequeno
+                            <input type="radio" name="porte" id="porte" value="medio" <?php echo ($porte == 'medio') ? 'checked' : ''; ?>>Médio
+                            <input type="radio" name="porte" id="porte" value="grande" <?php echo ($porte == 'grande') ? 'checked' : ''; ?>>Grande<br><br>
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <?php echo isset($erro["porte"]) ?   "<span class=\"label label-danger\">" . $erro["porte"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["idade"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="idade">Idade do animal:</label>
                         <div class="col-md-2">
-                            <input type="number" class="form-control" id="idade" name="idade">
+                            <input type="text" class="form-control" id="idade" name="idade">
                             <span><input type="radio" name="idadeEm" id="idadeEm" value="mes">Mês(es)
                             <input type="radio" name="idadeEm" id="idadeEm" value="ano">Ano(s)</span>
                         </div>
