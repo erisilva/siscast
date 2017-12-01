@@ -366,13 +366,78 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // validação # idadeEm
     $_POST['idadeEm'] = trim($_POST['idadeEm']);
     if(isset($_POST['idadeEm']) && !empty($_POST['idadeEm'])) {
-        $idade = strip_tags($_POST['idadeEm']);
+        $idadeEm = strip_tags($_POST['idadeEm']);
     }
     else {
         $erro["idadeEm"] = "Campo obrigatório.";
     }
 
     // validação # idade precisa estar dentro da faixa permitida
+    // validação # idade permitida >= 6 meses e <= 8 anos
+    if ($idadeEm == 'mes'){
+        if ($idade < 6){
+            $erro["idade"] = "Idade <strong>abaixo</strong> do permitido.";
+        }
+    }
+
+    if ($idadeEm == 'ano'){
+        if ($idade > 8){
+            $erro["idade"] = "Idade <strong>acima</strong> do permitido.";
+        }
+    }
+
+    // validação # cor
+    $_POST['cor'] = trim($_POST['cor']);
+    if(isset($_POST['cor']) && !empty($_POST['cor'])) {
+        $cor = strip_tags($_POST['cor']);
+    }
+    else {
+        $erro["cor"] = "Campo obrigatório.";
+    }
+
+    // validação # especie
+    $_POST['especie'] = trim($_POST['especie']);
+    if(isset($_POST['especie']) && !empty($_POST['especie'])) {
+        $especie = strip_tags($_POST['especie']);
+    }
+    else {
+        $erro["especie"] = "Campo obrigatório.";
+    }
+
+    // validação # raca_id
+    $_POST['raca_id'] = trim($_POST['raca_id']);
+    if(isset($_POST['raca_id']) && !empty($_POST['raca_id'])) {
+        $raca_id = strip_tags($_POST['raca_id']);
+        if (!is_numeric($raca_id)){
+            $erro["raca_id"] = "Precisa ser um valor númerico.";
+        }
+    }
+    else {
+        $erro["raca_id"] = "Campo obrigatório.";
+    }
+
+    // preciso da descrição da raça para colocar  no campo de seleção
+    TDBConnection::prepareQuery("select * from racas where id = :id");
+    TDBConnection::bindParamQuery(':id', $raca_id, PDO::PARAM_INT);
+    $racaSelecionada = TDBConnection::single();
+
+    // validação # procedencia
+    $_POST['procedencia'] = trim($_POST['procedencia']);
+    if(isset($_POST['procedencia']) && !empty($_POST['procedencia'])) {
+        $procedencia = strip_tags($_POST['procedencia']);
+    }
+    else {
+        $erro["procedencia"] = "Campo obrigatório.";
+    }
+
+    // validação # concordar
+    $_POST['concordar'] = trim($_POST['concordar']);
+    if(isset($_POST['concordar']) && !empty($_POST['concordar'])) {
+        $concordar = strip_tags($_POST['concordar']);
+    }
+    else {
+        $erro["concordar"] = "Campo obrigatório.";
+    }
 
     echo "<pre>\n";
     print_r($_POST);
@@ -638,18 +703,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group <?php echo isset($erro["idade"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="idade">Idade do animal:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="idade" name="idade">
-                            <span><input type="radio" name="idadeEm" id="idadeEm" value="mes">Mês(es)
-                            <input type="radio" name="idadeEm" id="idadeEm" value="ano">Ano(s)</span>
+                            <input type="text" class="form-control" id="idade" name="idade" value="<?php echo isset($idade) ? $idade : ''; ?>">
+
                         </div>
-                        <div class="col-md-7"></div>
+                        <div class="col-md-7">
+                            <?php echo isset($erro["idade"]) ?   "<span class=\"label label-danger\">" . $erro["idade"] . "</span>" : ""; ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group <?php echo isset($erro["idadeEm"]) ? "has-error" : ""; ?>">
+                        <label class="col-md-3 control-label" for="idadeEm">Idade em:</label>
+                            <div class="col-md-3">
+                            <input type="radio" name="idadeEm" id="idadeEm" value="mes" <?php echo ($idadeEm == 'mes') ? 'checked' : ''; ?>>Mês(es)<br>
+                            <input type="radio" name="idadeEm" id="idadeEm" value="ano" <?php echo ($idadeEm == 'ano') ? 'checked' : ''; ?>>Ano(s)
+                        </div>
+                        <div class="col-md-6">
+                            <?php echo isset($erro["idadeEm"]) ?   "<span class=\"label label-danger\">" . $erro["idadeEm"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="alert alert-info">
-                                <strong>Observação!</strong>Para serem submetidos à esterilização,
+                                <strong>Observação!</strong> Para serem submetidos à esterilização,
                                 os animais devem ter no mínimo 6 (seis) meses e no máximo 8 (oito) anos.
                                 O CCZ não realiza esterilização em animais idosos.
                             </div>
@@ -657,28 +734,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-3"></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["cor"]) ? "has-error" : ""; ?>"">
                         <label class="col-md-3 control-label" for="cor">Cor(es) do animal:</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="cor" name="cor" maxlength="80">
+                            <input type="text" class="form-control" id="cor" name="cor" maxlength="80" value="<?php echo isset($cor) ? $cor : ''; ?>">
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <?php echo isset($erro["cor"]) ?   "<span class=\"label label-danger\">" . $erro["cor"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["especie"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="especie">Espécie:</label>
                         <div class="col-md-6">
-                            <input type="radio" name="especie" id="especie" value="felino">Felino
-                            <input type="radio" name="especie" id="especie" value="canino">Canino
+                            <input type="radio" name="especie" id="especie" value="felino" <?php echo ($especie == 'felino') ? 'checked' : ''; ?>>Felino
+                            <input type="radio" name="especie" id="especie" value="canino" <?php echo ($especie == 'canino') ? 'checked' : ''; ?>>Canino
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["especie"]) ?   "<span class=\"label label-danger\">" . $erro["especie"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["raca_id"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="raca_id">Raça:</label>
                         <div class="col-md-6">
                             <select class="form-control" name="raca_id" id="raca_id">
-                                <option value="" selected>Escolha...</option>
+                                <option value="<?php echo isset($raca_id) ? $racaSelecionada->id : ""; ?>" selected><?php echo isset($raca_id) ? "&rarr;" . $racaSelecionada->descricao : "Escolha..."; ?></option>
                                 <?php
                                 TDBConnection::prepareQuery("select * from racas order by descricao;");
                                 $racas = TDBConnection::resultset();
@@ -688,19 +769,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 ?>
                             </select>
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["raca_id"]) ?   "<span class=\"label label-danger\">" . $erro["raca_id"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group <?php echo isset($erro["procedencia"]) ? "has-error" : ""; ?>">
                         <label class="col-md-3 control-label" for="procedencia">Origem:</label>
                         <div class="col-md-6">
-                            <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario">vive na rua/comunitário
-                            <input type="radio" name="procedencia" id="procedencia" value="resgatado">Resgatado
-                            <input type="radio" name="procedencia" id="procedencia" value="adotado">Adotado
-                            <input type="radio" name="procedencia" id="procedencia" value="comprado">Comprado
-                            <input type="radio" name="procedencia" id="procedencia" value="ONG">ONG<br><br>
+                            <input type="radio" name="procedencia" id="procedencia" value="vive na rua / comunitario" <?php echo ($procedencia == 'vive na rua / comunitario') ? 'checked' : ''; ?>>vive na rua/comunitário
+                            <input type="radio" name="procedencia" id="procedencia" value="resgatado" <?php echo ($procedencia == 'resgatado') ? 'checked' : ''; ?>>Resgatado
+                            <input type="radio" name="procedencia" id="procedencia" value="adotado" <?php echo ($procedencia == 'adotado') ? 'checked' : ''; ?>>Adotado
+                            <input type="radio" name="procedencia" id="procedencia" value="comprado" <?php echo ($procedencia == 'comprado') ? 'checked' : ''; ?>>Comprado
+                            <input type="radio" name="procedencia" id="procedencia" value="ONG" <?php echo ($procedencia == 'ONG') ? 'checked' : ''; ?>>ONG<br><br>
                         </div>
-                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <?php echo isset($erro["procedencia"]) ?   "<span class=\"label label-danger\">" . $erro["procedencia"] . "</span>" : ""; ?>
+                        </div>
                     </div>
 
                     <div class="well well text-center"><h2>Critérios e pré-requisitos para cadastro de esterilização de animais</h2></div>
@@ -753,14 +838,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="alert alert-danger">
                                 <input type="checkbox" name="concordar" id="concordar" value="sim">
-                                <strong>Declaro que li, aceito os termos e condições referentes ao cadastro para esterilização de animais e que as informações declaradas neste formulário são verdadeiras.</strong>
+                                <?php echo isset($erro["concordar"]) ?   "<span class=\"label label-danger\">" . $erro["concordar"] . "</span>" : ""; ?><strong>Declaro que li, aceito os termos e condições referentes ao cadastro para esterilização de animais e que as informações declaradas neste formulário são verdadeiras.</strong>
                             </div>
                         <div class="col-md-1"></div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-6 col-md-offset-3">
-                            <button type="submit" class="btn btn-primary">Pesquisar</button>
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary">Clique para enviar o formulário</button>
                         </div>
                     </div>
                 </form>

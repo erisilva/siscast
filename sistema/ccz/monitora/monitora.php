@@ -18,15 +18,6 @@ $loader->directories = array('../libs', '../model');
 $loader->register();
 
 /*
- * valida sessão
- */
-if (!isset($_SESSION['sessao_usuario_id'])) {
-    session_destroy();
-    header("Location: index.php");
-    exit;
-}
-
-/*
  * header page
  */
 header('Content-Type: text/html; charset=utf-8');
@@ -63,27 +54,11 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
         <h1>SisCast - Sistema de Agenda de Castrações</h1>
     </div>
 
-    <div class="titulofuncionario">
-        Funcionário : <a href="../operador/alterarSenha.php"><?php echo $_SESSION['sessao_usuario_name']; ?></a>
-    </div>
-
-    <!--menuTopo-->
-
-    <div class="menuTopo">
-        <ul class="menu">
-            <li><a href="../cadastro.php">Cadastro</a></li>
-            <li><a href="../pedidos.php">Pedidos</a></li>
-            <li><a href="../configuracao.php">Configurações</a></li>
-            <li><a href="../relatorios.php">Relatórios</a></li>
-            <li><a href="../logout.php">Sair</a></li>
-        </ul>
-    </div>
-
     <!--/conteúdo-->
 
     <div class="conteudo">
         <div class="subtitulo">
-            <h1>Monitoramento de Pedidos</h1>
+            <h1>Monitoramento de Pedidos - Versão em Desenvolvimento</h1>
         </div>
 
         <div>
