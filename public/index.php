@@ -106,10 +106,6 @@ if (!isset($_SESSION['token'])){
     </div>
 </nav>
 
-<div class="container-fluid">
-    <h1 class="text-center">Cadastro para Esterilização de Cães e Gatos</h1>
-</div>
-
 <div class="container">
     <img class="img-responsive center-block" src="img/banner.png" alt="Banner" width="460" height="345">
 </div>

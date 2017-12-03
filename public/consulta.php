@@ -76,7 +76,6 @@ if (!isset($_SESSION['token'])){
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/app.js"></script>
     <link rel="icon" href="img/favicon.png">
 
     <title>SisCast - Pedidos de Agendamento Público</title>
@@ -141,12 +140,14 @@ if (!isset($_SESSION['token'])){
                             }
 
                             $query = "SELECT 
-                                        date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
+                                        date_format(pedidos.quando, '%d/%m/%Y %H:%i') as quandoFormatado,
                                         pedidos.nomeAnimal,
                                         pedidos.especie,
+                                        concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigoInterno,
                                         situacoes.nome as situacao,
-                                        coalesce(date_format(pedidos.agendaquando, '%d/%m/%y'), '(não marcado)') as agendaQuando,
-                                        coalesce(pedidos.agendaTurno, '(não marcado)') as agendaTurno,
+                                        situacoes.descricao as situacaoDescricao,
+                                        coalesce(date_format(pedidos.agendaquando, '%d/%m/%Y'), 'Não marcado') as agendaQuando,
+                                        coalesce(pedidos.agendaTurno, '') as agendaTurno,
                                         pedidos.motivoNaoAgendado
 
 
@@ -167,8 +168,8 @@ if (!isset($_SESSION['token'])){
 
                             if ($pedidosResultadoTotal != 0) {
 
-                                echo "<div class=\"container\">\n";
-                                echo "<h3>Pedidos Realizados para o cpf $cpf:</h3>\n";
+                                echo "<div class=\"well text-center\">\n";
+                                echo "<h2>Resultado para o cpf $cpf</h2>\n";
                                 echo "</div>\n";
                                 echo "\n";
                                 echo "\n";
@@ -177,8 +178,9 @@ if (!isset($_SESSION['token'])){
                                 echo "<thead>\n";
                                 echo "<tr>\n";
                                 //cabeçalho da tabela
-                                echo "<th>Data/Hora</th>\n";
                                 echo "<th>Nome</th>\n";
+                                echo "<th>Código</th>\n";
+                                echo "<th>Data/Hora</th>\n";
                                 echo "<th>Situação</th>\n";
                                 echo "<th>Agendado para</th>\n";
                                 echo "<th>Turno</th>\n";
@@ -190,23 +192,35 @@ if (!isset($_SESSION['token'])){
                                     echo "<tr>\n";
 
                                     echo "<td>\n";
+                                    echo "<strong>"  . $pedido->nomeAnimal . "</strong>\n";
+                                    echo "</td>\n";
+
+                                    echo "<td>\n";
+                                    echo $pedido->codigoInterno . "\n";
+                                    echo "</td>\n";
+
+                                    echo "<td>\n";
                                     echo $pedido->quandoFormatado . "\n";
                                     echo "</td>\n";
 
                                     echo "<td>\n";
-                                    echo $pedido->nomeAnimal . "\n";
-                                    echo "</td>\n";
-
-                                    echo "<td>\n";
-                                    echo $pedido->situacao . "\n";
+                                    echo "<strong data-toggle=\"tooltip\" title=\"" . $pedido->situacaoDescricao . "\">"  .$pedido->situacao . "</strong> " . $pedido->motivoNaoAgendado . "\n";
                                     echo "</td>\n";
 
                                     echo "<td>\n";
                                     echo $pedido->agendaQuando . "\n";
                                     echo "</td>\n";
 
+                                    if ($pedido->agendaTurno == 'manha'){
+                                        $agendaTurno = "Manhã, a partir das 7:30";
+                                    } else if ($pedido->agendaTurno == 'tarde'){
+                                        $agendaTurno = "Tarde, a partir das 13:30";
+                                    } else {
+                                        $agendaTurno = "-";
+                                    }
+
                                     echo "<td>\n";
-                                    echo $pedido->agendaTurno . "\n";
+                                    echo $agendaTurno . "\n";
                                     echo "</td>\n";
 
                                     echo "</tr>\n";
@@ -242,6 +256,12 @@ if (!isset($_SESSION['token'])){
                 E-mail: cczcontagem@yahoo.com.br
             </p>
         </footer>
+
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
     </body>
 </html>
 

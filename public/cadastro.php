@@ -195,11 +195,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nascimento = strip_tags($_POST['nascimento']);
         if (!TCommon::valida_data_br($nascimento)) {
             $erro["nascimento"] = "Data inválida. Utilize o formato: DD/MM/AAAA.";
+        } else {
+            // validacao # idade precisa ser maior de 18 anos
+            $tz  = new DateTimeZone('America/Sao_Paulo');
+            $idade = DateTime::createFromFormat('d/m/Y', $nascimento , $tz)
+                ->diff(new DateTime('now', $tz))
+                ->y;
+            if ($idade < 18){
+                $erro["nascimento"] = "Somente maiores de idade. Idade: " .  $idade;
+            }
         }
     }
     else {
-        $erro["nascimento"] = "Campo Obrigatório.";
+
     }
+
+
 
     // validação # cpf
     $_POST['cpf'] = trim($_POST['cpf']);
@@ -439,6 +450,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $erro["concordar"] = "Campo obrigatório.";
     }
 
+    /* validar número máximo de pedidos por cpf (5) */
+    /* importante */
+    /* Use a lista para definir quantos pedidos por situação podem ser cadastrados para esse cpf */
+    TDBConnection::prepareQuery("select count(*) as total from pedidos where situacao_id in (1,2,3,4,5,6,7) and ano = year(now()) and cpf = :cpf");
+    TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
+    $totalPedidos = TDBConnection::single();
+    // definido como 5 por ano
+    if ($totalPedidos->total > 3){
+        $erro["totalPedidos"] = "Você já possui " . $totalPedidos->total . " cadastros em processamento.";
+    }
+
+    if (!isset($erro)){
+        TDBConnection::beginTransaction();
+        /* calculo do codigo e ano */
+        TDBConnection::prepareQuery("select (coalesce(max(codigo), 0) + 1) as codigo, year(now()) as ano from pedidos where ano = year(now());");
+        $codigo_ano = TDBConnection::single();
+
+        echo "oi como vai vc amor" . $codigo_ano->codigo . $codigo_ano->ano ;
+
+        TDBConnection::endTransaction();
+    }
+
+
+
     echo "<pre>\n";
     print_r($_POST);
     echo "</pre>\n";
@@ -463,6 +498,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
                     <?php
+
+                    if (isset($erro['totalPedidos'])){
+                        echo "<div class=\"alert alert-danger alert-dismissable text-center\">\n";
+                        echo "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n";
+                        echo "  <h3><strong>Atenção!</strong> " . $erro["totalPedidos"] ."</h3>\n";
+                        echo "  <h4></h4>\n";
+                        echo "</div>\n";
+                    }
+
                     if (isset($erro['token'])){
                         echo "<div class=\"alert alert-danger alert-dismissable\">\n";
                         echo "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n";
@@ -499,7 +543,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div class="form-group <?php echo isset($erro["cpf"]) ? "has-error" : ""; ?>">
-                        <label class="col-md-3 control-label" for="cpf">CPF:</label>
+                        <label class="col-md-3 control-label" for="cpf">CPF <i>(somente números)</i>:</label>
                         <div class="col-md-3">
                             <input type="text" class="form-control" id="cpf" name="cpf" maxlength="11" value="<?php echo isset($cpf) ? $cpf : ''; ?>">
                         </div>
@@ -788,7 +832,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
 
-                    <div class="well well text-center"><h2>Critérios e pré-requisitos para cadastro de esterilização de animais</h2></div>
+                    <div class="well well text-center">
+                        <h2>A saúde do seu companheiro depende de você, então</h2>
+                        <h4>leia todos os critérios e pré-requisitos para o cadastro de esterilização com atenção</h4>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -838,7 +885,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="alert alert-danger">
                                 <input type="checkbox" name="concordar" id="concordar" value="sim">
-                                <?php echo isset($erro["concordar"]) ?   "<span class=\"label label-danger\">" . $erro["concordar"] . "</span>" : ""; ?><strong>Declaro que li, aceito os termos e condições referentes ao cadastro para esterilização de animais e que as informações declaradas neste formulário são verdadeiras.</strong>
+                                <?php echo isset($erro["concordar"]) ?   "<span class=\"label label-danger\">" . $erro["concordar"] . "</span>" : ""; ?><strong> Declaro que li, aceito os termos e condições referentes ao cadastro para esterilização de animais e que as informações declaradas neste formulário são verdadeiras.</strong>
                             </div>
                         <div class="col-md-1"></div>
                     </div>
