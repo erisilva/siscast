@@ -173,14 +173,22 @@ CREATE TABLE `pedidos` (
     `bairro` varchar(140)  DEFAULT NULL,
     `complemento` varchar(60)  DEFAULT NULL,
     `cep` varchar(10)  DEFAULT NULL,
+    -- novidades
+    `cidade` varchar(140)  DEFAULT NULL,
+    `estado` varchar(2)  DEFAULT NULL,
 
-    `cns` ENUM ('S', 'N'),
+    -- campo alterado para a pessoa digitar o numero do cartão
+    -- `cns` ENUM ('S', 'N'),
+    -- novidades # tive de fazer gambiarra com nome, não me culpem
+    `cns` varchar(25)  DEFAULT NULL,
+
     `beneficio` ENUM ('S', 'N'),
     `beneficioQual` varchar(120)  DEFAULT NULL,
 
     `tel` varchar(20)  DEFAULT NULL,
     `cel` varchar(20)  DEFAULT NULL,
-    -- `email` varchar(180)  DEFAULT NULL,
+    -- novidades
+    `email` varchar(200)  DEFAULT NULL,
 
     `nomeAnimal` varchar(120)  DEFAULT NULL,
     `genero` ENUM ('M', 'F'),
@@ -192,7 +200,11 @@ CREATE TABLE `pedidos` (
     `especie` ENUM ('felino', 'canino'),
     `raca_id` int(10) unsigned NOT NULL,
 
-    `procedencia` ENUM ('vive na rua / comunitario', 'resgatado', 'adotado', 'comprado', 'ONG' ),
+
+    -- devido as várias insistencias eu adiconei a opção CCZ, que será provisório tipo pra sempre.
+    `procedencia` ENUM ('vive na rua / comunitario', 'resgatado', 'adotado', 'comprado', 'ONG', 'CCZ' ),
+
+
     `quando` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
 
@@ -277,5 +289,22 @@ CREATE TABLE `logAcesso` (
   `description` DATETIME,  
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+/*
+Alterações que precisam ser aplicadas para a versão 1.15.1 e acima
+
+
+ALTER TABLE `pedidos` CHANGE COLUMN `cns` `cns` VARCHAR(25) CHARACTER SET 'utf8' NULL DEFAULT NULL ;
+
+ALTER TABLE `pedidos` ADD COLUMN `cidade` VARCHAR(180) CHARACTER SET 'utf8' NULL DEFAULT NULL AFTER `complemento`;
+
+ALTER TABLE `pedidos` ADD COLUMN `estado` VARCHAR(2) CHARACTER SET 'utf8' NULL DEFAULT NULL AFTER `cidade`;
+
+ALTER TABLE `pedidos` ADD COLUMN `email` VARCHAR(200) CHARACTER SET 'utf8' NULL DEFAULT NULL AFTER `nome`;
+
+ALTER TABLE `pedidos` CHANGE COLUMN `procedencia` `procedencia` ENUM('vive na rua / comunitario', 'resgatado', 'adotado', 'comprado', 'ONG', 'CCZ') CHARACTER SET 'utf8' NULL DEFAULT NULL ;
+
+*/
 
 

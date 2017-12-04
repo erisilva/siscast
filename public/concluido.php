@@ -31,162 +31,109 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
  * se conecta
  */
 TDBConnection::getConnection();
+
+/*
+ * segurança
+ * para toda requisição é feita a criação de um token aleatorio
+ * se não existir nenhum token de sessao ao se solicitar
+ * a pagina é criado um token
+ */
+if (!isset($_SESSION['token'])){
+    date_default_timezone_set('America/Sao_Paulo');
+    $token = md5(uniqid(rand(), TRUE));
+    $quando = date("Y-m-d H:i:s");
+    $_SESSION['token'] = $token;
+    $_SESSION['token_time'] = time();
+
+    /* captura o e-mail da origem da requisição dessa página */
+    $ip = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+    /* Grava o logacesso com o ip origem da requisição, juntamente com token com a data/hora */
+    /* ERRO MEU: eu chamei o campo de data/hora de description em vez de quando como uso. Vou arrumar algum dia.*/
+    TDBConnection::beginTransaction();
+    TDBConnection::prepareQuery("INSERT INTO logacesso VALUES (null, :token, :ip, :description);");
+    TDBConnection::bindParamQuery(':token', $token, PDO::PARAM_STR);
+    TDBConnection::bindParamQuery(':ip', $ip, PDO::PARAM_STR);
+    TDBConnection::bindParamQuery(':description', $quando, PDO::PARAM_STR);
+    TDBConnection::execute();
+    TDBConnection::endTransaction();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-    <meta charset="UTF-8">
-    <meta name="author" content="Erivelton da Silva">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="img/favicon.ico">
-    <title>SisCast - Conclusão de Pedido</title>
-    <link rel="stylesheet" type="text/css" href="estilo/estilo.css">
-    <body>
-        <div class="estrutura">
+<meta charset="UTF-8">
+<meta name="author" content="EriSilva, erisilva.net, www.erisilva.net, erivelton.contagem@gmail.com">
+<meta name="description" content="Levantamento e Cadastro de Pedidos para Esterilização de Animais no Município de Contagem-MG, Brasil.">
+<meta name="keywords" content="pedidos, esterilização, animais, pets, cadastro, levantamento, saúde, contagem">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/estilo.css">
 
-            <!-- Cabeçalho-->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-            <div class="logotipo">
-                <img src="img/logo.png" alt="logoContagem" class="imagem_logo">
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<link rel="icon" href="img/favicon.png">
+
+<title>SisCast - Pedidos de Agendamento Público</title>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand" >
+                <img src="img/logo.png" class="img-rounded" alt="Logotipo Contagem" height="60">
             </div>
+        </div>
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>Início</a></li>
+                <li><a href="cadastro.php"><span class="glyphicon glyphicon-plus-sign"></span>Fazer um Cadastro</a></li>
+                <li><a href="consulta.php"><span class="glyphicon glyphicon-search"></span>Consultar Cadastro</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-            <div class="titulosuperior">
-                <h1>Cadastro para Esterilização de Animais</h1>
-            </div>
-
-            <!--/conteúdo-->
-
-            <div class="conteudo">
-
-                <div>
-
-                    <fieldset>
-
-                        <p class="destaque">Seu pedido foi enviado com sucesso.</p>
-
-                    </fieldset>                    
-
-                </div>
-
-                <br>
-                <div class="alinha">
-                    <p>Pedidos realizados</p>
-                </div>
-                <?php
-                $cpf = (isset($_GET['cpf']) ? strip_tags(trim($_GET['cpf'])) : '');
-
-                $query = "SELECT 
-                                    pedidos.id,
-                                    concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigoInterno,
-                                    date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
-                                    pedidos.nomeAnimal,
-                                    pedidos.especie,
-                                    pedidos.genero,
-                                    pedidos.porte,
-                                    situacoes.nome as situacao,
-                                    coalesce(date_format(pedidos.agendaquando, '%d/%m/%y'), '-') as agendaQuando,
-                                    coalesce(pedidos.agendaTurno, '-') as agendaTurno
+<div class="container-fluid">
+    <h1 class="text-center">Cadastro para Esterilização de Cães e Gatos</h1>
+</div>
 
 
-                            from pedidos
-                                    inner join situacoes on (pedidos.situacao_id = situacoes.id)
-
-                                where pedidos.cpf = :cpf
-
-                                order by pedidos.quando desc;";
-
-
-                TDBConnection::getConnection();
-                TDBConnection::prepareQuery($query);
-                TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
-                $result = TDBConnection::resultset();
-                $nRows = TDBConnection::rowCount();
-
-                if ($nRows != 0) {
-                    echo "\n";
-                    echo "\n";
-                    echo "<table>\n";
-                    echo "<thead>\n";
-                    echo "<tr>\n";
-                    //cabeçalho da tabela
-                    echo "<th class=\"alinha_direita\">Código</th>\n";
-                    echo "<th>Data/Hora</th>\n";
-                    echo "<th>Animal</th>\n";
-                    echo "<th>Espécie</th>\n";
-                    echo "<th>Gênero</th>\n";
-                    echo "<th>Situação</th>\n";
-                    echo "<th>Agendado para</th>\n";
-                    echo "<th>Turno</th>\n";
-                    echo "</tr>\n";
-                    echo "</thead>\n";
-                    echo "<tbody>\n";
-
-                    foreach ($result as $temp) {
-                        echo "<tr>\n";
-
-                        echo "<td class=\"alinha_direita\">\n";
-                        echo $temp->codigoInterno . "\n";
-                        echo "</td>\n";
-
-                        echo "<td>\n";
-                        echo $temp->quandoFormatado . "\n";
-                        echo "</td>\n";
-
-                        echo "<td>\n";
-                        echo $temp->nomeAnimal . "\n";
-                        echo "</td>\n";
-
-                        echo "<td>\n";
-                        echo $temp->especie . "\n";
-                        echo "</td>\n";
-
-                        echo "<td>\n";                       
-                        $genero_temp = ($temp->genero == 'M') ? 'Macho' : 'Fêmea'; 
-                        echo $genero_temp . "\n";
-                        echo "</td>\n";
-
-                        echo "<td>\n";
-                        echo $temp->situacao . "\n";
-                        echo "</td>\n";
-
-                        echo "<td>\n";
-                        echo $temp->agendaQuando . "\n";
-                        echo "</td>\n";
-
-                        echo "<td>\n";
-                        echo $temp->agendaTurno . "\n";
-                        echo "</td>\n";
-
-                        echo "</tr>\n";
-                    }
-                    echo "</tbody>\n";
-                    echo "</table>\n";
-                } else {
-                    echo "Nenhum registro foi encontrado.";
-                }
-                ?>  
-
-                <br>               
-
-                <div class="alinha">
-                    <a href="index.php">Voltar</a>
-                </div>
-
-                <!--/rodapé-->
-                <br/><br/>
-                <div class="rodape">
-                    <p>
-                        <strong>Centro de Controle de Zoonoses</strong><br>
-                        Telefones: 3351-3751 / 3361-7703<br>
-                        E-mail: cczcontagem@yahoo.com.br
-                    </p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Parabéns! Seu cadastro foi realizado com sucesso.
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-            <!-- scripts da página -->
-        </div>    
-    </body>
+
+<footer class="container-fluid text-center">
+    <p>
+        <strong>Centro de Controle de Zoonoses</strong><br>
+        Telefones: 3351-3751 / 3361-7703<br>
+        E-mail: cczcontagem@yahoo.com.br
+    </p>
+</footer>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+</body>
 </html>
 

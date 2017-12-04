@@ -198,19 +198,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // validacao # idade precisa ser maior de 18 anos
             $tz  = new DateTimeZone('America/Sao_Paulo');
-            $idade = DateTime::createFromFormat('d/m/Y', $nascimento , $tz)
+            $idadeTutor = DateTime::createFromFormat('d/m/Y', $nascimento , $tz)
                 ->diff(new DateTime('now', $tz))
                 ->y;
-            if ($idade < 18){
-                $erro["nascimento"] = "Somente maiores de idade. Idade: " .  $idade;
+            if ($idadeTutor < 18){
+                $erro["nascimento"] = "Somente maiores de idade. Idade: " .  $idadeTutor;
+            } else {
+                // yyyy-mm-dd
+                $tempDate = explode('/', $nascimento);
+                $nacimentoFormatoMySQL = $tempDate[2] . '-' . $tempDate[1] . '-' . $tempDate[0];
             }
         }
     }
     else {
-
+        $erro["nascimento"] = "Campo obrigatório.";
     }
-
-
 
     // validação # cpf
     $_POST['cpf'] = trim($_POST['cpf']);
@@ -247,10 +249,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             if ($logradouro['localidade'] != "Contagem"){
                 $erro["cep"] = "Localização inválida: " . $logradouro['localidade']  . ", " . $logradouro['uf'] . ".";
+            } else {
+                // salva os valores que vierem da tabela do viacep
+                $cidade = $logradouro['localidade'];
+                $estado = $logradouro['uf'];
             }
-            // salva os valores que vierem da tabela do viacep
-            $cidade = $logradouro['localidade'];
-            $estado = $logradouro['uf'];
         }
     }
     else {
@@ -320,7 +323,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         $erro["cns"] = "Campo obrigatório. <a href=\"http://cartaosus.com.br/consulta-cartao-sus/\" target=\"_blank\">Clique aqui para consultar seu cns.</a>";
     }
-
 
     // validação # beneficio
     $_POST['beneficio'] = trim($_POST['beneficio']);
@@ -467,9 +469,121 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         TDBConnection::prepareQuery("select (coalesce(max(codigo), 0) + 1) as codigo, year(now()) as ano from pedidos where ano = year(now());");
         $codigo_ano = TDBConnection::single();
 
-        echo "oi como vai vc amor" . $codigo_ano->codigo . $codigo_ano->ano ;
+        /* inclusão */
+        TDBConnection::prepareQuery("INSERT INTO pedidos
+                                                    (id,
+                                                    codigo,
+                                                    ano,
+                                                    cpf,
+                                                    nome,
+                                                    email,
+                                                    nascimento,
+                                                    endereco,
+                                                    numero,
+                                                    bairro,
+                                                    complemento,
+                                                    cidade,
+                                                    estado,
+                                                    cep,
+                                                    cns,
+                                                    beneficio,
+                                                    beneficioQual,
+                                                    tel,
+                                                    cel,
+                                                    nomeAnimal,
+                                                    genero,
+                                                    porte,
+                                                    idade,
+                                                    idadeEm,
+                                                    cor,
+                                                    especie,
+                                                    raca_id,
+                                                    procedencia,
+                                                    quando,
+                                                    situacao_id)
+                                                    
+                                                    VALUES
+                                                    
+                                                    (null,
+                                                    :codigo,
+                                                    :ano,
+                                                    :cpf,
+                                                    :nome,
+                                                    :email,
+                                                    :nascimento,
+                                                    :endereco,
+                                                    :numero,
+                                                    :bairro,
+                                                    :complemento,
+                                                    :cidade,
+                                                    :estado,
+                                                    :cep,
+                                                    :cns,
+                                                    :beneficio,
+                                                    :beneficioQual,
+                                                    :tel,
+                                                    :cel,
+                                                    :nomeAnimal,
+                                                    :genero,
+                                                    :porte,
+                                                    :idade,
+                                                    :idadeEm,
+                                                    :cor,
+                                                    :especie,
+                                                    :raca_id,
+                                                    :procedencia,
+                                                    now(),
+                                                    1);
+
+                                                    ");
+
+        /* código interno */
+        TDBConnection::bindParamQuery(':codigo', $codigo_ano->codigo, PDO::PARAM_INT);
+        TDBConnection::bindParamQuery(':ano', $codigo_ano->ano, PDO::PARAM_INT);
+
+        /* pessoa */
+        TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':nome', $nome, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':email', $email, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':nascimento', $nacimentoFormatoMySQL, PDO::PARAM_STR);
+
+        /* endereço */
+        TDBConnection::bindParamQuery(':endereco', $endereco, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':numero', $numero, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':bairro', $bairro, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':complemento', $complemento, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':cidade', $cidade, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':estado', $estado, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':cep', $cep, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':tel', $tel, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':cel', $cel, PDO::PARAM_STR);
+
+        /* beneficios da saúde */
+        TDBConnection::bindParamQuery(':cns', $cns, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':beneficio', $beneficio, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':beneficioQual', $beneficioQual, PDO::PARAM_STR);
+
+        /* animal */
+        TDBConnection::bindParamQuery(':nomeAnimal', $nomeAnimal, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':genero', $genero, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':porte', $porte, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':idade', $idade, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':idadeEm', $idadeEm, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':cor', $cor, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':especie', $especie, PDO::PARAM_STR);
+        TDBConnection::bindParamQuery(':raca_id', $raca_id, PDO::PARAM_INT);
+        TDBConnection::bindParamQuery(':procedencia', $procedencia, PDO::PARAM_STR);
+
+        $result = TDBConnection::execute();
 
         TDBConnection::endTransaction();
+
+        // reseta os tokens de segurança
+        unset($_SESSION['token_time']);
+        unset($_SESSION['token']);
+
+        header("Location: concluido.php");
+        exit;
     }
 
 
@@ -479,7 +593,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "</pre>\n";
 
     echo "<pre>\n";
-    print_r($erro);
+    print_r($nacimentoFormatoMySQL);
     echo "</pre>\n";
 }
 
