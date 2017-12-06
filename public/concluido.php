@@ -103,24 +103,17 @@ if (!isset($_SESSION['token'])){
         </div>
     </div>
 </nav>
-
 <div class="container-fluid">
     <h1 class="text-center">Cadastro para Esterilização de Cães e Gatos</h1>
 </div>
-
-
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Parabéns! Seu cadastro foi realizado com sucesso.
-                </div>
-            </div>
-        </div>
+    <div class="jumbotron">
+        <h1>Parabéns! Seu cadastro foi realizado com sucesso.</h1>
+        <h3>O prazo de espera poderá variar de acordo com a demanda.</h3>
+        <h3>Cabe ao solicitante acompanhar o andamento de sua solicitação no site.</h3>
+        <a href="#" class="btn btn-info btn-block btn-lg" role="button"><span class="glyphicon glyphicon-search"></span>Clique Aqui para Consultar seus Cadastros</a>
     </div>
 </div>
-
-
 <footer class="container-fluid text-center">
     <p>
         <strong>Centro de Controle de Zoonoses</strong><br>
@@ -128,12 +121,6 @@ if (!isset($_SESSION['token'])){
         E-mail: cczcontagem@yahoo.com.br
     </p>
 </footer>
-
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
 </body>
 </html>
 

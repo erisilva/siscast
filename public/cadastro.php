@@ -679,7 +679,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div class="form-group <?php echo isset($erro["cep"]) ? "has-error" : ""; ?>" >
-                        <label class="col-md-3 control-label" for="cep">CEP:</label>
+                        <label class="col-md-3 control-label" for="cep">CEP <i>(somente números)</i>:</label>
                         <div class="col-md-2">
                             <input type="text" class="form-control" id="cep" name="cep" maxlength="8" value="<?php echo isset($cep) ? $cep : ''; ?>">
                         </div>
@@ -947,8 +947,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
 
                     <div class="well well text-center">
-                        <h2>A saúde do seu companheiro depende de você, então</h2>
-                        <h4>leia todos os critérios e pré-requisitos para o cadastro de esterilização com atenção</h4>
+                        <h2>A saúde do seu companheiro depende de você</h2>
+                        <h4>Leia todos os critérios e pré-requisitos com atenção!</h4>
                     </div>
 
                     <div class="row">
@@ -995,6 +995,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </ul>
 
                                 <p>No dia do procedimento o solicitante deverá assinar um termo de autorização que pode ser acessado nesse <a href="doc/termo_autorizacao_cirurgia.pdf" target="new_window">link</a>.</p>
+                            </div>
+
+                            <h2>Documentos para Fazer Download (baixar)</h2>
+                            <div class="list-group">
+                                <a href="doc/criterios_pre_rquisitos_para_esterilizaco_dos_animais.pdf" target="_blank" class="list-group-item">
+                                    <h4 class="list-group-item-heading">Critérios e pré-requisitos para o cadastro de esterilização</h4>
+                                    <p class="list-group-item-text">Clique para salvar e abrir o documento</p>
+                                </a>
+                                <a href="doc/termo_autorizacao_cirurgia.pdf" target="_blank" class="list-group-item">
+                                    <h4 class="list-group-item-heading">Termo de autorização para realização do procedimento</h4>
+                                    <p class="list-group-item-text">Clique para salvar e abrir o documento</p>
+                                </a>
+                                <a href="doc/termos_condicoes_politica_uso_dados.pdf" target="_blank" class="list-group-item">
+                                    <h4 class="list-group-item-heading">Termos e condições gerais de uso e política de dados</h4>
+                                    <p class="list-group-item-text">Clique para salvar e abrir o documento</p>
+                                </a>
                             </div>
 
                             <div class="alert alert-danger">
