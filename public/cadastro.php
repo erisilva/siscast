@@ -588,13 +588,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
+/*    $data = array(
+        'cepEntrada' => '32223130',
+        'metodo' => 'buscarCep',
+    );
+
+    // http_build_query # construção das variaveis e valores para o get do response enviado pela chamada
+    $data = http_build_query($data);
+
+    //$curl = curl_init('http://m.correios.com.br/movel/buscaCepConfirma.do');
+
+    $curl = curl_init('http://erisilva.net');
+
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+    $html = curl_exec($curl);
+
+    curl_close($curl);
+
+
+    //$html = explode('resposta">', $html);
+    echo "<pre>\n";
+    print_r($html);
+    echo "</pre>\n";*/
+
+
     echo "<pre>\n";
     print_r($_POST);
     echo "</pre>\n";
 
     echo "<pre>\n";
-    print_r($nacimentoFormatoMySQL);
+    print_r($erro);
     echo "</pre>\n";
+
 }
 
 ?>

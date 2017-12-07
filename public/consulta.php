@@ -119,9 +119,9 @@ if (!isset($_SESSION['token'])){
                         <form class="form-horizontal" method="post"
                               action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                             <div class="form-group">
-                                <label class="col-md-4 control-label" for="cpf">CPF:</label>
+                                <label class="col-md-4 control-label" for="cpf">CPF <i>(somente números)</i>:</label>
                                 <div class="col-md-6">
-                                    <input type="cpf" class="form-control" id="cpf" name="cpf" placeholder="Digite aqui seu cpf">
+                                    <input type="cpf" class="form-control" id="cpf" name="cpf" placeholder="Digite aqui seu cpf" maxlength="11">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -228,6 +228,8 @@ if (!isset($_SESSION['token'])){
                                 echo "</tbody>\n";
                                 echo "</table>\n";
                                 echo "</div>\n";
+
+                                // mostra uma legenda com os dados das situações, pra explicar o significado
                             } else {
 
                                 echo "<div class=\"alert alert-success alert-dismissable\">\n";
@@ -237,10 +239,7 @@ if (!isset($_SESSION['token'])){
 
                             }
 
-
-                        }
-
-
+                        } // end of post
 
                         ?>
                     </div>
@@ -260,6 +259,23 @@ if (!isset($_SESSION['token'])){
         <script>
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip();
+
+                $("#cpf").keydown(function (e) {
+                    // Allow: backspace, delete, tab, escape, enter and .
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                        // Allow: Ctrl+A, Command+A
+                        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                        // Allow: home, end, left, right, down, up
+                        (e.keyCode >= 35 && e.keyCode <= 40)) {
+                        // let it happen, don't do anything
+                        return;
+                    }
+                    // Ensure that it is a number and stop the keypress
+                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                        e.preventDefault();
+                    }
+                });
+
             });
         </script>
     </body>

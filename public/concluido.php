@@ -111,7 +111,7 @@ if (!isset($_SESSION['token'])){
         <h1>Parabéns! Seu cadastro foi realizado com sucesso.</h1>
         <h3>O prazo de espera poderá variar de acordo com a demanda.</h3>
         <h3>Cabe ao solicitante acompanhar o andamento de sua solicitação no site.</h3>
-        <a href="#" class="btn btn-info btn-block btn-lg" role="button"><span class="glyphicon glyphicon-search"></span>Clique Aqui para Consultar seus Cadastros</a>
+        <a href="consulta.php" class="btn btn-info btn-block btn-lg" role="button"><span class="glyphicon glyphicon-search"></span>Clique Aqui para Consultar seus Cadastros</a>
     </div>
 </div>
 <footer class="container-fluid text-center">
