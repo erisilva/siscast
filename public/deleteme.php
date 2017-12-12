@@ -124,35 +124,35 @@ if (!isset($_SESSION['token'])){
                         $erro = "Não é aceito cadastro de menores de idade. idade " . $pedido->age . " anos.";
                     }
 
-                    if (!isset($pedido->cidade)) {
-
-                        $cep = strip_tags( trim( filter_var($pedido->cep, FILTER_SANITIZE_NUMBER_INT) ));
-
-
-                        $logradouro = TCommon::busca_cep_viacep_querty($cep);
-
-                        if (isset($logradouro['erro'])) {
-                            $erro .= " CEP inválido ou não encontrado.";
-                            TDBConnection::prepareQuery("update pedidos set cidade = :cidade, estado = :estado where id = :id;");
-                            TDBConnection::bindParamQuery(':cidade', 'Não cadastrado', PDO::PARAM_STR);
-                            TDBConnection::bindParamQuery(':estado', 'NO', PDO::PARAM_STR);
-                            TDBConnection::bindParamQuery(':id', $pedido->id, PDO::PARAM_INT);
-                            TDBConnection::execute();
-                        } else {
-                            if ($logradouro['localidade'] != "Contagem"){
-                                $erro .= "Localização inválida: " . $logradouro['localidade']  . ", " . $logradouro['uf'] . ".";
-                            }
-                            // salva os valores que vierem da tabela do viacep
-                            TDBConnection::prepareQuery("update pedidos set cidade = :cidade, estado = :estado where id = :id;");
-                            TDBConnection::bindParamQuery(':cidade', $logradouro['localidade'], PDO::PARAM_STR);
-                            TDBConnection::bindParamQuery(':estado', $logradouro['uf'], PDO::PARAM_STR);
-                            TDBConnection::bindParamQuery(':id', $pedido->id, PDO::PARAM_INT);
-                            TDBConnection::execute();
-                        }
-
-                        $erro .= " Sem cidade cadastrada. $cep. Localidade do cep: " . $logradouro['localidade'];
-
-                    }
+//                    if (!isset($pedido->cidade)) {
+//
+//                        $cep = strip_tags( trim( filter_var($pedido->cep, FILTER_SANITIZE_NUMBER_INT) ));
+//
+//
+//                        $logradouro = TCommon::busca_cep_viacep_querty($cep);
+//
+//                        if (isset($logradouro['erro'])) {
+//                            $erro .= " CEP inválido ou não encontrado.";
+//                            TDBConnection::prepareQuery("update pedidos set cidade = :cidade, estado = :estado where id = :id;");
+//                            TDBConnection::bindParamQuery(':cidade', 'Não cadastrado', PDO::PARAM_STR);
+//                            TDBConnection::bindParamQuery(':estado', 'NO', PDO::PARAM_STR);
+//                            TDBConnection::bindParamQuery(':id', $pedido->id, PDO::PARAM_INT);
+//                            TDBConnection::execute();
+//                        } else {
+//                            if ($logradouro['localidade'] != "Contagem"){
+//                                $erro .= "Localização inválida: " . $logradouro['localidade']  . ", " . $logradouro['uf'] . ".";
+//                            }
+//                            // salva os valores que vierem da tabela do viacep
+//                            TDBConnection::prepareQuery("update pedidos set cidade = :cidade, estado = :estado where id = :id;");
+//                            TDBConnection::bindParamQuery(':cidade', $logradouro['localidade'], PDO::PARAM_STR);
+//                            TDBConnection::bindParamQuery(':estado', $logradouro['uf'], PDO::PARAM_STR);
+//                            TDBConnection::bindParamQuery(':id', $pedido->id, PDO::PARAM_INT);
+//                            TDBConnection::execute();
+//                        }
+//
+//                        $erro .= " Sem cidade cadastrada. $cep. Localidade do cep: " . $logradouro['localidade'];
+//
+//                    }
 
 /*                    if (!isset($pedido->cidade)) {
                         $cep = strip_tags( trim( $pedido->cep ));

@@ -54,13 +54,15 @@ $(document).ready(function(){
                 $("#estado").val("...");
 
                 //Consulta o webservice viacep.com.br/
-                $.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
-
+                // http://cep.republicavirtual.com.br/web_cep.php?cep=91010000&formato=query_string
+                //
+                //$.getJSON("//viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+                $.getJSON("http://cep.republicavirtual.com.br/web_cep.php?cep="+ cep +"&formato=json", function(dados) {
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
                         $("#endereco").val(dados.logradouro);
                         $("#bairro").val(dados.bairro);
-                        $("#cidade").val(dados.localidade);
+                        $("#cidade").val(dados.cidade);
                         $("#estado").val(dados.uf);
                     } //end if.
                     else {

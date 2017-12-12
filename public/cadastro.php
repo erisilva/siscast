@@ -247,11 +247,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($logradouro['erro'])) {
             $erro["cep"] = "CEP inválido ou não encontrado.";
         } else {
-            if ($logradouro['localidade'] != "Contagem"){
-                $erro["cep"] = "Localização inválida: " . $logradouro['localidade']  . ", " . $logradouro['uf'] . ".";
+            if ($logradouro['cidade'] != "Contagem"){
+                $erro["cep"] = "Localização inválida: " . $logradouro['cidade']  . ", " . $logradouro['uf'] . ".";
             } else {
                 // salva os valores que vierem da tabela do viacep
-                $cidade = $logradouro['localidade'];
+                $cidade = $logradouro['cidade'];
                 $estado = $logradouro['uf'];
             }
         }
@@ -616,13 +616,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "</pre>\n";*/
 
 
-    echo "<pre>\n";
-    print_r($_POST);
-    echo "</pre>\n";
-
-    echo "<pre>\n";
-    print_r($erro);
-    echo "</pre>\n";
+//    echo "<pre>\n";
+//    print_r($_POST);
+//    echo "</pre>\n";
+//
+//    echo "<pre>\n";
+//    print_r($erro);
+//    echo "</pre>\n";
 
 }
 
@@ -641,6 +641,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
                     <?php
+
+                    if (isset($erro)){
+                        echo "<div class=\"alert alert-danger alert-dismissable text-center\">\n";
+                        echo "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n";
+                        echo "  <h3><strong>Atenção!</strong> Existem erro(s) no cadastro!</h3>\n";
+                        echo "  <h4></h4>\n";
+                        echo "</div>\n";
+                    }
 
                     if (isset($erro['totalPedidos'])){
                         echo "<div class=\"alert alert-danger alert-dismissable text-center\">\n";
