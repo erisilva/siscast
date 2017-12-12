@@ -3,7 +3,7 @@ session_start();
 /*
  * constants
  */
-require_once '/config/TConfig.php';
+require_once 'config/TConfig.php';
 
 /*
  *  session

@@ -167,9 +167,8 @@ abstract class TCommon {
 
 
     static function busca_cep_viacep_querty($cep){
-        $enderecoCompletoQuerty = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');
-        // viacep nos expulsou
-        // $enderecoCompletoQuerty = @file_get_contents('http://viacep.com.br/ws/'.urlencode($cep).'/querty/');
+        //$enderecoCompletoQuerty = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');
+        $enderecoCompletoQuerty = @file_get_contents('http://viacep.com.br/ws/'.urlencode($cep).'/querty/');
         if(!$enderecoCompletoQuerty){
             $enderecoCompletoQuerty = "&resultado=0&resultado_txt=erro+ao+buscar+cep";
         }

@@ -24,7 +24,7 @@ $(document).ready(function(){
     });
 
 
-    function limpa_formulário_cep() {
+    function limpa_formulario_cep() {
         // Limpa valores do formulário de cep.
         $("#endereco").val("");
         $("#bairro").val("");
@@ -65,18 +65,18 @@ $(document).ready(function(){
                     } //end if.
                     else {
                         //CEP pesquisado não foi encontrado.
-                        limpa_formulário_cep();
+                        limpa_formulario_cep();
                     }
                 });
             } //end if.
             else {
                 //cep é inválido.
-                limpa_formulário_cep();
+                limpa_formulario_cep();
             }
         } //end if.
         else {
             //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
+            limpa_formulario_cep();
         }
     });
 

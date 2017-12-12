@@ -183,161 +183,161 @@ TDBConnection::getConnection();
                     <br>
                 </div>                
 
-<?php
-include_once('grade/grade.php');
+                <?php
+                include_once('grade/grade.php');
 
-$page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
+                $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
 
-if ($page <= 0)
-    $page = 1;
+                if ($page <= 0)
+                    $page = 1;
 
-$per_page = 15; // quantidade de registros por página
+                $per_page = 15; // quantidade de registros por página
 
-$startpoint = ($page * $per_page) - $per_page;
+                $startpoint = ($page * $per_page) - $per_page;
 
-$statement = " pedidos
-                                inner join situacoes on (pedidos.situacao_id = situacoes.id) ";
+                $statement = " pedidos
+                                                inner join situacoes on (pedidos.situacao_id = situacoes.id) ";
 
-/* configurando os filtros */
-if ($filtroNome != "") {
-    $statement .= " and pedidos.nome like '" . $filtroNomeFormatado . "' ";
-}
+                /* configurando os filtros */
+                if ($filtroNome != "") {
+                    $statement .= " and pedidos.nome like '" . $filtroNomeFormatado . "' ";
+                }
 
-if ($filtroCPF != "") {
-    $statement .= " and pedidos.cpf like '" . $filtroCPFFormatado . "' ";
-}
+                if ($filtroCPF != "") {
+                    $statement .= " and pedidos.cpf like '" . $filtroCPFFormatado . "' ";
+                }
 
-if ($filtroEspecie != "") {
-    $statement .= " and pedidos.especie = '" . $filtroEspecie . "' ";
-}
+                if ($filtroEspecie != "") {
+                    $statement .= " and pedidos.especie = '" . $filtroEspecie . "' ";
+                }
 
-if ($filtroGenero != "") {
-    $statement .= " and pedidos.genero = '" . $filtroGenero . "' ";
-}
+                if ($filtroGenero != "") {
+                    $statement .= " and pedidos.genero = '" . $filtroGenero . "' ";
+                }
 
-if ($filtroPorte != "") {
-    $statement .= " and pedidos.porte = '" . $filtroPorte. "' ";
-}
+                if ($filtroPorte != "") {
+                    $statement .= " and pedidos.porte = '" . $filtroPorte. "' ";
+                }
 
-if ($situacaoFiltro != "") {
-    $statement .= " and pedidos.situacao_id = " . $situacaoFiltro. "";
-}
-
-
-/* configuração da ordenação*/
-if ($ordem == 1){
-    $statement .= " order by pedidos.id desc";    
-} elseif ($ordem == 2) {
-    $statement .= " order by pedidos.id asc";
-} else {
-    $statement .= " order by pedidos.nome";
-}
+                if ($situacaoFiltro != "") {
+                    $statement .= " and pedidos.situacao_id = " . $situacaoFiltro. "";
+                }
 
 
-$query = "SELECT 
-                                pedidos.id,
-                                concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigoInterno,
-                                date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
-                            pedidos.nome,
-                            pedidos.nomeAnimal,
-                            pedidos.especie,
-                            pedidos.genero,
-                            pedidos.porte,
-                            situacoes.nome as situacao "
-        . "from {$statement} LIMIT {$startpoint} , {$per_page}";
-
-//echo $query;
-
-TDBConnection::getConnection();
-TDBConnection::prepareQuery($query);
-$result = TDBConnection::resultset();
-$nRows = TDBConnection::rowCount();
-
-if ($nRows != 0) {
-    echo "\n";
-    echo "\n";
-    echo "<table>\n";
-    echo "<thead>\n";
-    echo "<tr>\n";
-    //cabeçalho da tabela
-    echo "<th class=\"alinha_direita\">Código</th>\n";
-    echo "<th>Data/Hora</th>\n";
-    echo "<th>Tutor</th>\n";
-    echo "<th>Animal</th>\n";
-    echo "<th>Espécie</th>\n";
-    echo "<th>G.</th>\n";
-    echo "<th>Porte</th>\n";
-    echo "<th>Situação</th>\n";
-    echo "<th class=\"alinha_direita\">...</th>\n";
-    echo "<th class=\"alinha\">...</th>\n";
-    echo "</tr>\n";
-    echo "</thead>\n";
-    echo "<tbody>\n";
-
-    foreach ($result as $temp) {
-        echo "<tr>\n";
-
-        echo "<td class=\"alinha_direita\">\n";
-        echo $temp->codigoInterno . "\n";
-        echo "</td>\n";
-
-        echo "<td>\n";
-        echo $temp->quandoFormatado . "\n";
-        echo "</td>\n";
-
-        echo "<td>\n";
-        echo $temp->nome . "\n";
-        echo "</td>\n";
-
-        echo "<td>\n";
-        echo $temp->nomeAnimal . "\n";
-        echo "</td>\n";
-
-        echo "<td>\n";
-        echo $temp->especie . "\n";
-        echo "</td>\n";
-
-        echo "<td>\n";
-        echo $temp->genero . "\n";
-        echo "</td>\n";
+                /* configuração da ordenação*/
+                if ($ordem == 1){
+                    $statement .= " order by pedidos.id desc";
+                } elseif ($ordem == 2) {
+                    $statement .= " order by pedidos.id asc";
+                } else {
+                    $statement .= " order by pedidos.nome";
+                }
 
 
-        echo "<td>\n";
-        echo $temp->porte . "\n";
-        echo "</td>\n";
+                $query = "SELECT 
+                                                pedidos.id,
+                                                concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigoInterno,
+                                                date_format(pedidos.quando, '%d/%m/%y %H:%i') as quandoFormatado,
+                                            pedidos.nome,
+                                            pedidos.nomeAnimal,
+                                            pedidos.especie,
+                                            pedidos.genero,
+                                            pedidos.porte,
+                                            situacoes.nome as situacao "
+                        . "from {$statement} LIMIT {$startpoint} , {$per_page}";
 
-        echo "<td>\n";
-        echo $temp->situacao . "\n";
-        echo "</td>\n";
+                //echo $query;
 
-        echo "<td class=\"alinha_direita\">\n";
-        echo "<a href=\" javascript:abrir('pedidos/agendar.php?id=" . $temp->id . "') \">Agendar</a>\n";
-        echo "</td>\n";
+                TDBConnection::getConnection();
+                TDBConnection::prepareQuery($query);
+                $result = TDBConnection::resultset();
+                $nRows = TDBConnection::rowCount();
 
-        echo "<td>\n";
-        echo "<a href=\" javascript:abrir('pedidos/formAlterar.php?id=" . $temp->id . "') \">Alterar</a>\n";
-        echo "</td>\n";
+                if ($nRows != 0) {
+                    echo "\n";
+                    echo "\n";
+                    echo "<table>\n";
+                    echo "<thead>\n";
+                    echo "<tr>\n";
+                    //cabeçalho da tabela
+                    echo "<th class=\"alinha_direita\">Código</th>\n";
+                    echo "<th>Data/Hora</th>\n";
+                    echo "<th>Tutor</th>\n";
+                    echo "<th>Animal</th>\n";
+                    echo "<th>Espécie</th>\n";
+                    echo "<th>G.</th>\n";
+                    echo "<th>Porte</th>\n";
+                    echo "<th>Situação</th>\n";
+                    echo "<th class=\"alinha_direita\">...</th>\n";
+                    echo "<th class=\"alinha\">...</th>\n";
+                    echo "</tr>\n";
+                    echo "</thead>\n";
+                    echo "<tbody>\n";
 
-        echo "</tr>\n";
-    }
-    echo "</tbody>\n";
-    echo "</table>\n";
-} else {
-    echo "Nenhum registro foi encontrado.";
-}
+                    foreach ($result as $temp) {
+                        echo "<tr>\n";
 
-// mostrando o conjunto de páginas.
-// salvando o filtro de consulta
-$filtroConsulta = "filtroNome=" . $filtroNome . "&";
-$filtroConsulta .= "filtroCPF=" . $filtroCPF . "&";
-$filtroConsulta .= "filtroEspecie=" . $filtroEspecie . "&";
-$filtroConsulta .= "filtroGenero=" . $filtroGenero . "&";
-$filtroConsulta .= "filtroPorte=" . $filtroPorte . "&";
-$filtroConsulta .= "situacaoFiltro=" . $situacaoFiltro . "&";
-$filtroConsulta .= "ordem=" . $ordem . "&";
+                        echo "<td class=\"alinha_direita\">\n";
+                        echo $temp->codigoInterno . "\n";
+                        echo "</td>\n";
 
-echo pagination($statement, $per_page, $page, $url = '?' . $filtroConsulta);
-?>
+                        echo "<td>\n";
+                        echo $temp->quandoFormatado . "\n";
+                        echo "</td>\n";
+
+                        echo "<td>\n";
+                        echo $temp->nome . "\n";
+                        echo "</td>\n";
+
+                        echo "<td>\n";
+                        echo $temp->nomeAnimal . "\n";
+                        echo "</td>\n";
+
+                        echo "<td>\n";
+                        echo $temp->especie . "\n";
+                        echo "</td>\n";
+
+                        echo "<td>\n";
+                        echo $temp->genero . "\n";
+                        echo "</td>\n";
+
+
+                        echo "<td>\n";
+                        echo $temp->porte . "\n";
+                        echo "</td>\n";
+
+                        echo "<td>\n";
+                        echo $temp->situacao . "\n";
+                        echo "</td>\n";
+
+                        echo "<td class=\"alinha_direita\">\n";
+                        echo "<a href=\" javascript:abrir('pedidos/agendar.php?id=" . $temp->id . "') \">Agendar</a>\n";
+                        echo "</td>\n";
+
+                        echo "<td>\n";
+                        echo "<a href=\" javascript:abrir('pedidos/formAlterar.php?id=" . $temp->id . "') \">Alterar</a>\n";
+                        echo "</td>\n";
+
+                        echo "</tr>\n";
+                    }
+                    echo "</tbody>\n";
+                    echo "</table>\n";
+                } else {
+                    echo "Nenhum registro foi encontrado.";
+                }
+
+                // mostrando o conjunto de páginas.
+                // salvando o filtro de consulta
+                $filtroConsulta = "filtroNome=" . $filtroNome . "&";
+                $filtroConsulta .= "filtroCPF=" . $filtroCPF . "&";
+                $filtroConsulta .= "filtroEspecie=" . $filtroEspecie . "&";
+                $filtroConsulta .= "filtroGenero=" . $filtroGenero . "&";
+                $filtroConsulta .= "filtroPorte=" . $filtroPorte . "&";
+                $filtroConsulta .= "situacaoFiltro=" . $situacaoFiltro . "&";
+                $filtroConsulta .= "ordem=" . $ordem . "&";
+
+                echo pagination($statement, $per_page, $page, $url = '?' . $filtroConsulta);
+                ?>
 
                 <div class="menuTopo">
                     <ul class="submenu">

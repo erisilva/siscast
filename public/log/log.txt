@@ -673,3 +673,9 @@ Stack trace:
 [24-Nov-2017 13:40:27 Europe/Berlin] PHP Warning:  checkdate() expects parameter 2 to be long, string given in C:\xampp\htdocs\siscast\public\libs\TCommon.php on line 159
 [24-Nov-2017 13:59:01 Europe/Berlin] PHP Warning:  preg_match(): Unknown modifier '(' in C:\xampp\htdocs\siscast\public\libs\TCommon.php on line 156
 [24-Nov-2017 14:17:12 Europe/Berlin] PHP Warning:  preg_match(): Unknown modifier '(' in C:\xampp\htdocs\siscast\public\libs\TCommon.php on line 156
+[10-Dec-2017 18:58:43 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email' in 'field list' in C:\xampp\htdocs\siscast\public\libs\TDBConnection.php:132
+Stack trace:
+#0 C:\xampp\htdocs\siscast\public\libs\TDBConnection.php(132): PDOStatement->execute()
+#1 C:\xampp\htdocs\siscast\public\cadastro.php(577): TDBConnection::execute()
+#2 {main}
+  thrown in C:\xampp\htdocs\siscast\public\libs\TDBConnection.php on line 132
