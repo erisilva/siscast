@@ -72,7 +72,7 @@ abstract class TCommon {
         // Exemplo de CPF: 025.462.884-23
 
         /**
-         * Multiplica dígitos vezes posições 
+         * Multiplica dígitos vezes posições
          *
          * @param string $digitos Os digitos desejados
          * @param int $posicoes A posição que vai iniciar a regressão
@@ -149,92 +149,33 @@ abstract class TCommon {
         }
     }
 
-    static function mes_extensao($mes) {
+    // valida datas no formato dd/mm/aaaa
+    static function valida_data_br($date = "00/00/0000") {
 
-        if ($mes == 1){
-            return 'JAN';
+        $regex = "/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/";
+        if (preg_match($regex, $date)) {
+            $tempDate = explode('/', $date);
+            $day = isset($tempDate[0]) ? $tempDate[0] : "99";
+            $month = isset($tempDate[1]) ? $tempDate[1] : "99";
+            $year = isset($tempDate[2]) ? $tempDate[2] : "9999";
+            // checkdate(month, day, year)
+            return checkdate($month, $day, $year);
+        } else {
+            return false;
         }
-
-        if ($mes == 2){
-            return 'FEV';
-        }
-
-        if ($mes == 3){
-            return 'MAR';
-        }
-
-        if ($mes == 4){
-            return 'ABR';
-        }
-
-        if ($mes == 5){
-            return 'MAI';
-        }
-
-        if ($mes == 6){
-            return 'JUN';
-        }
-
-        if ($mes == 7){
-            return 'JUL';
-        }
-
-        if ($mes == 8){
-            return 'AGO';
-        }
-
-        if ($mes == 9){
-            return 'SET';
-        }
-
-        if ($mes == 10){
-            return 'OUT';
-        }
-
-        if ($mes == 11){
-            return 'NOV';
-        }
-
-        if ($mes == 12){
-            return 'DEZ';
-        }
-
-        return 'ERR';
     }
 
 
-    static function dia_semana($mes) {
-
-        if ($mes == 1){
-            return 'DOM';
+    static function busca_cep_viacep_querty($cep){
+        $enderecoCompletoQuerty = @file_get_contents('http://republicavirtual.com.br/web_cep.php?cep='.urlencode($cep).'&formato=query_string');
+        //$enderecoCompletoQuerty = @file_get_contents('http://viacep.com.br/ws/'.urlencode($cep).'/querty/');
+        if(!$enderecoCompletoQuerty){
+            $enderecoCompletoQuerty = "&resultado=0&resultado_txt=erro+ao+buscar+cep";
         }
-
-        if ($mes == 2){
-            return 'SEG';
-        }
-
-        if ($mes == 3){
-            return 'TER';
-        }
-
-        if ($mes == 4){
-            return 'QUA';
-        }
-
-        if ($mes == 5){
-            return 'QUI';
-        }
-
-        if ($mes == 6){
-            return 'SEX';
-        }
-
-        if ($mes == 7){
-            return 'SAB';
-        }
-
-
-        return 'ERR';
+        parse_str($enderecoCompletoQuerty, $enderecoCompleto);
+        return $enderecoCompleto;
     }
+
+
 
 }

@@ -102,7 +102,11 @@ TDBConnection::getConnection();
                     /* dados do pedinte */
                     $nome = (isset($_POST['nome']) ? strip_tags(trim($_POST['nome'])) : '');
                     $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
+                    $email = (isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : '');
+                    // nascimento
                     $nascimento = (isset($_POST['nascimento']) ? $_POST['nascimento'] : '');
+                    $tempDate = explode('/', $nascimento);
+                    $nacimentoFormatoMySQL = $tempDate[2] . '-' . $tempDate[1] . '-' . $tempDate[0];
                     //$nascimento = (isset($_POST['nascimento']) ? date("Y-m-d", strtotime($_POST['nascimento'])) : '');
 
                     /* dados de endereço */
@@ -113,6 +117,8 @@ TDBConnection::getConnection();
                     $cep = (isset($_POST['cep']) ? strip_tags(trim($_POST['cep'])) : '');
                     $tel = (isset($_POST['tel']) ? strip_tags(trim($_POST['tel'])) : '');
                     $cel = (isset($_POST['cel']) ? strip_tags(trim($_POST['cel'])) : '');
+                    $cidade = (isset($_POST['cidade']) ? strip_tags(trim($_POST['cidade'])) : '');
+                    $estado = (isset($_POST['estado']) ? strip_tags(trim($_POST['estado'])) : '');
 
                     /* informações adicionais */
                     $cns = (isset($_POST['cns']) ? strip_tags(trim($_POST['cns'])) : '');
@@ -167,7 +173,7 @@ TDBConnection::getConnection();
                                                     raca_id,
                                                     procedencia,
                                                     quando,
-                                                    situacao_id)
+                                                    situacao_id, cidade, estado, email)
                                                     
                                                     VALUES
                                                     
@@ -197,7 +203,7 @@ TDBConnection::getConnection();
                                                     :raca_id,
                                                     :procedencia,
                                                     now(),
-                                                    1);
+                                                    1, :cidade, :estado, :email);
 
                                                     ");
 
@@ -208,6 +214,7 @@ TDBConnection::getConnection();
                     /* pessoa */
                     TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':nome', $nome, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':email', $email, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':nascimento', $nascimento, PDO::PARAM_STR);
 
                     /* endereço */
@@ -218,6 +225,8 @@ TDBConnection::getConnection();
                     TDBConnection::bindParamQuery(':cep', $cep, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':tel', $tel, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':cel', $cel, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':cidade', $cidade, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':estado', $estado, PDO::PARAM_STR);
 
                     /* beneficios da saúde */
                     TDBConnection::bindParamQuery(':cns', $cns, PDO::PARAM_STR);
@@ -251,18 +260,24 @@ TDBConnection::getConnection();
 
 
                 <form name="formExec" id="formExec" method="post"
-                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" onSubmit="return validaForm();">
+                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <fieldset>
                         <legend>Informações sobre o tutor:</legend>
 
                         <label for="nome">Nome:</label>
                         <input type="text" name="nome" id="nome" maxlength="140" size="36" required autofocus><br><br>
 
+                        <label for="email">E-mail:</label>
+                        <input type="text" name="email" id="email" maxlength="200" size="30" required><br><br>
+
                         <label for="nascimento">Data Nascimento:</label>
-                        <input type="date" name="nascimento" id="nascimento" required>
+                        <input type="date" name="nascimento" id="nascimento" required> <span>formato dd/mm/aaaa</span><br><br>
 
                         <label for="cpf">CPF:</label>
                         <input type="text" name="cpf" id="cpf" maxlength="11" size="12" required><br><br>
+
+                        <label for="cep">CEP:</label>
+                        <input type="text" name="cep" id="cep" maxlength="10" size="10" required><br/><br/>
 
                         <label for="endereco">Endereço:</label>
                         <input type="text" name="endereco" id="endereco" maxlength="255" size="36" required><br/><br/>                        
@@ -274,21 +289,22 @@ TDBConnection::getConnection();
                         <input type="text" name="complemento" id="complemento" maxlength="60" size="18"><br/><br/>  
 
                         <label for="bairro">Bairro:</label>
-                        <input type="text" name="bairro" id="bairro" maxlength="140" size="20" required><br/><br/>                       
+                        <input type="text" name="bairro" id="bairro" maxlength="140" size="20" required><br/><br/>
 
-                        <label for="cep">CEP:</label>
-                        <input type="text" name="cep" id="cep" maxlength="10" size="10" required><br/><br/>                        
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" name="cidade" id="cidade" maxlength="180" size="20" required><br/><br/>
+
+                        <label for="estado">Estado:</label>
+                        <input type="text" name="estado" id="estado" maxlength="2" size="5" required><br/><br/>
 
                         <label for="tel">Telefone:</label>
                         <input type="text" name="tel" id="tel" maxlength="20" size="10" required>                        
 
                         <label for="cel">Celular:</label>
-                        <input type="text" name="cel" id="cel" maxlength="20" size="10" required><br/><br/>                        
+                        <input type="text" name="cel" id="cel" maxlength="20" size="10" required><br/><br/>
 
-                        <label for="cns">Possui CNS:</label>
-                        <input type="radio" name="cns" id="cns" value="S" required>Sim
-                        <input type="radio" name="cns" id="cns" value="N">Não (Cartão Nacional de Saúde)<br>
-                        <br>
+                        <label for="cel">Cartão Nacional de Saúde:</label>
+                        <input type="text" name="cns" id="cns" maxlength="25" size="10" required><br/><br/>
 
                         <label for="beneficio">Possui Benefício:</label>
                         <input type="radio" name="beneficio" id="beneficio" value="S" required>Sim
@@ -347,6 +363,7 @@ TDBConnection::getConnection();
                         <input type="radio" name="procedencia" id="procedencia" value="adotado">Adotado
                         <input type="radio" name="procedencia" id="procedencia" value="comprado">Comprado
                         <input type="radio" name="procedencia" id="procedencia" value="ONG">ONG
+                        <input type="radio" name="procedencia" id="procedencia" value="CCZ">CCZ
                         <br><br>                        
 
                         <br>
@@ -377,8 +394,6 @@ TDBConnection::getConnection();
                 </p>
             </div>
         </div>
-
-        <script src="js/cadastro.js"></script>
     </body>
 </html>
 

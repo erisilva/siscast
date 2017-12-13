@@ -161,10 +161,10 @@ TDBConnection::getConnection();
                     </div>
 
                     <div>
-                        Endereço : <?php echo $pedido->endereco ?>, Nº <?php echo $pedido->numero ?> Bairro <?php echo $pedido->bairro ?> Complemento <?php echo $pedido->complemento ?> - CEP: <?php echo $pedido->cep ?>
-                        <br>Tel: <?php echo $pedido->tel ?>/Cel <?php echo $pedido->cel ?><br>
+                        Endereço : <?php echo $pedido->endereco ?>, Nº <?php echo $pedido->numero ?> Bairro <?php echo $pedido->bairro ?> Complemento <?php echo $pedido->complemento ?> - CEP: <?php echo $pedido->cep ?>. <?php echo $pedido->cidade ?>, <?php echo $pedido->estado ?>
+                        <br>Tel: <?php echo $pedido->tel ?>/Cel <?php echo $pedido->cel ?>. E-mail:<?php echo $pedido->email ?><br>
                         Nome do animal: <strong><?php echo $pedido->nomeAnimal ?></strong>
-                        Genero: <?php echo $pedido->genero ?>, Porte: <?php echo $pedido->porte ?>, Idade: <?php echo $pedido->idade ?>, Cor: <?php echo $pedido->cor ?>, Espécie: <?php echo $pedido->especie ?>, Raça: <?php echo $pedido->raca ?>, Procedência: <?php echo $pedido->procedencia ?>.
+                        Genero: <?php echo $pedido->genero ?>, Porte: <?php echo $pedido->porte ?>, Idade: <?php echo $pedido->idade ?> <?php echo $pedido->idadeEm ?>(s) , Cor: <?php echo $pedido->cor ?>, Espécie: <?php echo $pedido->especie ?>, Raça: <?php echo $pedido->raca ?>, Procedência: <?php echo $pedido->procedencia ?>.
                     </div>
                 </fieldset>
 

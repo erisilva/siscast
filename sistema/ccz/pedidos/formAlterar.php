@@ -83,6 +83,7 @@ TDBConnection::getConnection();
                     /* dados do pedinte */
                     $idPedido = (isset($_POST['idPedido']) ? strip_tags(trim($_POST['idPedido'])) : '');
                     $nome = (isset($_POST['nome']) ? strip_tags(trim($_POST['nome'])) : '');
+                    $email = (isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : '');
                     $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
                     $nascimento = (isset($_POST['nascimento']) ? $_POST['nascimento'] : '');
                     //$nascimento = (isset($_POST['nascimento']) ? date("Y-m-d", strtotime($_POST['nascimento'])) : '');
@@ -95,6 +96,9 @@ TDBConnection::getConnection();
                     $cep = (isset($_POST['cep']) ? strip_tags(trim($_POST['cep'])) : '');
                     $tel = (isset($_POST['tel']) ? strip_tags(trim($_POST['tel'])) : '');
                     $cel = (isset($_POST['cel']) ? strip_tags(trim($_POST['cel'])) : '');
+
+                    $cidade = (isset($_POST['cidade']) ? strip_tags(trim($_POST['cidade'])) : '');
+                    $estado = (isset($_POST['estado']) ? strip_tags(trim($_POST['estado'])) : '');
 
                     /* informações adicionais */
                     $cns = (isset($_POST['cns']) ? strip_tags(trim($_POST['cns'])) : '');
@@ -141,7 +145,11 @@ TDBConnection::getConnection();
                                                     cor = :cor,
                                                     especie = :especie,
                                                     raca_id = :raca_id,
-                                                    procedencia = :procedencia
+                                                    procedencia = :procedencia,
+                                                    email = :email,
+                                                    cidade = :cidade,
+                                                    estado = :estado
+                                                    
 
                                                     WHERE id = :id;");
 
@@ -150,6 +158,7 @@ TDBConnection::getConnection();
                     /* pessoa */
                     TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':nome', $nome, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':email', $email, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':nascimento', $nascimento, PDO::PARAM_STR);
 
                     /* endereço */
@@ -160,6 +169,9 @@ TDBConnection::getConnection();
                     TDBConnection::bindParamQuery(':cep', $cep, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':tel', $tel, PDO::PARAM_STR);
                     TDBConnection::bindParamQuery(':cel', $cel, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':cidade', $cidade, PDO::PARAM_STR);
+                    TDBConnection::bindParamQuery(':estado', $estado, PDO::PARAM_STR);
+
 
                     /* beneficios da saúde */
                     TDBConnection::bindParamQuery(':cns', $cns, PDO::PARAM_STR);
@@ -213,11 +225,17 @@ TDBConnection::getConnection();
                         <label for="nome">Nome:</label>
                         <input type="text" name="nome" id="nome" maxlength="140" size="36" required autofocus value="<?php echo $pedidos->nome ?>"><br><br>
 
+                        <label for="email">E-mail:</label>
+                        <input type="text" name="email" id="email" maxlength="200" size="30" required value="<?php echo $pedidos->email ?>"><br><br>
+
                         <label for="nascimento">Data Nascimento:</label>
                         <input type="date" name="nascimento" id="nascimento" required value="<?php echo date('Y-m-d', strtotime($pedidos->nascimento)) ?>" ><br><br>
 
                         <label for="cpf">CPF:</label>
                         <input type="text" name="cpf" id="cpf" maxlength="11" size="12" required value="<?php echo $pedidos->cpf ?>"><br><br>
+
+                        <label for="cep">CEP:</label>
+                        <input type="text" name="cep" id="cep" maxlength="10" size="10" required value="<?php echo $pedidos->cep ?>"><br/><br/>
 
                         <label for="endereco">Endereço:</label>
                         <input type="text" name="endereco" id="endereco" maxlength="255" size="36" required value="<?php echo $pedidos->endereco ?>"><br/><br/>                        
@@ -229,10 +247,13 @@ TDBConnection::getConnection();
                         <input type="text" name="complemento" id="complemento" maxlength="60" size="18" value="<?php echo $pedidos->complemento ?>"><br/><br/>  
 
                         <label for="bairro">Bairro:</label>
-                        <input type="text" name="bairro" id="bairro" maxlength="140" size="20" required value="<?php echo $pedidos->bairro ?>"><br/><br/>                       
+                        <input type="text" name="bairro" id="bairro" maxlength="140" size="20" required value="<?php echo $pedidos->bairro ?>"><br/><br/>
 
-                        <label for="cep">CEP:</label>
-                        <input type="text" name="cep" id="cep" maxlength="10" size="10" required value="<?php echo $pedidos->cep ?>"><br/><br/>                        
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" name="cidade" id="cidade" maxlength="180" size="20" required value="<?php echo $pedidos->cidade ?>"><br/><br/>
+
+                        <label for="estado">Estado:</label>
+                        <input type="text" name="estado" id="estado" maxlength="2" size="5" required value="<?php echo $pedidos->estado ?>"><br/><br/>
 
                         <label for="tel">Telefone:</label>
                         <input type="text" name="tel" id="tel" maxlength="20" size="10" required value="<?php echo $pedidos->tel ?>">  <br><br>                      
@@ -241,9 +262,7 @@ TDBConnection::getConnection();
                         <input type="text" name="cel" id="cel" maxlength="20" size="10" required value="<?php echo $pedidos->cel ?>"><br/><br/>                        
 
                         <label for="cns">Possui CNS:</label>
-                        <input type="radio" name="cns" id="cns" value="S" required <?php echo (($pedidos->cns == 'S') ? 'checked' : '' ) ?>>Sim
-                        <input type="radio" name="cns" id="cns" value="N" <?php echo (($pedidos->cns == 'N') ? 'checked' : '' ) ?>>Não<br>
-                        <br>
+                        <input type="text" name="cns" id="cns" maxlength="25" size="10" required value="<?php echo $pedidos->cns ?>"><br/><br/>
 
                         <label for="beneficio">Possui Benefício:</label>
                         <input type="radio" name="beneficio" id="beneficio" value="S" required <?php echo (($pedidos->beneficio == 'S') ? 'checked' : '' ) ?>>Sim
@@ -301,8 +320,8 @@ TDBConnection::getConnection();
                         <input type="radio" name="procedencia" id="procedencia" value="resgatado" <?php echo (($pedidos->procedencia == 'resgatado') ? 'checked' : '' ) ?>>Resgatado
                         <input type="radio" name="procedencia" id="procedencia" value="adotado" <?php echo (($pedidos->procedencia == 'adotado') ? 'checked' : '' ) ?>>Adotado
                         <input type="radio" name="procedencia" id="procedencia" value="comprado" <?php echo (($pedidos->procedencia == 'comprado') ? 'checked' : '' ) ?>>Comprado
-                        <input type="radio" name="procedencia" id="procedencia" value="ONG" <?php echo (($pedidos->procedencia == 'ONG') ? 'checked' : '' ) ?>>ONG<br><br>                        
-
+                        <input type="radio" name="procedencia" id="procedencia" value="ONG" <?php echo (($pedidos->procedencia == 'ONG') ? 'checked' : '' ) ?>>ONG<br><br>
+                        <input type="radio" name="procedencia" id="procedencia" value="CCZ" <?php echo (($pedidos->procedencia == 'CCZ') ? 'checked' : '' ) ?>>CCZ
                         <br>
 
                     </fieldset>
@@ -335,8 +354,6 @@ TDBConnection::getConnection();
                 </p>
             </div>
         </div>
-
-        <script src="js/cadastro.js"></script>
     </body>
 </html>
 

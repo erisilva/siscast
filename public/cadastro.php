@@ -455,7 +455,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     /* validar número máximo de pedidos por cpf (5) */
     /* importante */
     /* Use a lista para definir quantos pedidos por situação podem ser cadastrados para esse cpf */
-    TDBConnection::prepareQuery("select count(*) as total from pedidos where situacao_id in (1,2,3,4,5,6,7) and ano = year(now()) and cpf = :cpf");
+    /*
+     * o cidadão pode ter no máximo 3 pedidos em análise, agendado, em espera e ausente por ano
+     * foi solicitado que se bloqueia por 180 dias, o usuário
+     *
+     * */
+    TDBConnection::prepareQuery("select count(*) as total from pedidos where situacao_id in (1,3,5) and ano = year(now()) and cpf = :cpf");
     TDBConnection::bindParamQuery(':cpf', $cpf, PDO::PARAM_INT);
     $totalPedidos = TDBConnection::single();
     // definido como 5 por ano
@@ -780,7 +785,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="cidade">Cidade:</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="cidade" name="cidade" disabled
+                            <input type="text" class="form-control" id="cidade" name="cidade"
                                    value="<?php echo isset($cidade) ? $cidade : ''; ?>">
                         </div>
                         <div class="col-md-5"></div>
@@ -789,7 +794,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="estado">Estado:</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control" id="estado" name="estado" disabled
+                            <input type="text" class="form-control" id="estado" name="estado"
                                    value="<?php echo isset($estado) ? $estado : ''; ?>">
                         </div>
                         <div class="col-md-7"></div>
