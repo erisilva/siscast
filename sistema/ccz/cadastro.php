@@ -89,10 +89,6 @@ TDBConnection::getConnection();
             <div class="conteudo">
 
                <?php
-                // limpa as variáveis de entrada
-                $nome = $cpf = $endereco = $numero = $complemento = $bairro = $cep = $tel = '';
-                $cel = $cns = $beneficio = $beneficioQual = $nomeAnimal = $genero = $porte = $idade = '';
-                $idadeEm = $cor = $especie = $raca_id = $procedencia = $nascimento ='';
 
                 // executa o cadastro se possível
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -101,10 +97,10 @@ TDBConnection::getConnection();
 
                     /* dados do pedinte */
                     $nome = (isset($_POST['nome']) ? strip_tags(trim($_POST['nome'])) : '');
-                    $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : '');
-                    $email = (isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : '');
+                    $cpf = (isset($_POST['cpf']) ? strip_tags(trim($_POST['cpf'])) : 'AVULSO');
+                    $email = (isset($_POST['email']) ? strip_tags(trim($_POST['email'])) : 'avulso@avulso');
                     // nascimento
-                    $nascimento = (isset($_POST['nascimento']) ? $_POST['nascimento'] : '');
+                    $nascimento = (isset($_POST['nascimento']) ? $_POST['nascimento'] : '19/10/1978');
                     $tempDate = explode('/', $nascimento);
                     $nacimentoFormatoMySQL = $tempDate[2] . '-' . $tempDate[1] . '-' . $tempDate[0];
                     //$nascimento = (isset($_POST['nascimento']) ? date("Y-m-d", strtotime($_POST['nascimento'])) : '');
@@ -117,12 +113,12 @@ TDBConnection::getConnection();
                     $cep = (isset($_POST['cep']) ? strip_tags(trim($_POST['cep'])) : '');
                     $tel = (isset($_POST['tel']) ? strip_tags(trim($_POST['tel'])) : '');
                     $cel = (isset($_POST['cel']) ? strip_tags(trim($_POST['cel'])) : '');
-                    $cidade = (isset($_POST['cidade']) ? strip_tags(trim($_POST['cidade'])) : '');
-                    $estado = (isset($_POST['estado']) ? strip_tags(trim($_POST['estado'])) : '');
+                    $cidade = (isset($_POST['cidade']) ? strip_tags(trim($_POST['cidade'])) : 'Contagem');
+                    $estado = (isset($_POST['estado']) ? strip_tags(trim($_POST['estado'])) : 'MG');
 
                     /* informações adicionais */
-                    $cns = (isset($_POST['cns']) ? strip_tags(trim($_POST['cns'])) : '');
-                    $beneficio = (isset($_POST['beneficio']) ? strip_tags(trim($_POST['beneficio'])) : '');
+                    $cns = (isset($_POST['cns']) ? strip_tags(trim($_POST['cns'])) : 'AVULSO');
+                    $beneficio = (isset($_POST['beneficio']) ? strip_tags(trim($_POST['beneficio'])) : 'N');
                     $beneficioQual = (isset($_POST['beneficioQual']) ? strip_tags(trim($_POST['beneficioQual'])) : '');
 
                     /* informações do animal */
@@ -268,19 +264,19 @@ TDBConnection::getConnection();
                         <input type="text" name="nome" id="nome" maxlength="140" size="36" required autofocus><br><br>
 
                         <label for="email">E-mail:</label>
-                        <input type="text" name="email" id="email" maxlength="200" size="30" required><br><br>
+                        <input type="text" name="email" id="email" maxlength="200" size="30"><br><br>
 
                         <label for="nascimento">Data Nascimento:</label>
-                        <input type="date" name="nascimento" id="nascimento" required> <span>formato dd/mm/aaaa</span><br><br>
+                        <input type="date" name="nascimento" id="nascimento"> <span>formato dd/mm/aaaa</span><br><br>
 
                         <label for="cpf">CPF:</label>
-                        <input type="text" name="cpf" id="cpf" maxlength="11" size="12" required><br><br>
+                        <input type="text" name="cpf" id="cpf" maxlength="11" size="12"><br><br>
 
                         <label for="cep">CEP:</label>
-                        <input type="text" name="cep" id="cep" maxlength="10" size="10" required><br/><br/>
+                        <input type="text" name="cep" id="cep" maxlength="10" size="10"><br/><br/>
 
                         <label for="endereco">Endereço:</label>
-                        <input type="text" name="endereco" id="endereco" maxlength="255" size="36" required><br/><br/>                        
+                        <input type="text" name="endereco" id="endereco" maxlength="255" size="36"><br/><br/>
 
                         <label for="numero">Número:</label>
                         <input type="text" name="numero" id="numero" maxlength="20" size="9"> 
@@ -289,25 +285,25 @@ TDBConnection::getConnection();
                         <input type="text" name="complemento" id="complemento" maxlength="60" size="18"><br/><br/>  
 
                         <label for="bairro">Bairro:</label>
-                        <input type="text" name="bairro" id="bairro" maxlength="140" size="20" required><br/><br/>
+                        <input type="text" name="bairro" id="bairro" maxlength="140" size="20"><br/><br/>
 
                         <label for="cidade">Cidade:</label>
-                        <input type="text" name="cidade" id="cidade" maxlength="180" size="20" required><br/><br/>
+                        <input type="text" name="cidade" id="cidade" maxlength="180" size="20" value="Contagem"><br/><br/>
 
                         <label for="estado">Estado:</label>
-                        <input type="text" name="estado" id="estado" maxlength="2" size="5" required><br/><br/>
+                        <input type="text" name="estado" id="estado" maxlength="2" size="5" value="MG"><br/><br/>
 
                         <label for="tel">Telefone:</label>
-                        <input type="text" name="tel" id="tel" maxlength="20" size="10" required>                        
+                        <input type="text" name="tel" id="tel" maxlength="20" size="10">
 
                         <label for="cel">Celular:</label>
-                        <input type="text" name="cel" id="cel" maxlength="20" size="10" required><br/><br/>
+                        <input type="text" name="cel" id="cel" maxlength="20" size="10"><br/><br/>
 
                         <label for="cel">Cartão Nacional de Saúde:</label>
-                        <input type="text" name="cns" id="cns" maxlength="25" size="10" required><br/><br/>
+                        <input type="text" name="cns" id="cns" maxlength="25" size="10"><br/><br/>
 
                         <label for="beneficio">Possui Benefício:</label>
-                        <input type="radio" name="beneficio" id="beneficio" value="S" required>Sim
+                        <input type="radio" name="beneficio" id="beneficio" value="S" >Sim
                         <input type="radio" name="beneficio" id="beneficio" value="N">Não
 
                         <label for="beneficioQual">Qual:</label>

@@ -94,7 +94,14 @@ TDBConnection::getConnection();
                 $filtroPorte = (!isset($_POST["filtroPorte"]) ? "" : $_POST["filtroPorte"]);
                 $situacaoFiltro = (!isset($_POST["situacaoFiltro"]) ? "" : $_POST["situacaoFiltro"]);
                 $ordem = (!isset($_POST["ordem"]) ? 1 : $_POST["ordem"]);
-                
+
+                //filtroOrigem
+                $filtroOrigem = (!isset($_POST["filtroOrigem"]) ? "%" : $_POST["filtroOrigem"]);
+                $filtro_dta_inicio = (isset($_POST['filtro_dta_inicio']) ? strip_tags( trim( $_POST['filtro_dta_inicio']) ) : null);
+                $filtro_dta_fim = (isset($_POST['filtro_dta_fim']) ? strip_tags( trim( $_POST['filtro_dta_fim']) ) : null);
+
+
+
             } elseif ($_SERVER["REQUEST_METHOD"] == "GET") {
                 // recebe as variaveis pelo metodo de GET, passagem por link
                 // usado para paginar o resultado das consultas  
@@ -105,7 +112,12 @@ TDBConnection::getConnection();
                 $filtroPorte = (!isset($_GET["filtroPorte"]) ? "" : $_GET["filtroPorte"]);
                 $situacaoFiltro = (!isset($_GET["situacaoFiltro"]) ? "" : $_GET["situacaoFiltro"]);
                 $ordem = (!isset($_GET["ordem"]) ? 1 : $_GET["ordem"]);
-                
+
+                //filtroOrigem
+                $filtroOrigem = (!isset($_GET["filtroOrigem"]) ? "%" : $_GET["filtroOrigem"]);
+                $filtro_dta_inicio = (isset($_GET['filtro_dta_inicio']) ? strip_tags( trim( $_GET['filtro_dta_inicio']) ) : "");
+                $filtro_dta_fim = (isset($_GET['filtro_dta_fim']) ? strip_tags( trim( $_GET['filtro_dta_fim']) ) : "");
+
             } else {
                 $filtroNome = "";
                 $filtroCPF = "";
@@ -114,6 +126,11 @@ TDBConnection::getConnection();
                 $filtroPorte = "";
                 $situacaoFiltro = "";
                 $ordem = 1;
+
+                //
+                $filtroOrigem = "";
+                $filtro_dta_inicio = "";
+                $filtro_dta_fim = "";
             }
             
             /* ajusta os filtros */
@@ -132,6 +149,8 @@ TDBConnection::getConnection();
 
                             CPF:<input type="text" name="filtroCPF" id="filtroCPF"
                                        maxlength="11" size="10">
+
+                            Entre:<input type="date" name="filtro_dta_inicio">à<input type="date" name="filtro_dta_fim">
                             
                             <br><br>
 
@@ -163,6 +182,16 @@ TDBConnection::getConnection();
                                 echo "<option value=\"$situacao->id\">$situacao->nome</option>" . EOL;
                             }
                             ?>
+                            </select>
+
+                            <select name="filtroOrigem" id="filtroOrigem">
+                                <option value="" selected>Origem ou procedência</option>
+                                <option value="comunitario">vive na rua / comunitário
+                                <option value="resgatado">Resgatado
+                                <option value="adotado">Adotado
+                                <option value="comprado">Comprado
+                                <option value="ONG">ONG
+                                <option value="CCZ">CCZ
                             </select>
 
                             <select name="ordem" id="ordem">
@@ -223,6 +252,18 @@ TDBConnection::getConnection();
                     $statement .= " and pedidos.situacao_id = " . $situacaoFiltro. "";
                 }
 
+                //
+                if ($filtroOrigem != "") {
+                    $statement .= " and pedidos.procedencia like '%" . $filtroOrigem . "%' ";
+                }
+
+                if ($filtro_dta_inicio != "") {
+                    $statement .= " and (DATE(pedidos.quando) >= '$filtro_dta_inicio')";
+                }
+
+                if ($filtro_dta_fim != "") {
+                    $statement .= " and (DATE(pedidos.quando) <= '$filtro_dta_fim')";
+                }
 
                 /* configuração da ordenação*/
                 if ($ordem == 1){
@@ -233,7 +274,6 @@ TDBConnection::getConnection();
                     $statement .= " order by pedidos.nome";
                 }
 
-
                 $query = "SELECT 
                                                 pedidos.id,
                                                 concat(lpad(pedidos.codigo, 6, '0'), '/', pedidos.ano ) as codigoInterno,
@@ -243,6 +283,7 @@ TDBConnection::getConnection();
                                             pedidos.especie,
                                             pedidos.genero,
                                             pedidos.porte,
+                                            pedidos.procedencia,
                                             situacoes.nome as situacao "
                         . "from {$statement} LIMIT {$startpoint} , {$per_page}";
 
@@ -268,6 +309,7 @@ TDBConnection::getConnection();
                     echo "<th>G.</th>\n";
                     echo "<th>Porte</th>\n";
                     echo "<th>Situação</th>\n";
+                    echo "<th>Origem</th>\n";
                     echo "<th class=\"alinha_direita\">...</th>\n";
                     echo "<th class=\"alinha\">...</th>\n";
                     echo "</tr>\n";
@@ -310,6 +352,10 @@ TDBConnection::getConnection();
                         echo $temp->situacao . "\n";
                         echo "</td>\n";
 
+                        echo "<td>\n";
+                        echo $temp->procedencia . "\n";
+                        echo "</td>\n";
+
                         echo "<td class=\"alinha_direita\">\n";
                         echo "<a href=\" javascript:abrir('pedidos/agendar.php?id=" . $temp->id . "') \">Agendar</a>\n";
                         echo "</td>\n";
@@ -335,6 +381,12 @@ TDBConnection::getConnection();
                 $filtroConsulta .= "filtroPorte=" . $filtroPorte . "&";
                 $filtroConsulta .= "situacaoFiltro=" . $situacaoFiltro . "&";
                 $filtroConsulta .= "ordem=" . $ordem . "&";
+
+                //
+                $filtroConsulta .= "filtroOrigem=" . $filtroOrigem . "&";
+                $filtroConsulta .= "filtro_dta_fim=" . $filtro_dta_fim . "&";
+                $filtroConsulta .= "filtro_dta_inicio=" . $filtro_dta_inicio . "&";
+
 
                 echo pagination($statement, $per_page, $page, $url = '?' . $filtroConsulta);
                 ?>

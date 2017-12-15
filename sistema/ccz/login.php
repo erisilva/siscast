@@ -56,7 +56,7 @@ if ($nRows == 1) { // aceitou o login
     $_SESSION['sessao_usuario_id'] = (isset($result->id) ? $result->id : NULL);
     $_SESSION['sessao_usuario_name'] = (isset($result->name) ? $result->name : NULL);
     $_SESSION['sessao_usuario_login'] = (isset($result->login) ? $result->login : NULL);
-    $_SESSION['sessao_usuario_profile_id'] = (isset($result->profile_id) ? $result->profile_id : NULL);
+    $_SESSION['sessao_usuario_profile_id'] = (isset($result->userProfile_id) ? $result->userProfile_id : NULL);
 
 
     echo 1;

@@ -45,8 +45,8 @@ TDBConnection::getConnection();
  */
 $idSituacao = (isset($_POST['idSituacao']) ? strip_tags( trim( $_POST['idSituacao']) ) : 0);
 
-$dta_inicio = (isset($_POST['dta_inicio']) ? strip_tags( trim( $_POST['dta_inicio']) ) : '');
-$dta_fim = (isset($_POST['dta_fim']) ? strip_tags( trim( $_POST['dta_fim']) ) : '');
+$dta_inicio = (isset($_POST['dta_inicio']) ? strip_tags( trim( $_POST['dta_inicio']) ) : null);
+$dta_fim = (isset($_POST['dta_fim']) ? strip_tags( trim( $_POST['dta_fim']) ) : null);
 
 
 require('../FPDF/fpdf.php');

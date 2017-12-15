@@ -79,10 +79,11 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
             </div>           
 
             <!--/conteúdo-->
-
-            <div class="conteudo">
                 
             <div class="conteudo">
+
+                <?php print_r($_SESSION) ?>
+
                 <ul class="listaLinks">
                     <li><a href="operador/busca.php">Operadores do sistema.</a></li>
                 </ul>  
@@ -98,7 +99,6 @@ ini_set('error_reporting', E_ALL ^ E_NOTICE);
                 <br><br>
             </div>
 
-            </div>
 
             <!--/rodapé-->
             <br/><br/>
