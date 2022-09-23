@@ -1,121 +1,55 @@
 <?php
-/*
- * inicia a sessão
- */
-session_start();
+
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
+
+define('LARAVEL_START', microtime(true));
 
 /*
- * constants
- */
-require_once 'config/TConfig.php';
+|--------------------------------------------------------------------------
+| Check If Application Is Under Maintenance
+|--------------------------------------------------------------------------
+|
+| If the application is maintenance / demo mode via the "down" command we
+| will require this file so that any prerendered template can be shown
+| instead of starting the framework, which could cause an exception.
+|
+*/
 
-/*
- *  autoload
- */
-require_once 'libs/Autoloader.php';
-$loader = new Autoloader();
-$loader->directories = array('libs', 'model');
-$loader->register();
-
-
-/*
- * header page
- */
-header('Content-Type: text/html; charset=utf-8');
-ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', dirname(__FILE__) . '/log/log.txt');
-ini_set('error_reporting', E_ALL ^ E_NOTICE);
-
-/*
- * se conecta
- */
-TDBConnection::getConnection();
-
-/*
- * segurança
- * para toda requisição é feita a criação de um token aleatorio
- * se não existir nenhum token de sessao ao se solicitar
- * a pagina é criado um token
- */
-if (!isset($_SESSION['token'])){
-    date_default_timezone_set('America/Sao_Paulo');
-    $token = md5(uniqid(rand(), TRUE));
-    $quando = date("Y-m-d H:i:s");
-    $_SESSION['token'] = $token;
-    $_SESSION['token_time'] = time();
-
-    /* captura o e-mail da origem da requisição dessa página */
-    $ip = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-
-    /* Grava o logacesso com o ip origem da requisição, juntamente com token com a data/hora */
-    /* ERRO MEU: eu chamei o campo de data/hora de description em vez de quando como uso. Vou arrumar algum dia.*/
-    TDBConnection::beginTransaction();
-    TDBConnection::prepareQuery("INSERT INTO logacesso VALUES (null, :token, :ip, :description);");
-    TDBConnection::bindParamQuery(':token', $token, PDO::PARAM_STR);
-    TDBConnection::bindParamQuery(':ip', $ip, PDO::PARAM_STR);
-    TDBConnection::bindParamQuery(':description', $quando, PDO::PARAM_STR);
-    TDBConnection::execute();
-    TDBConnection::endTransaction();
+if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
+    require __DIR__.'/../storage/framework/maintenance.php';
 }
-?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<meta charset="UTF-8">
-<meta name="author" content="EriSilva, erisilva.net, www.erisilva.net, erivelton.contagem@gmail.com">
-<meta name="description" content="Levantamento e Cadastro de Pedidos para Esterilização de Animais no Município de Contagem-MG, Brasil.">
-<meta name="keywords" content="pedidos, esterilização, animais, pets, cadastro, levantamento, saúde, contagem">
-<meta name="robots" content="noindex, nofollow">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/estilo.css">
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| this application. We just need to utilize it! We'll simply require it
+| into the script here so we don't need to manually load our classes.
+|
+*/
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+require __DIR__.'/../vendor/autoload.php';
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/app.js"></script>
-<link rel="icon" href="img/favicon.png">
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request using
+| the application's HTTP kernel. Then, we will send the response back
+| to this client's browser, allowing them to enjoy our application.
+|
+*/
 
-<title>SisCast - Pedidos de Agendamento Público</title>
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
-<body>
+$kernel = $app->make(Kernel::class);
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="navbar-brand" >
-                <img src="img/logo.png" class="img-rounded" alt="Logotipo Contagem" height="60">
-            </div>
-        </div>
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="index.php"><span class="glyphicon glyphicon-home"></span>Início</a></li>
-                <li><a href="cadastro.php"><span class="glyphicon glyphicon-plus-sign"></span>Fazer um Cadastro</a></li>
-                <li><a href="consulta.php"><span class="glyphicon glyphicon-search"></span>Consultar Cadastro</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+$response = tap($kernel->handle(
+    $request = Request::capture()
+))->send();
 
-<div class="container">
-    <img class="img-responsive center-block" src="img/banner.png" alt="Banner" width="460" height="345">
-</div>
-
-<footer class="container-fluid text-center">
-    <p>
-        <strong>Centro de Controle de Zoonoses</strong><br>
-        Telefones: 3351-3751 / 3361-7703<br>
-        E-mail: cczcontagem@yahoo.com.br
-    </p>
-</footer>
-</body>
-</html>
+$kernel->terminate($request, $response);
