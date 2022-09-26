@@ -30,14 +30,14 @@ class CreatePedidosTable extends Migration
             $table->string('numero', 10);
             $table->string('bairro', 50);
             $table->string('complemento', 100)->nullable();
-            $table->string('cidade', 50);
-            $table->string('uf', 2);
+            $table->string('cidade', 50)->default('contagem');
+            $table->string('uf', 2)->default('MG');
             $table->string('cep', 8);
 
             # contatos
             $table->string('email', 150);
-            $table->string('tel', 15)->nullable();
-            $table->string('cel', 15)->nullable();
+            $table->string('tel', 15);
+            $table->string('cel', 15);
 
             # cartão nacional de saúde
             $table->string('cns', 15)->nullable();

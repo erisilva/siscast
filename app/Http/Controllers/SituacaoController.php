@@ -28,15 +28,15 @@ class SituacaoController extends Controller
      */
     public function index()
     {
-        $this->authorize('Situacao-index');
+        $this->authorize('situacao-index');
 
         // atualiza perPage se necessário
         if(request()->has('perpage')) {
             session(['perPage' => request('perpage')]);
         }
 
-        return view('Situacaos.index', [
-            'Situacaos' => Situacao::orderBy('id', 'asc')->paginate(session('perPage', '5')),
+        return view('situacaos.index', [
+            'situacaos' => Situacao::orderBy('id', 'asc')->paginate(session('perPage', '5')),
             'perpages' => Perpage::orderBy('valor')->get()
         ]);
         
@@ -49,9 +49,9 @@ class SituacaoController extends Controller
      */
     public function create()
     {
-        $this->authorize('Situacao-create');
+        $this->authorize('situacao-create');
 
-        return view('Situacaos.create');
+        return view('situacaos.create');
     }
 
     /**
@@ -62,42 +62,41 @@ class SituacaoController extends Controller
      */
     public function store(Request $request)
     {
-        $Situacao = $request->validate([
-          'descricao' => 'required',
-        ]);
+        Situacao::create($request->validate([
+            'nome' => 'required',
+            'descricao' => 'required',
+          ]));
 
-        Situacao::create($Situacao);
-
-        return redirect(route('Situacaos.index'))->with('message', 'Situação do pedido cadastrada com sucesso!');
+        return redirect(route('situacaos.index'))->with('message', 'Situação cadastrada com sucesso!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Situacao  $Situacao
+     * @param  \App\Models\Situacao  $situacao
      * @return \Illuminate\Http\Response
      */
-    public function show(Situacao $Situacao)
+    public function show(Situacao $situacao)
     {
-        $this->authorize('Situacao-show');
+        $this->authorize('situacao-show');
 
-        return view('Situacaos.show', [
-            'Situacao' => $Situacao
+        return view('situacaos.show', [
+            'situacao' => $situacao
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Situacao  $Situacao
+     * @param  \App\Models\Situacao  $situacao
      * @return \Illuminate\Http\Response
      */
-    public function edit(Situacao $Situacao)
+    public function edit(Situacao $situacao)
     {
-        $this->authorize('Situacao-edit');
+        $this->authorize('situacao-edit');
 
-        return view('Situacaos.edit', [
-            'Situacao' => $Situacao
+        return view('situacaos.edit', [
+            'situacao' => $situacao
         ]);
     }
 
@@ -105,52 +104,53 @@ class SituacaoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Situacao  $Situacao
+     * @param  \App\Models\Situacao  $situacao
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Situacao $Situacao)
+    public function update(Request $request, Situacao $situacao)
     {
-        $Situacao->update($request->validate([
+        $situacao->update($request->validate([
+          'nome' => 'required',
           'descricao' => 'required',
         ]));
 
-        return redirect(route('Situacaos.index'))->with('message', 'Situação do pedido atualizada com sucesso!');
+        return redirect(route('situacaos.index'))->with('message', 'Situação atualizada com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Situacao  $Situacao
+     * @param  \App\Models\Situacao  $situacao
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Situacao $Situacao)
+    public function destroy(Situacao $situacao)
     {
-        $this->authorize('Situacao-delete');
+        $this->authorize('situacao-delete');
 
-        $Situacao->delete();
+        $situacao->delete();
 
-        return redirect(route('Situacaos.index'))->with('message', 'Situação do pedido excluída com sucesso!');
+        return redirect(route('situacaos.index'))->with('message', 'Situação excluída com sucesso!');
     }
 
     public function exportcsv()
     {
-        $this->authorize('Situacao-export');
+        $this->authorize('situacao-export');
 
         return Excel::download(new SituacaosExport(), 'Situacaos_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     public function exportxls()
     {
-        $this->authorize('Situacao-export');
+        $this->authorize('situacao-export');
 
         return Excel::download(new SituacaosExport(), 'Situacaos_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function exportpdf()
     {
-        $this->authorize('Situacao-export');
+        $this->authorize('situacao-export');
         
-        return PDF::loadView('Situacaos.report', [
+        return PDF::loadView('situacaos.report', [
             'dataset' => Situacao::orderBy('id', 'asc')->get()
         ])->download('Situacaos_' .  date("Y-m-d H:i:s") . '.pdf');
     }

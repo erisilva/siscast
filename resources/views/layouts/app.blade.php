@@ -44,7 +44,9 @@
                           Configurações
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarConfig">
-                          <a class="dropdown-item" href="{{ route('users.index') }}"><i class="bi bi-person-lines-fill"></i> Operadores do Sistema</a>
+                            <a class="dropdown-item" href="{{ route('users.index') }}"><i class="bi bi-person-lines-fill"></i> Operadores do Sistema</a>
+                            <a class="dropdown-item" href="{{ route('situacaos.index') }}"><i class="bi bi-clipboard-check"></i> Situações dos Pedidos</a>
+                            <a class="dropdown-item" href="{{ route('racas.index') }}"><i class="bi bi-clipboard-check"></i> Raças dos Animais</a>
                         </div>
                     </li>                    
                 </ul>

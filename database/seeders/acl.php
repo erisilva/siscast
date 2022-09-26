@@ -82,6 +82,13 @@ class acl extends Seeder
         $situacao_delete = Permission::where('name', '=', 'situacao-delete')->get()->first();
         $situacao_show = Permission::where('name', '=', 'situacao-show')->get()->first();
         $situacao_export = Permission::where('name', '=', 'situacao-export')->get()->first();
+        // para pedidos
+        $pedido_index = Permission::where('name', '=', 'pedido-index')->get()->first();
+        $pedido_create = Permission::where('name', '=', 'pedido-create')->get()->first();
+        $pedido_edit = Permission::where('name', '=', 'pedido-edit')->get()->first();
+        $pedido_delete = Permission::where('name', '=', 'pedido-delete')->get()->first();
+        $pedido_show = Permission::where('name', '=', 'pedido-show')->get()->first();
+        $pedido_export = Permission::where('name', '=', 'pedido-export')->get()->first();
 
 
         // salva os relacionamentos entre perfil e suas permissões
@@ -120,6 +127,13 @@ class acl extends Seeder
         $administrador_perfil->permissions()->attach($situacao_delete);
         $administrador_perfil->permissions()->attach($situacao_show);
         $administrador_perfil->permissions()->attach($situacao_export);
+        # Pedidos
+        $administrador_perfil->permissions()->attach($pedido_index);
+        $administrador_perfil->permissions()->attach($pedido_create);
+        $administrador_perfil->permissions()->attach($pedido_edit);
+        $administrador_perfil->permissions()->attach($pedido_delete);
+        $administrador_perfil->permissions()->attach($pedido_show);
+        $administrador_perfil->permissions()->attach($pedido_export);
 
 
         // o gerente (diretor) pode gerenciar os operadores do sistema
@@ -140,6 +154,12 @@ class acl extends Seeder
         $gerente_perfil->permissions()->attach($situacao_edit);
         $gerente_perfil->permissions()->attach($situacao_show);
         $gerente_perfil->permissions()->attach($situacao_export);
+        # Pedidos
+        $gerente_perfil->permissions()->attach($pedido_index);
+        $gerente_perfil->permissions()->attach($pedido_create);
+        $gerente_perfil->permissions()->attach($pedido_edit);
+        $gerente_perfil->permissions()->attach($pedido_show);
+        $gerente_perfil->permissions()->attach($pedido_export);
 
 
         // o operador é o nível de operação do sistema não pode criar
@@ -155,6 +175,10 @@ class acl extends Seeder
         $operador_perfil->permissions()->attach($situacao_index);
         $operador_perfil->permissions()->attach($situacao_show);
         $operador_perfil->permissions()->attach($situacao_export);
+        # Pedidos
+        $operador_perfil->permissions()->attach($pedido_index);
+        $operador_perfil->permissions()->attach($pedido_create);
+        $operador_perfil->permissions()->attach($pedido_edit);
 
 
         // leitura é um tipo de operador que só pode ler
@@ -167,6 +191,9 @@ class acl extends Seeder
         # Situações
         $leitor_perfil->permissions()->attach($situacao_index);
         $leitor_perfil->permissions()->attach($situacao_show);
+        # Pedidos
+        $leitor_perfil->permissions()->attach($pedido_index);
+        $leitor_perfil->permissions()->attach($pedido_show);
 
     }
 }

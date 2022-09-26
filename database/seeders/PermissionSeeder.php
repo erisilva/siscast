@@ -147,5 +147,32 @@ class PermissionSeeder extends Seeder
             'name' => 'situacao-export',
             'description' => 'Exportação de dados das situações',
         ]);
+
+        # Pedidos
+        DB::table('permissions')->insert([
+            'name' => 'pedido-index',
+            'description' => 'Lista de pedidos',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-create',
+            'description' => 'Registrar novo pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-edit',
+            'description' => 'Alterar dados do pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-delete',
+            'description' => 'Excluir pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-show',
+            'description' => 'Mostrar dados do pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-export',
+            'description' => 'Exportação de dados dos pedidos',
+        ]);    
+
     }
 }

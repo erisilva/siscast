@@ -26,4 +26,12 @@ class Pedido extends Model
     protected $dates = [
         'nascimento', 'primeiraTentativaQuando', 'segundaTentativaQuando', 'agendaQuando', 'created_at', 'updated_at'
     ];
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['codigo'] ?? false, fn ($query, $codigo) => $query->where('codigo', 'like', '%' . $codigo . '%'));
+        $query->when($filters['ano'] ?? false, fn ($query, $ano) => $query->where('ano', 'like', '%' . $ano . '%'));
+        $query->when($filters['cpf'] ?? false, fn ($query, $cpf) => $query->where('cpf', 'like', '%' . $cpf . '%'));
+        $query->when($filters['nome'] ?? false, fn ($query, $nome) => $query->where('nome', 'like', '%' . $nome . '%'));
+    }
 }
