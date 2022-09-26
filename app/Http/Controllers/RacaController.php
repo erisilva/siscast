@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Raca;
+use App\Models\Perpage;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+use App\Exports\RacasExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RacaController extends Controller
 {
-
+    public function __construct() 
+    {
+        $this->middleware(['middleware' => 'auth']);
+        $this->middleware(['middleware' => 'hasaccess']);
+    }
 
     /**
      * Display a listing of the resource.
@@ -16,6 +28,17 @@ class RacaController extends Controller
      */
     public function index()
     {
+        $this->authorize('raca-index');
+
+        // atualiza perPage se necessário
+        if(request()->has('perpage')) {
+            session(['perPage' => request('perpage')]);
+        }
+
+        return view('racas.index', [
+            'racas' => Raca::orderBy('id', 'asc')->paginate(session('perPage', '5')),
+            'perpages' => Perpage::orderBy('valor')->get()
+        ]);
         
     }
 
@@ -26,7 +49,9 @@ class RacaController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('raca-create');
+
+        return view('racas.create');
     }
 
     /**
@@ -37,7 +62,13 @@ class RacaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $raca = $request->validate([
+          'descricao' => 'required',
+        ]);
+
+        Raca::create($raca);
+
+        return redirect(route('racas.index'))->with('message', 'Raça cadastrada com sucesso!');
     }
 
     /**
@@ -48,7 +79,11 @@ class RacaController extends Controller
      */
     public function show(Raca $raca)
     {
-        //
+        $this->authorize('raca-show');
+
+        return view('racas.show', [
+            'raca' => $raca
+        ]);
     }
 
     /**
@@ -59,7 +94,11 @@ class RacaController extends Controller
      */
     public function edit(Raca $raca)
     {
-        //
+        $this->authorize('raca-edit');
+
+        return view('racas.edit', [
+            'raca' => $raca
+        ]);
     }
 
     /**
@@ -71,7 +110,11 @@ class RacaController extends Controller
      */
     public function update(Request $request, Raca $raca)
     {
-        //
+        $raca->update($request->validate([
+          'descricao' => 'required',
+        ]));
+
+        return redirect(route('racas.index'))->with('message', 'Raça atualizada com sucesso!');
     }
 
     /**
@@ -82,6 +125,34 @@ class RacaController extends Controller
      */
     public function destroy(Raca $raca)
     {
-        //
+        $this->authorize('raca-delete');
+
+        $raca->delete();
+
+        return redirect(route('racas.index'))->with('message', 'Raça excluída com sucesso!');
     }
+
+    public function exportcsv()
+    {
+        $this->authorize('raca-export');
+
+        return Excel::download(new RacasExport(), 'Racas_' .  date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function exportxls()
+    {
+        $this->authorize('raca-export');
+
+        return Excel::download(new RacasExport(), 'Racas_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+    }
+
+    public function exportpdf()
+    {
+        $this->authorize('raca-export');
+        
+        return PDF::loadView('racas.report', [
+            'dataset' => Raca::orderBy('id', 'asc')->get()
+        ])->download('Racas_' .  date("Y-m-d H:i:s") . '.pdf');
+    }
+
 }
