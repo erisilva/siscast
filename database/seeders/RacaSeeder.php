@@ -29,7 +29,7 @@ DB::table('racas')->insert(['id' => '13', 'descricao' => 'DOGUE ALEMÃO']);
 DB::table('racas')->insert(['id' => '14', 'descricao' => 'FILA BRASILEIRO']);
 DB::table('racas')->insert(['id' => '15', 'descricao' => 'FOX PAULISTINHA']);
 DB::table('racas')->insert(['id' => '16', 'descricao' => 'HUSKY SIBERIANO']);
-DB::table('racas')->insert(['id' => '17', 'descricao' => 'PASTOR ALEMÃƒO']);
+DB::table('racas')->insert(['id' => '17', 'descricao' => 'PASTOR ALEMÃO']);
 DB::table('racas')->insert(['id' => '18', 'descricao' => 'PASTOR BELGA']);
 DB::table('racas')->insert(['id' => '20', 'descricao' => 'PERDIGUEIRO']);
 DB::table('racas')->insert(['id' => '21', 'descricao' => 'PINSHER']);

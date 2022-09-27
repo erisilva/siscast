@@ -100,9 +100,11 @@ class PedidoController extends Controller
             'procedencia' => 'required|string|max:100',
             'situacao_id' => 'required|numeric',            
             'primeiraTentativa' => 'required|in:S,N',
-            'dataPrimeiraTentativa' => ['nullable','date_format:d/m/Y'],
+            'primeiraTentativaQuando' => ['nullable','date_format:d/m/Y'],
+            'primeiraTentativaHora' => 'nullable|string|max:5',
             'segundaTentativa' => 'required|in:S,N',
-            'dataSegundaTentativa' => ['nullable','date_format:d/m/Y'],
+            'segundaTentativaQuando' => ['nullable','date_format:d/m/Y'],
+            'segundaTentativaHora' => 'nullable|string|max:5',
             'agendaQuando' => ['nullable','date_format:d/m/Y'],
             'agendaTurno' => 'nullable|in:manha,tarde,nenhum',
         ],[
@@ -145,7 +147,7 @@ class PedidoController extends Controller
             'porte.in' => 'O campo Porte deve ser Pequeno, Médio ou Grande.',
             'idade.required' => 'O campo Idade é obrigatório.',
             'idade.numeric' => 'O campo Idade deve ser um número.',
-            'idadeEm.required' => 'O campo Idade em é obrigatório.',
+            'idadeEm.required' => 'Escolha se a Idade é em meses ou anos.',
             'idadeEm.in' => 'O campo Idade em deve ser Mês ou Ano.',
             'cor.required' => 'O campo Cor é obrigatório.',
             'cor.max' => 'O campo Cor deve ter no máximo 80 caracteres.',
@@ -159,25 +161,43 @@ class PedidoController extends Controller
             'situacao_id.numeric' => 'O campo Situação deve ser um número.',
             'primeiraTentativa.required' => 'O campo Primeira Tentativa é obrigatório.',
             'primeiraTentativa.in' => 'O campo Primeira Tentativa deve ser Sim ou Não.',
-            'dataPrimeiraTentativa.date_format' => 'O campo Data da Primeira Tentativa deve estar no formato dd/mm/aaaa.',
-            'segundaTentativa' => 'O campo Segunda Tentativa é obrigatório.',
+            'primeiraTentativaQuando.date_format' => 'O campo Data da Primeira Tentativa deve estar no formato dd/mm/aaaa.',
+            'primeiraTentativaHora.max' => 'O campo Hora da Primeira Tentativa deve ter no máximo 5 caracteres.',
+            'segundaTentativa.required' => 'O campo Segunda Tentativa é obrigatório.',
             'segundaTentativa.in' => 'O campo Segunda Tentativa deve ser Sim ou Não.',
-            'dataSegundaTentativa.date_format' => 'O campo Data da Segunda Tentativa deve estar no formato dd/mm/aaaa.',
-            'agendaQuando.date_format' => 'O campo Agendar para quando deve estar no formato dd/mm/aaaa.',
+            'segundaTentativaQuando.date_format' => 'O campo Data da Segunda Tentativa deve estar no formato dd/mm/aaaa.',
+            'segundaTentativaHora.max' => 'O campo Hora da Segunda Tentativa deve ter no máximo 5 caracteres.',
+            'agendaQuando.date_format' => 'O campo Data de Agendamento deve estar no formato dd/mm/aaaa.',
             'agendaTurno.in' => 'O campo Agendar para qual turno deve ser Manhã ou Tarde.',
             'agendaTurno.required' => 'O campo Agendar para qual turno é obrigatório.',
         ]);
 
-        //dd($request->ip()); //ip do usuário que está fazendo a requisição
-        //dd(json_encode($request->all())); // pego todos os dados do formulário e converto em json
-
         $pedido = request()->all(); // pego todos os dados do formulário e coloco em um array
 
+        $pedido['ip'] = $request->ip(); // pego o ip do usuário que está fazendo a requisição e coloco no array pedido
+
+        $pedido['request'] = json_encode($request->except('_token')); // pego todos os dados do formulário e converto em json e coloco no array pedido
+
+        $pedido['codigo'] = 0; // coloco o código como 0 para que o trigger gere um código para o pedido
+
+        $pedido['ano'] = 0; // coloco o ano como 0 para que o trigger gere um ano para o pedido, ano atual
+
+        $pedido['cpf'] = preg_replace('/[^0-9]/', '', $pedido['cpf'] ); // retiro os caracteres especiais do cpf
+
+        $pedido['cep'] = preg_replace('/[^0-9]/', '', $pedido['cep'] ); // retiro os caracteres especiais do cep
+        
         $datas_a_ajustar = ['nascimento', 'primeiraTentativaQuando', 'segundaTentativaQuando', 'agendaQuando']; // datas que precisam ser ajustadas
         
-        //Pedido::create($pedido);
+        # ajusto as datas para o formato do banco de dados
+        foreach ($datas_a_ajustar as $data) {
+            if (isset($pedido[$data])) {
+                $pedido[$data] = implode('-', array_reverse(explode('/', $pedido[$data]))); // ajusto a data para o formato do banco de dados
+            }
+        }
+
+        Pedido::create($pedido);
         
-        dd($pedido);
+        // atualizar no futuro pra abrir a edição
         return redirect(route('pedidos.index'))->with('message', 'Pedido cadastrado com sucesso!');
     }
 
@@ -189,7 +209,11 @@ class PedidoController extends Controller
      */
     public function show(Pedido $pedido)
     {
-        //
+        $this->authorize('pedido-show');
+
+        return view('pedidos.show', [
+            'pedido' => $pedido
+        ]);
     }
 
     /**

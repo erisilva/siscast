@@ -13,6 +13,11 @@
     </ol>
   </nav>
 </div>
+<div class="container py-3">
+  @if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+  @endif
+</div>
 <div class="container">
   <form method="POST" action="{{ route('pedidos.store') }}">
     @csrf
@@ -21,15 +26,24 @@
         <p class="text-center"><strong>Informações Sobre o Tutor</strong></p>
       </div>
     </div>
+
+    <div class="form-group py-1">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="fillccz" name="fillccz">
+        <label class="custom-control-label" for="fillccz">Preencher com os dados do CCZ</label>
+      </div>
+    </div>
+
     <div class="form-group">
       <div class="alert alert-info" role="alert">
         <p class="text-center">Campos marcado com * <strong>(asterístico)</strong> devem ser preenchidos obrigatoriamente.</p>
       </div>  
     </div>
+    
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="nome">Nome <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') ?? '' }}" maxlength="180">
+        <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" id="nome" value="{{ old('nome') ?? '' }}" maxlength="180">
         @error('nome')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -53,7 +67,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="email">E-mail <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? '' }}" maxlength="150">
+        <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') ?? '' }}" maxlength="150">
         @error('email')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -145,16 +159,19 @@
         <label for="beneficio">Possui benefício de algum programa social do governo? <strong class="text-danger">(*)</strong></label>
         <select class="form-control  @error('beneficio') is-invalid @enderror" name="beneficio" id="beneficio">
           <option value="" selected="true">Selecione...</option>        
-          <option value="S" {{ old("beneficio") == "S" ? "selected": "" }}>Não</option>
-          <option value="N" {{ old("beneficio") == "N" ? "selected": "" }}>Sim</option>
+          <option value="S" {{ old("beneficio") == "S" ? "selected": "" }}>Sim</option>
+          <option value="N" {{ old("beneficio") == "N" ? "selected": "" }}>Não</option>
         </select>
         @error('beneficio')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror 
       </div>
       <div class="form-group col-md-4">  
-        <label for="beneficioQual">Se sim, qual(is)?</label>  
+        <label for="beneficioQual @error('beneficioQual') is-invalid @enderror">Se sim, qual(is)?</label>  
         <input type="text" class="form-control" name="beneficioQual" id="beneficioQual" value="{{ old('beneficioQual') ?? '' }}" maxlength="100" >
+        @error('beneficio')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror 
       </div>
     </div>
 
@@ -286,18 +303,28 @@
         <label for="primeiraTentativa">Primeira Tentativa</label>
         <select class="form-control" name="primeiraTentativa" id="primeiraTentativa">
           <option value="N" selected="true">Selecione...</option>        
-          <option value="S" {{ old("primeiraTentativa") == "S" ? "selected": "" }}>Não</option>
-          <option value="N" {{ old("primeiraTentativa") == "N" ? "selected": "" }}>Sim</option>
+          <option value="S" {{ old("primeiraTentativa") == "S" ? "selected": "" }}>Sim</option>
+          <option value="N" {{ old("primeiraTentativa") == "N" ? "selected": "" }}>Não</option>
         </select>
       </div>
       <div class="form-group col-md-4">
         <label for="primeiraTentativaQuando">Quando</label>
-        <input type="text" class="form-control" name="primeiraTentativaQuando" id="primeiraTentativaQuando" value="{{ old('primeiraTentativaQuando') ?? '' }}" autocomplete="off">  
+        <input type="text" class="form-control @error('primeiraTentativaQuando') is-invalid @enderror" name="primeiraTentativaQuando" id="primeiraTentativaQuando" value="{{ old('primeiraTentativaQuando') ?? '' }}" autocomplete="off">
+        @error('primeiraTentativaQuando')
+        <div class="text-danger">
+          <small>{{ $message }}</small>
+        </div>
+        @enderror 
       </div>
       <div class="form-group col-md-4">
         <label for="primeiraTentativaHora">Horas</label>  
-        <input type="text" class="form-control" name="primeiraTentativaHora" id="primeiraTentativaHora" value="{{ old('primeiraTentativaHora') ?? '' }}"  maxlength="5">
+        <input type="text" class="form-control @error('primeiraTentativaHora') is-invalid @enderror" name="primeiraTentativaHora" id="primeiraTentativaHora" value="{{ old('primeiraTentativaHora') ?? '' }}"  maxlength="5">
+      @error('primeiraTentativaHora')
+      <div class="text-danger">
+        <small>{{ $message }}</small>
       </div>
+      @enderror
+      </div>      
     </div>
 
     <div class="form-row">
@@ -305,18 +332,28 @@
         <label for="segundaTentativa">Segunda Tentativa</label>
         <select class="form-control" name="segundaTentativa" id="segundaTentativa">
           <option value="N" selected="true">Selecione...</option>        
-          <option value="S" {{ old("segundaTentativa") == "S" ? "selected": "" }}>Não</option>
-          <option value="N" {{ old("segundaTentativa") == "N" ? "selected": "" }}>Sim</option>
+          <option value="S" {{ old("segundaTentativa") == "S" ? "selected": "" }}>Sim</option>
+          <option value="N" {{ old("segundaTentativa") == "N" ? "selected": "" }}>Não</option>
         </select>
       </div>
       <div class="form-group col-md-4">
         <label for="segundaTentativaQuando">Quando</label>
-        <input type="text" class="form-control" name="segundaTentativaQuando" id="segundaTentativaQuando" value="{{ old('segundaTentativaQuando') ?? '' }}" autocomplete="off">  
+        <input type="text" class="form-control @error('segundaTentativaQuando') is-invalid @enderror" name="segundaTentativaQuando" id="segundaTentativaQuando" value="{{ old('segundaTentativaQuando') ?? '' }}" autocomplete="off"> 
+        @error('segundaTentativaQuando')
+          <div class="text-danger">
+            <small>{{ $message }}</small>
+          </div>
+        @enderror 
       </div>
       <div class="form-group col-md-4">
         <label for="segundaTentativaHora">Horas</label>  
-        <input type="text" class="form-control" name="segundaTentativaHora" id="segundaTentativaHora" value="{{ old('segundaTentativaHora') ?? '' }}"  maxlength="5">
-      </div>
+        <input type="text" class="form-control @error('segundaTentativaHora') is-invalid @enderror" name="segundaTentativaHora" id="segundaTentativaHora" value="{{ old('segundaTentativaHora') ?? '' }}" maxlength="5">
+        @error('segundaTentativaHora')
+        <div class="text-danger">
+          <small>{{ $message }}</small>
+        </div>
+        @enderror
+      </div>      
     </div>
 
     <div class="form-group">
@@ -327,10 +364,15 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="agendaQuando">Data de Agendamento</label>
-        <input type="text" class="form-control" name="agendaQuando" id="agendaQuando" value="{{ old('agendaQuando') ?? '' }}" autocomplete="off">  
+        <input type="text" class="form-control @error('agendaQuando') is-invalid @enderror" name="agendaQuando" id="agendaQuando" value="{{ old('agendaQuando') ?? '' }}" autocomplete="off">
+        @error('agendaQuando')
+        <div class="text-danger">
+          <small>{{ $message }}</small>
+        </div>
+        @enderror   
       </div>
       <div class="form-group col-md-6">
-        <label for="agendaTurno">Segunda Tentativa</label>
+        <label for="agendaTurno">Truno do Agendamento</label>
         <select class="form-control" name="agendaTurno" id="agendaTurno">
           <option value="nenhum" selected="true">Selecione...</option>        
           <option value="manha" {{ old("agendaTurno") == "manha" ? "selected": "" }}>Manhã</option>
@@ -359,11 +401,11 @@
           <option value="{{$situacao->id}}" {{ old("situacao_id") == $situacao->id ? "selected":"" }}>{{$situacao->descricao}}</option>
           @endforeach
       </select>
-      @if ($errors->has('situacao_id'))
-      <div class="text-danger">
-      {{ $errors->first('situacao_id') }}
-      </div>
-      @endif 
+      @error('situacao_id')
+        <div class="text-danger">
+          <small>{{ $message }}</small>
+        </div>
+      @enderror 
     </div>
      
     <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Cadastrar Pedido</button>
@@ -408,11 +450,6 @@
         keepStatic: true
       });
 
-      $("#idade").inputmask({
-        mask: ['99'],
-        keepStatic: true
-      });
-
       $("#cep").blur(function () {
           var cep = $(this).val().replace(/\D/g, '');
           if (cep != "") {
@@ -444,6 +481,40 @@
           } else {
               limpa_formulario_cep();
           }
+      });
+
+      $('#fillccz').click(function(){
+        if($(this).is(':checked')){
+          $('#nome').val('CCZ');
+          $('#cpf').val('797.875.780-35');
+          $('#nascimento').val('18/11/1985');
+          $('#email').val('cczcontagem@yahoo.com.br');
+          $('#cep').val('32010-000');
+          $('#endereco').val('João César de Oliveira');
+          $('#numero').val('4665');
+          $('#bairro').val('Cinco');
+          $('#cidade').val('Contagem');
+          $('#uf').val('MG');
+          $('#tel').val('(31) 3351-3751');
+          $('#cel').val('(31) 99999-9999');
+          $('#cns').val('111111111111111');
+          $('#beneficio').val('N');
+        }else{
+          $('#nome').val('');
+          $('#cpf').val('');
+          $('#nascimento').val('');
+          $('#email').val('');
+          $('#cep').val('');
+          $('#endereco').val('');
+          $('#numero').val('');
+          $('#bairro').val('');
+          $('#cidade').val('');
+          $('#uf').val('');
+          $('#tel').val('');
+          $('#cel').val('');
+          $('#cns').val('');
+          $('#beneficio').val('');
+        }
       });
 
   });
