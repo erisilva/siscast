@@ -45,7 +45,7 @@ DB::table('racas')->insert(['id' => '30', 'descricao' => 'YORKSHIRE']);
 DB::table('racas')->insert(['id' => '32', 'descricao' => 'SIAMÊS']);
 DB::table('racas')->insert(['id' => '33', 'descricao' => 'HIMALAIA']);
 DB::table('racas')->insert(['id' => '34', 'descricao' => 'MAINE COON']);
-DB::table('racas')->insert(['id' => '35', 'descricao' => 'ANGORÃ']);
+DB::table('racas')->insert(['id' => '35', 'descricao' => 'ANGORÁ']);
 DB::table('racas')->insert(['id' => '36', 'descricao' => 'SIBERIANO']);
 DB::table('racas')->insert(['id' => '37', 'descricao' => 'SPHYNX']);
 DB::table('racas')->insert(['id' => '38', 'descricao' => 'BURMESE']);

@@ -10,7 +10,7 @@ class Pedido extends Model
     use HasFactory;
 
     protected $fillable = [
-        'codigo', 'ano', 'cpf', 'nome', 'nascimento', 'endereco', 'numero', 'bairro', 'complemento', 'cidade', 'uf', 'cep', 'email', 'tel', 'cel', 'cns', 'beneficio', 'beneficioQual', 'nomeAnimal', 'genero', 'porte', 'idade', 'idadeEm', 'cor', 'especie', 'raca_id', 'procedencia', 'situacao_id', 'primeiraTentativa', 'primeiraTentativaQuando', 'primeiraTentativaHora', 'segundaTentativa', 'segundaTentativaQuando', 'segundaTentativaHora', 'nota', 'agendaQuando', 'agendaTurno', 'motivoNaoAgendado'
+        'codigo', 'ano', 'cpf', 'nome', 'nascimento', 'endereco', 'numero', 'bairro', 'complemento', 'cidade', 'uf', 'cep', 'email', 'tel', 'cel', 'cns', 'beneficio', 'beneficioQual', 'nomeAnimal', 'genero', 'porte', 'idade', 'idadeEm', 'cor', 'especie', 'raca_id', 'procedencia', 'situacao_id', 'primeiraTentativa', 'primeiraTentativaQuando', 'primeiraTentativaHora', 'segundaTentativa', 'segundaTentativaQuando', 'segundaTentativaHora', 'nota', 'agendaQuando', 'agendaTurno', 'motivoNaoAgendado', 'ip', 'request'
     ];
 
     public function raca()

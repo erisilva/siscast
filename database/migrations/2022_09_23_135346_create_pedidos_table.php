@@ -28,15 +28,15 @@ class CreatePedidosTable extends Migration
             # logradouro
             $table->string('endereco', 100);
             $table->string('numero', 10);
-            $table->string('bairro', 50);
+            $table->string('bairro', 80);
             $table->string('complemento', 100)->nullable();
-            $table->string('cidade', 50)->default('contagem');
+            $table->string('cidade', 80)->default('contagem');
             $table->string('uf', 2)->default('MG');
             $table->string('cep', 8);
 
             # contatos
             $table->string('email', 150);
-            $table->string('tel', 15);
+            $table->string('tel', 15)->nullable();
             $table->string('cel', 15);
 
             # cartão nacional de saúde
@@ -70,6 +70,9 @@ class CreatePedidosTable extends Migration
             $table->date('agendaQuando')->nullable();
             $table->enum('agendaTurno', ['manha', 'tarde', 'nenhum'])->nullable()->default('nenhum');
             $table->text('motivoNaoAgendado')->nullable();
+
+            $table->string('ip', 200)->nullable();
+            $table->text('request')->nullable();
 
             $table->timestamps();
 

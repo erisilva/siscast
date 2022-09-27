@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css-header')
+<link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
+@endsection
+
 @section('content')
 <div class="container-fluid">
   <nav aria-label="breadcrumb">
@@ -24,22 +28,22 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="name">Nome <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? '' }}" maxlength="180">
-        @error('name')
+        <label for="nome">Nome <strong  class="text-danger">(*)</strong></label>
+        <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') ?? '' }}" maxlength="180">
+        @error('nome')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
       <div class="form-group col-md-3">
         <label for="nascimento">Nascimento <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" id="nascimento" value="{{ old('description') ?? '' }}">
+        <input type="text" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" id="nascimento" value="{{ old('nascimento') ?? '' }}" autocomplete="off">
         @error('nascimento')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
       <div class="form-group col-md-3">
         <label for="cpf">CPF <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="{{ old('description') ?? '' }}" maxlength="14">
+        <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" id="cpf" value="{{ old('cpf') ?? '' }}" maxlength="14">
         @error('cpf')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -49,22 +53,22 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="email">E-mail <strong  class="text-danger">(*)</strong></label>
-        <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? '' }}" maxlength="150">
+        <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? '' }}" maxlength="150">
         @error('email')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
       <div class="form-group col-md-4">
-        <label for="celular">Celular <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('celular') is-invalid @enderror" name="celular" id="celular" value="{{ old('description') ?? '' }}" maxlength="15">
-        @error('celular')
+        <label for="cel">Celular <strong  class="text-danger">(*)</strong></label>
+        <input type="text" class="form-control @error('cel') is-invalid @enderror" name="cel" id="cel" value="{{ old('cel') ?? '' }}" maxlength="15">
+        @error('cel')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror  
       </div>
       <div class="form-group col-md-4">
-        <label for="telefone">Telefone</label>
-        <input type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone" id="telefone" value="{{ old('description') ?? '' }}" maxlength="15">
-        @error('telefone')
+        <label for="tel">Telefone</label>
+        <input type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" id="tel" value="{{ old('tel') ?? '' }}" maxlength="15">
+        @error('tel')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror 
       </div>      
@@ -73,48 +77,48 @@
     <div class="form-row">
       <div class="form-group col-md-2">
         <label for="cep">CEP <strong class="text-danger">(*)</strong></label>  
-        <input type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" id="cep" value="{{ old('cep') ?? '' }}">
+        <input type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" id="cep" value="{{ old('cep') ?? '' }}" maxlength="9">
         @error('cep')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
       <div class="form-group col-md-5">  
-        <label for="logradouro">Logradouro <strong class="text-danger">(*)</strong></label>  
-        <input type="text" class="form-control  @error('logradouro') is-invalid @enderror" name="logradouro" id="logradouro" value="{{ old('logradouro') ?? '' }}">
-        @error('logradouro')
+        <label for="endereco">Endereço <strong class="text-danger">(*)</strong></label>  
+        <input type="text" class="form-control  @error('endereco') is-invalid @enderror" name="endereco" id="endereco" value="{{ old('endereco') ?? '' }}" maxlength="100">
+        @error('endereco')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror 
       </div> 
       <div class="form-group col-md-2">  
         <label for="numero">Nº <strong class="text-danger">(*)</strong></label>  
-        <input type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" id="numero" value="{{ old('numero') ?? '' }}">
+        <input type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" id="numero" value="{{ old('numero') ?? '' }}"  maxlength="10">
         @error('numero')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror    
       </div>
       <div class="form-group col-md-3">  
         <label for="complemento">Complemento</label>  
-        <input type="text" class="form-control" name="complemento" id="complemento" value="{{ old('complemento') ?? '' }}">
+        <input type="text" class="form-control" name="complemento" id="complemento" value="{{ old('complemento') ?? '' }}"  maxlength="100">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="bairro">Bairro <strong class="text-danger">(*)</strong></label>  
-        <input type="text" class="form-control  @error('bairro') is-invalid @enderror" name="bairro" id="bairro" value="{{ old('bairro') ?? '' }}">
+        <input type="text" class="form-control  @error('bairro') is-invalid @enderror" name="bairro" id="bairro" value="{{ old('bairro') ?? '' }}" maxlength="80">
         @error('bairro')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div>
       <div class="form-group col-md-6">  
         <label for="cidade">Cidade <strong class="text-danger">(*)</strong></label>  
-        <input type="text" class="form-control @error('cidade') is-invalid @enderror" name="cidade" id="cidade" value="{{ old('cidade') ?? '' }}">
+        <input type="text" class="form-control @error('cidade') is-invalid @enderror" name="cidade" id="cidade" value="{{ old('cidade') ?? '' }}" maxlength="80">
         @error('cidade')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
       </div> 
       <div class="form-group col-md-2">  
         <label for="uf">UF <strong class="text-danger">(*)</strong></label>  
-        <input type="text" class="form-control @error('uf') is-invalid @enderror" name="uf" id="uf" value="{{ old('uf') ?? '' }}">
+        <input type="text" class="form-control @error('uf') is-invalid @enderror" name="uf" id="uf" value="{{ old('uf') ?? '' }}"  maxlength="2">
         @error('uf')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -124,7 +128,7 @@
     <div class="form-row">
       <div class="form-group col-4">
         <label for="cns">Cartão Nacional de Saúde <strong class="text-danger">(*)</strong></label>
-        <input type="password" class="form-control @error('cns') is-invalid @enderror" name="cns" id="cns" value="{{ old('cns') ?? '' }}" maxlength="20">
+        <input type="text" class="form-control @error('cns') is-invalid @enderror" name="cns" id="cns" value="{{ old('cns') ?? '' }}" maxlength="15">
         @error('cns')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror  
@@ -141,8 +145,8 @@
         <label for="beneficio">Possui benefício de algum programa social do governo? <strong class="text-danger">(*)</strong></label>
         <select class="form-control  @error('beneficio') is-invalid @enderror" name="beneficio" id="beneficio">
           <option value="" selected="true">Selecione...</option>        
-          <option value="S">Não</option>
-          <option value="N">Sim</option>
+          <option value="S" {{ old("beneficio") == "S" ? "selected": "" }}>Não</option>
+          <option value="N" {{ old("beneficio") == "N" ? "selected": "" }}>Sim</option>
         </select>
         @error('beneficio')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -163,7 +167,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
         <label for="nomeAnimal">Nome do Animal <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" name="nomeAnimal" value="{{ old('nomeAnimal') ?? '' }}" maxlength="180">
+        <input type="text" class="form-control @error('nomeAnimal') is-invalid @enderror" name="nomeAnimal" value="{{ old('nomeAnimal') ?? '' }}" maxlength="100">
         @error('nomeAnimal')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -172,8 +176,8 @@
         <label for="especie">Espécie<strong class="text-danger">(*)</strong></label>
         <select class="form-control  @error('especie') is-invalid @enderror" name="especie" id="especie">
           <option value="" selected="true">Selecione...</option>        
-          <option value="felino">Felino</option>
-          <option value="canino">Canino</option>
+          <option value="felino" {{ old("especie") == "felino" ? "selected": "" }}>Felino</option>
+          <option value="canino" {{ old("especie") == "canino" ? "selected": "" }}>Canino</option>
         </select>
         @error('especie')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -183,8 +187,8 @@
         <label for="genero">Gênero<strong class="text-danger">(*)</strong></label>
         <select class="form-control  @error('genero') is-invalid @enderror" name="genero" id="genero">
           <option value="" selected="true">Selecione...</option>        
-          <option value="M">Macho</option>
-          <option value="F">Fêmea</option>
+          <option value="M" {{ old("genero") == "M" ? "selected": "" }}>Macho</option>
+          <option value="F" {{ old("genero") == "F" ? "selected": "" }}>Fêmea</option>
         </select>
         @error('genero')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -198,7 +202,7 @@
         <select class="form-control @error('raca_id') is-invalid @enderror" name="raca_id" id="raca_id">
           <option value="" selected="true">Selecione ...</option>        
           @foreach($racas as $raca)
-          <option value="{{$raca->id}}">{{$raca->descricao}}</option>
+          <option value="{{$raca->id}}"  {{ old("raca_id") == $raca->id ? "selected":"" }}>{{$raca->descricao}}</option>
           @endforeach
         </select>
         @error('raca_id')
@@ -209,9 +213,9 @@
         <label for="porte">Porte(tamanho)<strong class="text-danger">(*)</strong></label>
         <select class="form-control  @error('porte') is-invalid @enderror" name="porte" id="porte">
           <option value="" selected="true">Selecione...</option>        
-          <option value="pequeno">Pequeno</option>
-          <option value="medio">Médio</option>
-          <option value="grande">Grande</option>
+          <option value="pequeno" {{ old("porte") == "pequeno" ? "selected": "" }}>Pequeno</option>
+          <option value="medio" {{ old("porte") == "medio" ? "selected": "" }}>Médio</option>
+          <option value="grande" {{ old("porte") == "grande" ? "selected": "" }}>Grande</option>
         </select>
         @error('porte')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -219,7 +223,7 @@
       </div>
       <div class="form-group col-md-4">
         <label for="cor">Cor(es) do animal <strong  class="text-danger">(*)</strong></label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" name="cor" value="{{ old('cor') ?? '' }}" maxlength="80">
+        <input type="text" class="form-control @error('cor') is-invalid @enderror" name="cor" value="{{ old('cor') ?? '' }}" maxlength="80">
         @error('cor')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -238,7 +242,7 @@
     <div class="form-row">
       <div class="form-group col-md-4">
           <label for="idade">Idade do animal <strong  class="text-danger">(*)</strong></label>
-          <input type="text" class="form-control @error('name') is-invalid @enderror" name="idade" value="{{ old('idade') ?? '' }}" maxlength="2" id="idade">
+          <input type="text" class="form-control @error('idade') is-invalid @enderror" name="idade" value="{{ old('idade') ?? '' }}" maxlength="2" id="idade">
           @error('idade')
               <div class="invalid-feedback">{{ $message }}</div>
           @enderror
@@ -247,8 +251,8 @@
         <label for="idadeEm">Idade em <strong class="text-danger">(*)</strong></label>
         <select class="form-control  @error('idadeEm') is-invalid @enderror" name="idadeEm" id="idadeEm">
           <option value="" selected="true">Selecione...</option>        
-          <option value="mes">Mês(es)</option>
-          <option value="ano">Ano(s)</option>
+          <option value="mes" {{ old("idadeEm") == "mes" ? "selected": "" }}>Mês(es)</option>
+          <option value="ano" {{ old("idadeEm") == "ano" ? "selected": "" }}>Ano(s)</option>
         </select>
         @error('idadeEm')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -258,12 +262,12 @@
         <label for="procedencia">Origem do animal <strong class="text-danger">(*)</strong></label>
         <select class="form-control  @error('procedencia') is-invalid @enderror" name="procedencia" id="procedencia">
           <option value="" selected="true">Selecione...</option>        
-          <option value="vive na rua / comunitario">Vive na rua ou comunitário</option>
-          <option value="resgatado">Resgatado</option>
-          <option value="adotado">Adotado</option>
-          <option value="comprado">Comprado</option>
-          <option value="ONG">ONG</option>
-          <option value="CCZ">CCZ</option>
+          <option value="vive na rua / comunitario" {{ old("procedencia") == "vive na rua / comunitario" ? "selected": "" }}>Vive na rua ou comunitário</option>
+          <option value="resgatado" {{ old("procedencia") == "resgatado" ? "selected": "" }}>Resgatado</option>
+          <option value="adotado" {{ old("procedencia") == "adotado" ? "selected": "" }}>Adotado</option>
+          <option value="comprado" {{ old("procedencia") == "comprado" ? "selected": "" }}>Comprado</option>
+          <option value="ONG" {{ old("procedencia") == "ONG" ? "selected": "" }}>ONG</option>
+          <option value="CCZ" {{ old("procedencia") == "CCZ" ? "selected": "" }}>CCZ</option>
         </select>
         @error('procedencia')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -277,7 +281,90 @@
       </div>
     </div>
 
-    
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="primeiraTentativa">Primeira Tentativa</label>
+        <select class="form-control" name="primeiraTentativa" id="primeiraTentativa">
+          <option value="N" selected="true">Selecione...</option>        
+          <option value="S" {{ old("primeiraTentativa") == "S" ? "selected": "" }}>Não</option>
+          <option value="N" {{ old("primeiraTentativa") == "N" ? "selected": "" }}>Sim</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="primeiraTentativaQuando">Quando</label>
+        <input type="text" class="form-control" name="primeiraTentativaQuando" id="primeiraTentativaQuando" value="{{ old('primeiraTentativaQuando') ?? '' }}" autocomplete="off">  
+      </div>
+      <div class="form-group col-md-4">
+        <label for="primeiraTentativaHora">Horas</label>  
+        <input type="text" class="form-control" name="primeiraTentativaHora" id="primeiraTentativaHora" value="{{ old('primeiraTentativaHora') ?? '' }}"  maxlength="5">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="segundaTentativa">Segunda Tentativa</label>
+        <select class="form-control" name="segundaTentativa" id="segundaTentativa">
+          <option value="N" selected="true">Selecione...</option>        
+          <option value="S" {{ old("segundaTentativa") == "S" ? "selected": "" }}>Não</option>
+          <option value="N" {{ old("segundaTentativa") == "N" ? "selected": "" }}>Sim</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="segundaTentativaQuando">Quando</label>
+        <input type="text" class="form-control" name="segundaTentativaQuando" id="segundaTentativaQuando" value="{{ old('segundaTentativaQuando') ?? '' }}" autocomplete="off">  
+      </div>
+      <div class="form-group col-md-4">
+        <label for="segundaTentativaHora">Horas</label>  
+        <input type="text" class="form-control" name="segundaTentativaHora" id="segundaTentativaHora" value="{{ old('segundaTentativaHora') ?? '' }}"  maxlength="5">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="nota">Anotações do Agendamento </label>
+      <textarea class="form-control" name="nota" id="nota" rows="5">{{ old('nota') ?? '' }}</textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="agendaQuando">Data de Agendamento</label>
+        <input type="text" class="form-control" name="agendaQuando" id="agendaQuando" value="{{ old('agendaQuando') ?? '' }}" autocomplete="off">  
+      </div>
+      <div class="form-group col-md-6">
+        <label for="agendaTurno">Segunda Tentativa</label>
+        <select class="form-control" name="agendaTurno" id="agendaTurno">
+          <option value="nenhum" selected="true">Selecione...</option>        
+          <option value="manha" {{ old("agendaTurno") == "manha" ? "selected": "" }}>Manhã</option>
+          <option value="tarde" {{ old("agendaTurno") == "tarde" ? "selected": "" }}>Tarde</option>
+          <option value="nenhum" {{ old("agendaTurno") == "nenhum" ? "selected": "" }}>Nenhum</option>
+        </select>  
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="motivoNaoAgendado">Motivo do Não Agendamento</label>
+      <textarea class="form-control" name="motivoNaoAgendado" id="motivoNaoAgendado" rows="5">{{ old('motivoNaoAgendado') ?? '' }}</textarea>
+    </div>
+
+    <div class="form-group py-2">
+      <div class="container bg-warning text-dark">
+        <p class="text-center"><strong>STATUS DO PEDIDO</strong></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="situacao_id">Situação do Pedido <strong  class="text-danger">(*)</strong></label>
+      <select class="form-control" id="situacao_id" name="situacao_id">
+          <option value="1" selected="true">&rarr; Em análise do pedido para agendamento</option> 
+          @foreach($situacoes as $situacao)
+          <option value="{{$situacao->id}}" {{ old("situacao_id") == $situacao->id ? "selected":"" }}>{{$situacao->descricao}}</option>
+          @endforeach
+      </select>
+      @if ($errors->has('situacao_id'))
+      <div class="text-danger">
+      {{ $errors->first('situacao_id') }}
+      </div>
+      @endif 
+    </div>
      
     <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Cadastrar Pedido</button>
   </form>
@@ -292,7 +379,7 @@
 <script>
   $(document).ready(function(){
 
-      $('#nascimento').datepicker({
+      $('#nascimento, #primeiraTentativaQuando, #segundaTentativaQuando, #agendaQuando').datepicker({
           format: "dd/mm/yyyy",
           todayBtn: "linked",
           clearBtn: true,
@@ -307,16 +394,16 @@
       });
 
       $("#cep").inputmask({
-        mask: ['99.999-999'],
+        mask: ['99999-999'],
         keepStatic: true
       });
 
-      $("#celular").inputmask({
+      $("#cel").inputmask({
         mask: ['(99) 99999-9999'],
         keepStatic: true
       });
 
-      $("#telefone").inputmask({
+      $("#tel").inputmask({
         mask: ['(99) 9999-9999'],
         keepStatic: true
       });
@@ -331,7 +418,7 @@
           if (cep != "") {
               var validacep = /^[0-9]{8}$/;
               if(validacep.test(cep)) {
-                  $("#logradouro").val("...");
+                  $("#endereco").val("...");
                   $("#bairro").val("...");
                   $("#cidade").val("...");
                   $("#uf").val("...");
@@ -347,7 +434,7 @@
                               $("#bairro").val(json[0]['bairro']);
                               $("#cidade").val(json[0]['cidade']);
                               $("#uf").val(json[0]['uf'].toUpperCase());
-                              $("#logradouro").val(json[0]['rua']);
+                              $("#endereco").val(json[0]['rua']);
                           }
                       }
                   });
