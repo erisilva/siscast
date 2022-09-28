@@ -20,26 +20,43 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Cód/Ano</th>
-                <th scope="col">Data</th>
-                <th scope="col">Hora</th>
-                <th scope="col">Nome</th>
                 <th scope="col"></th>
+                <th scope="col">Cód/Ano</th>
+                <th scope="col">Cadastro</th>
+                <th scope="col">Status</th>
+                <th scope="col">Solicitante</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Nome do Animal</th>
+                <th scope="col">Espécie</th>
+                <th scope="col">Raça</th>
+                <th scope="col">Gênero</th>
+                <th scope="col">Porte</th>
+                <th scope="col">Idade</th>
+                
             </tr>
         </thead>
         <tbody>
             @foreach($pedidos as $pedido)
             <tr>
-                <td class="text-nowrap"><strong>{{$pedido->codigo}}/{{$pedido->ano}}</strong></td>
-                <td class="text-nowrap">{{date('d/m/Y', strtotime($pedido->created_at))}}</td>
-                <td class="text-nowrap">{{date('H:i', strtotime($pedido->created_at))}}</td>
-                <td class="text-nowrap">{{$pedido->nome}}</td>
                 <td>
                   <div class="btn-group" role="group">
                     <a href="{{route('pedidos.edit', $pedido)}}" class="btn btn-primary btn-sm" role="button"><i class="bi bi-pencil-square"></i></a>
                     <a href="{{route('pedidos.show', $pedido)}}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-trash"></i></a>
-                 </div>
+                </div>
                 </td>
+                <td class="text-nowrap"><strong>{{$pedido->codigo}}/{{$pedido->ano}}</strong></td>
+                <td class="text-nowrap">{{date('d/m/Y', strtotime($pedido->created_at))}}</td>
+                <td><strong>{{ $pedido->situacao->nome }}</strong></td>
+                <td>{{$pedido->nome}}</td>
+                <td  class="text-nowrap">{{$pedido->cel}}</td>
+                <td>{{$pedido->cidade}}</td>
+                <td>{{$pedido->nomeAnimal}}</td>
+                <td><strong>{{$pedido->especie_descricao}}</strong></td>
+                <td>{{$pedido->raca->descricao}}</td>
+                <td>{{$pedido->genero_descricao}}</td>
+                <td>{{$pedido->porte_descricao}}</td>
+                <td  class="text-nowrap">{{$pedido->idade}} {{($pedido->idadeEm == 'ano') ? 'Ano(s)' : 'Mês(es)'}}</td>
             </tr>    
             @endforeach                                                 
         </tbody>

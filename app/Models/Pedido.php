@@ -22,6 +22,21 @@ class Pedido extends Model
     {
         return $this->belongsTo(Situacao::class);
     }
+
+    public function getEspecieDescricaoAttribute()
+    {
+        return $this->especie == 'felino' ? 'Felino' : 'Canino';
+    }
+
+    public function getGeneroDescricaoAttribute()
+    {
+        return $this->genero == 'M' ? 'Macho' : 'Fêmea';     
+    }
+
+    public function getPorteDescricaoAttribute()
+    {
+        return $this->porte == 'pequeno' ? 'Pequeno' : ($this->porte == 'medio' ? 'Médio' : 'Grande');
+    }
     
     protected $dates = [
         'nascimento', 'primeiraTentativaQuando', 'segundaTentativaQuando', 'agendaQuando', 'created_at', 'updated_at'
