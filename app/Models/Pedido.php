@@ -37,6 +37,16 @@ class Pedido extends Model
     {
         return $this->porte == 'pequeno' ? 'Pequeno' : ($this->porte == 'medio' ? 'Médio' : 'Grande');
     }
+
+    public function getBeneficioDescricaoAttribute()
+    {
+        return $this->beneficio == 'S' ? 'Sim' : 'Não';
+    }
+
+    public function getTurnoDescricaoAttribute()
+    {
+        return $this->porte == 'nenhum' ? 'Nenhum' : ($this->agendaTurno == 'manha' ? 'Manhã' : 'Tarde');
+    }
     
     protected $dates = [
         'nascimento', 'primeiraTentativaQuando', 'segundaTentativaQuando', 'agendaQuando', 'created_at', 'updated_at'

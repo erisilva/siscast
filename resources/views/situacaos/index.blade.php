@@ -24,6 +24,7 @@
             <tr>
                 <th scope="col">Nome</th>
                 <th scope="col">Descrição</th>
+                <th scope="col">Desenho</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
             <tr>
                 <td>{{$situacao->nome}}</td>
                 <td>{{$situacao->descricao}}</td>
+                <td><button type="button" class="btn {{$situacao->cor}}"><i class="{{$situacao->icone}}"></i> {{$situacao->nome}}</button></td>
                 <td>
                   <div class="btn-group" role="group">
                     <a href="{{route('situacaos.edit', $situacao)}}" class="btn btn-primary btn-sm" role="button"><i class="bi bi-pencil-square"></i></a>

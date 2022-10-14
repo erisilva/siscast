@@ -24,6 +24,7 @@
                 <th scope="col">Cód/Ano</th>
                 <th scope="col">Cadastro</th>
                 <th scope="col">Status</th>
+                <th scope="col">Agenda</th>
                 <th scope="col">Solicitante</th>
                 <th scope="col">Celular</th>
                 <th scope="col">Cidade</th>
@@ -48,6 +49,7 @@
                 <td class="text-nowrap"><strong>{{$pedido->codigo}}/{{$pedido->ano}}</strong></td>
                 <td class="text-nowrap">{{date('d/m/Y', strtotime($pedido->created_at))}}</td>
                 <td><strong>{{ $pedido->situacao->nome }}</strong></td>
+                <td><strong>{{isset($pedido->agendaQuando) ?  date('d/m/Y', strtotime($pedido->agendaQuando)) : '-'}}</strong></td>
                 <td>{{$pedido->nome}}</td>
                 <td  class="text-nowrap">{{$pedido->cel}}</td>
                 <td>{{$pedido->cidade}}</td>

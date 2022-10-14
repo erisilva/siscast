@@ -65,6 +65,8 @@ class SituacaoController extends Controller
         Situacao::create($request->validate([
             'nome' => 'required',
             'descricao' => 'required',
+            'cor' => 'required',
+            'icone' => 'required',
           ]));
 
         return redirect(route('situacaos.index'))->with('message', 'Situação cadastrada com sucesso!');
@@ -110,8 +112,10 @@ class SituacaoController extends Controller
     public function update(Request $request, Situacao $situacao)
     {
         $situacao->update($request->validate([
-          'nome' => 'required',
-          'descricao' => 'required',
+            'nome' => 'required',
+            'descricao' => 'required',
+            'cor' => 'required',
+            'icone' => 'required',
         ]));
 
         return redirect(route('situacaos.index'))->with('message', 'Situação atualizada com sucesso!');

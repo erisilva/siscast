@@ -14,6 +14,9 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Nome: {{$situacao->NOME}}</li>
     <li class="list-group-item">Descrição: {{$situacao->descricao}}</li>
+    <li class="list-group-item">Cor: {{$situacao->cor}}</li>
+    <li class="list-group-item">Ícone: {{$situacao->icone}}</li>
+    <li class="list-group-item">Desenho: <button type="button" class="btn {{$situacao->cor}}"><i class="{{$situacao->icone}}"></i> {{$situacao->nome}}</button></li>
   </ul>
 </x-card>
 

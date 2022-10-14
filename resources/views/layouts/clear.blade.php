@@ -14,10 +14,10 @@
     @yield('script-header')
 
     <!-- Icones -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.united.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.spacelab.css') }}">
 
     <!-- Custom css, necessary for typehead -->
     @yield('css-header')

@@ -17,6 +17,8 @@ class CreateSituacaosTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('descricao');
+            $table->string('cor');
+            $table->string('icone');
             $table->timestamps();
         });
     }
