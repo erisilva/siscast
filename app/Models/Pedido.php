@@ -45,7 +45,7 @@ class Pedido extends Model
 
     public function getTurnoDescricaoAttribute()
     {
-        return $this->porte == 'nenhum' ? 'Nenhum' : ($this->agendaTurno == 'manha' ? 'Manhã' : 'Tarde');
+        return $this->agendaTurno == 'nenhum' ? 'Nenhum' : ($this->agendaTurno == 'manha' ? 'Manhã' : 'Tarde');
     }
     
     protected $dates = [
@@ -56,7 +56,7 @@ class Pedido extends Model
     {
         $query->when($filters['codigo'] ?? false, fn ($query, $codigo) => $query->where('codigo', 'like', '%' . $codigo . '%'));
         $query->when($filters['ano'] ?? false, fn ($query, $ano) => $query->where('ano', 'like', '%' . $ano . '%'));
-        $query->when($filters['cpf'] ?? false, fn ($query, $cpf) => $query->where('cpf', 'like', '%' . $cpf . '%'));
+        $query->when($filters['situacao_id'] ?? false, fn ($query, $situacao_id) => $query->where('situacao_id', '=', $situacao_id));
         $query->when($filters['nome'] ?? false, fn ($query, $nome) => $query->where('nome', 'like', '%' . $nome . '%'));
     }
 }

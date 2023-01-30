@@ -25,10 +25,10 @@
                 <th scope="col">Cadastro</th>
                 <th scope="col">Status</th>
                 <th scope="col">Agenda</th>
-                <th scope="col">Solicitante</th>
+                <th scope="col">Nome do Tutor</th>
                 <th scope="col">Celular</th>
                 <th scope="col">Cidade</th>
-                <th scope="col">Nome do Animal</th>
+                <th scope="col">Animal</th>
                 <th scope="col">Espécie</th>
                 <th scope="col">Raça</th>
                 <th scope="col">Gênero</th>
@@ -74,29 +74,45 @@
   <form method="GET" action="{{ route('pedidos.index') }}">
     @csrf
     <div class="form-row">
-      <div class="for-group col-6">
+      <div class="form-group col-md-2">
         <label for="codigo">Código</label>
-        <input type="text" class="form-control" id="codigo" name="codigo" value="{{ request()->input('codigo') }}">
+        <input type="text" class="form-control" id="codigo" name="codigo" value="{{ session('codigo') }}">
       </div>
-      <div class="for-group col-6">
+      <div class="form-group col-md-2">
         <label for="ano">Ano</label>
-        <input type="text" class="form-control" id="ano" name="ano" value="{{ request()->input('ano') }}">
-      </div>  
-    </div>
-    
-    <div class="form-row">
-      <div class="for-group col-6">
-        <label for="nome">Nome</label>
-        <input type="text" class="form-control" id="nome" name="nome" value="{{ request()->input('nome') }}">
+        <input type="text" class="form-control" id="ano" name="ano" value="{{ session('ano') }}">
       </div>
-      <div class="for-group col-6">
-        <label for="cpf">CPF</label>
-        <input type="text" class="form-control" id="cpf" name="cpf" value="{{ request()->input('cpf') }}">
+      <div class="form-group col-md-8">
+        <label for="nome">Nome do Tutor</label>
+        <input type="text" class="form-control" id="nome" name="nome" value="{{ session('nome') }}">
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-search"></i> Pesquisar</button>
-    <a href="{{ route('pedidos.index') }}" class="btn btn-primary btn-sm" role="button">Limpar</a>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="situacao_id">Situação do Pedido</label>
+        <select class="form-control" id="situacao_id" name="situacao_id">
+          <option value="" selected>Exibir Todos</option> 
+            @foreach($situacoes as $situacao)
+            <option value="{{$situacao->id}}" {{ session("situacao_id") == $situacao->id ? "selected":"" }}>{{$situacao->descricao}}</option>
+            @endforeach
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="especie">Espécie</label>
+        <select class="form-control  @error('especie') is-invalid @enderror" name="especie" id="especie">
+          <option value="" selected>Exibir Todos</option> 
+          <option value="felino" {{ session("especie") == "felino" ? "selected": "" }}>Felino</option>
+          <option value="canino" {{ session("especie") == "canino" ? "selected": "" }}>Canino</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group py-2">
+      <button type="submit" class="btn btn-primary btn-sm"><i class="bi bi-search"></i> Pesquisar</button>
+      <a href="{{ route('pedidos.clear.session') }}" class="btn btn-secondary btn-sm" role="button"><i class="bi bi-stars"></i> Limpar</a>
+    </div>
+
   </form>
 </x-modal-filter>  
 

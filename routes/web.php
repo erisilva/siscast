@@ -84,6 +84,7 @@ Route::prefix('sistema')->group(function () {
 
     /* Pedidos */
     # relatorios
+    Route::get('/pedidos/clear/session', 'PedidoController@clearsession')->name('pedidos.clear.session');
     Route::get('/pedidos/export/csv', 'PedidoController@exportcsv')->name('pedidos.export.csv');
     Route::get('/pedidos/export/xls', 'PedidoController@exportxls')->name('pedidos.export.xls');
     Route::get('/pedidos/export/pdf', 'PedidoController@exportpdf')->name('pedidos.export.pdf');

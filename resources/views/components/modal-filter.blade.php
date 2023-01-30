@@ -9,8 +9,10 @@
         </button>
       </div>
       <div class="modal-body">
+        <div class="container">
         {{$slot}}
-        <div class="form-group py-2">
+      </div>
+        <div class="container py-2">
           <select class="form-control" name="perpage" id="perpage">
             @foreach($perpages as $perpage)
             <option value="{{$perpage->valor}}"  {{($perpage->valor == session('perPage')) ? 'selected' : ''}}>{{$perpage->nome}}</option>

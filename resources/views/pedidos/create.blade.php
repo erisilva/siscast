@@ -42,7 +42,7 @@
     
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="nome">Nome <strong  class="text-danger">(*)</strong></label>
+        <label for="nome">Nome do Tutor <strong  class="text-danger">(*)</strong></label>
         <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" id="nome" value="{{ old('nome') ?? '' }}" maxlength="180">
         @error('nome')
           <div class="text-danger">

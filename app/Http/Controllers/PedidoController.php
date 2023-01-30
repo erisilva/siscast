@@ -35,18 +35,39 @@ class PedidoController extends Controller
     public function index()
     {
         $this->authorize('pedido-index');
-        
-        // atualiza perPage se necessário
+                
         if(request()->has('perpage')) {
             session(['perPage' => request('perpage')]);
         }
+
+        $lista_de_filtros = ['codigo', 'ano', 'nome', 'situacao_id'];
+
+        foreach($lista_de_filtros as $filtro) {
+            if(request()->has($filtro)) {
+                session([$filtro => request($filtro)]);
+            }
+            $filtros[$filtro] = session($filtro, null);
+        }
         
         return view('pedidos.index', [
-            'pedidos' => Pedido::orderBy('id', 'desc')->filter(request(['codigo', 'ano', 'cpf', 'nome']))->paginate(session('perPage', '5'))->appends(request(['codigo', 'ano', 'cpf', 'nome'])),
+            'pedidos' => Pedido::orderBy('id', 'desc')->filter($filtros)->paginate(session('perPage', '5'))->appends(request(['codigo', 'ano', 'cpf', 'nome'])),
             'racas' => Raca::orderBy('descricao')->get(),
             'situacoes' => Situacao::orderBy('nome')->get(),
             'perpages' => Perpage::orderBy('valor')->get()
         ]);   
+    }
+
+    public function clearsession()
+    {
+        $this->authorize('pedido-index');
+        
+        $lista_de_filtros = ['codigo', 'ano', 'nome', 'situacao_id'];
+
+        foreach($lista_de_filtros as $filtro) {
+            session([$filtro => null]);
+        }
+        
+        return redirect()->route('pedidos.index');
     }
 
     /**
@@ -342,7 +363,28 @@ class PedidoController extends Controller
             'agendaTurno.required' => 'O campo Agendar para qual turno é obrigatório.',
         ]);
 
-        dd($request->all());
+        $new_pedido = request()->all(); // pego todos os dados do formulário e coloco em um array
+
+        // $new_pedido['ip'] = $request->ip(); // pego o ip do usuário que está fazendo a requisição e coloco no array pedido
+
+        // $new_pedido['request'] = json_encode($request->except('_token')); // pego todos os dados do formulário e converto em json e coloco no array pedido
+
+        $new_pedido['cpf'] = preg_replace('/[^0-9]/', '', $new_pedido['cpf'] ); // retiro os caracteres especiais do cpf
+
+        $new_pedido['cep'] = preg_replace('/[^0-9]/', '', $new_pedido['cep'] ); // retiro os caracteres especiais do cep
+        
+        $datas_a_ajustar = ['nascimento', 'primeiraTentativaQuando', 'segundaTentativaQuando', 'agendaQuando']; // datas que precisam ser ajustadas
+        
+        # ajusto as datas para o formato do banco de dados
+        foreach ($datas_a_ajustar as $data) {
+            if (isset($new_pedido[$data])) {
+                $new_pedido[$data] = implode('-', array_reverse(explode('/', $new_pedido[$data]))); // ajusto a data para o formato do banco de dados
+            }
+        }
+
+        $pedido->update($new_pedido); // atualizo o pedido
+
+        return redirect(route('pedidos.edit', $pedido))->with('message', 'Pedido alterado com sucesso!'); // redireciono para a página de edição do pedido de adoção']));
     }
 
     /**
@@ -353,6 +395,10 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
-        //
+        $this->authorize('pedido-delete'); // verifica se o usuário tem permissão para excluir o pedido
+
+        $pedido->delete();
+
+        return redirect(route('pedidos.index'))->with('message', 'Pedido excluído com sucesso!');
     }
 }

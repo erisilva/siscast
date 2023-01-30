@@ -33,7 +33,7 @@
 
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="nome">Nome</label>
+        <label for="nome">Nome do Tutor</label>
         <input type="text" class="form-control  @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') ?? $pedido->nome }}"  maxlength="180">
         @error('nome')
         <div class="text-danger">
@@ -179,6 +179,8 @@
       </div>
     </div>
 
+    <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Alterar Dados do Pedido</button>
+
     <div class="form-group py-2">
       <div class="container bg-warning text-dark">
         <p class="text-center"><strong>Informações Sobre o Animal</strong></p>
@@ -305,6 +307,8 @@
       </div>
     </div>
 
+    <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Alterar Dados do Pedido</button>
+
     <div class="form-group py-2">
       <div class="container bg-warning text-dark">
         <p class="text-center"><strong>Agendamento do Pedido (Opcional)</strong></p>
@@ -387,7 +391,7 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="agendaQuando">Data de Agendamento</label>
-        <input type="text" class="form-control @error('agendaQuando') is-invalid @enderror" name="agendaQuando" id="agendaQuando" value="{{ old('agendaQuando') ?? (isset($pedido->segundaTentativaQuando) ? $pedido->agendaQuando->format('d/m/Y') : '') }}" autocomplete="off">
+        <input type="text" class="form-control @error('agendaQuando') is-invalid @enderror" name="agendaQuando" id="agendaQuando" value="{{ old('agendaQuando') ?? (isset($pedido->agendaQuando) ? $pedido->agendaQuando->format('d/m/Y') : '') }}" autocomplete="off">
         @error('agendaQuando')
         <div class="text-danger">
           <small>{{ $message }}</small>
@@ -409,6 +413,8 @@
       <label for="motivoNaoAgendado">Motivo do Não Agendamento</label>
       <textarea class="form-control" name="motivoNaoAgendado" id="motivoNaoAgendado" rows="5">{{ old('motivoNaoAgendado') ?? $pedido->motivoNaoAgendado }}</textarea>
     </div>
+
+    <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Alterar Dados do Pedido</button>
 
     <div class="form-group py-2">
       <div class="container bg-warning text-dark">
