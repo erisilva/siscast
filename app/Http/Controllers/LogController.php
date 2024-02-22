@@ -3,83 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Log;
+use App\Models\Perpage;
 use Illuminate\Http\Request;
+
+use Illuminate\View\View;
 
 class LogController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() : View
     {
-        //
-    }
+        $this->authorize('log-index');
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        if(request()->has('perpage')) {
+            session(['perPage' => request('perpage')]);
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('logs.index', [
+            'logs' => Log::orderBy('id', 'desc')->paginate(session('perPage', '5')),
+            'perpages' => Perpage::orderBy('valor')->get()
+        ]);
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\Log  $log
-     * @return \Illuminate\Http\Response
      */
-    public function show(Log $log)
+    public function show(Log $log) : View
     {
-        //
+        $this->authorize('log-show');
+
+        return view('logs.show', [
+            'log' => $log
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Log $log)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Log $log)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Log  $log
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Log $log)
-    {
-        //
-    }
 }

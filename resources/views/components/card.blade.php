@@ -1,14 +1,19 @@
-@props(['title'])
+@props([
+  'title' => '', 
+  'footer' => ''
+  ])
 <div class="container">
   <div class="card">
     <div class="card-header">
-      {{$title}}
+      {{ $title }}
     </div>
     <div class="card-body">
-      {{$slot}}
+      {{ $slot }}
     </div>
+    @if ($footer)
     <div class="card-footer text-right">
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalLixeira"><i class="bi bi-trash"></i> Enviar para Lixeira</button>    
+      {{ $footer }}
     </div>
+    @endif
   </div>
 </div>

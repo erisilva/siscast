@@ -2,37 +2,36 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="robots" content="noindex, nofollow">
 
-    <!-- Custom Scripts -->
-    @yield('script-header')
+    <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
-    <!-- Icones -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    
+    @if (Auth::guest())
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    @else
+    <link rel="stylesheet" href="{{ asset('css/' . Auth::user()->theme->filename) }}">
+    @endif
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.spacelab.css') }}">
-
-    <!-- Custom css, necessary for typehead -->
+    <!-- Custom css -->
     @yield('css-header')
 </head>
 <body>
-
-
-    <main class="py-2">
-        @yield('content')
-    </main>
+    <div id="app">
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @yield('script-footer')
-    </body>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    @yield('script-footer')    
+</body>
 </html>

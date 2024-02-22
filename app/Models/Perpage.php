@@ -8,8 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Perpage extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'valor', 'nome',
-    ];
 }

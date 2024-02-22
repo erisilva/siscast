@@ -1,45 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Não encontrado.</title>
+@extends('layouts.app')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('title', 'Erro 419: ' . __('Page Expired'))
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Arial';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Erro 419: Sua sessão expirou.</div>
-            </div>
+@section('content')
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+			<div class="card bg-warning text-white">
+			  <div class="card-body">
+			  	<h5 class="card-title"><i class="bi bi-exclamation-triangle"></i> Erro 419: {{ __('Page Expired') }}</h5>
+    			<p class="card-text">{{ $exception->getMessage() }}</p>
+    			<a href="#" class="btn btn-primary" onclick="location.reload()"><i class="bi bi-arrow-clockwise"></i> {{ __('Reload Page') }}</a>
+			  </div>
+			</div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection

@@ -1,17 +1,17 @@
 <?php
 
 return [
-    'characters' => ['2', '3', '4', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'X', 'Y', 'Z'],
+    'disable' => env('CAPTCHA_DISABLE', false),
+    'characters' => ['2', '3', '4', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'm', 'n', 'p', 'q', 'r', 't', 'u', 'x', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'M', 'N', 'P', 'Q', 'R', 'T', 'U', 'X', 'Z'],
     'default' => [
         'length' => 5,
-        'width' => 120,
-        'height' => 36,
+        'width' => 140,
+        'height' => 40,
         'quality' => 90,
         'math' => false,
         'expire' => 60,
         'encrypt' => false,
         'fontColors' => ['#0A0E0F', '#762323', '#2A0E62'],
-        'characters' => ['2', '3', '4', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'f', 'f', 'g', 'h', 'm', 't', 'u', 'x', 'y', 'z'],
         'sensitive' => false,
         'bgColor' => '#ecf2f4',
     ],
@@ -31,7 +31,7 @@ return [
         'lines' => 6,
         'bgImage' => false,
         'bgColor' => '#ecf2f4',
-        'fontColors' => ['#0A0E0F', '#762323', '#2A0E62'],
+        'fontColors' => ['#2c3e50', '#c0392b', '#16a085', '#c0392b', '#8e44ad', '#303f9f', '#f57c00', '#795548'],
         'contrast' => -5,
     ],
     'mini' => [

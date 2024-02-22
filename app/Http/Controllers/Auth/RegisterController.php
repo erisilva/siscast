@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -53,6 +54,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'captcha' => 'required|captcha'
+        ],
+        [
+            'captcha.required' => __('Enter the characters shown in the figure above'),
+            'captcha.captcha' => __('Captcha typed incorrectly'),
         ]);
     }
 
@@ -64,10 +70,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Session::flash('register_user', __('Seu cadastro foi realizado com sucesso! Por favor, verifique seu e-mail para ativar sua conta.'));
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'active' => 'y',
+            'theme_id' => 1
         ]);
     }
 }

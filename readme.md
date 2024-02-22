@@ -2,95 +2,80 @@
 
 Sistema de cadastro de solicitações de esterilização de animais (cães e gatos) desenvolvido para a UVZ (unidade Vetéria e de Zoonoses).
 
-Constuído com a framework [Laravel](https://laravel.com/), na versão 8.x e usa como front-end [Bootstrap 4.6](https://getbootstrap.com/).
+## Built With
 
+- [Laravel 10.x](https://laravel.com/docs/10.x)
+- [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 
-## Requisitos
+## Prerequisites
 
-Os requisitos para executar esse sistema pode ser encontrado na [documentação oficial do laravel](https://laravel.com/docs/8.x):
+The requirements to run this system can be found at the link: [documentação oficial do laravel](https://laravel.com/docs/10.x):
 
+- Laravel 10.x requires a minimum PHP version of 8.1
+- Enable extension=gd extension in php.ini (for captcha)
+- Enable extension=zip extension in php.ini (for captcha)
 
-#### Bibliotecas (que podem ser) utilizadas nos projetos:
+## Dependencies
 
-- [Captcha for Laravel](https://github.com/mewebstudio/captcha) Nota: Habilitar a extenção extension=gd no php.ini
-- [Laravel DomPdf](https://github.com/barryvdh/laravel-dompdf) Exportação de dados para PDF
-- [laravel excel export lib](https://laravel-excel.com/) Exportação de dados para XLSX e CSV
-- [typeahead](https://github.com/corejavascript/typeahead.js) Criação de campo de autocompletar
-- [bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker) Campo de data/hora customizável compatível com bootstrap
-- [Inputmask](https://github.com/RobinHerbots/Inputmask) Máscaras para os campos dos formulários
-- [Bootstrap Multiselect](https://github.com/davidstutz/bootstrap-multiselect) Campo de seleção multipla de ítens compátivel com bootstrap
-- Utilizo os temas do site [Bootswatch](https://bootswatch.com/) para a versão 4.6 do Bootstrap
+- [Captcha for Laravel](https://github.com/mewebstudio/captcha), Note: Enable extension=gd extension in php.ini
+- [Laravel DomPdf](https://github.com/barryvdh/laravel-dompdf)
+- [laravel excel export lib](https://laravel-excel.com/)
+- [bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
+- [Inputmask](https://github.com/RobinHerbots/Inputmask)
 
-## Instalação
+## Installation
 
-Executar a migração das tabelas com o comando seed:
-
-php artisan migrate --seed
-
-Serão criados 4 usuários de acesso ao sistema, cada um com um perfíl de acesso diferente.
-
-Login: adm@mail.com senha:123456, acesso total.
-Login: gerente@mail.com senha:123456, acesso restrito.
-Login: operador@mail.com senha:123456, acesso restrito, não pode excluir registros.
-Login: leitor@mail.com senha: 123456, somente consulta.
-
-## Funcionalidades
-
-- Operadores* (usuários do sistema)
-- Perfís de acesso
-- Permissões
-
-## Guia de intalação
-
-Requer:
-
-- Servidor apache com banco de dados MySQL instalado, se aplicável, conforme requisitos mínimos
-- [Composer](https://getcomposer.org/download/) instalado
-- [Git client](https://git-scm.com/downloads) instalado
-
-### clonar o reposítório
+### Clone the repository
 
 ```
-git clone https://github.com/erisilva/siscast.git
+git clone https://github.com/erisilva/acl80.git
 ```
 
-não esquecer de usar o composer update para fazer download das libs do framework
+Use composer to install project dependencies:
 
 ```
 composer update
 ```
 
-### criar o banco de dados
+### Create the database
 
-para mysql
+This configuration shown below uses MySQL as the database. This configuration is for a development environment, therefore not recommended for production.
 
 ```
-CREATE DATABASE nome_do_banco_de_dados CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE database_name_here CHARACTER SET utf8 COLLATE utf8_general_ci;
 ```
 
-### configurações iniciais
+### Configure the environment
 
-criar o arquivo .env de configurações:
+Create the settings .env file:
 
 ```
 php -r "copy('.env.example', '.env');"
 ```
 
-editar o arquivo .env na pasta raiz do projeto com os dados de configuração com o banco.
+Edit the .env file in the root folder of the project with the database configuration data. More info in [documentação oficial do laravel](https://laravel.com/docs/10.x/configuration#environment-configuration):
+    
+```
+DB_CONNECTION=mysql
+DB_HOST=
+DB_PORT=
+DB_DATABASE=database_name_here
+DB_USERNAME=your_username_here
+DB_PASSWORD=yout_password_here
+```
 
-gerando a key de segurança:
+### Generate the application key
 
 ```
 php artisan key:generate
 ```
-
-iniciando o store para os anexos (se o projeto precisar):
+### Configure the storage if necessary
 
 ```
 php artisan storage:link
 ```
 
-### migrações
+### Migration
 
 Executar a migração das tabelas com o comando seed:
 
@@ -98,19 +83,55 @@ Executar a migração das tabelas com o comando seed:
 php artisan migrate --seed
 ```
 
-Serão criados 4 usuários de acesso ao sistema, cada um com um perfíl de acesso diferente.
+### Language
 
-Login: adm@mail.com senha:123456, acesso total.
-Login: gerente@mail.com senha:123456, acesso restrito.
-Login: operador@mail.com senha:123456, acesso restrito, não pode excluir registros.
-Login: leitor@mail.com senha: 123456, somente consulta.
+The default language is Brazilian Portuguese. To change the language, edit the file config/app.php:
 
-### executando
+```
+'locale' => 'en',
+```
+
+## Usage
+
+To run the system, use the command:
 
 ```
 php artisan serve
 ```
+Access the application in your web browser by visiting http://localhost:8000 or the appropriate URL provided by the php artisan serve command.
+
+### Users
+
+Login: adm@mail.com 
+Login: gerente@mail.com 
+Login: operador@mail.com
+Login: leitor@mail.com
+
+Note: The password for all users is 123456. By default, the migration generates users with names in Brazilian Portuguese.
+
+## Contact
+
+- E-mail: erivelton.silva@proton.me
+- Discord: gixeph#0658
+
+## Contribution
+
+If you would like to contribute to this project, I welcome your suggestions, bug reports, and pull requests. Please fork the repository, make your changes, and submit a pull request outlining your modifications.
+
+## Future Enhancements
+
+Here are some potential areas for future development and enhancement of this web application:
+
+-Implementing additional authentication methods such as OAuth or Two-Factor Authentication (2FA) for enhanced security.
+- Extending reporting capabilities to include additional file formats and advanced data visualization options.
+- Enhancing the logging system to provide more detailed information, including IP address and timestamp, for better traceability of events.
+- Expanding language support to include more languages
 
 ## Licenças
 
-Código aberto licenciado sob a [licença MIT](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details, except for the libraries used.
+
+## Acknowledgments
+
+- [Laravel](https://laravel.com/)
+- [Bootswatch](https://bootswatch.com/)

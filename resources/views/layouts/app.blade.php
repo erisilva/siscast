@@ -2,94 +2,140 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="robots" content="noindex, nofollow">
 
-    <!-- Custom Scripts -->
-    @yield('script-header')
+    <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
 
-    <!-- Icones -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    
+    @if (Auth::guest())
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    @else
+    <link rel="stylesheet" href="{{ asset('css/' . Auth::user()->theme->filename) }}">
+    @endif
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.spacelab.css') }}">
-
-    <!-- Custom css, necessary for typehead -->
+    <!-- Custom css -->
     @yield('css-header')
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <i class="bi bi-shop"></i> {{ config('app.name', 'ACL80') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                @if (!Auth::guest())
-                <ul class="navbar-nav mr-auto">                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">TO-DO</a>
-                    </li>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarConfig" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Configurações
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarConfig">
-                            <a class="dropdown-item" href="{{ route('users.index') }}"><i class="bi bi-person-lines-fill"></i> Operadores do Sistema</a>
-                            <a class="dropdown-item" href="{{ route('situacaos.index') }}"><i class="bi bi-clipboard-check"></i> Situações dos Pedidos</a>
-                            <a class="dropdown-item" href="{{ route('racas.index') }}"><i class="bi bi-clipboard-check"></i> Raças dos Animais</a>
-                        </div>
-                    </li>                    
-                </ul>
-                @endif
-                <ul class="navbar-nav ml-auto">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                    @else
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    @auth
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               {{ __('Config') }} 
                             </a>
+                            <ul class="dropdown-menu">
+                                @can('user-index')
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('users.index') }}">
+                                        <x-icon icon='people' /> {{ __('Users') }}
+                                    </a>
+                                </li>
+                                @endcan
+                                @can('log-index')
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logs.index') }}">
+                                        <x-icon icon='list' /> {{ __('Logs') }}
+                                    </a>
+                                </li>
+                                @endcan
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Another action
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('about') }}">
+                                        <x-icon icon='info-square' /> {{ __('About') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Something else here
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    @endauth
+                    
+                    <!-- Right Side Of Navbar -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    <i class="bi bi-door-closed"></i> Sair do Sistema
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('profile') }}">
+                                            <x-icon icon='person-fill' /> {{ __('Profile') }}
+                                        </a>
+                                    </li>
 
-                                <a class="dropdown-item" href="{{ route('users.password') }}"><i class="bi bi-key-fill"></i></i> Trocar Senha</a>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            <x-icon icon='box-arrow-right' /> {{ __('Logout') }}
+                                        </a>
+                                    </li> 
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </ul>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <main class="py-2">
-        @yield('content')
-    </main>
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    @yield('script-footer')
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    @yield('script-footer')    
+</body>
 </html>

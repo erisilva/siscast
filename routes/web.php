@@ -2,93 +2,99 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ProfileController;
+
+use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LogController;
+use App\Http\Controllers\RacaController;
+use App\Http\Controllers\SituacaoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+# about page
+Route::get('/about', function () {
+    return view('about.about');
+})->name('about')->middleware('auth', 'verified');
 
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::group(['prefix' => 'admin','namespace' => 'Auth'],function(){
-    // Authentication Routes...
-    Route::get('login', 'LoginController@showLoginForm')->name('login');
-    Route::post('login', 'LoginController@login');
-    Route::post('logout', 'LoginController@logout')->name('logout');
+Route::get('/', function () {
+    #if the user is logged return index view, if not logged return login view
+    if (Auth::check()) {
+        return view('index');
+    } else {
+        return view('auth.login');
+    }
 });
 
-Route::get('/', 'HomeController@index')->name('index');
+# add 'register' => false to Auth::routes() to disable registration
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('index');
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->middleware('auth', 'verified');
+Route::post('/profile/update/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update')->middleware('auth', 'verified');
+Route::post('/profile/update/theme', [ProfileController::class, 'updateTheme'])->name('profile.theme.update')->middleware('auth', 'verified');
 
-Route::prefix('admin')->namespace('Admin')->group(function () {
-    /*  Operadores */
-    // nota mental :: as rotas extras devem ser declaradas antes de se declarar as rotas resources
-    Route::get('/users/password', 'ChangePasswordController@showPasswordUpdateForm')->name('users.password');
-    Route::put('/users/password/update', 'ChangePasswordController@passwordUpdate')->name('users.passwordupdate');
-    // relatorios
-    Route::get('/users/export/csv', 'UserController@exportcsv')->name('users.export.csv');
-    Route::get('/users/export/xls', 'UserController@exportxls')->name('users.export.xls');
-    Route::get('/users/export/pdf', 'UserController@exportpdf')->name('users.export.pdf');
-    // crud
-    Route::resource('/users', 'UserController');
+# Permission::class
 
-    /* Permissões */
-    # relatorios
-    Route::get('/permissions/export/csv', 'PermissionController@exportcsv')->name('permissions.export.csv');
-    Route::get('/permissions/export/xls', 'PermissionController@exportxls')->name('permissions.export.xls');
-    Route::get('/permissions/export/pdf', 'PermissionController@exportpdf')->name('permissions.export.pdf');
-    #crud
-    Route::resource('/permissions', 'PermissionController');
+Route::get('/permissions/export/csv', [PermissionController::class, 'exportcsv'])->name('permissions.export.csv')->middleware('auth', 'verified');
 
-    /* Perfis */
-    # relatorios
-    Route::get('/roles/export/csv', 'RoleController@exportcsv')->name('roles.export.csv');
-    Route::get('/roles/export/xls', 'RoleController@exportxls')->name('roles.export.xls');
-    Route::get('/roles/export/pdf', 'RoleController@exportpdf')->name('roles.export.pdf');
-    # crud
-    Route::resource('/roles', 'RoleController');
-});
+Route::get('/permissions/export/xls', [PermissionController::class, 'exportxls'])->name('permissions.export.xls')->middleware('auth', 'verified'); // Export XLS
 
-Route::prefix('sistema')->group(function () {
-    /* Raças */
-    # relatorios
-    Route::get('/racas/export/csv', 'RacaController@exportcsv')->name('racas.export.csv');
-    Route::get('/racas/export/xls', 'RacaController@exportxls')->name('racas.export.xls');
-    Route::get('/racas/export/pdf', 'RacaController@exportpdf')->name('racas.export.pdf');
-    # crud
-    Route::resource('/racas', 'RacaController');
+Route::get('/permissions/export/pdf', [PermissionController::class, 'exportpdf'])->name('permissions.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
-    /* Situações do pedido */
-    # relatorios
-    Route::get('/situacaos/export/csv', 'SituacaoController@exportcsv')->name('situacaos.export.csv');
-    Route::get('/situacaos/export/xls', 'SituacaoController@exportxls')->name('situacaos.export.xls');
-    Route::get('/situacaos/export/pdf', 'SituacaoController@exportpdf')->name('situacaos.export.pdf');
-    # crud
-    Route::resource('/situacaos', 'SituacaoController');
+Route::resource('/permissions', PermissionController::class)->middleware('auth', 'verified'); // Resource Route, crud
 
-    /* Pedidos */
-    # relatorios
-    Route::get('/pedidos/clear/session', 'PedidoController@clearsession')->name('pedidos.clear.session');
-    Route::get('/pedidos/export/csv', 'PedidoController@exportcsv')->name('pedidos.export.csv');
-    Route::get('/pedidos/export/xls', 'PedidoController@exportxls')->name('pedidos.export.xls');
-    Route::get('/pedidos/export/pdf', 'PedidoController@exportpdf')->name('pedidos.export.pdf');
-    # crud
-    Route::resource('/pedidos', 'PedidoController');
-});    
+# Role::class
 
+Route::get('/roles/export/csv', [RoleController::class, 'exportcsv'])->name('roles.export.csv')->middleware('auth', 'verified'); // Export CSV
+
+Route::get('/roles/export/xls', [RoleController::class, 'exportxls'])->name('roles.export.xls')->middleware('auth', 'verified'); // Export XLS
+
+Route::get('/roles/export/pdf', [RoleController::class, 'exportpdf'])->name('roles.export.pdf')->middleware('auth', 'verified'); // Export PDF
+
+Route::resource('/roles', RoleController::class)->middleware('auth', 'verified'); // Resource Route, crud
+
+# User::class
+
+Route::get('/users/export/csv', [UserController::class, 'exportcsv'])->name('users.export.csv')->middleware('auth', 'verified'); // Export CSV
+
+Route::get('/users/export/xls', [UserController::class, 'exportxls'])->name('users.export.xls')->middleware('auth', 'verified'); // Export XLS
+
+Route::get('/users/export/pdf', [UserController::class, 'exportpdf'])->name('users.export.pdf')->middleware('auth', 'verified'); // Export PDF
+
+Route::resource('/users', UserController::class)->middleware('auth', 'verified'); // Resource Route, crud
+
+# Log::class
+
+Route::resource('/logs', LogController::class)->middleware('auth', 'verified')->only('show', 'index'); // Resource Route, crud
+
+# Raca::class
+
+Route::get('/racas/export/csv', [App\Http\Controllers\RacaController::class, 'exportcsv'])->name('racas.export.csv')->middleware('auth', 'verified'); // Export CSV
+
+Route::get('/racas/export/xls', [App\Http\Controllers\RacaController::class, 'exportxls'])->name('racas.export.xls')->middleware('auth', 'verified'); // Export XLS
+
+Route::get('/racas/export/pdf', [App\Http\Controllers\RacaController::class, 'exportpdf'])->name('racas.export.pdf')->middleware('auth', 'verified'); // Export PDF
+
+Route::resource('/racas', App\Http\Controllers\RacaController::class)->middleware('auth', 'verified'); // Resource Route, crud
+
+# Situacao::class
+
+Route::get('/situacaos/export/csv', [App\Http\Controllers\SituacaoController::class, 'exportcsv'])->name('situacaos.export.csv')->middleware('auth', 'verified'); // Export CSV
+
+Route::get('/situacaos/export/xls', [App\Http\Controllers\SituacaoController::class, 'exportxls'])->name('situacaos.export.xls')->middleware('auth', 'verified'); // Export XLS
+
+Route::get('/situacaos/export/pdf', [App\Http\Controllers\SituacaoController::class, 'exportpdf'])->name('situacaos.export.pdf')->middleware('auth', 'verified'); // Export PDF
+
+Route::resource('/situacaos', App\Http\Controllers\SituacaoController::class)->middleware('auth', 'verified'); // Resource Route, crud
