@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Situacao;
+use App\Models\Perpage;
 use Illuminate\Http\Request;
 
 class SituacaoController extends Controller
@@ -12,7 +13,16 @@ class SituacaoController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('situacao-index');
+
+        if(request()->has('perpage')) {
+            session(['perPage' => request('perpage')]);
+        }
+
+        return view('situacaos.index', [
+            'situacaos' => Situacao::orderBy('id', 'asc')->filter(request(['nome']))->paginate(session('perPage', '5'))->appends(request(['nome'])),
+            'perpages' => Perpage::orderBy('valor')->get()
+        ]);
     }
 
     /**
@@ -20,7 +30,9 @@ class SituacaoController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('situacao-create');
+
+        return view('situacaos.create');
     }
 
     /**
@@ -28,7 +40,18 @@ class SituacaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('situacao-create');
+
+        $request->validate([
+            'nome' => 'required|unique:situacaos',
+            'descricao' => 'required',
+            'cor' => 'required',
+            'icone' => 'required'
+        ]);
+
+        Situacao::create($request->all());
+
+        return redirect()->route('situacaos.index')->with('message', 'Situação cadastrada com sucesso!');
     }
 
     /**
@@ -36,7 +59,9 @@ class SituacaoController extends Controller
      */
     public function show(Situacao $situacao)
     {
-        //
+        $this->authorize('situacao-show');
+
+        return view('situacaos.show', compact('situacao'));
     }
 
     /**
@@ -44,7 +69,9 @@ class SituacaoController extends Controller
      */
     public function edit(Situacao $situacao)
     {
-        //
+        $this->authorize('situacao-edit');
+
+        return view('situacaos.edit', compact('situacao'));
     }
 
     /**
@@ -52,7 +79,18 @@ class SituacaoController extends Controller
      */
     public function update(Request $request, Situacao $situacao)
     {
-        //
+        $this->authorize('situacao-edit');
+
+        $request->validate([
+            'nome' => 'required|unique:situacaos,nome,' . $situacao->id,
+            'descricao' => 'required',
+            'cor' => 'required',
+            'icone' => 'required'
+        ]);
+
+        $situacao->update($request->all());
+
+        return redirect()->route('situacaos.index')->with('message', 'Situação atualizada com sucesso!');
     }
 
     /**
@@ -60,6 +98,10 @@ class SituacaoController extends Controller
      */
     public function destroy(Situacao $situacao)
     {
-        //
+        $this->authorize('situacao-delete');
+
+        $situacao->delete();
+
+        return redirect()->route('situacaos.index')->with('message', 'Situação excluída com sucesso!');
     }
 }

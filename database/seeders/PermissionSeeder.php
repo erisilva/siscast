@@ -105,5 +105,86 @@ class PermissionSeeder extends Seeder
             'name' => 'log-export',
             'description' => 'Exportação de dados das permissões',
         ]);
+
+        // permission list for racas table
+        DB::table('permissions')->insert([
+            'name' => 'raca-index',
+            'description' => 'Lista de raças',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'raca-create',
+            'description' => 'Registrar nova raça',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'raca-edit',
+            'description' => 'Alterar dados da raça',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'raca-delete',
+            'description' => 'Excluir raça',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'raca-show',
+            'description' => 'Mostrar dados da raça',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'raca-export',
+            'description' => 'Exportação de dados das raças',
+        ]);
+
+        // permission list for situacao table
+        DB::table('permissions')->insert([
+            'name' => 'situacao-index',
+            'description' => 'Lista de situações',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'situacao-create',
+            'description' => 'Registrar nova situação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'situacao-edit',
+            'description' => 'Alterar dados da situação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'situacao-delete',
+            'description' => 'Excluir situação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'situacao-show',
+            'description' => 'Mostrar dados da situação',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'situacao-export',
+            'description' => 'Exportação de dados das situações',
+        ]);
+
+        // permission list for pedidos
+        DB::table('permissions')->insert([
+            'name' => 'pedido-index',
+            'description' => 'Lista de pedidos',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-create',
+            'description' => 'Registrar novo pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-edit',
+            'description' => 'Alterar dados do pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-delete',
+            'description' => 'Excluir pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-show',
+            'description' => 'Mostrar dados do pedido',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'pedido-export',
+            'description' => 'Exportação de dados dos pedidos',
+        ]);
+
+        
+
     }
 }

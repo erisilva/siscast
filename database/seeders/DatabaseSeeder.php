@@ -35,11 +35,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AclSeeder::class);
 
-
-        \App\Models\User::factory(50)->create();
-
-        \App\Models\Permission::factory(50)->create();
-
-        \App\Models\Role::factory(50)->create();
+        \App\Models\Pedido::factory(1000)->create();
     }
 }

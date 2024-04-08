@@ -70,6 +70,27 @@ class AclSeeder extends Seeder
                 $log_index = Permission::where('name', '=', 'log-index')->get()->first();
                 $log_show = Permission::where('name', '=', 'log-show')->get()->first();
                 $log_export = Permission::where('name', '=', 'log-export')->get()->first();
+                // para racas
+                $raca_index = Permission::where('name', '=', 'raca-index')->get()->first();
+                $raca_create = Permission::where('name', '=', 'raca-create')->get()->first();
+                $raca_edit = Permission::where('name', '=', 'raca-edit')->get()->first();
+                $raca_delete = Permission::where('name', '=', 'raca-delete')->get()->first();
+                $raca_show = Permission::where('name', '=', 'raca-show')->get()->first();
+                $raca_export = Permission::where('name', '=', 'raca-export')->get()->first();
+                // para situacoes
+                $situacao_index = Permission::where('name', '=', 'situacao-index')->get()->first();
+                $situacao_create = Permission::where('name', '=', 'situacao-create')->get()->first();
+                $situacao_edit = Permission::where('name', '=', 'situacao-edit')->get()->first();
+                $situacao_delete = Permission::where('name', '=', 'situacao-delete')->get()->first();
+                $situacao_show = Permission::where('name', '=', 'situacao-show')->get()->first();
+                $situacao_export = Permission::where('name', '=', 'situacao-export')->get()->first();
+                // para pedidos
+                $pedido_index = Permission::where('name', '=', 'pedido-index')->get()->first();
+                $pedido_create = Permission::where('name', '=', 'pedido-create')->get()->first();
+                $pedido_edit = Permission::where('name', '=', 'pedido-edit')->get()->first();
+                $pedido_delete = Permission::where('name', '=', 'pedido-delete')->get()->first();
+                $pedido_show = Permission::where('name', '=', 'pedido-show')->get()->first();
+                $pedido_export = Permission::where('name', '=', 'pedido-export')->get()->first();
         
         
                 // salva os relacionamentos entre perfil e suas permissões
@@ -97,6 +118,25 @@ class AclSeeder extends Seeder
                 $administrador_perfil->permissions()->attach($log_index);
                 $administrador_perfil->permissions()->attach($log_show);
                 $administrador_perfil->permissions()->attach($log_export);
+                $administrador_perfil->permissions()->attach($raca_index);
+                $administrador_perfil->permissions()->attach($raca_create);
+                $administrador_perfil->permissions()->attach($raca_edit);
+                $administrador_perfil->permissions()->attach($raca_delete);
+                $administrador_perfil->permissions()->attach($raca_show);
+                $administrador_perfil->permissions()->attach($raca_export);
+                $administrador_perfil->permissions()->attach($situacao_index);
+                $administrador_perfil->permissions()->attach($situacao_create);
+                $administrador_perfil->permissions()->attach($situacao_edit);
+                $administrador_perfil->permissions()->attach($situacao_delete);
+                $administrador_perfil->permissions()->attach($situacao_show);
+                $administrador_perfil->permissions()->attach($situacao_export);
+                $administrador_perfil->permissions()->attach($pedido_index);
+                $administrador_perfil->permissions()->attach($pedido_create);
+                $administrador_perfil->permissions()->attach($pedido_edit);
+                $administrador_perfil->permissions()->attach($pedido_delete);
+                $administrador_perfil->permissions()->attach($pedido_show);
+                $administrador_perfil->permissions()->attach($pedido_export);
+
 
         
         
@@ -109,6 +149,18 @@ class AclSeeder extends Seeder
                 $gerente_perfil->permissions()->attach($log_show);
                 $gerente_perfil->permissions()->attach($log_show);
                 $gerente_perfil->permissions()->attach($log_export);
+                $gerente_perfil->permissions()->attach($raca_index);
+                $gerente_perfil->permissions()->attach($raca_show);
+                $gerente_perfil->permissions()->attach($raca_export);
+                $gerente_perfil->permissions()->attach($situacao_index);
+                $gerente_perfil->permissions()->attach($situacao_show);
+                $gerente_perfil->permissions()->attach($situacao_export);
+                $gerente_perfil->permissions()->attach($pedido_index);
+                $gerente_perfil->permissions()->attach($pedido_show);
+                $gerente_perfil->permissions()->attach($pedido_export);
+
+
+
 
         
         
@@ -117,6 +169,17 @@ class AclSeeder extends Seeder
                 $operador_perfil->permissions()->attach($user_index);
                 $operador_perfil->permissions()->attach($user_show);
                 $operador_perfil->permissions()->attach($user_export);
+                $operador_perfil->permissions()->attach($log_show);
+                $operador_perfil->permissions()->attach($log_export);
+                $operador_perfil->permissions()->attach($raca_index);
+                $operador_perfil->permissions()->attach($raca_show);
+                $operador_perfil->permissions()->attach($raca_export);
+                $operador_perfil->permissions()->attach($situacao_index);
+                $operador_perfil->permissions()->attach($situacao_show);
+                $operador_perfil->permissions()->attach($situacao_export);
+                $operador_perfil->permissions()->attach($pedido_index);
+                $operador_perfil->permissions()->attach($pedido_show);
+                $operador_perfil->permissions()->attach($pedido_export);
         
         
                 // leitura é um tipo de operador que só pode ler

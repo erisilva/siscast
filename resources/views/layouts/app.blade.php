@@ -59,8 +59,13 @@
                                 </li>
                                 @endcan
                                 <li>
-                                    <a class="dropdown-item" href="#">
-                                        Another action
+                                    <a class="dropdown-item" href="{{ route('racas.index') }}">
+                                        <x-icon icon='list' /> Raças
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('situacaos.index') }}">
+                                        <x-icon icon='list' /> Situações do Pedido
                                     </a>
                                 </li>
                                 <li>

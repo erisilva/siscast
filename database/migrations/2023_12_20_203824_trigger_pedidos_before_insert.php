@@ -9,32 +9,32 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): string
+    public function up()
     {
-        return <<<EOD
-                    CREATE TRIGGER `trigger_pedidos_before_insert` BEFORE INSERT ON `pedidos` FOR EACH ROW
-                    BEGIN
+                DB::unprepared("
+                
+                CREATE TRIGGER `trigger_pedidos_before_insert` BEFORE INSERT ON `pedidos` FOR EACH ROW
+                BEGIN
+                
+                    -- Obtém o ano atual
+                    SET new.ano = YEAR(CURRENT_TIMESTAMP);
+                
+                    -- Obtém o último número inserido
+                    SELECT coalesce(MAX(codigo), 0) INTO @numero FROM `pedidos` WHERE ano = NEW.ano;
                     
-                        -- Obtém o ano atual
-                        SET new.ano = YEAR(CURRENT_TIMESTAMP);
-                    
-                        -- Obtém o último número inserido
-                        SELECT coalesce(MAX(numero), 0) INTO @numero FROM `pedidos` WHERE ano = NEW.ano;
-                        
-                        -- Incrementa o número
-                        SET NEW.numero = @numero + 1;
-                    
-                    END;                
-                EOD;
+                    -- Incrementa o número
+                    SET NEW.codigo = @numero + 1;
+                
+                END;
+                
+                ");        
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): string
+    public function down()
     {
-        return <<<EOD
-                DROP TRIGGER `trigger_pedidos_before_insert`;
-            EOD;
+        DB::unprepared('DROP TRIGGER `trigger_pedidos_before_insert`;');
     }
 };

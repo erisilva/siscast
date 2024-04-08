@@ -19,23 +19,23 @@ return new class extends Migration
             $table->unsignedBigInteger('ano');
 
             # dados pessoais
-            $table->string('cpf', 11);
+            $table->string('cpf', 20);
             $table->string('nome', 180);
             $table->date('nascimento');
             
             # logradouro
-            $table->string('endereco', 100);
+            $table->string('logradouro', 100);
             $table->string('numero', 10);
             $table->string('bairro', 80);
             $table->string('complemento', 100)->nullable();
             $table->string('cidade', 80)->default('contagem');
             $table->string('uf', 2)->default('MG');
-            $table->string('cep', 8);
+            $table->string('cep', 20);
 
             # contatos
-            $table->string('email', 150);
-            $table->string('tel', 15)->nullable();
-            $table->string('cel', 15);
+            $table->string('email', 190);
+            $table->string('tel', 20)->nullable();
+            $table->string('cel', 20);
 
             # cartão nacional de saúde
             $table->string('cns', 15)->nullable();

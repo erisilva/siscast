@@ -216,10 +216,17 @@ return [
         'photo' => 'foto',
         'price' => 'preço',
         'size' => 'tamanho',
-        'title' => 'título',
         'content' => 'conteúdo',
-        'body' => 'conteúdo',
-        'excerpt' => 'resumo',
+        "genero" => "Sexo",
+        "nomeAnimal" => "Nome do Animal",
+        "porte" => "Porte",
+        "idade" => "Idade",
+        "idadeEm" => "Idade em",
+        "cor" => "Cor",
+        "especie" => "Espécie",
+        "procedencia" => "Procedência",
+        "raca_id" => "Raça",
+
     ],
 
 ];

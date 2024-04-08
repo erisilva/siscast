@@ -98,3 +98,15 @@ Route::get('/situacaos/export/xls', [App\Http\Controllers\SituacaoController::cl
 Route::get('/situacaos/export/pdf', [App\Http\Controllers\SituacaoController::class, 'exportpdf'])->name('situacaos.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
 Route::resource('/situacaos', App\Http\Controllers\SituacaoController::class)->middleware('auth', 'verified'); // Resource Route, crud
+
+# Pedido::class
+
+Route::get('/pedidos/export/csv', [App\Http\Controllers\PedidoController::class, 'exportcsv'])->name('pedidos.export.csv')->middleware('auth', 'verified'); // Export CSV
+
+Route::get('/pedidos/export/xls', [App\Http\Controllers\PedidoController::class, 'exportxls'])->name('pedidos.export.xls')->middleware('auth', 'verified'); // Export XLS
+
+Route::get('/pedidos/export/pdf', [App\Http\Controllers\PedidoController::class, 'exportpdf'])->name('pedidos.export.pdf')->middleware('auth', 'verified'); // Export PDF
+
+Route::resource('/pedidos', App\Http\Controllers\PedidoController::class)->middleware('auth', 'verified'); // Resource Route, crud
+
+
