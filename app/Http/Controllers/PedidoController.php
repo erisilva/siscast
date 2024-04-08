@@ -27,11 +27,13 @@ class PedidoController extends Controller
             session(['perPage' => request('perpage')]);
         }
 
+// 'codigo' => '','ano' => '','situacao_id' => '','dataAgendaInicio' => '','dataAgendaFim' => '','nome' => '','cpf' => '','nomeAnimal' => '','especie' => '','genero' => '','porte' => '','idadeMinima' => '','idadeMaxima' => '','idadeEm' => '','procedencia' => '','dataCadastroInicio' => '','dataCadastroFim' => ''
+
         return view('pedidos.index', [
             'pedidos' => Pedido::orderBy('id', 'desc')
-                ->filter(request(['nome']))
+                ->filter(request(['codigo','ano','situacao_id','dataAgendaInicio','dataAgendaFim','nome','cpf','nomeAnimal','especie','genero','porte','idadeMinima','idadeMaxima','idadeEm','procedencia','dataCadastroInicio','dataCadastroFim']))
                 ->paginate(session('perPage', '5'))
-                ->appends(request(['nome'])),
+                ->appends(request(['codigo','ano','situacao_id','dataAgendaInicio','dataAgendaFim','nome','cpf','nomeAnimal','especie','genero','porte','idadeMinima','idadeMaxima','idadeEm','procedencia','dataCadastroInicio','dataCadastroFim'])),
             'perpages' => Perpage::orderBy('valor')->get(),
             'situacaos'=> Situacao::orderBy('nome','asc')->get()
         ]);

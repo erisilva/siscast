@@ -266,7 +266,7 @@
                             {{ __('Search') }}</button>
 
                         {{-- Reset the Filter --}}
-                        <a href="{{ route('pedidos.index', ['nome' => '']) }}" class="btn btn-secondary btn-sm"
+                        <a href="{{ route('pedidos.index', ['codigo' => '','ano' => '','situacao_id' => '','dataAgendaInicio' => '','dataAgendaFim' => '','nome' => '','cpf' => '','nomeAnimal' => '','especie' => '','genero' => '','porte' => '','idadeMinima' => '','idadeMaxima' => '','idadeEm' => '','procedencia' => '','dataCadastroInicio' => '','dataCadastroFim' => '']) }}" class="btn btn-secondary btn-sm"
                             role="button"><x-icon icon='stars' />
                             {{ __('Reset') }}</a>
                     </div>
