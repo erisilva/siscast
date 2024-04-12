@@ -54,7 +54,7 @@
 </head>
     <body>
         <header>
-            Permissões do Sistema
+            Pedidos
         </header>
 
         <footer>
@@ -62,20 +62,137 @@
         </footer>
 
         <main>
+            @foreach($dataset as $row)
             <table  class="bordered" width="100%">
-              <thead>
-                <th style="text-align:left;">Nome</th>
-                <th style="text-align:left;">Descrição</th>
-              </thead>
+
               <tbody>
-                @foreach($dataset as $row)
+                
+
                 <tr>
-                  <td>{{$row->name}}</td>
-                  <td>{{$row->description}}</td>
+                    <td colspan="2">
+                        <label for="codigo"><strong>Código</strong></label>
+                        <div id="codigo">{{ $row->codigo }}</div>
+                    </td>
+                    <td colspan="2">
+                        <label for="ano"><strong>Ano</strong></label>
+                        <div id="ano">{{ $row->ano }}</div>
+                    </td>
+                    <td colspan="2">
+                        <label for="datacadastro"><strong>Data Cadastro</strong></label>
+                        <div id="datacadastro">{{ date('d/m/Y', strtotime($row->created_at)) }}</div>
+                    </td>
+                    <td colspan="6">
+                        <label for="situacao"><strong>Situação</strong></label>
+                        <div id="situacao">{{ $row->situacao->nome }}</div>
+                    </td>
                 </tr>
-                @endforeach
+
+                <tr>
+                    <td colspan="6">
+                        <label for="nome"><strong>Nome</strong></label>
+                        <div id="nome">{{ $row->nome }}</div>
+                    </td>
+                    <td colspan="3">
+                        <label for="tel"><strong>TEL</strong></label>
+                        <div id="tel">{{ $row->tel }}</div>
+                    </td>
+                    <td colspan="3">
+                        <label for="tel"><strong>CEL</strong></label>
+                        <div id="tel">{{ $row->tel }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="cep"><strong>CEP</strong></label>
+                        <div id="cep">{{ $row->cep }}</div>
+                    </td>
+                    <td colspan="5">
+                        <label for="logradouro"><strong>Logradouro</strong></label>
+                        <div id="logradouro">{{ $row->logradouro }}</div>
+                    </td>
+                    <td colspan="2">
+                        <label for="numero"><strong>Nº</strong></label>
+                        <div id="numero">{{ $row->numero }}</div>
+                    </td>
+                    <td colspan="3">
+                        <label for="complemento"><strong>Complem.</strong></label>
+                        <div id="complemento">{{ $row->complemento }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5">
+                        <label for="bairro"><strong>Bairro</strong></label>
+                        <div id="bairro">{{ $row->bairro }}</div>
+                    </td>
+                    <td colspan="5">
+                        <label for="cidade"><strong>Cidade</strong></label>
+                        <div id="cidade">{{ $row->cidade }}</div>
+                    </td>
+                    <td colspan="2">
+                        <label for="uf"><strong>UF</strong></label>
+                        <div id="uf">{{ $row->uf }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="5">
+                        <label for="cargo"><strong>Cargo</strong></label>
+                        <div id="cargo">{{ $row->cargo->nome }}</div>
+                    </td>
+                    <td colspan="3">
+                        <label for="vinculo"><strong>Vínculo</strong></label>
+                        <div id="vinculo">{{ $row->vinculo->nome }}</div>
+                    </td>
+                    <td colspan="4">
+                        <label for="vinculotipo"><strong>Tipo</strong></label>
+                        <div id="vinculotipo">{{ $row->vinculotipo->nome }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="cargahoraria"><strong>Carga Horária</strong></label>
+                        <div id="cargahoraria">{{ $row->cargahoraria->nome }}</div>
+                    </td>
+                    <td colspan="6">
+                        <label for="flexibilizacao"><strong>Flexibilização</strong></label>
+                        <div id="flexibilizacao">{{ $row->flexibilizacao }}</div>
+                    </td>                    
+                    <td colspan="3" style = "text-align: center;">
+                        <label for="admissao"><strong>Admissão</strong></label>
+                        <div id="admissao">{{ date('d/m/Y', strtotime($row->admissao)) }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <label for="registroClasse"><strong>Registro de Classe</strong></label>
+                        <div id="registroClasse">{{ $row->registroClasse }}</div>
+                    </td>
+                    <td colspan="4">
+                        <label for="orgaoemissor"><strong>Orgão Emissor</strong></label>
+                        <div id="orgaoemissor">{{ $row->orgaoemissor->nome }}</div>
+                    </td>
+                    <td colspan="4">
+                        <label for="ufOrgaoEmissor"><strong>UF/SSP</strong></label>
+                        <div id="ufOrgaoEmissor">{{ $row->ufOrgaoEmissor }}</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="12">
+                        <label for="observacao"><strong>Observação</strong></label>
+                        <div id="observacao">{{ $row->observacao }}</div>
+                    </td>
+                </tr>
+                
               </tbody>
             </table>
+            <br>
+            @endforeach
+        </main>
         </main>
     </body>
 </html>

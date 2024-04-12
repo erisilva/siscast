@@ -245,19 +245,19 @@
 
                     <div class="col-md-4">
                         <label for="procedencia" class="form-label">Origem</label>
-                        <input type="number" class="form-control" id="procedencia" name="procedencia"
+                        <input type="text" class="form-control" id="procedencia" name="procedencia"
                             value="{{ session()->get('pedido_procedencia') }}">
                     </div>
 
                     <div class="col-md-2">
                         <label for="dataCadastroInicio" class="form-label">Data Cadastro Início</label>
-                        <input type="number" class="form-control" id="dataCadastroInicio" name="dataCadastroInicio"
+                        <input type="text" class="form-control" id="dataCadastroInicio" name="dataCadastroInicio"
                             value="{{ session()->get('pedido_dataCadastroInicio') }}">
                     </div>
 
                     <div class="col-md-2">
                         <label for="dataCadastroFim" class="form-label">Data Cadastro Início</label>
-                        <input type="number" class="form-control" id="dataCadastroFim" name="dataCadastroFim"
+                        <input type="text" class="form-control" id="dataCadastroFim" name="dataCadastroFim"
                             value="{{ session()->get('pedido_dataCadastroFim') }}">
                     </div>
 

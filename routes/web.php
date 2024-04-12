@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\RacaController;
 use App\Http\Controllers\SituacaoController;
+use App\Http\Controllers\PedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::get('/', function () {
 });
 
 # add 'register' => false to Auth::routes() to disable registration
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false, 'register' => false]);
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile')->middleware('auth', 'verified');
 Route::post('/profile/update/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update')->middleware('auth', 'verified');
@@ -53,7 +54,7 @@ Route::get('/permissions/export/xls', [PermissionController::class, 'exportxls']
 
 Route::get('/permissions/export/pdf', [PermissionController::class, 'exportpdf'])->name('permissions.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
-Route::resource('/permissions', PermissionController::class)->middleware('auth', 'verified'); // Resource Route, crud
+Route::resource('/permissions', PermissionController::class)->middleware(['auth', 'verified']); // Resource Route, crud
 
 # Role::class
 
@@ -63,7 +64,7 @@ Route::get('/roles/export/xls', [RoleController::class, 'exportxls'])->name('rol
 
 Route::get('/roles/export/pdf', [RoleController::class, 'exportpdf'])->name('roles.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
-Route::resource('/roles', RoleController::class)->middleware('auth', 'verified'); // Resource Route, crud
+Route::resource('/roles', RoleController::class)->middleware(['auth', 'verified']); // Resource Route, crud
 
 # User::class
 
@@ -73,40 +74,40 @@ Route::get('/users/export/xls', [UserController::class, 'exportxls'])->name('use
 
 Route::get('/users/export/pdf', [UserController::class, 'exportpdf'])->name('users.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
-Route::resource('/users', UserController::class)->middleware('auth', 'verified'); // Resource Route, crud
+Route::resource('/users', UserController::class)->middleware(['auth', 'verified']); // Resource Route, crud
 
 # Log::class
 
-Route::resource('/logs', LogController::class)->middleware('auth', 'verified')->only('show', 'index'); // Resource Route, crud
+Route::resource('/logs', LogController::class)->middleware(['auth', 'verified'])->only('show', 'index'); // Resource Route, crud
 
 # Raca::class
 
-Route::get('/racas/export/csv', [App\Http\Controllers\RacaController::class, 'exportcsv'])->name('racas.export.csv')->middleware('auth', 'verified'); // Export CSV
+Route::get('/racas/export/csv', [RacaController::class, 'exportcsv'])->name('racas.export.csv')->middleware('auth', 'verified'); // Export CSV
 
-Route::get('/racas/export/xls', [App\Http\Controllers\RacaController::class, 'exportxls'])->name('racas.export.xls')->middleware('auth', 'verified'); // Export XLS
+Route::get('/racas/export/xls', [RacaController::class, 'exportxls'])->name('racas.export.xls')->middleware('auth', 'verified'); // Export XLS
 
-Route::get('/racas/export/pdf', [App\Http\Controllers\RacaController::class, 'exportpdf'])->name('racas.export.pdf')->middleware('auth', 'verified'); // Export PDF
+Route::get('/racas/export/pdf', [RacaController::class, 'exportpdf'])->name('racas.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
-Route::resource('/racas', App\Http\Controllers\RacaController::class)->middleware('auth', 'verified'); // Resource Route, crud
+Route::resource('/racas', RacaController::class)->middleware(['auth', 'verified']); // Resource Route, crud
 
 # Situacao::class
 
-Route::get('/situacaos/export/csv', [App\Http\Controllers\SituacaoController::class, 'exportcsv'])->name('situacaos.export.csv')->middleware('auth', 'verified'); // Export CSV
+Route::get('/situacaos/export/csv', [SituacaoController::class, 'exportcsv'])->name('situacaos.export.csv')->middleware('auth', 'verified'); // Export CSV
 
-Route::get('/situacaos/export/xls', [App\Http\Controllers\SituacaoController::class, 'exportxls'])->name('situacaos.export.xls')->middleware('auth', 'verified'); // Export XLS
+Route::get('/situacaos/export/xls', [SituacaoController::class, 'exportxls'])->name('situacaos.export.xls')->middleware('auth', 'verified'); // Export XLS
 
-Route::get('/situacaos/export/pdf', [App\Http\Controllers\SituacaoController::class, 'exportpdf'])->name('situacaos.export.pdf')->middleware('auth', 'verified'); // Export PDF
+Route::get('/situacaos/export/pdf', [SituacaoController::class, 'exportpdf'])->name('situacaos.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
-Route::resource('/situacaos', App\Http\Controllers\SituacaoController::class)->middleware('auth', 'verified'); // Resource Route, crud
+Route::resource('/situacaos', SituacaoController::class)->middleware(['auth', 'verified']); // Resource Route, crud
 
 # Pedido::class
 
-Route::get('/pedidos/export/csv', [App\Http\Controllers\PedidoController::class, 'exportcsv'])->name('pedidos.export.csv')->middleware('auth', 'verified'); // Export CSV
+Route::get('/pedidos/export/csv', [PedidoController::class, 'exportcsv'])->name('pedidos.export.csv')->middleware('auth', 'verified'); // Export CSV
 
-Route::get('/pedidos/export/xls', [App\Http\Controllers\PedidoController::class, 'exportxls'])->name('pedidos.export.xls')->middleware('auth', 'verified'); // Export XLS
+Route::get('/pedidos/export/xls', [PedidoController::class, 'exportxls'])->name('pedidos.export.xls')->middleware('auth', 'verified'); // Export XLS
 
-Route::get('/pedidos/export/pdf', [App\Http\Controllers\PedidoController::class, 'exportpdf'])->name('pedidos.export.pdf')->middleware('auth', 'verified'); // Export PDF
+Route::get('/pedidos/export/pdf', [PedidoController::class, 'exportpdf'])->name('pedidos.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
-Route::resource('/pedidos', App\Http\Controllers\PedidoController::class)->middleware('auth', 'verified'); // Resource Route, crud
+Route::resource('/pedidos', PedidoController::class)->middleware(['auth', 'verified']); // Resource Route, crud
 
 

@@ -18,7 +18,7 @@ class PedidoFactory extends Factory
     {
         return [
             'nome' => $this->faker->name(),
-            'cpf' => '03975624620',
+            'cpf' => '11111111111',
             'codigo' => 1,
             'ano' => 2023,
             'nascimento' => $this->faker->date(),

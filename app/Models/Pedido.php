@@ -12,16 +12,55 @@ class Pedido extends Model
     use HasFactory;
 
     protected $fillable = [
-            'codigo','ano','cpf','nome','nascimento','logradouro','numero','bairro','complemento','cidade','uf','cep','email','tel','cel','cns','beneficio','beneficioQual','nomeAnimal','genero','porte','idade','idadeEm','cor','especie','procedencia','primeiraTentativa','primeiraTentativaQuando','primeiraTentativaHora','segundaTentativa','segundaTentativaQuando','segundaTentativaHora','nota','agendaQuando','agendaTurno','motivoNaoAgendado','ip','request','raca_id','situacao_id',
+        'codigo',
+        'ano',
+        'cpf',
+        'nome',
+        'nascimento',
+        'logradouro',
+        'numero',
+        'bairro',
+        'complemento',
+        'cidade',
+        'uf',
+        'cep',
+        'email',
+        'tel',
+        'cel',
+        'cns',
+        'beneficio',
+        'beneficioQual',
+        'nomeAnimal',
+        'genero',
+        'porte',
+        'idade',
+        'idadeEm',
+        'cor',
+        'especie',
+        'procedencia',
+        'primeiraTentativa',
+        'primeiraTentativaQuando',
+        'primeiraTentativaHora',
+        'segundaTentativa',
+        'segundaTentativaQuando',
+        'segundaTentativaHora',
+        'nota',
+        'agendaQuando',
+        'agendaTurno',
+        'motivoNaoAgendado',
+        'ip',
+        'request',
+        'raca_id',
+        'situacao_id',
     ];
 
     protected $casts = [
         'nascimento' => 'date',
         'primeiraTentativaQuando' => 'date',
-        'segundaTentativaQuando'=> 'date',
-        'agendaQuando'=> 'date',
-        'created_at'=> 'date',
-      ];
+        'segundaTentativaQuando' => 'date',
+        'agendaQuando' => 'date',
+        'created_at' => 'date',
+    ];
 
     public function scopeFilter($query, array $filters)
     {
@@ -47,72 +86,72 @@ class Pedido extends Model
 
 
         // start session values if not yet initialized
-        if (!session()->exists('pedido_codigo')){
+        if (!session()->exists('pedido_codigo')) {
             session(['pedido_codigo' => '']);
         }
 
-        if (!session()->exists('pedido_ano')){
+        if (!session()->exists('pedido_ano')) {
             session(['pedido_ano' => '']);
         }
 
-        if (!session()->exists('pedido_situacao_id')){
+        if (!session()->exists('pedido_situacao_id')) {
             session(['pedido_situacao_id' => '']);
         }
 
-        if (!session()->exists('pedido_dataAgendaInicio')){
+        if (!session()->exists('pedido_dataAgendaInicio')) {
             session(['pedido_dataAgendaInicio' => '']);
         }
 
-        if (!session()->exists('pedido_dataAgendaFim')){
+        if (!session()->exists('pedido_dataAgendaFim')) {
             session(['pedido_dataAgendaFim' => '']);
         }
 
-        if (!session()->exists('pedido_nome')){
+        if (!session()->exists('pedido_nome')) {
             session(['pedido_nome' => '']);
         }
 
-        if (!session()->exists('pedido_cpf')){
+        if (!session()->exists('pedido_cpf')) {
             session(['pedido_cpf' => '']);
         }
 
-        if (!session()->exists('nomeAnimal')){
-            session(['nomeAnimal' => '']);
+        if (!session()->exists('pedido_nomeAnimal')) {
+            session(['pedido_nomeAnimal' => '']);
         }
 
-        if (!session()->exists('pedido_especie')){
+        if (!session()->exists('pedido_especie')) {
             session(['pedido_especie' => '']);
         }
 
-        if (!session()->exists('pedido_genero')){
+        if (!session()->exists('pedido_genero')) {
             session(['pedido_genero' => '']);
         }
 
-        if (!session()->exists('pedido_porte')){
+        if (!session()->exists('pedido_porte')) {
             session(['pedido_porte' => '']);
         }
 
-        if (!session()->exists('pedido_idadeMinima')){
+        if (!session()->exists('pedido_idadeMinima')) {
             session(['pedido_idadeMinima' => '']);
         }
 
-        if (!session()->exists('pedido_idadeMaxima')){
+        if (!session()->exists('pedido_idadeMaxima')) {
             session(['pedido_idadeMaxima' => '']);
         }
 
-        if (!session()->exists('pedido_idadeEm')){
+        if (!session()->exists('pedido_idadeEm')) {
             session(['pedido_idadeEm' => '']);
         }
 
-        if (!session()->exists('pedido_procedencia')){
+        if (!session()->exists('pedido_procedencia')) {
             session(['pedido_procedencia' => '']);
         }
 
-        if (!session()->exists('dataCadastroInicio')){
-            session(['dataCadastroInicio' => '']);
+        if (!session()->exists('pedido_dataCadastroInicio')) {
+            session(['pedido_dataCadastroInicio' => '']);
         }
 
-        if (!session()->exists('dataCadastroFim')){
-            session(['dataCadastroFim' => '']);
+        if (!session()->exists('pedido_dataCadastroFim')) {
+            session(['pedido_dataCadastroFim' => '']);
         }
 
 
@@ -147,7 +186,7 @@ class Pedido extends Model
         }
 
         if (Arr::exists($filters, 'nomeAnimal')) {
-            session(['nomeAnimal' => $filters['nomeAnimal'] ?? '']);
+            session(['pedido_nomeAnimal' => $filters['nomeAnimal'] ?? '']);
         }
 
         if (Arr::exists($filters, 'especie')) {
@@ -179,11 +218,11 @@ class Pedido extends Model
         }
 
         if (Arr::exists($filters, 'dataCadastroInicio')) {
-            session(['dataCadastroInicio' => $filters['dataCadastroInicio'] ?? '']);
+            session(['pedido_dataCadastroInicio' => $filters['dataCadastroInicio'] ?? '']);
         }
 
         if (Arr::exists($filters, 'dataCadastroFim')) {
-            session(['dataCadastroFim' => $filters['dataCadastroFim'] ?? '']);
+            session(['pedido_dataCadastroFim' => $filters['dataCadastroFim'] ?? '']);
         }
 
         // query if session filters are not empty
@@ -200,23 +239,23 @@ class Pedido extends Model
         }
 
         if (trim(session()->get('pedido_dataAgendaInicio')) !== '') {
-            $query->where('dataAgendaInicio', '>=', session()->get('pedido_dataAgendaInicio'));
+            $query->where('agendaQuando', '>=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataAgendaInicio')))));
         }
 
         if (trim(session()->get('pedido_dataAgendaFim')) !== '') {
-            $query->where('dataAgendaFim', '<=', session()->get('pedido_dataAgendaFim'));
+            $query->where('agendaQuando', '<=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataAgendaFim')))));
         }
 
         if (trim(session()->get('pedido_nome')) !== '') {
-            $query->where('nome', 'like', '%'.session()->get('pedido_nome').'%');
+            $query->where('nome', 'like', '%' . session()->get('pedido_nome') . '%');
         }
 
         if (trim(session()->get('pedido_cpf')) !== '') {
             $query->where('cpf', session()->get('pedido_cpf'));
         }
 
-        if (trim(session()->get('nomeAnimal')) !== '') {
-            $query->where('nomeAnimal', 'like', '%'.session()->get('nomeAnimal').'%');
+        if (trim(session()->get('pedido_nomeAnimal')) !== '') {
+            $query->where('nomeAnimal', 'like', '%' . session()->get('pedido_nomeAnimal') . '%');
         }
 
         if (trim(session()->get('pedido_especie')) !== '') {
@@ -244,25 +283,25 @@ class Pedido extends Model
         }
 
         if (trim(session()->get('pedido_procedencia')) !== '') {
-            $query->where('procedencia', 'like', '%'.session()->get('pedido_procedencia').'%');
+            $query->where('procedencia', 'like', '%' . session()->get('pedido_procedencia') . '%');
         }
 
         if (trim(session()->get('dataCadastroInicio')) !== '') {
-            $query->where('created_at', '>=', session()->get('dataCadastroInicio'));
+            $query->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataCadastroInicio')))));
         }
 
         if (trim(session()->get('dataCadastroFim')) !== '') {
-            $query->where('created_at', '<=', session()->get('dataCadastroFim'));
+            $query->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataCadastroFim')))));
         }
 
     }
 
-    public function raca() : BelongsTo
+    public function raca(): BelongsTo
     {
         return $this->belongsTo(Raca::class);
     }
 
-    public function situacao() : BelongsTo
+    public function situacao(): BelongsTo
     {
         return $this->belongsTo(Situacao::class);
     }
