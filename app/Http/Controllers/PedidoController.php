@@ -231,7 +231,7 @@ class PedidoController extends Controller
         $this->authorize('pedido-export');
 
         return Pdf::loadView('pedidos.report', [
-            'dataset' => Pedido::orderBy('id', 'asc')->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim']))->get()
+            'dataset' => Pedido::orderBy('id', 'desc')->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim']))->get()
         ])->download(__('Pedidos') . '_' . date("Y-m-d H:i:s") . '.pdf');
     }
 
@@ -252,8 +252,6 @@ class PedidoController extends Controller
     {
         $this->authorize('pedido-export');
 
-        dd(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim']));
-
-        return Excel::download(new PedidosExport(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim'])), __('Pedidos') . '_' . date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new PedidosExport(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim'])),  'Pedidos_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

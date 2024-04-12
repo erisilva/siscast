@@ -36,7 +36,7 @@
 
                     <li>
                         <a class="dropdown-item"
-                            href="{{ route('pedidos.export.xls') }}"><x-icon
+                            href="{{ route('pedidos.export.xls', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id')]) }}"><x-icon
                                 icon='file-earmark-spreadsheet-fill' /> {{ __('Export') . ' XLS' }}</a>
                     </li>
                     <li>

@@ -88,45 +88,59 @@
                 </tr>
 
                 <tr>
-                    <td colspan="6">
+                    <td colspan="4">
                         <label for="nome"><strong>Nome</strong></label>
                         <div id="nome">{{ $row->nome }}</div>
                     </td>
-                    <td colspan="3">
-                        <label for="tel"><strong>TEL</strong></label>
-                        <div id="tel">{{ $row->tel }}</div>
+                    <td colspan="2">
+                        <label for="tel"><strong>Nascimento</strong></label>
+                        <div id="tel">{{ date('d/m/Y', strtotime($row->nascimento)) }}</div>
+                    </td>
                     </td>
                     <td colspan="3">
-                        <label for="tel"><strong>CEL</strong></label>
-                        <div id="tel">{{ $row->tel }}</div>
+                        <label for="cpf"><strong>CPF</strong></label>
+                        <div id="cpf">{{ $row->cpf }}</div>
+                    </td>
+                    <td colspan="3">
+                        <label for="email"><strong>E-mail</strong></label>
+                        <div id="email">{{ $row->email }}</div>
                     </td>
                 </tr>
 
                 <tr>
+                    <td colspan="2">
+                        <label for="cel"><strong>CEL</strong></label>
+                        <div id="cel">{{ $row->cel }}</div>
+                    </td>
+                    <td colspan="2">
+                        <label for="tel"><strong>TEL</strong></label>
+                        <div id="tel">{{ $row->tel }}</div>
+                    </td>
                     <td colspan="2">
                         <label for="cep"><strong>CEP</strong></label>
                         <div id="cep">{{ $row->cep }}</div>
                     </td>
-                    <td colspan="5">
+                    <td colspan="3">
                         <label for="logradouro"><strong>Logradouro</strong></label>
                         <div id="logradouro">{{ $row->logradouro }}</div>
-                    </td>
+                    </td>                    
+                </tr>
+
+                <tr>
                     <td colspan="2">
                         <label for="numero"><strong>Nº</strong></label>
                         <div id="numero">{{ $row->numero }}</div>
                     </td>
-                    <td colspan="3">
-                        <label for="complemento"><strong>Complem.</strong></label>
+                    <td colspan="2">
+                        <label for="complemento"><strong>Complemento</strong></label>
                         <div id="complemento">{{ $row->complemento }}</div>
                     </td>
-                </tr>
 
-                <tr>
-                    <td colspan="5">
+                    <td colspan="3">
                         <label for="bairro"><strong>Bairro</strong></label>
                         <div id="bairro">{{ $row->bairro }}</div>
                     </td>
-                    <td colspan="5">
+                    <td colspan="3">
                         <label for="cidade"><strong>Cidade</strong></label>
                         <div id="cidade">{{ $row->cidade }}</div>
                     </td>
@@ -137,54 +151,24 @@
                 </tr>
 
                 <tr>
-                    <td colspan="5">
-                        <label for="cargo"><strong>Cargo</strong></label>
-                        <div id="cargo">{{ $row->cargo->nome }}</div>
+                    <td colspan="2">
+                        <label for="cns"><strong>CNS</strong></label>
+                        <div id="cns">{{ $row->cns }}</div>
                     </td>
-                    <td colspan="3">
-                        <label for="vinculo"><strong>Vínculo</strong></label>
-                        <div id="vinculo">{{ $row->vinculo->nome }}</div>
-                    </td>
-                    <td colspan="4">
-                        <label for="vinculotipo"><strong>Tipo</strong></label>
-                        <div id="vinculotipo">{{ $row->vinculotipo->nome }}</div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="3">
-                        <label for="cargahoraria"><strong>Carga Horária</strong></label>
-                        <div id="cargahoraria">{{ $row->cargahoraria->nome }}</div>
-                    </td>
-                    <td colspan="6">
-                        <label for="flexibilizacao"><strong>Flexibilização</strong></label>
-                        <div id="flexibilizacao">{{ $row->flexibilizacao }}</div>
-                    </td>                    
-                    <td colspan="3" style = "text-align: center;">
-                        <label for="admissao"><strong>Admissão</strong></label>
-                        <div id="admissao">{{ date('d/m/Y', strtotime($row->admissao)) }}</div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td colspan="4">
-                        <label for="registroClasse"><strong>Registro de Classe</strong></label>
-                        <div id="registroClasse">{{ $row->registroClasse }}</div>
+                    <td colspan="2">
+                        <label for="beneficio"><strong>Possui Benéficio</strong></label>
+                        <div id="beneficio">{{ $row->beneficio }}</div>
                     </td>
                     <td colspan="4">
-                        <label for="orgaoemissor"><strong>Orgão Emissor</strong></label>
-                        <div id="orgaoemissor">{{ $row->orgaoemissor->nome }}</div>
-                    </td>
-                    <td colspan="4">
-                        <label for="ufOrgaoEmissor"><strong>UF/SSP</strong></label>
-                        <div id="ufOrgaoEmissor">{{ $row->ufOrgaoEmissor }}</div>
+                        <label for="beneficioQual"><strong>Qual?</strong></label>
+                        <div id="beneficioQual">{{ $row->beneficioQual }}</div>
                     </td>
                 </tr>
 
                 <tr>
                     <td colspan="12">
                         <label for="observacao"><strong>Observação</strong></label>
-                        <div id="observacao">{{ $row->observacao }}</div>
+                        <div id="observacao">{{ $row->nota }}</div>
                     </td>
                 </tr>
                 

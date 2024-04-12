@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="situacao_id" class="form-label">Raça <strong class="text-danger">(*)</strong></label>
+                    <label for="situacao_id" class="form-label">Situação do Pedido <strong class="text-danger">(*)</strong></label>
                     <select class="form-select" id="situacao_id" name="situacao_id">
                         <option value="{{ $pedido->situacao_id }}" selected="true">
                             &rarr; {{ $pedido->situacao->nome }}
