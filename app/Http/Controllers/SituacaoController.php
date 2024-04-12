@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Situacao;
 use App\Models\Perpage;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 class SituacaoController extends Controller
@@ -49,7 +50,16 @@ class SituacaoController extends Controller
             'icone' => 'required'
         ]);
 
-        Situacao::create($request->all());
+        $new_situacao = Situacao::create($request->all());
+
+        // LOG
+        Log::create([
+            'model_id' => $new_situacao->id,
+            'model' => 'Situacao',
+            'action' => 'store',
+            'changes' => json_encode($new_situacao),
+            'user_id' => auth()->id(),            
+        ]);
 
         return redirect()->route('situacaos.index')->with('message', 'Situação cadastrada com sucesso!');
     }
@@ -88,6 +98,15 @@ class SituacaoController extends Controller
             'icone' => 'required'
         ]);
 
+        // LOG
+        Log::create([
+            'model_id' => $situacao->id,
+            'model' => 'Situacao',
+            'action' => 'update',
+            'changes' => json_encode($situacao),
+            'user_id' => auth()->id(),            
+        ]);
+
         $situacao->update($request->all());
 
         return redirect()->route('situacaos.index')->with('message', 'Situação atualizada com sucesso!');
@@ -99,6 +118,15 @@ class SituacaoController extends Controller
     public function destroy(Situacao $situacao)
     {
         $this->authorize('situacao-delete');
+
+        // LOG
+        Log::create([
+            'model_id' => $situacao->id,
+            'model' => 'Situacao',
+            'action' => 'destroy',
+            'changes' => json_encode($situacao),
+            'user_id' => auth()->id(),            
+        ]);
 
         $situacao->delete();
 

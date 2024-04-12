@@ -22,13 +22,36 @@
 
         <x-btn-group label='MenuPrincipal' class="py-1">
 
-            @can('permission-create')
+            @can('pedido-create')
                 <a class="btn btn-primary" href="{{ route('pedidos.create') }}" role="button"><x-icon icon='file-earmark' />
                     {{ __('New') }}</a>
             @endcan
 
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalFilter"><x-icon
-                    icon='funnel' /> {{ __('Filters') }}</button>
+                    icon='funnel' /> {{ __('Filters') }}
+            </button>
+
+            @can('pedido-export')
+                <x-dropdown-menu title='Reports' icon='printer'>
+
+                    <li>
+                        <a class="dropdown-item"
+                            href="{{ route('pedidos.export.xls') }}"><x-icon
+                                icon='file-earmark-spreadsheet-fill' /> {{ __('Export') . ' XLS' }}</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                            href="{{ route('pedidos.export.csv', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id')]) }}"><x-icon
+                                icon='file-earmark-spreadsheet-fill' /> {{ __('Export') . ' CSV' }}</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item"
+                            href="{{ route('pedidos.export.pdf', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id')]) }}"><x-icon
+                                icon='file-pdf-fill' /> {{ __('Export') . ' PDF' }}</a>
+                    </li>
+
+                </x-dropdown-menu>
+            @endcan
 
         </x-btn-group>
 
@@ -45,6 +68,7 @@
                         <th scope="col">CPF</th>
                         <th scope="col">Nome do Animal</th>
                         <th scope="col">Espécie</th>
+                        <th scope="col">Raça</th>
                         <th scope="col">Sexo</th>
                         <th scope="col">Porte</th>
                         <th scope="col">Idade</th>
@@ -91,6 +115,10 @@
 
                             <td>
                                 {{ $pedido->especie == 'canino' ? 'Canino' : 'Felino' }}
+                            </td>
+
+                            <td>
+                                {{ $pedido->raca->nome }}
                             </td>
 
                             <td>
@@ -203,7 +231,19 @@
                         </select>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <label for="raca_id" class="form-label">Raça</label>
+                        <select class="form-select" id="raca_id" name="raca_id">
+                            <option value="" selected="true">Mostrar Todos ...</option>
+                            @foreach ($racas as $raca)
+                                <option value="{{ $raca->id }}" @selected(session()->get('pedido_raca_id') == $raca->id)>
+                                    {{ $raca->nome }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
                         <label for="genero" class="form-label">Sexo </label>
                         <select class="form-select" id="genero" name="genero">
                             <option value="" selected="true">Mostrar Todos ...</option>
@@ -212,7 +252,7 @@
                         </select>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label for="porte" class="form-label">Porte </label>
                         <select class="form-select" id="genero" name="porte">
                             <option value="" selected="true">Mostrar Todos ...</option>
@@ -266,8 +306,8 @@
                             {{ __('Search') }}</button>
 
                         {{-- Reset the Filter --}}
-                        <a href="{{ route('pedidos.index', ['codigo' => '','ano' => '','situacao_id' => '','dataAgendaInicio' => '','dataAgendaFim' => '','nome' => '','cpf' => '','nomeAnimal' => '','especie' => '','genero' => '','porte' => '','idadeMinima' => '','idadeMaxima' => '','idadeEm' => '','procedencia' => '','dataCadastroInicio' => '','dataCadastroFim' => '']) }}" class="btn btn-secondary btn-sm"
-                            role="button"><x-icon icon='stars' />
+                        <a href="{{ route('pedidos.index', ['codigo' => '', 'ano' => '', 'situacao_id' => '', 'dataAgendaInicio' => '', 'dataAgendaFim' => '', 'nome' => '', 'cpf' => '', 'nomeAnimal' => '', 'especie' => '', 'raca_id' => '', 'genero' => '', 'porte' => '', 'idadeMinima' => '', 'idadeMaxima' => '', 'idadeEm' => '', 'procedencia' => '', 'dataCadastroInicio' => '', 'dataCadastroFim' => '']) }}"
+                            class="btn btn-secondary btn-sm" role="button"><x-icon icon='stars' />
                             {{ __('Reset') }}</a>
                     </div>
                 </div>

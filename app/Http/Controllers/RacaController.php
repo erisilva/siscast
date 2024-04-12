@@ -7,6 +7,7 @@ use App\Models\Perpage;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Log;
 
 class RacaController extends Controller
 {
@@ -48,7 +49,16 @@ class RacaController extends Controller
             'nome' => 'required|unique:racas'
         ]);
 
-        Raca::create($request->all());
+        $new_raca = Raca::create($request->all());
+
+        // LOG
+        Log::create([
+            'model_id' => $new_raca->id,
+            'model' => 'Raca',
+            'action' => 'store',
+            'changes' => json_encode($new_raca),
+            'user_id' => auth()->id(),            
+        ]);
 
         return redirect()->route('racas.index')->with('message', 'Raça cadastrada com sucesso!');
     }
@@ -86,6 +96,16 @@ class RacaController extends Controller
 
         $raca->update($request->all());
 
+        // LOG
+        Log::create([
+            'model_id' => $raca->id,
+            'model' => 'Raca',
+            'action' => 'update',
+            'changes' => json_encode($raca->getChanges()),
+            'user_id' => auth()->id(),            
+        ]);
+        
+
         return redirect()->route('racas.index')->with('message', 'Raça atualizada com sucesso!');
     }
 
@@ -95,6 +115,15 @@ class RacaController extends Controller
     public function destroy(Raca $raca) : RedirectResponse
     {
         $this->authorize('raca-delete');
+
+        // LOG
+        Log::create([
+            'model_id' => $raca->id,
+            'model' => 'Raca',
+            'action' => 'destroy',
+            'changes' => json_encode($raca),
+            'user_id' => auth()->id(),            
+        ]);
 
         $raca->delete();
 

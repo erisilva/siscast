@@ -83,6 +83,8 @@ class Pedido extends Model
         // dataCadastroInicio
         // dataCadastroFim
 
+        //'codigo' => request()->input('pedido_codigo'),'ano' => request()->input('pedido_ano'),'situacao_id' => request()->input('pedido_situacao_id'),'dataAgendaInicio' => request()->input('pedido_dataAgendaInicio'),'dataAgendaFim' => request()->input('pedido_dataAgendaFim'),'nome' => request()->input('pedido_nome'),'cpf' => request()->input('pedido_cpf'),'nomeAnimal' => request()->input('pedido_nomeAnimal'),'especie' => request()->input('pedido_especie'),'genero' => request()->input('pedido_genero'),'porte' => request()->input('pedido_porte'),'idadeMinima' => request()->input('pedido_idadeMinima'),'idadeMaxima' => request()->input('pedido_idadeMaxima'),'idadeEm' => request()->input('pedido_IdadeEm'),'procedencia' => request()->input('pedido_procedencia'),'dataCadastroInicio' => request()->input('pedido_dataCadastroInicio'),'dataCadastroFim' => request()->input('pedido_dataCadastroFim'),'raca_id' => request()->input('pedido_raca_id')
+
 
 
         // start session values if not yet initialized
@@ -120,6 +122,10 @@ class Pedido extends Model
 
         if (!session()->exists('pedido_especie')) {
             session(['pedido_especie' => '']);
+        }
+
+        if (!session()->exists('pedido_raca_id')) {
+            session(['pedido_raca_id' => '']);
         }
 
         if (!session()->exists('pedido_genero')) {
@@ -193,6 +199,10 @@ class Pedido extends Model
             session(['pedido_especie' => $filters['especie'] ?? '']);
         }
 
+        if (Arr::exists($filters, 'raca_id')) {
+            session(['pedido_raca_id' => $filters['raca_id'] ?? '']);
+        }
+
         if (Arr::exists($filters, 'genero')) {
             session(['pedido_genero' => $filters['genero'] ?? '']);
         }
@@ -226,71 +236,75 @@ class Pedido extends Model
         }
 
         // query if session filters are not empty
-        if (trim(session()->get('pedido_codigo')) !== '') {
+        if (trim((string) session()->get('pedido_codigo')) !== '') {
             $query->where('codigo', session()->get('pedido_codigo'));
         }
 
-        if (trim(session()->get('pedido_ano')) !== '') {
+        if (trim((string) session()->get('pedido_ano')) !== '') {
             $query->where('ano', session()->get('pedido_ano'));
         }
 
-        if (trim(session()->get('pedido_situacao_id')) !== '') {
+        if (trim((string) session()->get('pedido_situacao_id')) !== '') {
             $query->where('situacao_id', session()->get('pedido_situacao_id'));
         }
 
-        if (trim(session()->get('pedido_dataAgendaInicio')) !== '') {
+        if (trim((string) session()->get('pedido_dataAgendaInicio')) !== '') {
             $query->where('agendaQuando', '>=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataAgendaInicio')))));
         }
 
-        if (trim(session()->get('pedido_dataAgendaFim')) !== '') {
+        if (trim((string) session()->get('pedido_dataAgendaFim')) !== '') {
             $query->where('agendaQuando', '<=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataAgendaFim')))));
         }
 
-        if (trim(session()->get('pedido_nome')) !== '') {
+        if (trim((string) session()->get('pedido_nome')) !== '') {
             $query->where('nome', 'like', '%' . session()->get('pedido_nome') . '%');
         }
 
-        if (trim(session()->get('pedido_cpf')) !== '') {
+        if (trim((string) session()->get('pedido_cpf')) !== '') {
             $query->where('cpf', session()->get('pedido_cpf'));
         }
 
-        if (trim(session()->get('pedido_nomeAnimal')) !== '') {
+        if (trim((string) session()->get('pedido_nomeAnimal')) !== '') {
             $query->where('nomeAnimal', 'like', '%' . session()->get('pedido_nomeAnimal') . '%');
         }
 
-        if (trim(session()->get('pedido_especie')) !== '') {
+        if (trim((string) session()->get('pedido_especie')) !== '') {
             $query->where('especie', session()->get('pedido_especie'));
         }
 
-        if (trim(session()->get('pedido_genero')) !== '') {
+        if (trim((string) session()->get('pedido_raca_id')) !== '') {
+            $query->where('raca_id', session()->get('pedido_raca_id'));
+        }
+
+        if (trim((string) session()->get('pedido_genero')) !== '') {
             $query->where('genero', session()->get('pedido_genero'));
         }
 
-        if (trim(session()->get('pedido_porte')) !== '') {
+        if (trim((string) session()->get('pedido_porte')) !== '') {
             $query->where('porte', session()->get('pedido_porte'));
         }
 
-        if (trim(session()->get('pedido_idadeMinima')) !== '') {
+        if (trim((string) session()->get('pedido_idadeMinima')) !== '') {
             $query->where('idade', '>=', session()->get('pedido_idadeMinima'));
         }
 
-        if (trim(session()->get('pedido_idadeMaxima')) !== '') {
+        if (trim((string) session()->get('pedido_idadeMaxima')) !== '') {
             $query->where('idade', '<=', session()->get('pedido_idadeMaxima'));
         }
 
-        if (trim(session()->get('pedido_idadeEm')) !== '') {
+        if (trim((string) session()->get('pedido_idadeEm')) !== '') {
             $query->where('idadeEm', session()->get('pedido_idadeEm'));
         }
 
-        if (trim(session()->get('pedido_procedencia')) !== '') {
+        if (trim((string) session()->get('pedido_procedencia')) !== '') {
             $query->where('procedencia', 'like', '%' . session()->get('pedido_procedencia') . '%');
         }
 
-        if (trim(session()->get('dataCadastroInicio')) !== '') {
+        if (trim((string) session()->get('dataCadastroInicio')) !== '') {
             $query->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataCadastroInicio')))));
         }
 
-        if (trim(session()->get('dataCadastroFim')) !== '') {
+        if (trim((string) session()->get('dataCadastroFim')) !== '') {
             $query->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataCadastroFim')))));
         }
 
