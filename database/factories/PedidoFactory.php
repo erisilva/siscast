@@ -51,7 +51,7 @@ class PedidoFactory extends Factory
             'segundaTentativaHora' => '12:00',
             'nota'=> $this->faker->sentence(),
             'agendaQuando'=> $this->faker->date(),
-            'agendaTurno'=> $this->faker->randomElement(['manha', 'tarde']),
+            'agendaTurno'=> $this->faker->randomElement(['manha', 'tarde', 'nenhum']),
             'motivoNaoAgendado'=> $this->faker->sentence(),
             'ip'=> $this->faker->ipv4(),
             'request'=> $this->faker->sentence(),

@@ -358,7 +358,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="agendaQuando" class="form-label">Data <strong
+                    <label for="agendaQuando" class="form-label">Data do Agendamento<strong
                             class="text-info">(Opcional)</strong></label>
                     <input type="text" class="form-control" name="agendaQuando" id="agendaQuando"
                         value="{{ old('agendaQuando') ?? '' }}" maxlength="80">

@@ -260,7 +260,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="agendaQuando" class="form-label">Data Agendamento</label>
+                    <label for="agendaQuando" class="form-label">Data do Agendamento</label>
                     <input type="text" class="form-control" name="agendaQuando" id="agendaQuando"
                         value="{{ isset($pedido->agendaQuando) ? date('d/m/Y', strtotime($pedido->agendaQuando)) : '' }}" readonly disabled>
                 </div>

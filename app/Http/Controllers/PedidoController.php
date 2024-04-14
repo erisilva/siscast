@@ -8,6 +8,7 @@ use App\Models\Raca;
 use App\Models\Situacao;
 
 use App\Rules\Cpf; // validação de um cpf
+use App\Rules\LegalAgeRule; // validação de idade
 
 use Illuminate\Http\Request;
 use App\Models\Log;
@@ -39,9 +40,9 @@ class PedidoController extends Controller
 
         return view('pedidos.index', [
             'pedidos' => Pedido::orderBy('id', 'desc')
-                ->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim']))
+                ->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade']))
                 ->paginate(session('perPage', '5'))
-                ->appends(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim'])),
+                ->appends(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade'])),
             'perpages' => Perpage::orderBy('valor')->get(),
             'situacaos' => Situacao::orderBy('nome', 'asc')->get(),
             'racas' => Raca::orderBy('nome')->get(),
@@ -71,7 +72,7 @@ class PedidoController extends Controller
         $request->validate([
             'cpf' => ['required', 'max:15', new Cpf],
             'nome' => 'required|max:80',
-            'nascimento' => 'required|date_format:d/m/Y',
+            'nascimento' => ['required', 'date_format:d/m/Y', new LegalAgeRule(18)],
             'logradouro' => 'required|max:100',
             'complemento' => 'max:100', // 'complemento is nullable
             'numero' => 'required|max:10',
@@ -231,7 +232,7 @@ class PedidoController extends Controller
         $this->authorize('pedido-export');
 
         return Pdf::loadView('pedidos.report', [
-            'dataset' => Pedido::orderBy('id', 'desc')->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim']))->get()
+            'dataset' => Pedido::orderBy('id', 'desc')->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade']))->get()
         ])->download(__('Pedidos') . '_' . date("Y-m-d H:i:s") . '.pdf');
     }
 
@@ -242,7 +243,7 @@ class PedidoController extends Controller
     {
         $this->authorize('pedido-export');
 
-        return Excel::download(new PedidosExport(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim'])), __('Pedidos') . '_' . date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
+        return Excel::download(new PedidosExport(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade'])), __('Pedidos') . '_' . date("Y-m-d H:i:s") . '.csv', \Maatwebsite\Excel\Excel::CSV);
     }
 
     /**
@@ -252,6 +253,6 @@ class PedidoController extends Controller
     {
         $this->authorize('pedido-export');
 
-        return Excel::download(new PedidosExport(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim'])),  'Pedidos_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new PedidosExport(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade'])),  'Pedidos_' .  date("Y-m-d H:i:s") . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }

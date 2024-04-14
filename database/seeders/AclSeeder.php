@@ -91,6 +91,13 @@ class AclSeeder extends Seeder
                 $pedido_delete = Permission::where('name', '=', 'pedido-delete')->get()->first();
                 $pedido_show = Permission::where('name', '=', 'pedido-show')->get()->first();
                 $pedido_export = Permission::where('name', '=', 'pedido-export')->get()->first();
+                // para params
+                $param_index = Permission::where('name', '=', 'param-index')->get()->first();
+                $param_create = Permission::where('name', '=', 'param-create')->get()->first();
+                $param_edit = Permission::where('name', '=', 'param-edit')->get()->first();
+                $param_delete = Permission::where('name', '=', 'param-delete')->get()->first();
+                $param_show = Permission::where('name', '=', 'param-show')->get()->first();
+
         
         
                 // salva os relacionamentos entre perfil e suas permissões
@@ -136,6 +143,12 @@ class AclSeeder extends Seeder
                 $administrador_perfil->permissions()->attach($pedido_delete);
                 $administrador_perfil->permissions()->attach($pedido_show);
                 $administrador_perfil->permissions()->attach($pedido_export);
+                $administrador_perfil->permissions()->attach($param_index);
+                $administrador_perfil->permissions()->attach($param_create);
+                $administrador_perfil->permissions()->attach($param_edit);
+                $administrador_perfil->permissions()->attach($param_delete);
+                $administrador_perfil->permissions()->attach($param_show);
+
 
 
         
@@ -158,6 +171,10 @@ class AclSeeder extends Seeder
                 $gerente_perfil->permissions()->attach($pedido_index);
                 $gerente_perfil->permissions()->attach($pedido_show);
                 $gerente_perfil->permissions()->attach($pedido_export);
+                $gerente_perfil->permissions()->attach($param_index);
+                $gerente_perfil->permissions()->attach($param_edit);
+                $gerente_perfil->permissions()->attach($param_show);
+
 
 
 

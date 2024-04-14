@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedido;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('index', [
+            'pedidos' => Pedido::orderBy('turno', 'asc')->orderBy('nome', 'asc')->filter(['dataAgendaInicio' => Carbon::today()->format('d/m/Y'), 'dataAgendaFim' =>  Carbon::today()->format('d/m/Y')])->get(),
+        ]);
     }
 }

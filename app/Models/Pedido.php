@@ -70,8 +70,10 @@ class Pedido extends Model
         // pedido_situacao_id
         // pedido_dataAgendaInicio
         // pedido_dataAgendaFim
+        // pedido_turno
         // pedido_nome
         // pedido_cpf
+        // pedido_cidade
         // nomeAnimal
         // pedido_especie
         // pedido_genero
@@ -108,12 +110,20 @@ class Pedido extends Model
             session(['pedido_dataAgendaFim' => '']);
         }
 
+        if (!session()->exists('pedido_turno')) {
+            session(['pedido_turno' => '']);
+        }
+
         if (!session()->exists('pedido_nome')) {
             session(['pedido_nome' => '']);
         }
 
         if (!session()->exists('pedido_cpf')) {
             session(['pedido_cpf' => '']);
+        }
+
+        if (!session()->exists('pedido_cidade')) {
+            session(['pedido_cidade' => '']);
         }
 
         if (!session()->exists('pedido_nomeAnimal')) {
@@ -182,6 +192,10 @@ class Pedido extends Model
             session(['pedido_dataAgendaFim' => $filters['dataAgendaFim'] ?? '']);
         }
 
+        if (Arr::exists($filters, 'turno')) {
+            session(['pedido_turno' => $filters['turno'] ?? '']);
+        }
+
         if (Arr::exists($filters, 'nome')) {
             session(['pedido_nome' => $filters['nome'] ?? '']);
         }
@@ -189,6 +203,10 @@ class Pedido extends Model
         if (Arr::exists($filters, 'cpf')) {
             $cpf = preg_replace('/[^0-9]/', '', $filters['cpf']);
             session(['pedido_cpf' => $cpf ?? '']);
+        }
+
+        if (Arr::exists($filters, 'cidade')) {
+            session(['pedido_cidade' => $filters['cidade'] ?? '']);
         }
 
         if (Arr::exists($filters, 'nomeAnimal')) {
@@ -256,12 +274,20 @@ class Pedido extends Model
             $query->where('agendaQuando', '<=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataAgendaFim')))));
         }
 
+        if (trim((string) session()->get('pedido_turno')) !== '') {
+            $query->where('agendaTurno', session()->get('pedido_turno'));
+        }
+
         if (trim((string) session()->get('pedido_nome')) !== '') {
             $query->where('nome', 'like', '%' . session()->get('pedido_nome') . '%');
         }
 
         if (trim((string) session()->get('pedido_cpf')) !== '') {
             $query->where('cpf', session()->get('pedido_cpf'));
+        }
+
+        if (trim((string) session()->get('pedido_cidade')) !== '') {
+            $query->where('cidade', 'like', '%' . session()->get('pedido_cidade') . '%');
         }
 
         if (trim((string) session()->get('pedido_nomeAnimal')) !== '') {

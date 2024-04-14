@@ -184,7 +184,29 @@ class PermissionSeeder extends Seeder
             'description' => 'Exportação de dados dos pedidos',
         ]);
 
-        
+        // permission list for paramentros
+        DB::table('permissions')->insert([
+            'name' => 'param-index',
+            'description' => 'Lista de parametros',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'param-create',
+            'description' => 'Registrar novo parametro',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'param-edit',
+            'description' => 'Alterar dados do parametro',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'param-delete',
+            'description' => 'Excluir parametro',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'param-show',
+            'description' => 'Mostrar dados do parametro',
+        ]);
+
+
 
     }
 }

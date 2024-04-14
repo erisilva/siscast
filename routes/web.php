@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 
 use Illuminate\Support\Facades\Auth;
+
+use App\Models\Pedido;
+
+use Carbon\Carbon;
 
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
@@ -13,6 +18,9 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\RacaController;
 use App\Http\Controllers\SituacaoController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\RelatorioController;
+use App\Http\Controllers\ParamController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +41,9 @@ Route::get('/about', function () {
 Route::get('/', function () {
     #if the user is logged return index view, if not logged return login view
     if (Auth::check()) {
-        return view('index');
+        return view('index', [
+            'pedidos' => Pedido::orderBy('agendaTurno', 'asc')->orderBy('nome', 'asc')->filter(['dataAgendaInicio' => Carbon::today()->format('d/m/Y'), 'dataAgendaFim' =>  Carbon::today()->format('d/m/Y')])->get(),
+        ]);
     } else {
         return view('auth.login');
     }
@@ -109,5 +119,18 @@ Route::get('/pedidos/export/xls', [PedidoController::class, 'exportxls'])->name(
 Route::get('/pedidos/export/pdf', [PedidoController::class, 'exportpdf'])->name('pedidos.export.pdf')->middleware('auth', 'verified'); // Export PDF
 
 Route::resource('/pedidos', PedidoController::class)->middleware(['auth', 'verified']); // Resource Route, crud
+
+
+# relatorios por status (Mesmo que situação) e período 
+Route::get('/relatorio/porsituacao/xls', [RelatorioController::class, 'porSituacaoExportXLSX'])->name('relatorio.porsituacao.xls');
+Route::get('/relatorio/porsituacao/csv', [RelatorioController::class, 'porSituacaoExportCSV'])->name('relatorio.porsituacao.csv');
+Route::get('/relatorio/porsituacao', [RelatorioController::class, 'porSituacao'])->name('relatorio.porsituacao');
+
+
+
+Route::get('/relatorio', [RelatorioController::Class, 'index'])->name('relatorio.index');
+
+# Parametros
+Route::resource('/params', ParamController::class)->middleware(['auth', 'verified']); // Resource Route, crud
 
 

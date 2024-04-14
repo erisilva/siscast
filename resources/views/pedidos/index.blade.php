@@ -36,18 +36,22 @@
 
                     <li>
                         <a class="dropdown-item"
-                            href="{{ route('pedidos.export.xls', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id')]) }}"><x-icon
+                            href="{{ route('pedidos.export.xls', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id'), 'turno' => request()->input('turno'), 'cidade' => request()->input('cidade')]) }}"><x-icon
                                 icon='file-earmark-spreadsheet-fill' /> {{ __('Export') . ' XLS' }}</a>
                     </li>
                     <li>
                         <a class="dropdown-item"
-                            href="{{ route('pedidos.export.csv', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id')]) }}"><x-icon
+                            href="{{ route('pedidos.export.csv', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id'), 'turno' => request()->input('turno'), 'cidade' => request()->input('cidade')]) }}"><x-icon
                                 icon='file-earmark-spreadsheet-fill' /> {{ __('Export') . ' CSV' }}</a>
                     </li>
                     <li>
                         <a class="dropdown-item"
-                            href="{{ route('pedidos.export.pdf', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id')]) }}"><x-icon
+                            href="{{ route('pedidos.export.pdf', ['codigo' => request()->input('codigo'),'ano' => request()->input('ano'),'situacao_id' => request()->input('situacao_id'),'dataAgendaInicio' => request()->input('dataAgendaInicio'),'dataAgendaFim' => request()->input('dataAgendaFim'),'nome' => request()->input('nome'),'cpf' => request()->input('cpf'),'nomeAnimal' => request()->input('nomeAnimal'),'especie' => request()->input('especie'),'genero' => request()->input('genero'),'porte' => request()->input('porte'),'idadeMinima' => request()->input('idadeMinima'),'idadeMaxima' => request()->input('idadeMaxima'),'idadeEm' => request()->input('IdadeEm'),'procedencia' => request()->input('procedencia'),'dataCadastroInicio' => request()->input('dataCadastroInicio'),'dataCadastroFim' => request()->input('dataCadastroFim'),'raca_id' => request()->input('raca_id'), 'turno' => request()->input('turno'), 'cidade' => request()->input('cidade')]) }}"><x-icon
                                 icon='file-pdf-fill' /> {{ __('Export') . ' PDF' }}</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('relatorio.index') }}"><x-icon
+                            icon='printer' /> Mais Relatórios</a>
                     </li>
 
                 </x-dropdown-menu>
@@ -64,8 +68,10 @@
                         <th scope="col">Data Pedido</th>
                         <th scope="col">Situação</th>
                         <th scope="col">Agendado em</th>
+                        <th scope="col">Turno</th>
                         <th scope="col">Nome</th>
                         <th scope="col">CPF</th>
+                        <th scope="col">Cidade</th>
                         <th scope="col">Nome do Animal</th>
                         <th scope="col">Espécie</th>
                         <th scope="col">Raça</th>
@@ -102,11 +108,19 @@
                             </td>
 
                             <td>
+                                {{ $pedido->agendaTurno == 'nenhum' ? '-' : ($pedido->agendaTurno == 'manha' ? 'Manhã' : 'Tarde') }}
+                            </td>    
+
+                            <td>
                                 {{ $pedido->nome }}
                             </td>
 
                             <td>
                                 {{ Str::substr($pedido->cpf, 0, 3) . '.' . Str::substr($pedido->cpf, 3, 3) . '.' . Str::substr($pedido->cpf, 6, 3) . '-' . Str::substr($pedido->cpf, 9, 2) }}
+                            </td>
+
+                            <td>
+                                {{ $pedido->cidade }}
                             </td>
 
                             <td>
@@ -204,7 +218,17 @@
                             value="{{ session()->get('pedido_dataAgendaFim') }}">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-2">
+                        <label for="turno" class="form-label">Turno </label>
+                        <select class="form-select" id="genero" name="turno">
+                            <option value="" selected="true">Mostrar Todos ...</option>
+                            <option value="nenhum" @selected(session()->get('pedido_turno') == 'nenhum')>Nenhum</option>
+                            <option value="manha" @selected(session()->get('pedido_turno') == 'manha')>Manhã</option>
+                            <option value="tarde" @selected(session()->get('pedido_turno') == 'tarde')>Tarde</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
                         <label for="nome" class="form-label">Nome do Tutor</label>
                         <input type="text" class="form-control" id="nome" name="nome"
                             value="{{ session()->get('pedido_nome') }}">
@@ -216,7 +240,7 @@
                             value="{{ session()->get('pedido_cpf') }}">
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="nomeAnimal" class="form-label">Nome do Animal</label>
                         <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal"
                             value="{{ session()->get('pedido_nomeAnimal') }}">
@@ -301,12 +325,18 @@
                             value="{{ session()->get('pedido_dataCadastroFim') }}">
                     </div>
 
+                    <div class="col-md-4">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" name="cidade"
+                            value="{{ session()->get('pedido_cidade') }}">
+                    </div>
+
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-sm"><x-icon icon='search' />
                             {{ __('Search') }}</button>
 
                         {{-- Reset the Filter --}}
-                        <a href="{{ route('pedidos.index', ['codigo' => '', 'ano' => '', 'situacao_id' => '', 'dataAgendaInicio' => '', 'dataAgendaFim' => '', 'nome' => '', 'cpf' => '', 'nomeAnimal' => '', 'especie' => '', 'raca_id' => '', 'genero' => '', 'porte' => '', 'idadeMinima' => '', 'idadeMaxima' => '', 'idadeEm' => '', 'procedencia' => '', 'dataCadastroInicio' => '', 'dataCadastroFim' => '']) }}"
+                        <a href="{{ route('pedidos.index', ['codigo' => '', 'ano' => '', 'situacao_id' => '', 'dataAgendaInicio' => '', 'dataAgendaFim' => '', 'nome' => '', 'cpf' => '', 'nomeAnimal' => '', 'especie' => '', 'raca_id' => '', 'genero' => '', 'porte' => '', 'idadeMinima' => '', 'idadeMaxima' => '', 'idadeEm' => '', 'procedencia' => '', 'dataCadastroInicio' => '', 'dataCadastroFim' => '', 'turno' => '', 'cidade' => '']) }}"
                             class="btn btn-secondary btn-sm" role="button"><x-icon icon='stars' />
                             {{ __('Reset') }}</a>
                     </div>

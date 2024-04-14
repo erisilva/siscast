@@ -7,8 +7,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            <h1>ACL 10</h1>
+            <div class="card">
+                <div class="card-header">SisCast 2.0.0 Abril-2024</div>
 
+                <div class="card-body">
+                    <p>Sistema de Controle dos Pedidos de Castração</p>
+                    <p>Analista Responsável: Erivelton da Silva <a href="mailto:erivelton.silva@contagem.mg.gov.br">erivelton.silva@contagem.mg.gov.br</a></p>                    
+                </div>    
+            </div>    
         </div>
     </div>
 </div>
