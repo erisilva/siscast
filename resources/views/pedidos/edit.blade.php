@@ -30,13 +30,13 @@
             @method('PUT')
             <div class="row g-3">
 
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <label for="codigo" class="form-label">Cód.</label>
                     <input type="text" class="form-control" name="codigo" id="codigo" value="{{ $pedido->codigo }}"
                         maxlength="180" readonly disabled>
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <label for="ano" class="form-label">Ano</label>
                     <input type="text" class="form-control" name="ano" id="ano" value="{{ $pedido->ano }}"
                         maxlength="180" readonly disabled>
@@ -54,7 +54,7 @@
                         value="{{ date('h:m', strtotime($pedido->created_at)) }}" maxlength="180" readonly disabled>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="situacao_id" class="form-label">Situação do Pedido <strong class="text-danger">(*)</strong></label>
                     <select class="form-select" id="situacao_id" name="situacao_id">
                         <option value="{{ $pedido->situacao_id }}" selected="true">

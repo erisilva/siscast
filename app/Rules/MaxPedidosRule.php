@@ -2,21 +2,22 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
-use Carbon\Carbon;
+use App\Models\Pedido;
 
-class LegalAgeRule implements Rule
+use Illuminate\Contracts\Validation\Rule;
+
+class MaxPedidosRule implements Rule
 {
-    public $legalAge = 18;
+    public $totalPedidosMax = 3;
 
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($age)
+    public function __construct($total)
     {
-        $this->legalAge = $age;
+        $this->totalPedidosMax = $total;
     }
 
     /**
@@ -28,9 +29,9 @@ class LegalAgeRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $formattedValue = Carbon::createFromFormat('d/m/Y', $value);
-        $legalAge = Carbon::now()->subYears($this->legalAge);
-        return $formattedValue < $legalAge;
+        $cpf = preg_replace('/[^0-9]/', '', $value);
+        $count = Pedido::whereIn('situacao_id', [1, 3, 5])->where('cpf', $value)->count();
+        return $count > $this->totalPedidosMax;
     }
 
     /**
@@ -40,6 +41,6 @@ class LegalAgeRule implements Rule
      */
     public function message()
     {
-        return 'Você precisar ter pelo menos ' . $this->legalAge . ' anos de idade!';
+        return 'Você só pode ter  ' . $this->totalPedidosMax . ' pedidos cadastrado!';
     }
 }
