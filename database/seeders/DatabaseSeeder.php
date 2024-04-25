@@ -37,6 +37,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ParamSeeder::class);
 
-        \App\Models\Pedido::factory(1000)->create();
+        # \App\Models\Pedido::factory(1000)->create();
     }
 }
