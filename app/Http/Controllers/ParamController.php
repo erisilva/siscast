@@ -23,7 +23,7 @@ class ParamController extends Controller
         }
 
         return view('params.index', [
-            'params' => Param::orderBy('id', 'asc')->paginate(session('perPage', '5')),
+            'params' => Param::orderBy('id', 'asc')->paginate(session('perPage', '5'))->withPath(env('APP_URL', null) .  '/params'),
             'perpages' => Perpage::orderBy('valor')->get()
         ]);
     }

@@ -41,9 +41,7 @@ Route::get('/about', function () {
 Route::get('/', function () {
     #if the user is logged return index view, if not logged return login view
     if (Auth::check()) {
-        return view('index', [
-            'pedidos' => Pedido::orderBy('agendaTurno', 'asc')->orderBy('nome', 'asc')->filter(['dataAgendaInicio' => Carbon::today()->format('d/m/Y'), 'dataAgendaFim' =>  Carbon::today()->format('d/m/Y')])->get(),
-        ]);
+        return view('index');
     } else {
         return view('auth.login');
     }

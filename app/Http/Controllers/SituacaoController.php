@@ -21,7 +21,7 @@ class SituacaoController extends Controller
         }
 
         return view('situacaos.index', [
-            'situacaos' => Situacao::orderBy('id', 'asc')->filter(request(['nome']))->paginate(session('perPage', '5'))->appends(request(['nome'])),
+            'situacaos' => Situacao::orderBy('id', 'asc')->filter(request(['nome']))->paginate(session('perPage', '5'))->appends(request(['nome']))->withPath(env('APP_URL', null) .  '/situacaos'),
             'perpages' => Perpage::orderBy('valor')->get()
         ]);
     }

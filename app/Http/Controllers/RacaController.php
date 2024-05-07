@@ -23,7 +23,7 @@ class RacaController extends Controller
         }
 
         return view('racas.index', [
-            'racas' => Raca::orderBy('id', 'asc')->filter(request(['nome']))->paginate(session('perPage', '5'))->appends(request(['nome'])),
+            'racas' => Raca::orderBy('id', 'asc')->filter(request(['nome']))->paginate(session('perPage', '5'))->appends(request(['nome']))->withPath(env('APP_URL', null) .  '/racas'),
             'perpages' => Perpage::orderBy('valor')->get()
         ]);
     }

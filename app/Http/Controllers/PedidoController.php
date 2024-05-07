@@ -42,7 +42,8 @@ class PedidoController extends Controller
             'pedidos' => Pedido::orderBy('id', 'desc')
                 ->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade']))
                 ->paginate(session('perPage', '5'))
-                ->appends(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade'])),
+                ->appends(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade']))
+                ->withPath(env('APP_URL', null) .  '/pedidos'), // for linux server
             'perpages' => Perpage::orderBy('valor')->get(),
             'situacaos' => Situacao::orderBy('nome', 'asc')->get(),
             'racas' => Raca::orderBy('nome')->get(),
