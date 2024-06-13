@@ -177,18 +177,18 @@ class PedidoController extends Controller
 
         $request->merge(['nascimento' => date('Y-m-d', strtotime(str_replace('/', '-', $request->nascimento)))]);
 
-        if ($request->has('primeiraTentativaQuando')) {
+        if ($request->has('primeiraTentativaQuando') && !empty($request->primeiraTentativaQuando)) {
             $request->merge(['primeiraTentativaQuando' => date('Y-m-d', strtotime(str_replace('/', '-', $request->primeiraTentativaQuando)))]);
         }
-
-        if ($request->has('segundaTentativaQuando')) {
+        
+        if ($request->has('segundaTentativaQuando') && !empty($request->segundaTentativaQuando)) {
             $request->merge(['segundaTentativaQuando' => date('Y-m-d', strtotime(str_replace('/', '-', $request->segundaTentativaQuando)))]);
         }
 
-        if ($request->has('agendaQuando')) {
+        if ($request->has('agendaQuando') && !empty($request->agendaQuando)) {
             $request->merge(['agendaQuando' => date('Y-m-d', strtotime(str_replace('/', '-', $request->agendaQuando)))]);
         }
-
+        
         $request->merge(['cpf' => preg_replace('/[^0-9]/', '', $request->cpf)]);
 
         $pedido->update($request->all());
