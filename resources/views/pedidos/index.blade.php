@@ -209,13 +209,13 @@
                     <div class="col-md-2">
                         <label for="dataAgendaInicio" class="form-label">Data Agenda Início</label>
                         <input type="text" class="form-control" id="dataAgendaInicio" name="dataAgendaInicio"
-                            value="{{ session()->get('pedido_dataAgendaInicio') }}">
+                            value="{{ session()->get('pedido_dataAgendaInicio') }}" autocomplete="off">
                     </div>
 
                     <div class="col-md-2">
                         <label for="dataAgendaFim" class="form-label">Data Agenda Fim</label>
                         <input type="text" class="form-control" id="dataAgendaFim" name="dataAgendaFim"
-                            value="{{ session()->get('pedido_dataAgendaFim') }}">
+                            value="{{ session()->get('pedido_dataAgendaFim') }}" autocomplete="off">
                     </div>
 
                     <div class="col-md-2">
@@ -316,13 +316,13 @@
                     <div class="col-md-2">
                         <label for="dataCadastroInicio" class="form-label">Data Cadastro Início</label>
                         <input type="text" class="form-control" id="dataCadastroInicio" name="dataCadastroInicio"
-                            value="{{ session()->get('pedido_dataCadastroInicio') }}">
+                            value="{{ session()->get('pedido_dataCadastroInicio') }}" autocomplete="off">
                     </div>
 
                     <div class="col-md-2">
                         <label for="dataCadastroFim" class="form-label">Data Cadastro Início</label>
                         <input type="text" class="form-control" id="dataCadastroFim" name="dataCadastroFim"
-                            value="{{ session()->get('pedido_dataCadastroFim') }}">
+                            value="{{ session()->get('pedido_dataCadastroFim') }}" autocomplete="off">
                     </div>
 
                     <div class="col-md-4">

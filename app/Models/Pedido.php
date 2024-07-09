@@ -326,11 +326,11 @@ class Pedido extends Model
             $query->where('procedencia', 'like', '%' . session()->get('pedido_procedencia') . '%');
         }
 
-        if (trim((string) session()->get('dataCadastroInicio')) !== '') {
+        if (trim((string) session()->get('pedido_dataCadastroInicio')) !== '') {
             $query->where('created_at', '>=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataCadastroInicio')))));
         }
 
-        if (trim((string) session()->get('dataCadastroFim')) !== '') {
+        if (trim((string) session()->get('pedido_dataCadastroFim')) !== '') {
             $query->where('created_at', '<=', date('Y-m-d', strtotime(str_replace('/', '-', session()->get('pedido_dataCadastroFim')))));
         }
 
