@@ -30,7 +30,7 @@ class MaxPedidosRule implements Rule
     public function passes($attribute, $value)
     {
         $cpf = preg_replace('/[^0-9]/', '', $value);
-        $count = Pedido::whereIn('situacao_id', [1, 3, 5])->where('cpf', $value)->count();
+        $count = Pedido::whereIn('situacao_id', [1, 3, 7, 10])->where('cpf', $value)->count();
         return $count > $this->totalPedidosMax;
     }
 

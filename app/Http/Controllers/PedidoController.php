@@ -39,7 +39,7 @@ class PedidoController extends Controller
         // 'description' => request()->input('description'), 'name' => request()->input('name')
 
         return view('pedidos.index', [
-            'pedidos' => Pedido::orderBy('id', 'desc')
+            'pedidos' => Pedido::orderBy('codigo', 'asc')->orderBy('ano', 'asc')
                 ->filter(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade']))
                 ->paginate(session('perPage', '5'))
                 ->appends(request(['codigo', 'ano', 'situacao_id', 'dataAgendaInicio', 'dataAgendaFim', 'nome', 'cpf', 'nomeAnimal', 'especie', 'raca_id', 'genero', 'porte', 'idadeMinima', 'idadeMaxima', 'idadeEm', 'procedencia', 'dataCadastroInicio', 'dataCadastroFim', 'turno', 'cidade']))
